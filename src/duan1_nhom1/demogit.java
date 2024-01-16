@@ -5,5 +5,6 @@ public class demogit {
         // TODO code application logic here
 
         System.out.println("hello");
+        System.out.println("nhom1");
     }
 }
