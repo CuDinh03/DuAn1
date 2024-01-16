@@ -15,6 +15,7 @@ public class DuAn1_nhom1 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        System.out.println("duan1_nhom1.DuAn1_nhom1.main()");
     }
     
 }
