@@ -19,7 +19,7 @@ public class JdbcHelper {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=PRO1041_Duan1";
             String username = "sa";
-            String pass = "Password.1";
+            String pass = "123456";
             return DriverManager.getConnection(url, username, pass);
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();

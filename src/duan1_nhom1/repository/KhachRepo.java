@@ -118,7 +118,7 @@ public class KhachRepo {
 
     public List<Khach> getAll() {
         String sql = """
-                SELECT [[ma]
+                SELECT [ma]
                       ,[ten]
                       ,[sdt]
                       ,[ngay_tao]
@@ -146,5 +146,38 @@ public class KhachRepo {
         }
         return null;
     }
-    
+    public List<Khach> timKiem(String ma, String ten,String sdt,Boolean trangThai) {
+        String sql = """
+                    SELECT [ma]
+                           ,[ten]
+                           ,[sdt]
+                           ,[ngay_tao]
+                           ,[ngay_sua]
+                           ,[trang_thai]
+                       FROM [dbo].[Khach_Hang]
+                       where [ma] = ? or  [ten] = ? or[sdt]=? or [trang_thai]=? ;
+                     """;
+        try (Connection con = DBconnect.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setObject(1, ma);
+            ps.setObject(2, ten);
+            ps.setObject(3, sdt);
+            ps.setObject(4, trangThai);
+            ResultSet rs = ps.executeQuery();
+            List<Khach> list = new ArrayList<>();
+            while (rs.next()) {
+                Khach kh = new Khach();
+                kh.setMaKhachHang(rs.getString(1));
+                kh.setTenKhachHang(rs.getString(2));
+                kh.setSdt(rs.getString(3));
+                kh.setNgayTao(rs.getDate(4));
+                kh.setNgaySua(rs.getDate(5));
+                kh.setTrangThai(rs.getBoolean(6));
+                list.add(kh);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

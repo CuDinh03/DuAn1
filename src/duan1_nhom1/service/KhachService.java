@@ -19,6 +19,7 @@ import java.util.UUID;
  * @author WEB
  */
 public class KhachService implements IService<Khach>{
+    private List<Khach> listKhach = new ArrayList<>();
     private KhachRepo khachHangRepo = new KhachRepo();
 
     @Override
@@ -43,19 +44,28 @@ public class KhachService implements IService<Khach>{
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    @Override
     public List<Khach> getAll() {
+     return khachHangRepo.getAll();
+    }
+public List<Khach> timKiem(String ma, String ten,String sdt,Boolean trangThai) {
         String sql = """
-                SELECT [ma]
-                      ,[ten]
-                      ,[sdt]
-                      ,[ngay_tao]
-                      ,[ngay_sua]
-                      ,[trang_thai]
-                  FROM [dbo].[Khach_Hang];
-            """;
+                    SELECT [ma]
+                           ,[ten]
+                           ,[sdt]
+                           ,[ngay_tao]
+                           ,[ngay_sua]
+                           ,[trang_thai]
+                       FROM [dbo].[Khach_Hang]
+                       where [ma] = ? or  [ten] = ? or[sdt]=? or [trang_thai]=? ;
+                     """;
         try (Connection con = DBconnect.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setObject(1, ma);
+            ps.setObject(2, ten);
+            ps.setObject(3, sdt);
+            ps.setObject(4, trangThai);
             ResultSet rs = ps.executeQuery();
-            List<Khach> khach = new ArrayList<>();
+            List<Khach> list = new ArrayList<>();
             while (rs.next()) {
                 Khach kh = new Khach();
                 kh.setMaKhachHang(rs.getString(1));
@@ -64,13 +74,13 @@ public class KhachService implements IService<Khach>{
                 kh.setNgayTao(rs.getDate(4));
                 kh.setNgaySua(rs.getDate(5));
                 kh.setTrangThai(rs.getBoolean(6));
-
-                khach.add(kh);
+                list.add(kh);
             }
-            return khach;
+            return list;
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
+   
 }
