@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -20,7 +21,102 @@ public class KhachRepo {
 
     private List<Khach> listKhach = new ArrayList<>();
 
-    private List<Khach> getAll() {
+    public void addKhachHang(Khach khachHang) {
+        if (khachHang == null) {
+            return;
+        }
+
+        String sql = """
+        INSERT INTO [dbo].[Khach_Hang]
+                     ([ma]
+                     ,[ten]
+                     ,[sdt]
+                     ,[ngay_tao]
+                     ,[ngay_sua]
+                     ,[trang_thai])
+               VALUES
+                     (?
+                     ,?
+                     ,?
+                     ,?
+                     ,?
+                     ,?);  
+                 """;
+
+        try (Connection con = DBconnect.getConnection(); PreparedStatement stm = con.prepareStatement(sql)) {
+            stm.setString(1, khachHang.getMaKhachHang());
+            stm.setString(2, khachHang.getTenKhachHang());
+            stm.setString(3, khachHang.getSdt());
+            stm.setDate(4, khachHang.getNgayTao());
+            stm.setDate(5, khachHang.getNgaySua());
+            stm.setBoolean(6, khachHang.getTrangThai());
+
+            int chek = stm.executeUpdate();
+
+            if (chek > 0) {
+                System.out.println("KhachHang Đã thêm thành công ");
+            } else {
+                System.out.println("Thêm thất bại ");
+            }
+        } catch (Exception e) {
+            System.out.println("An error occurred: " + e.getMessage());
+        }
+    }
+
+    public void updateKhachHang(Khach kh) {
+        String sql = """
+        UPDATE [dbo].[Khach_Hang]
+        SET [ma] = ?
+           ,[ten] = ?
+           ,[sdt] = ?
+           ,[ngay_tao] = ?
+           ,[ngay_sua] = ?
+           ,[trang_thai] = ?
+        WHERE id = ?;
+    """;
+
+        try (Connection con = DBconnect.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setObject(1, kh.getMaKhachHang());
+            ps.setObject(2, kh.getTenKhachHang());
+            ps.setObject(3, kh.getSdt());
+            ps.setObject(4, kh.getNgayTao());
+            ps.setObject(5, kh.getNgaySua());
+            ps.setObject(6, kh.getTrangThai());
+            ps.setObject(7, kh.getId());
+
+            int chek = ps.executeUpdate();
+
+            if (chek > 0) {
+                System.out.println("KhachHang updated thành công ");
+            } else {
+                System.out.println("Update thất bại ");
+            }
+        } catch (Exception e) {
+            System.out.println("An error occurred: " + e.getMessage());
+        }
+    }
+
+    public void deleteNhanVien(UUID id) {
+        String sql = """
+         DELETE FROM [dbo].[Khach_Hang]
+                    WHERE id=?;
+            """;
+
+        try (Connection con = DBconnect.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setObject(1, id);
+            int chek = ps.executeUpdate();
+
+            if (chek > 0) {
+                System.out.println("Xóa  thành công ");
+            } else {
+                System.out.println("Xóa  thất bại ");
+            }
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+    }
+
+    public List<Khach> getAll() {
         String sql = """
                 SELECT [[ma]
                       ,[ten]
@@ -50,83 +146,5 @@ public class KhachRepo {
         }
         return null;
     }
-
-    public boolean addKhachHang(Khach khachHang) {
-        if (khachHang == null) {
-            return false;
-        }
-        String sql = """
-            INSERT INTO [dbo].[Khach_Hang]
-                         ([ma]
-                         ,[ten]
-                         ,[sdt]
-                         ,[ngay_tao]
-                         ,[ngay_sua]
-                         ,[trang_thai])
-                   VALUES
-                         (?
-                         ,?
-                         ,?
-                         ,?
-                         ,?
-                         ,?);  
-                     """;
-        int check = 0;
-        try (Connection con = DBconnect.getConnection(); PreparedStatement stm = con.prepareStatement(sql)) {
-            stm.setString(1, khachHang.getMaKhachHang());
-            stm.setString(2, khachHang.getTenKhachHang());
-            stm.setString(3, khachHang.getSdt());
-            stm.setDate(4, khachHang.getNgayTao());
-            stm.setDate(5, khachHang.getNgaySua());
-            stm.setBoolean(6, khachHang.getTrangThai());
-            check = stm.executeUpdate();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return check > 0;
-    }
-    public Boolean updateNhanVien(Khach kh) {
-        String sql = """
-   UPDATE [dbo].[Khach_Hang]
-                  SET [ma] = ?
-                     ,[ten] = ?
-                     ,[sdt] = ?
-                     ,[ngay_tao] = ?
-                     ,[ngay_sua] = ?
-                     ,[trang_thai] = ?
-                WHERE id =?;
-            """;
-        int chek = 0;
-        try (Connection con = DBconnect.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setObject(1, kh.getMaKhachHang());
-            ps.setObject(2, kh.getTenKhachHang());
-            ps.setObject(3, kh.getSdt());
-            ps.setObject(4, kh.getNgayTao());
-            ps.setObject(5, kh.getNgaySua());
-            ps.setObject(6, kh.getTrangThai());
-            ps.setObject(7, kh.getId());
-            chek = ps.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace(System.out);
-        }
-        return chek > 0;
-    }
-
-    public Boolean deleteNhanVien(String ma) {
-        String sql = """
-         DELETE FROM [dbo].[Khach_Hang]
-                    WHERE id=?;
-            """;
-        int chek = 0;
-        try (Connection con = DBconnect.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setObject(1, ma);
-            chek = ps.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace(System.out);
-        }
-        return chek > 0;
-    }
     
-    
-
 }

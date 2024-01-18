@@ -4,19 +4,40 @@
  */
 package duan1_nhom1.view;
 
+import duan1_nhom1.model.Khach;
+import duan1_nhom1.service.KhachService;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author WEB
  */
 public class ViewKhachHang extends javax.swing.JFrame {
-
-    /**
-     * Creates new form ViewKhachHang
-     */
+ private DefaultTableModel tableModel=new DefaultTableModel();
+ private KhachService khachService=new KhachService();
+ private List<Khach>listKH=new ArrayList<>();
     public ViewKhachHang() {
         initComponents();
+        setLocationRelativeTo(null);
+        showDataKhach();
     }
-
+    public void showDataKhach(){
+     tableModel = (DefaultTableModel) tblKhachHang.getModel();
+        tableModel.setRowCount(0);
+        listKH = khachService.getAll();
+        for (Khach khachHang : listKH) {
+            tableModel.addRow(new Object[]{
+                khachHang.getMaKhachHang(),
+                khachHang.getTenKhachHang(),
+                khachHang.getSdt(),
+                khachHang.getNgayTao(),
+                khachHang.getNgaySua(),
+                khachHang.getTrangThai()?"Hoạt động":"không hoạt động "
+            });
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -100,11 +121,11 @@ public class ViewKhachHang extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Mã khách hàng ", "Tên khách hàng ", "Địa Chỉ", "Số điện thoại ", "Ngày tạo ", "Ngày sửa", "Trạng thái "
+                "Mã khách hàng ", "Tên khách hàng ", "Số điện thoại ", "Ngày tạo ", "Ngày sửa", "Trạng thái "
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, true, true
+                false, false, false, false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
