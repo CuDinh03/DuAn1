@@ -4,6 +4,8 @@
  */
 package duan1_nhom1.view;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author bachh
@@ -13,6 +15,7 @@ public class ViewDanhMuc extends javax.swing.JFrame {
     /**
      * Creates new form View
      */
+    private DefaultTableModel model = new DefaultTableModel();
     
     public ViewDanhMuc() {
         initComponents();
