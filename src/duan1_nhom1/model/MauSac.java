@@ -12,7 +12,7 @@ import java.util.UUID;
  * @author maccuacu
  */
 public class MauSac {
-    private UUID id;
+    private String id;
     private String ma;
     private String ten;
     private String moTa;
@@ -23,7 +23,7 @@ public class MauSac {
     public MauSac() {
     }
 
-    public MauSac(UUID id, String ma, String ten, String moTa, Date ngayTao, Date ngaySua, boolean trangThai) {
+    public MauSac(String id, String ma, String ten, String moTa, Date ngayTao, Date ngaySua, boolean trangThai) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
@@ -33,11 +33,11 @@ public class MauSac {
         this.trangThai = trangThai;
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -88,6 +88,12 @@ public class MauSac {
     public void setTrangThai(boolean trangThai) {
         this.trangThai = trangThai;
     }
-    
+
+    @Override
+    public String toString() {
+        return ten ;
+    }
+
+   
     
 }

@@ -4,6 +4,8 @@
  */
 package duan1_nhom1;
 
+import duan1_nhom1.view.SanPhamFrame;
+
 /**
  *
  * @author maccuacu
@@ -15,6 +17,7 @@ public class DuAn1_nhom1 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        new SanPhamFrame().setVisible(true);
     }
     
 }

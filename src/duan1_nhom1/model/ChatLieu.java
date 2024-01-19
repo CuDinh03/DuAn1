@@ -12,7 +12,7 @@ import java.util.UUID;
  * @author maccuacu
  */
 public class ChatLieu {
-    private UUID id;
+    private String id;
     private String ma;
     private String ten;
     private String moTa;
@@ -20,24 +20,11 @@ public class ChatLieu {
     private Date ngaySua;
     private Boolean trangThai;
 
-    public ChatLieu() {
-    }
-
-    public ChatLieu(UUID id, String ma, String ten, String moTa, Date ngayTao, Date ngaySua, Boolean trangThai) {
-        this.id = id;
-        this.ma = ma;
-        this.ten = ten;
-        this.moTa = moTa;
-        this.ngayTao = ngayTao;
-        this.ngaySua = ngaySua;
-        this.trangThai = trangThai;
-    }
-
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -88,7 +75,19 @@ public class ChatLieu {
     public void setTrangThai(Boolean trangThai) {
         this.trangThai = trangThai;
     }
-    
-    
+
+    public ChatLieu(String id, String ma, String ten, String moTa, Date ngayTao, Date ngaySua, Boolean trangThai) {
+        this.id = id;
+        this.ma = ma;
+        this.ten = ten;
+        this.moTa = moTa;
+        this.ngayTao = ngayTao;
+        this.ngaySua = ngaySua;
+        this.trangThai = trangThai;
+    }
+
+    public ChatLieu() {
+    }
+
     
 }

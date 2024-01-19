@@ -2,43 +2,28 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package duan1_nhom1.model;
+package duan1_nhom1.viewModel;
 
 import java.util.Date;
-import java.util.UUID;
 
 /**
  *
- * @author maccuacu
+ * @author anhtuanle
  */
-public class KichThuoc {
-    private String id;
+public class QLDanhMuc {
     private String ma;
     private String ten;
-    private String moTa;
     private Date ngayTao;
     private Date ngaySua;
-    private boolean trangThai;
 
-    public KichThuoc() {
+    public QLDanhMuc() {
     }
 
-    public KichThuoc(String id, String ma, String ten, String moTa, Date ngayTao, Date ngaySua, boolean trangThai) {
-        this.id = id;
+    public QLDanhMuc(String ma, String ten, Date ngayTao, Date ngaySua) {
         this.ma = ma;
         this.ten = ten;
-        this.moTa = moTa;
         this.ngayTao = ngayTao;
         this.ngaySua = ngaySua;
-        this.trangThai = trangThai;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getMa() {
@@ -57,14 +42,6 @@ public class KichThuoc {
         this.ten = ten;
     }
 
-    public String getMoTa() {
-        return moTa;
-    }
-
-    public void setMoTa(String moTa) {
-        this.moTa = moTa;
-    }
-
     public Date getNgayTao() {
         return ngayTao;
     }
@@ -80,16 +57,6 @@ public class KichThuoc {
     public void setNgaySua(Date ngaySua) {
         this.ngaySua = ngaySua;
     }
-
-    public boolean isTrangThai() {
-        return trangThai;
-    }
-
-    public void setTrangThai(boolean trangThai) {
-        this.trangThai = trangThai;
-    }
-
-    
     
     
 }

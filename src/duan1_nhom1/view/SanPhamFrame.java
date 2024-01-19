@@ -4,18 +4,81 @@
  */
 package duan1_nhom1.view;
 
+import duan1_nhom1.model.DanhMuc;
+import duan1_nhom1.model.Hang;
+import duan1_nhom1.model.MauSac;
+import duan1_nhom1.service.HangService;
+import duan1_nhom1.service.MauSacService;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import duan1_nhom1.service.IService;
+import duan1_nhom1.service.KichCoService;
+import duan1_nhom1.service.SanPhamService;
+import duan1_nhom1.viewModel.QLSanPhamViewModel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author anhtuanle
  */
 public class SanPhamFrame extends javax.swing.JFrame {
+    
+    private IService iService = new MauSacService();
+    private DefaultComboBoxModel defaultComboBoxModel;
+    private DefaultTableModel defaultTableModel;
+    private MauSacService mauSacService = new MauSacService();
+    private HangService hangService = new HangService();
+    private KichCoService kichCoService = new KichCoService();
+    private SanPhamService sanPhamService = new SanPhamService();
 
     /**
      * Creates new form SanPhamFrame
      */
     public SanPhamFrame() {
         initComponents();
+//        loadHang();
+//        loadMauSac();
+//        loadKichThuoc();
+//        addTable(sanPhamService.getAll());
     }
+    
+//    public void loadKichThuoc() {
+//        DefaultComboBoxModel model = (DefaultComboBoxModel) cb_kichthuoc.getModel();
+//        List<String> lstIdBoNho = kichCoService.getAllId();
+//        for (String str : lstIdBoNho) {
+//            model.addElement(kichCoService.getTenById(str));
+//        }
+//    }
+//    
+//    public void loadMauSac() {
+//        DefaultComboBoxModel model = (DefaultComboBoxModel) cb_mausac.getModel();
+//        List<String> lstIdBoNho = mauSacService.getAllId();
+//        for (String str : lstIdBoNho) {
+//            model.addElement(mauSacService.getTenById(str));
+//        }
+//    }
+//    
+//    public void loadHang() {
+//        DefaultComboBoxModel model = (DefaultComboBoxModel) cb_thuonghieu.getModel();
+//        List<String> lstIdBoNho = hangService.getAllId();
+//        for (String str : lstIdBoNho) {
+//            model.addElement(hangService.getTenById(str));
+//        }
+//    }
+//    
+//    public void addTable(List<QLSanPhamViewModel> list) {
+//        defaultTableModel = (DefaultTableModel) tbl_sanpham.getModel();
+//        defaultTableModel.setRowCount(0);
+//        for (QLSanPhamViewModel qLSanPhamViewModel : list) {
+//            defaultTableModel.addRow(new Object[]{
+//                qLSanPhamViewModel.getMaSP(), qLSanPhamViewModel.getTenSP(),
+//                qLSanPhamViewModel.getKichThuoc(), qLSanPhamViewModel.getThuongHieu(),qLSanPhamViewModel.getMauSac()
+//            });
+//        }
+//    }
+//    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -41,7 +104,7 @@ public class SanPhamFrame extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbl_sanpham = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -49,10 +112,10 @@ public class SanPhamFrame extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cb_thuonghieu = new javax.swing.JComboBox<>();
+        cb_kichthuoc = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        cb_mausac = new javax.swing.JComboBox<>();
         jButton8 = new javax.swing.JButton();
         jComboBox4 = new javax.swing.JComboBox<>();
         jTextField3 = new javax.swing.JTextField();
@@ -134,8 +197,8 @@ public class SanPhamFrame extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(203, 233, 162));
 
-        jTable1.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_sanpham.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
+        tbl_sanpham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -146,7 +209,7 @@ public class SanPhamFrame extends javax.swing.JFrame {
                 "STT", "Mã ", "Tên", "Kich cỡ", "Thương hiệu", "Màu sắc"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbl_sanpham);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -180,14 +243,20 @@ public class SanPhamFrame extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
         jLabel5.setText("Kích cỡ:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cb_thuonghieu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_thuonghieuActionPerformed(evt);
+            }
+        });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cb_kichthuoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_kichthuocActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
         jLabel6.setText("Màu sắc:");
-
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jButton8.setText("Sản phẩm chi tiết");
 
@@ -216,12 +285,12 @@ public class SanPhamFrame extends javax.swing.JFrame {
                                     .addComponent(jLabel5))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(cb_kichthuoc, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cb_thuonghieu, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(cb_mausac, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(248, 248, 248)
                         .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -235,17 +304,17 @@ public class SanPhamFrame extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cb_kichthuoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cb_thuonghieu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cb_mausac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addComponent(jButton8)
                 .addGap(29, 29, 29))
@@ -334,6 +403,15 @@ public class SanPhamFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cb_thuonghieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_thuonghieuActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_cb_thuonghieuActionPerformed
+
+    private void cb_kichthuocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_kichthuocActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cb_kichthuocActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -370,6 +448,9 @@ public class SanPhamFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<MauSac> cb_kichthuoc;
+    private javax.swing.JComboBox<MauSac> cb_mausac;
+    private javax.swing.JComboBox<Hang> cb_thuonghieu;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -379,9 +460,6 @@ public class SanPhamFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -398,9 +476,9 @@ public class SanPhamFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JTable tbl_sanpham;
     // End of variables declaration//GEN-END:variables
 }

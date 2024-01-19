@@ -12,7 +12,7 @@ import java.util.UUID;
  * @author maccuacu
  */
 public class DanhMuc {
-    private UUID id;
+    private String id;
     private String ma;
     private String ten;
     private String moTa;
@@ -20,24 +20,11 @@ public class DanhMuc {
     private Date ngaySua;
     private boolean trangThai;
 
-    public DanhMuc() {
-    }
-
-    public DanhMuc(UUID id, String ma, String ten, String moTa, Date ngayTao, Date ngaySua, boolean trangThai) {
-        this.id = id;
-        this.ma = ma;
-        this.ten = ten;
-        this.moTa = moTa;
-        this.ngayTao = ngayTao;
-        this.ngaySua = ngaySua;
-        this.trangThai = trangThai;
-    }
-
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -88,7 +75,19 @@ public class DanhMuc {
     public void setTrangThai(boolean trangThai) {
         this.trangThai = trangThai;
     }
-    
-    
+
+    public DanhMuc(String id, String ma, String ten, String moTa, Date ngayTao, Date ngaySua, boolean trangThai) {
+        this.id = id;
+        this.ma = ma;
+        this.ten = ten;
+        this.moTa = moTa;
+        this.ngayTao = ngayTao;
+        this.ngaySua = ngaySua;
+        this.trangThai = trangThai;
+    }
+
+    public DanhMuc() {
+    }
+
     
 }

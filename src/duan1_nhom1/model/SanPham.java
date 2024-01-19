@@ -12,7 +12,7 @@ import java.util.UUID;
  * @author maccuacu
  */
 public class SanPham {
-    private UUID id;
+    private String id;
     private String ma;
     private String ten;
     private String moTa;
@@ -23,7 +23,7 @@ public class SanPham {
     public SanPham() {
     }
 
-    public SanPham(UUID id, String ma, String ten, String moTa, Date ngayTao, Date ngaySua, boolean trangThai) {
+    public SanPham(String id, String ma, String ten, String moTa, Date ngayTao, Date ngaySua, boolean trangThai) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
@@ -33,11 +33,11 @@ public class SanPham {
         this.trangThai = trangThai;
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -88,6 +88,6 @@ public class SanPham {
     public void setTrangThai(boolean trangThai) {
         this.trangThai = trangThai;
     }
-    
+
     
 }
