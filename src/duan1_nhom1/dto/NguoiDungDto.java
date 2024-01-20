@@ -4,14 +4,18 @@
  */
 package duan1_nhom1.dto;
 
+<<<<<<< HEAD
 import java.util.Date;
 import java.util.UUID;
 
+=======
+>>>>>>> ec9267bf7e7e17fbe46ce1ec122c1cd5d17263ba
 /**
  *
  * @author maccuacu
  */
 public class NguoiDungDto {
+<<<<<<< HEAD
     private UUID id;
     private String ma;
     private String ten;
@@ -69,5 +73,7 @@ public class NguoiDungDto {
         this.ngaySua = ngaySua;
     }
 
+=======
+>>>>>>> ec9267bf7e7e17fbe46ce1ec122c1cd5d17263ba
     
 }

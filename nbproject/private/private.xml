@@ -5,7 +5,12 @@
         <group>
             <file>file:/C:/Users/bachh/DuAn1/src/duan1_nhom1/view/ViewDanhMuc.java</file>
             <file>file:/C:/Users/bachh/DuAn1/src/duan1_nhom1/DuAn1_nhom1.java</file>
+            <file>file:/C:/Users/bachh/DuAn1/src/duan1_nhom1/repository/SanPhamRepo.java</file>
+            <file>file:/C:/Users/bachh/DuAn1/src/duan1_nhom1/dto/ChatLieuDto.java</file>
+            <file>file:/C:/Users/bachh/DuAn1/src/duan1_nhom1/service/SanPhamService.java</file>
             <file>file:/C:/Users/bachh/DuAn1/src/duan1_nhom1/view/ViewVoucher.java</file>
+            <file>file:/C:/Users/bachh/DuAn1/src/duan1_nhom1/dto/DanhMucDto.java</file>
+            <file>file:/C:/Users/bachh/DuAn1/src/duan1_nhom1/model/DanhMuc.java</file>
         </group>
     </open-files>
 </project-private>
