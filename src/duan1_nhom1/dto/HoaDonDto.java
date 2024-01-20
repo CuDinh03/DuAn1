@@ -14,6 +14,7 @@ import java.util.UUID;
 public class HoaDonDto {
      private UUID id;
     private UUID idKhachHang;
+    private UUID idNv;
     private String ma;
     private Date ngayMua;
     private Double tongTien;
@@ -24,15 +25,24 @@ public class HoaDonDto {
     public HoaDonDto() {
     }
 
-    public HoaDonDto(UUID id, UUID idKhachHang, String ma, Date ngayMua, Double tongTien, Boolean trangThai, Date ngayTao, Date ngaySua) {
+    public HoaDonDto(UUID id, UUID idKhachHang, UUID idNv, String ma, Date ngayMua, Double tongTien, Boolean trangThai, Date ngayTao, Date ngaySua) {
         this.id = id;
         this.idKhachHang = idKhachHang;
+        this.idNv = idNv;
         this.ma = ma;
         this.ngayMua = ngayMua;
         this.tongTien = tongTien;
         this.trangThai = trangThai;
         this.ngayTao = ngayTao;
         this.ngaySua = ngaySua;
+    }
+
+    public UUID getIdNv() {
+        return idNv;
+    }
+
+    public void setIdNv(UUID idNv) {
+        this.idNv = idNv;
     }
 
     public UUID getId() {

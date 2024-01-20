@@ -21,17 +21,18 @@ public class HoaDonRepository {
 
     public void createHoaDon(HoaDon hoaDon) {
         try {
-            String query = "INSERT INTO hoa_don (id, id_kh, ma, ngay_mua, tong_tien, trang_thai, ngay_tao, ngay_sua) " +
+            String query = "INSERT INTO hoa_don (id, id_kh, id_nv, ma, ngay_mua, tong_tien, trang_thai, ngay_tao, ngay_sua) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setObject(1, hoaDon.getId());
                 preparedStatement.setObject(2, hoaDon.getIdKhachHang());
-                preparedStatement.setString(3, hoaDon.getMa());
-                preparedStatement.setDate(4, new java.sql.Date(hoaDon.getNgayMua().getTime()));
-                preparedStatement.setDouble(5, hoaDon.getTongTien());
-                preparedStatement.setBoolean(6, hoaDon.getTrangThai());
-                preparedStatement.setDate(7, new java.sql.Date(hoaDon.getNgayTao().getTime()));
-                preparedStatement.setDate(8, new java.sql.Date(hoaDon.getNgaySua().getTime()));
+                preparedStatement.setObject(3, hoaDon.getIdNv());
+                preparedStatement.setString(4, hoaDon.getMa());
+                preparedStatement.setDate(5, new java.sql.Date(hoaDon.getNgayMua().getTime()));
+                preparedStatement.setDouble(6, hoaDon.getTongTien());
+                preparedStatement.setBoolean(7, hoaDon.getTrangThai());
+                preparedStatement.setDate(8, new java.sql.Date(hoaDon.getNgayTao().getTime()));
+                preparedStatement.setDate(9, new java.sql.Date(hoaDon.getNgaySua().getTime()));
 
                 preparedStatement.executeUpdate();
             }
@@ -68,16 +69,17 @@ public class HoaDonRepository {
 
     public void updateHoaDon(HoaDon hoaDon) {
         try {
-            String query = "UPDATE hoa_don SET id_kh = ?, ma = ?, ngay_mua = ?, " +
+            String query = "UPDATE hoa_don SET id_kh = ?, id_Nv =?, ma = ?, ngay_mua = ?, " +
                     "tong_tien = ?, trang_thai = ?, ngay_sua = ? WHERE id = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setObject(1, hoaDon.getIdKhachHang());
-                preparedStatement.setString(2, hoaDon.getMa());
-                preparedStatement.setDate(3, new java.sql.Date(hoaDon.getNgayMua().getTime()));
-                preparedStatement.setDouble(4, hoaDon.getTongTien());
-                preparedStatement.setBoolean(5, hoaDon.getTrangThai());
-                preparedStatement.setDate(6, new java.sql.Date(hoaDon.getNgaySua().getTime()));
-                preparedStatement.setObject(7, hoaDon.getId());
+                preparedStatement.setObject(2, hoaDon.getIdNv());
+                preparedStatement.setString(3, hoaDon.getMa());
+                preparedStatement.setDate(4, new java.sql.Date(hoaDon.getNgayMua().getTime()));
+                preparedStatement.setDouble(5, hoaDon.getTongTien());
+                preparedStatement.setBoolean(6, hoaDon.getTrangThai());
+                preparedStatement.setDate(7, new java.sql.Date(hoaDon.getNgaySua().getTime()));
+                preparedStatement.setObject(8, hoaDon.getId());
 
                 preparedStatement.executeUpdate();
             }

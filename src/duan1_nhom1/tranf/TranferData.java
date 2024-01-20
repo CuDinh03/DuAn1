@@ -6,6 +6,8 @@ package duan1_nhom1.tranf;
 
 import duan1_nhom1.dto.HoaDonDto;
 import duan1_nhom1.model.HoaDon;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -40,5 +42,12 @@ public class TranferData {
         if (dto.getNgaySua() != null) model.setNgaySua(dto.getNgaySua());
         return model;
     }
-    
+    public static List<HoaDonDto> convertListToDto(List<HoaDon> entityList) {
+        List<HoaDonDto> dtoList = new ArrayList<>();
+        for (HoaDon entity : entityList) {
+            dtoList.add(convertToDto(entity));
+        }
+        return dtoList;
+    }
+
 }

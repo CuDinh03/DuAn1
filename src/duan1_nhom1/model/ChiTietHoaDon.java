@@ -7,7 +7,7 @@ public class ChiTietHoaDon {
     private UUID id;
     private UUID idHoaDon;
     private UUID idSanPham;
-    private int soLuong;
+    private Integer soLuong;
     private Double giaBan;
     private Date ngayTao;
     private Date ngaySua;
@@ -16,7 +16,7 @@ public class ChiTietHoaDon {
     public ChiTietHoaDon() {
     }
 
-    public ChiTietHoaDon(UUID id, UUID idHoaDon, UUID idSanPham, int soLuong, Double giaBan, Date ngayTao, Date ngaySua, Boolean trangThai) {
+    public ChiTietHoaDon(UUID id, UUID idHoaDon, UUID idSanPham, Integer soLuong, Double giaBan, Date ngayTao, Date ngaySua, Boolean trangThai) {
         this.id = id;
         this.idHoaDon = idHoaDon;
         this.idSanPham = idSanPham;
@@ -51,11 +51,11 @@ public class ChiTietHoaDon {
         this.idSanPham = idSanPham;
     }
 
-    public int getSoLuong() {
+    public Integer getSoLuong() {
         return soLuong;
     }
 
-    public void setSoLuong(int soLuong) {
+    public void setSoLuong(Integer soLuong) {
         this.soLuong = soLuong;
     }
 
