@@ -17,23 +17,23 @@ public class KichCoService implements IService<KichThuoc>{
     private KichThuocRepository KichThuocRepository = new KichThuocRepository();
 
     @Override
-    public void add(KichThuoc t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void add(KichThuoc kichThuoc) {
+        KichThuocRepository.add(kichThuoc);
     }
 
     @Override
-    public void update(KichThuoc t, String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void update(KichThuoc kichThuoc, String id) {
+       KichThuocRepository.update(kichThuoc);
     }
 
     @Override
     public void delete(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        KichThuocRepository.delete(id);
     }
 
     @Override
     public List<KichThuoc> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return KichThuocRepository.getAll();
     }
 
     @Override

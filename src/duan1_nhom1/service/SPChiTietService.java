@@ -12,35 +12,13 @@ import java.util.List;
  *
  * @author anhtuanle
  */
-public class SPChiTietService implements IService<QLSanPhamViewModel>{
-    
+public class SPChiTietService implements IService<QLSanPhamViewModel> {
+
     private SPChiTietRepository sPChiTietRepository = new SPChiTietRepository();
 
     @Override
     public void add(QLSanPhamViewModel t) {
-        QLSanPhamViewModel domainModel = new QLSanPhamViewModel();
-
-        domainModel.setThuongHieu(t.getThuongHieu());
-        domainModel.setMauSac(t.getMauSac());
-        domainModel.setDanhMuc(t.getDanhMuc());
-        domainModel.setChatLieu(t.getChatLieu());
-        domainModel.setTenSP(t.getTenSP());
-        domainModel.setMaSP(t.getMaSP());
-        domainModel.setKichThuoc(t.getKichThuoc());
-        domainModel.setGiaNhap(t.getGiaNhap());
-        domainModel.setGiaBan(t.getGiaBan());
-        domainModel.setSoLuong(t.getSoLuong());
-        domainModel.setNgayNhap(t.getNgayNhap());
-        domainModel.setNgaySua(t.getNgaySua());
-        domainModel.setNgayTao(t.getNgayTao());
-        domainModel.setTrangThai(t.getTrangThai());
-        
-
-        if (this.sPChiTietRepository.insert(domainModel)) {
-            System.out.println("them thanh cong");;
-        } else {
-            System.out.println("them that bai");;
-        }
+       sPChiTietRepository.insert(t);
     }
 
     @Override
@@ -62,5 +40,29 @@ public class SPChiTietService implements IService<QLSanPhamViewModel>{
     public QLSanPhamViewModel findById(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
+    public String insert(QLSanPhamViewModel t) {
+        QLSanPhamViewModel domainModel = new QLSanPhamViewModel();
+
+        domainModel.setIdThuongHieu(t.getIdThuongHieu());
+        domainModel.setIdMauSac(t.getIdMauSac());
+        domainModel.setIdDanhMuc(t.getIdDanhMuc());
+        domainModel.setIdChatLieu(t.getIdChatLieu());
+        domainModel.setTenSP(t.getTenSP());
+        domainModel.setMaSP(t.getMaSP());
+        domainModel.setIdKichThuoc(t.getIdKichThuoc());
+        domainModel.setGiaNhap(t.getGiaNhap());
+        domainModel.setGiaBan(t.getGiaBan());
+        domainModel.setSoLuong(t.getSoLuong());
+        domainModel.setNgayNhap(t.getNgayNhap());
+        domainModel.setNgaySua(t.getNgaySua());
+        domainModel.setNgayTao(t.getNgayTao());
+        domainModel.setTrangThai(t.isTrangThai());
+
+        if (this.sPChiTietRepository.insert(domainModel)) {
+            return "Thêm thành công !";
+        } else {
+            return "Thêm thất bại !";
+        }
+    }
 }

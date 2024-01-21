@@ -89,7 +89,6 @@ public class KichThuoc {
         this.trangThai = trangThai;
     }
 
-    
-    
+
     
 }

@@ -97,4 +97,71 @@ public class KichThuocRepository {
         }
         return listId;
     }
+
+    public void add(KichThuoc kichThuoc) {
+        Connection conn = jdbcHelper.getConnection();
+        String sql = "INSERT INTO size_ao(ma,ten,mo_ta,ngay_tao,ngay_sua,trang_thai) VALUES(?,?,?,?,?,?)";
+        try {
+            PreparedStatement prepareStatement = conn.prepareStatement(sql);
+
+            prepareStatement.setString(1, kichThuoc.getMa());
+
+            prepareStatement.setString(2, kichThuoc.getTen());
+
+            prepareStatement.setString(3, kichThuoc.getMoTa());
+
+            prepareStatement.setDate(4, new java.sql.Date(kichThuoc.getNgayTao().getTime()));
+            prepareStatement.setDate(5, new java.sql.Date(kichThuoc.getNgaySua().getTime()));
+
+            prepareStatement.setBoolean(6, kichThuoc.isTrangThai());
+
+            int rs = prepareStatement.executeUpdate();
+            System.out.println(rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void update(KichThuoc kichThuoc) {
+         String sql = "UPDATE size_ao SET ma = ?, ten = ?, mo_ta = ?, ngay_tao = ?, ngay_sua = ?, trang_thai = ? WHERE id  = ? ";
+
+        try (Connection con = jdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setObject(1, kichThuoc.getMa());
+            ps.setObject(2, kichThuoc.getTen());
+            ps.setObject(3, kichThuoc.getMoTa());
+            ps.setObject(4, kichThuoc.getNgayTao());
+            ps.setObject(5, kichThuoc.getNgaySua());
+            ps.setObject(6, kichThuoc.isTrangThai());
+            ps.setObject(7, kichThuoc.getId());
+
+            int chek = ps.executeUpdate();
+
+            if (chek > 0) {
+                System.out.println(" updated thành công ");
+            } else {
+                System.out.println("Update thất bại ");
+            }
+        } catch (Exception e) {
+            System.out.println("An error occurred: " + e.getMessage());
+        }
+    }
+
+    public void delete(String id) {
+        String sql = "DELETE FROM size_ao WHERE id = ?";
+
+        try (Connection con = jdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setObject(1, id);
+            int chek = ps.executeUpdate();
+
+            if (chek > 0) {
+                System.out.println("Xóa thành công ");
+            } else {
+                System.out.println("Xóa thất bại ");
+            }
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+    }
+    
+    
 }

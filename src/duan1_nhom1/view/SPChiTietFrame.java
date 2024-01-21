@@ -13,10 +13,21 @@ import duan1_nhom1.service.KichCoService;
 import duan1_nhom1.service.MauSacService;
 import duan1_nhom1.service.SPChiTietService;
 import duan1_nhom1.service.SanPhamService;
+import duan1_nhom1.utils.Uhelper;
 import duan1_nhom1.viewModel.QLSanPhamViewModel;
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -35,6 +46,7 @@ public class SPChiTietFrame extends javax.swing.JFrame {
     private SanPhamService sanPhamService = new SanPhamService();
     private DanhMucService danhMucService = new DanhMucService();
     private ChatLieuService chatLieuService = new ChatLieuService();
+    private int index = -1;
 
     /**
      * Creates new form SPChiTietFrame
@@ -51,8 +63,8 @@ public class SPChiTietFrame extends javax.swing.JFrame {
         addTable(sPChiTietService.getAll());
 
     }
-    
-     public void addTable(List<QLSanPhamViewModel> list) {
+
+    public void addTable(List<QLSanPhamViewModel> list) {
         defaultTableModel = (DefaultTableModel) tbl_sanpham.getModel();
         defaultTableModel.setRowCount(0);
         int count = 1;
@@ -61,24 +73,23 @@ public class SPChiTietFrame extends javax.swing.JFrame {
                 count++,
                 qLSanPhamViewModel.getMaSP(),
                 qLSanPhamViewModel.getTenSP(),
-                qLSanPhamViewModel.getThuongHieu(),
-                qLSanPhamViewModel.getChatLieu(),
-                qLSanPhamViewModel.getMauSac(),
-                qLSanPhamViewModel.getKichThuoc(),
-                qLSanPhamViewModel.getDanhMuc(),
+                this.hangService.getTenById(qLSanPhamViewModel.getIdThuongHieu().toString()),
+                this.chatLieuService.getTenById(qLSanPhamViewModel.getIdChatLieu().toString()),
+                this.mauSacService.getTenById(qLSanPhamViewModel.getIdMauSac().toString()),
+                this.kichCoService.getTenById(qLSanPhamViewModel.getIdKichThuoc().toString()),
+                this.danhMucService.getTenById(qLSanPhamViewModel.getIdDanhMuc().toString()),
                 qLSanPhamViewModel.getGiaNhap(),
                 qLSanPhamViewModel.getGiaBan(),
                 qLSanPhamViewModel.getSoLuong(),
                 qLSanPhamViewModel.getNgayNhap(),
                 qLSanPhamViewModel.getNgaySua(),
                 qLSanPhamViewModel.getNgayTao(),
-                qLSanPhamViewModel.getTrangThai()
-                
-                
+                qLSanPhamViewModel.isTrangThai()
+
             });
         }
     }
-    
+
     public void loadDanhMuc() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cb_danhmuc.getModel();
         List<String> list = danhMucService.getAllId();
@@ -86,6 +97,7 @@ public class SPChiTietFrame extends javax.swing.JFrame {
             model.addElement(danhMucService.getTenById(str));
         }
     }
+
     public void loadChatLieu() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cb_chatlieu.getModel();
         List<String> list = chatLieuService.getAllId();
@@ -93,7 +105,7 @@ public class SPChiTietFrame extends javax.swing.JFrame {
             model.addElement(chatLieuService.getTenById(str));
         }
     }
-    
+
     public void loadSanPham() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cb_tensp.getModel();
         List<String> list = sanPhamService.getAllId();
@@ -174,7 +186,6 @@ public class SPChiTietFrame extends javax.swing.JFrame {
         cb_danhmuc = new javax.swing.JComboBox<>();
         cb_mausac = new javax.swing.JComboBox<>();
         cb_kichco = new javax.swing.JComboBox<>();
-        lbl_masp = new javax.swing.JLabel();
         txt_gianhap = new javax.swing.JTextField();
         txt_giaban = new javax.swing.JTextField();
         txt_soluong = new javax.swing.JTextField();
@@ -186,6 +197,7 @@ public class SPChiTietFrame extends javax.swing.JFrame {
         btn_xoa = new javax.swing.JButton();
         btn_clear = new javax.swing.JButton();
         txt_trangthai = new javax.swing.JTextField();
+        txt_masp = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -349,9 +361,12 @@ public class SPChiTietFrame extends javax.swing.JFrame {
             }
         });
 
-        lbl_masp.setText("-");
-
         btn_them.setText("Thêm");
+        btn_them.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_themActionPerformed(evt);
+            }
+        });
 
         btn_sua.setText("Sửa");
         btn_sua.addActionListener(new java.awt.event.ActionListener() {
@@ -361,6 +376,11 @@ public class SPChiTietFrame extends javax.swing.JFrame {
         });
 
         btn_xoa.setText("Xóa");
+        btn_xoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_xoaActionPerformed(evt);
+            }
+        });
 
         btn_clear.setText("Clear");
 
@@ -394,7 +414,7 @@ public class SPChiTietFrame extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addGap(18, 18, 18)
-                        .addComponent(lbl_masp))
+                        .addComponent(txt_masp))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel12)
@@ -469,8 +489,8 @@ public class SPChiTietFrame extends javax.swing.JFrame {
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(jLabel11)
-                                            .addComponent(lbl_masp)
-                                            .addComponent(btn_them))
+                                            .addComponent(btn_them)
+                                            .addComponent(txt_masp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(14, 14, 14)
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(jLabel12)
@@ -534,6 +554,157 @@ public class SPChiTietFrame extends javax.swing.JFrame {
     private void cb_mausacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_mausacActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cb_mausacActionPerformed
+
+    private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
+        // TODO add your handling code here:
+        if (Uhelper.checkNull(txt_giaban, "Không để trống giá bán")) {
+            return;
+        }
+        if (Uhelper.checkNull(txt_gianhap, "Không để trống giá nhập")) {
+            return;
+        }
+        if (Uhelper.checkKiTuDacBiet(txt_giaban, "Không nhập các kí tự đặc biệt !")) {
+            return;
+        }
+        if (Uhelper.checkKiTuDacBiet(txt_gianhap, "Không nhập các kí tự đặc biệt !")) {
+            return;
+        }
+        if (Uhelper.checkNumber(txt_giaban, "Vui lòng nhập giá bán là số")) {
+            return;
+        }
+        if (Uhelper.checkNumber(txt_gianhap, "Vui lòng nhập giá nhập là số")) {
+            return;
+        }
+        if (Uhelper.checkNull(txt_masp, "Vui lòng nhập mã sản phẩm")) {
+            return;
+        }
+
+        String maSP = txt_masp.getText();
+        String idTenSP = sanPhamService.getAllId().get(cb_tensp.getSelectedIndex());
+        String idThuongHieu = hangService.getAllId().get(cb_hang.getSelectedIndex());
+        String idMauSac = mauSacService.getAllId().get(cb_mausac.getSelectedIndex());
+        String idChatLieu = chatLieuService.getAllId().get(cb_chatlieu.getSelectedIndex());
+        String idKichCo = kichCoService.getAllId().get(cb_kichco.getSelectedIndex());
+        String idDanhMuc = danhMucService.getAllId().get(cb_danhmuc.getSelectedIndex());
+        BigDecimal giaNhap = new BigDecimal(txt_gianhap.getText());
+        BigDecimal giaBan = new BigDecimal(txt_giaban.getText());
+//        boolean trangThai = Boolean.parseBoolean(txt_trangthai.getText());
+        int soLuong = Integer.parseInt(txt_soluong.getText());
+
+        
+        UUID uuidIdTenSP = UUID.fromString(idTenSP);
+        UUID uuidIdThuongHieu = UUID.fromString(idThuongHieu);
+        UUID uuidIdMauSac = UUID.fromString(idMauSac);
+        UUID uuidIdChatLieu = UUID.fromString(idChatLieu);
+        UUID uuidIdKichCo = UUID.fromString(idKichCo);
+        UUID uuidIdDanhMuc = UUID.fromString(idDanhMuc);
+        
+
+        if (giaBan.compareTo(giaNhap) != 0 && giaBan.compareTo(giaNhap) != 1) {
+            JOptionPane.showMessageDialog(this, "Giá bán lớn hơn giá nhập, bạn vui lòng nhập lại giá bán !");
+            return;
+        }
+
+        Date ngayNhap = new Date();
+        String timeStamp = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy").format(Calendar.getInstance().getTime());
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
+        try {
+            ngayNhap = sdf.parse(timeStamp);
+        } catch (ParseException ex) {
+            Logger.getLogger(SPChiTietFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        Date ngayTao = new Date();
+        try {
+            ngayTao = sdf.parse(timeStamp);
+        } catch (ParseException ex) {
+            Logger.getLogger(SPChiTietFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        Date ngaySua = new Date();
+        try {
+            ngaySua = sdf.parse(timeStamp);
+        } catch (ParseException ex) {
+            Logger.getLogger(SPChiTietFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        boolean trangThai = true;
+        QLSanPhamViewModel ctsp = new QLSanPhamViewModel(maSP, idTenSP, uuidIdKichCo, uuidIdThuongHieu, uuidIdMauSac, uuidIdChatLieu, uuidIdDanhMuc, giaNhap, giaBan, soLuong, ngayTao, ngaySua, ngayNhap, trangThai);
+
+////        if (this.checkDuplicateObject(ctsp)) {
+////            if (!checkDuplicateMaSP(maSP)) {
+////                JOptionPane.showMessageDialog(this, this.sPChiTietService.insert(ctsp));
+////                this.addTable(sPChiTietService.getAll());
+////            } else {
+////                JOptionPane.showMessageDialog(this, "Mã sản phẩm đã tồn tại");
+////                return;
+////            }
+////
+////        } else {
+////            JOptionPane.showMessageDialog(this, "Sản phẩm này đã tồn tại");
+////            return;
+////        }
+//////
+    sPChiTietService.insert(ctsp);
+    }//GEN-LAST:event_btn_themActionPerformed
+
+    private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
+        // TODO add your handling code here:
+//        
+//        index = tbl_sanpham.getSelectedRow();
+//
+//        if (index == -1) {
+//            JOptionPane.showMessageDialog(this, "Bạn vui lòng chọn sản phẩm cần xóa !");
+//            return;
+//        }
+//
+//        QLSanPhamViewModel ctsp = this.sPChiTietService.getAll().get(index);
+//        String id = ctsp.getId();
+//
+//        int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa không ?");
+//        if (confirm != JOptionPane.YES_OPTION) {
+//            JOptionPane.showMessageDialog(this, "Xóa thất bại !");
+//            return;
+//        } else {
+//            JOptionPane.showMessageDialog(this, this.iCTSPService.delete(id));
+//            loadDataChiTietSP(iCTSPService.getAllSP());
+//        }
+    }//GEN-LAST:event_btn_xoaActionPerformed
+//
+//    private boolean checkDuplicateObject(QLSanPhamViewModel vModelCheck) {
+//
+//        int count = 0;
+//        List<QLSanPhamViewModel> listViewModel = this.sPChiTietService.getAll();
+//        for (int i = 0; i < listViewModel.size(); i++) {
+//            if (listViewModel.get(i).getTenSP().equals(vModelCheck.getTenSP())
+//                    && listViewModel.get(i).getChatLieu().equals(vModelCheck.getChatLieu())
+//                    && listViewModel.get(i).getDanhMuc().equals(vModelCheck.getDanhMuc())
+//                    && listViewModel.get(i).getKichThuoc().equals(vModelCheck.getKichThuoc())
+//                    && listViewModel.get(i).getMauSac().equals(vModelCheck.getMauSac())
+//                    && listViewModel.get(i).getThuongHieu().equals(vModelCheck.getThuongHieu())) {
+//                count++;
+//            }
+//        }
+//        if (count == 0) {
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
+//
+//    private boolean checkDuplicateMaSP(String maSP) {
+//        int count = 0;
+//        for (int i = 0; i < this.sPChiTietService.getAll().size(); i++) {
+//            if (maSP.equalsIgnoreCase(this.sPChiTietService.getAll().get(i).getMaSP())) {
+//                count++;
+//            }
+//        }
+//        if (count == 0) {
+//            return false;
+//        } else {
+//            return true;
+//        }
+//    }
 
     /**
      * @param args the command line arguments
@@ -615,10 +786,10 @@ public class SPChiTietFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JLabel lbl_masp;
     private javax.swing.JTable tbl_sanpham;
     private javax.swing.JTextField txt_giaban;
     private javax.swing.JTextField txt_gianhap;
+    private javax.swing.JTextField txt_masp;
     private javax.swing.JTextField txt_search;
     private javax.swing.JTextField txt_soluong;
     private javax.swing.JTextField txt_trangthai;

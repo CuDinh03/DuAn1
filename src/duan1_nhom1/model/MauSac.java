@@ -89,11 +89,7 @@ public class MauSac {
         this.trangThai = trangThai;
     }
 
-    @Override
-    public String toString() {
-        return ten ;
-    }
-
+    
    
     
 }

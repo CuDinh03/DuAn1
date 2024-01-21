@@ -7,6 +7,7 @@ package duan1_nhom1.repository;
 import duan1_nhom1.model.MauSac;
 import duan1_nhom1.utils.JdbcHelper;
 import duan1_nhom1.viewModel.QLSanPhamViewModel;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,6 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -27,7 +29,7 @@ public class SPChiTietRepository {
 
     public List<QLSanPhamViewModel> getAll() {
 
-        String sql = "SELECT spct.id AS ma_san_pham, sp.ten AS ten_san_pham, h.ten AS ten_hang, cl.ten AS ten_chat_lieu, ms.ten AS ten_mau_sac, size.ten AS ten_kich_co, dm.ten AS ten_danh_muc, spct.gia_nhap, spct.gia_ban, spct.so_luong, spct.ngay_nhap, spct.ngay_sua, spct.ngay_tao, spct.trang_thai\n"
+        String sql = "SELECT spct.id AS ma_san_pham, sp.ten AS ten_san_pham, h.id AS id_hang, cl.id AS id_cl, ms.id AS id_ms, size.id AS id_size, dm.id AS id_dm, spct.gia_nhap, spct.gia_ban, spct.so_luong, spct.ngay_nhap, spct.ngay_sua, spct.ngay_tao, spct.trang_thai\n"
                 + "FROM san_pham_chi_tiet spct\n"
                 + "JOIN Hang h ON spct.id_hang = h.id\n"
                 + "JOIN chat_lieu cl ON spct.id_cl = cl.id\n"
@@ -38,23 +40,34 @@ public class SPChiTietRepository {
 
         try {
             PreparedStatement pr = conn.prepareStatement(sql);
-            ResultSet rs = pr.executeQuery();
-            while (rs.next()) {
-                QLSanPhamViewModel qLSanPhamViewModel = new QLSanPhamViewModel();
-                qLSanPhamViewModel.setMaSP(rs.getString("ma_san_pham"));
-                qLSanPhamViewModel.setTenSP(rs.getString("ten_san_pham"));
-                qLSanPhamViewModel.setThuongHieu(rs.getString("ten_hang"));
-                qLSanPhamViewModel.setChatLieu(rs.getString("ten_chat_lieu"));
-                qLSanPhamViewModel.setMauSac(rs.getString("ten_mau_sac"));
-                qLSanPhamViewModel.setKichThuoc(rs.getString("ten_kich_co"));
-                qLSanPhamViewModel.setDanhMuc(rs.getString("ten_danh_muc"));
-                qLSanPhamViewModel.setGiaNhap(rs.getBigDecimal("gia_nhap"));
-                qLSanPhamViewModel.setGiaBan(rs.getBigDecimal("gia_ban"));
-                qLSanPhamViewModel.setSoLuong(rs.getInt("so_luong"));
-                qLSanPhamViewModel.setNgayNhap(rs.getDate("ngay_nhap"));
-                qLSanPhamViewModel.setNgaySua(rs.getDate("ngay_sua"));
-                qLSanPhamViewModel.setNgayTao(rs.getDate("ngay_tao"));
-                qLSanPhamViewModel.setTrangThai(rs.getInt("trang_thai"));
+            ResultSet resultSet = pr.executeQuery();
+            while (resultSet.next()) {
+                String maSP = resultSet.getString("ma_san_pham");
+                String tenSP = resultSet.getString("ten_san_pham");
+                String idHangString = resultSet.getString("id_hang");
+                UUID idHang = UUID.fromString(idHangString);
+
+                String idClString = resultSet.getString("id_cl");
+                UUID idCl = UUID.fromString(idClString);
+
+                String idMsString = resultSet.getString("id_ms");
+                UUID idMs = UUID.fromString(idMsString);
+
+                String idSizeString = resultSet.getString("id_size");
+                UUID idSize = UUID.fromString(idSizeString);
+
+                String idDmString = resultSet.getString("id_dm");
+                UUID idDm = UUID.fromString(idDmString);
+
+                BigDecimal giaNhap = resultSet.getBigDecimal("gia_nhap");
+                BigDecimal giaBan = resultSet.getBigDecimal("gia_ban");
+                int soLuong = resultSet.getInt("so_luong");
+                Date ngayNhap = resultSet.getDate("ngay_nhap");
+                Date ngayTao = resultSet.getDate("ngay_tao");
+                Date ngaySua = resultSet.getDate("ngay_sua");
+                boolean trangThai = resultSet.getBoolean("trang_thai");
+
+                QLSanPhamViewModel qLSanPhamViewModel = new QLSanPhamViewModel(maSP, tenSP, idSize, idHang, idMs, idCl, idDm, giaNhap, giaBan, soLuong, ngayTao, ngaySua, ngayNhap, trangThai);
 
                 listSanPham.add(qLSanPhamViewModel);
             }
@@ -65,28 +78,29 @@ public class SPChiTietRepository {
         return listSanPham;
     }
 
-    public boolean insert(QLSanPhamViewModel domainModel) {
+    public boolean insert(QLSanPhamViewModel sanPham) {
         String sql = "INSERT INTO san_pham_chi_tiet \n"
-                + "    (id_hang, id_ms, id_cl, id_size, id_anh, id_dm, id_sp, gia_ban, gia_nhap, so_luong, ngay_nhap, ngay_tao, ngay_sua, trang_thai) \n"
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+                + "    (ma_sp, ten_sp, id_hang, id_cl, id_ms, id_size, id_dm, gia_nhap, gia_ban, so_luong, ngay_nhap, ngay_tao, ngay_sua, trang_thai) \n"
+                + "VALUES \n"
+                + "    (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, domainModel.getMaSP());
-            ps.setString(2, domainModel.getTenSP());
-            ps.setString(3, domainModel.getThuongHieu());
-            ps.setString(4, domainModel.getMauSac());
-            ps.setString(5, domainModel.getChatLieu());
-            ps.setString(6, domainModel.getDanhMuc());
-            ps.setString(7, domainModel.getKichThuoc());
-            ps.setInt(8, domainModel.getSoLuong());
-            ps.setBigDecimal(9, domainModel.getGiaNhap());
-            ps.setBigDecimal(10, domainModel.getGiaBan());
-            ps.setDate(11, new java.sql.Date(domainModel.getNgayNhap().getTime()));
-            ps.setDate(12, new java.sql.Date(domainModel.getNgaySua().getTime()));
-            ps.setDate(13, new java.sql.Date(domainModel.getNgayTao().getTime()));
-            ps.setInt(14, domainModel.getTrangThai());
-            
+
+            ps.setString(1, sanPham.getMaSP());
+            ps.setString(2, sanPham.getTenSP());
+            ps.setObject(3, sanPham.getIdThuongHieu());
+            ps.setObject(4, sanPham.getIdChatLieu());
+            ps.setObject(5, sanPham.getIdMauSac());
+            ps.setObject(6, sanPham.getIdKichThuoc());
+            ps.setObject(7, sanPham.getIdDanhMuc());
+            ps.setBigDecimal(8, sanPham.getGiaNhap());
+            ps.setBigDecimal(9, sanPham.getGiaBan());
+            ps.setInt(10, sanPham.getSoLuong());
+            ps.setDate(11, new java.sql.Date(sanPham.getNgayNhap().getTime()));
+            ps.setDate(12, new java.sql.Date(sanPham.getNgaySua().getTime()));
+            ps.setDate(13, new java.sql.Date(sanPham.getNgayTao().getTime()));
+            ps.setBoolean(14, sanPham.isTrangThai());
 
             int result = ps.executeUpdate();
             return result > 0;

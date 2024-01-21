@@ -4,17 +4,112 @@
  */
 package duan1_nhom1.view;
 
+import duan1_nhom1.model.KichThuoc;
+import duan1_nhom1.model.MauSac;
+import duan1_nhom1.service.IService;
+import duan1_nhom1.service.KichCoService;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author anhtuanle
  */
 public class KichThuocFrame extends javax.swing.JFrame {
 
+    private KichCoService kichCoService = new KichCoService();
+    List<KichThuoc> list = kichCoService.getAll();
+    private KichThuoc kichThuoc = new KichThuoc();
+
     /**
      * Creates new form KichThuocFrame
      */
     public KichThuocFrame() {
         initComponents();
+        loadTable();
+    }
+
+    public void loadTable() {
+
+        DefaultTableModel dfm = (DefaultTableModel) tbl_kichthuoc.getModel();
+
+        dfm.setRowCount(0);
+
+        for (KichThuoc kichThuoc : list) {
+            Object[] row = new Object[]{
+                kichThuoc.getMa(),
+                kichThuoc.getTen(),
+                kichThuoc.getMoTa(),
+                kichThuoc.getNgaySua(),
+                kichThuoc.getNgayTao(),
+                kichThuoc.isTrangThai()
+            };
+            dfm.addRow(row);
+
+        }
+
+    }
+    
+      private void clearForm() {
+        txt_ma.setText("");
+        txt_ten.setText("");
+        txt_mota.setText("");
+        clr_ngaysua.setDate(null);
+        clr_ngaytao.setDate(null);
+    }
+
+    private KichThuoc getData() {
+        KichThuoc kichThuoc = new KichThuoc();
+        kichThuoc.setMa(txt_ma.getText());
+        kichThuoc.setTen(txt_ma.getText());
+        kichThuoc.setMoTa(txt_ma.getText());
+
+        Date ngayTao = clr_ngaytao.getDate();
+        kichThuoc.setNgayTao(ngayTao);
+
+        Date ngaySua = clr_ngaysua.getDate();
+        kichThuoc.setNgaySua(ngaySua);
+        
+
+        return kichThuoc;
+    }
+
+    public void addSize() {
+        try {
+            int check = JOptionPane.showConfirmDialog(this, "bạn có muốn thêm không");
+            if (check != JOptionPane.YES_OPTION) {
+                return;
+            }
+            KichThuoc size = getData();
+            kichCoService.add(size);
+            list = kichCoService.getAll();
+            loadTable();
+            JOptionPane.showMessageDialog(this, "thêm thành công");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "thêm thất bại");
+        }
+
+    }
+    
+    public void xoa() {
+        try {
+            int check = JOptionPane.showConfirmDialog(this, "bạn có muốn xóa không");
+            if (check != JOptionPane.YES_OPTION) {
+                return;
+            }
+
+            loadTable();
+            JOptionPane.showMessageDialog(this, "xóa thành công");
+            clearForm();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "xóa thất bại");
+        }
     }
 
     /**
@@ -31,10 +126,10 @@ public class KichThuocFrame extends javax.swing.JFrame {
         btn_search = new javax.swing.JButton();
         txt_search = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbl_danhmuc = new javax.swing.JTable();
+        tbl_kichthuoc = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         txt_ma = new javax.swing.JTextField();
-        txt_danhmuc = new javax.swing.JTextField();
+        txt_ten = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         clr_ngaytao = new com.toedter.calendar.JDateChooser();
@@ -44,6 +139,8 @@ public class KichThuocFrame extends javax.swing.JFrame {
         btn_sua = new javax.swing.JButton();
         btn_xoa = new javax.swing.JButton();
         btn_clear = new javax.swing.JButton();
+        txt_mota = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,7 +148,7 @@ public class KichThuocFrame extends javax.swing.JFrame {
 
         btn_search.setText("Tìm Kiếm");
 
-        tbl_danhmuc.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_kichthuoc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -70,28 +167,48 @@ public class KichThuocFrame extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        tbl_danhmuc.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbl_kichthuoc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_kichthuocMouseClicked(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                tbl_danhmucMousePressed(evt);
+                tbl_kichthuocMousePressed(evt);
             }
         });
-        jScrollPane1.setViewportView(tbl_danhmuc);
+        jScrollPane1.setViewportView(tbl_kichthuoc);
 
-        jLabel1.setText("Mã:");
+        jLabel1.setText("Mã size");
 
-        jLabel2.setText("Tên:");
+        jLabel2.setText("Size");
 
         jLabel3.setText("Ngày tạo:");
 
         jLabel4.setText("Ngày sửa");
 
         btn_them.setText("Thêm");
+        btn_them.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_themActionPerformed(evt);
+            }
+        });
 
         btn_sua.setText("Sửa");
 
         btn_xoa.setText("Xóa");
+        btn_xoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_xoaActionPerformed(evt);
+            }
+        });
 
         btn_clear.setText("Clear");
+        btn_clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_clearActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Mô tả:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -110,34 +227,35 @@ public class KichThuocFrame extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
+                        .addGap(19, 19, 19)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(clr_ngaysua, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                            .addComponent(jLabel4)
-                                            .addGap(43, 43, 43))
-                                        .addGroup(jPanel2Layout.createSequentialGroup()
-                                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel2)
-                                                .addComponent(jLabel3))
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(txt_danhmuc, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
-                                        .addComponent(clr_ngaytao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txt_ten, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txt_mota, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(clr_ngaytao, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(clr_ngaysua, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
                                 .addComponent(txt_ma, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btn_them)
-                            .addComponent(btn_clear)
+                            .addComponent(btn_xoa)
                             .addComponent(btn_sua)
-                            .addComponent(btn_xoa))
-                        .addGap(88, 88, 88))))
+                            .addComponent(btn_clear))
+                        .addGap(59, 59, 59))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,26 +270,37 @@ public class KichThuocFrame extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txt_ma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_them))
+                    .addComponent(btn_xoa))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txt_danhmuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_sua))
-                .addGap(26, 26, 26)
+                    .addComponent(txt_ten, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_them))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(clr_ngaytao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_xoa))
-                .addGap(26, 26, 26)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(btn_sua))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txt_mota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(clr_ngaysua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_clear))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(clr_ngaysua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(clr_ngaytao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addGap(32, 32, 32))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(btn_clear)
+                        .addGap(40, 40, 40))))
         );
 
-        jTabbedPane1.addTab("Kích thước", jPanel2);
+        jTabbedPane1.addTab("Kich thuoc", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -183,15 +312,36 @@ public class KichThuocFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tbl_danhmucMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_danhmucMousePressed
+    private void tbl_kichthuocMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_kichthuocMouseClicked
+        // TODO add your handling code here:
 
-    }//GEN-LAST:event_tbl_danhmucMousePressed
+    }//GEN-LAST:event_tbl_kichthuocMouseClicked
+
+    private void tbl_kichthuocMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_kichthuocMousePressed
+
+    }//GEN-LAST:event_tbl_kichthuocMousePressed
+
+    private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
+        // TODO add your handling code here:
+        addSize();
+    }//GEN-LAST:event_btn_themActionPerformed
+
+    private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
+        // TODO add your handling code here:
+        clearForm();
+
+    }//GEN-LAST:event_btn_clearActionPerformed
+
+    private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
+        // TODO add your handling code here:
+      
+    }//GEN-LAST:event_btn_xoaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -240,12 +390,14 @@ public class KichThuocFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable tbl_danhmuc;
-    private javax.swing.JTextField txt_danhmuc;
+    private javax.swing.JTable tbl_kichthuoc;
     private javax.swing.JTextField txt_ma;
+    private javax.swing.JTextField txt_mota;
     private javax.swing.JTextField txt_search;
+    private javax.swing.JTextField txt_ten;
     // End of variables declaration//GEN-END:variables
 }

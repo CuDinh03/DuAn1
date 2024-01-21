@@ -2,6 +2,24 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/repository/SPChiTietRepository.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/MauSacFrame.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/service/SPChiTietService.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/repository/KichThuocRepository.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/model/MauSac.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/service/IService.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/utils/JdbcHelper.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/repository/MauSacRepository.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/service/MauSacService.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/repository/DanhMucRepository.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/model/KichThuoc.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/DanhMucFrame.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/KichThuocFrame.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/service/KichCoService.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/viewModel/QLSanPhamViewModel.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/repository/HangRepository.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/SPChiTietFrame.java</file>
+        </group>
     </open-files>
 </project-private>

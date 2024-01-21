@@ -198,7 +198,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="lbl_masp" min="-2" max="-2" attributes="0"/>
+                              <Component id="txt_masp" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -291,8 +291,8 @@
                                           <Group type="102" attributes="0">
                                               <Group type="103" groupAlignment="3" attributes="0">
                                                   <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="lbl_masp" alignment="3" min="-2" max="-2" attributes="0"/>
                                                   <Component id="btn_them" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="txt_masp" alignment="3" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="3" attributes="0">
@@ -585,11 +585,6 @@
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JLabel" name="lbl_masp">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="-"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JTextField" name="txt_gianhap">
             </Component>
             <Component class="javax.swing.JTextField" name="txt_giaban">
@@ -606,6 +601,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_themActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btn_sua">
               <Properties>
@@ -619,6 +617,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_xoaActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btn_clear">
               <Properties>
@@ -626,6 +627,8 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txt_trangthai">
+            </Component>
+            <Component class="javax.swing.JTextField" name="txt_masp">
             </Component>
           </SubComponents>
         </Container>

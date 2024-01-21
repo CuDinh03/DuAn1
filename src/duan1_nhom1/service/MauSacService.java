@@ -23,18 +23,18 @@ public class MauSacService implements IService<MauSac>{
     }
 
     @Override
-    public void add(MauSac t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void add(MauSac mauSac) {
+        mauSacRepository.insert(mauSac);
     }
 
     @Override
-    public void update(MauSac t, String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void update(MauSac mauSac, String id) {
+        mauSacRepository.update(mauSac);
     }
 
     @Override
     public void delete(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        mauSacRepository.delete(id);
     }
 
     @Override
@@ -59,5 +59,4 @@ public class MauSacService implements IService<MauSac>{
         return mauSacRepository.getAllId();
     }
 
-    
 }
