@@ -9,6 +9,7 @@ import duan1_nhom1.repository.DanhMucRepo;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -24,7 +25,6 @@ public class ViewDanhMuc extends javax.swing.JFrame {
     private DefaultTableModel model = new DefaultTableModel();
     private List<DanhMuc> danhMucs = new ArrayList<>();
     private DanhMucRepo danhMucRepo = new DanhMucRepo();
-    
     public ViewDanhMuc() {
         initComponents();
         model = (DefaultTableModel) tblDanhMuc.getModel();
@@ -46,7 +46,7 @@ public class ViewDanhMuc extends javax.swing.JFrame {
     }
     }
     public DanhMuc getDataDanhMuc(){
-        
+        UUID id = UUID.randomUUID();
         String ma = txtMa.getText();
         String ten = txtTen.getText();
         String moTa = txaMoTa.getText();
@@ -104,6 +104,11 @@ public class ViewDanhMuc extends javax.swing.JFrame {
         });
 
         btnSua.setText("Sửa");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
 
         btnThem.setText("Thêm");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
@@ -129,9 +134,17 @@ public class ViewDanhMuc extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã", "Tên", "Ngày Tạo", "Ngày Sửa"
+                "ID", "Mã", "Tên", "Ngày Tạo", "Ngày Sửa"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblDanhMuc);
 
         jLabel1.setForeground(new java.awt.Color(60, 63, 65));
@@ -147,6 +160,11 @@ public class ViewDanhMuc extends javax.swing.JFrame {
         jLabel4.setText("Ngày Tạo");
 
         btnThoat.setText("Thoát");
+        btnThoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThoatActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -268,17 +286,38 @@ public class ViewDanhMuc extends javax.swing.JFrame {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(rootPane, danhMucRepo.addDanhMuc(getDataDanhMuc()));
-            danhMucs = danhMucRepo.getAllDanhMuc();
-            showDataDanhMuc(danhMucs);
+//        JOptionPane.showMessageDialog(rootPane, danhMucRepo.addDanhMuc(getDataDanhMuc()));
+//            danhMucs = danhMucRepo.getAllDanhMuc();
+//            showDataDanhMuc(danhMucs);
+        danhMucRepo.addDanhMuc(getDataDanhMuc());
+        danhMucs = danhMucRepo.getAllDanhMuc();
+        showDataDanhMuc(danhMucs);
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
-         JOptionPane.showMessageDialog(rootPane, danhMucRepo.deleteDanhMuc(getDataDanhMuc().getMa()));
-        danhMucs = danhMucRepo.getAllDanhMuc();
-            showDataDanhMuc(danhMucs);
+        if (tblDanhMuc.getSelectedRow() != -1) {
+            String id = tblDanhMuc.getValueAt(tblDanhMuc.getSelectedRow(), 0).toString();
+                JOptionPane.showMessageDialog(rootPane, danhMucRepo.deleteDanhMuc(getDataDanhMuc().getMa()));
+                danhMucs = danhMucRepo.getAllDanhMuc();
+                showDataDanhMuc(danhMucs);
+        }
     }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_btnThoatActionPerformed
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        // TODO add your handling code here:
+        if (tblDanhMuc.getSelectedRow() >= 0) {
+            DanhMuc dm = danhMucRepo.getAllDanhMuc().get(tblDanhMuc.getSelectedRow());
+            JOptionPane.showMessageDialog(rootPane,danhMucRepo.updateDanhMuc(getDataDanhMuc()));
+            danhMucs = danhMucRepo.getAllDanhMuc();
+            showDataDanhMuc(danhMucs);
+        }
+    }//GEN-LAST:event_btnSuaActionPerformed
 
     /**
      * @param args the command line arguments

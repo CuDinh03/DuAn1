@@ -83,8 +83,9 @@ public class DanhMuc {
         this.ngaySua = ngaySua;
     }
 
+    @Override
+    public String toString() {
+        return "DanhMuc{" + "id=" + id + ", ma=" + ma + ", ten=" + ten + ", moTa=" + moTa + ", ngayTao=" + ngayTao + ", ngaySua=" + ngaySua + '}';
+    }
     
-    
-    
-        
 }

@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -38,7 +39,8 @@ public class DanhMucRepo {
             List<DanhMuc> list = new ArrayList<>();
             while (rs.next()) {
                 DanhMuc dm = new DanhMuc();
-                
+                UUID id = UUID.fromString((String)rs.getObject("id"));
+                dm.setId(id);
                 dm.setMa(rs.getString(2));
                 dm.setTen(rs.getString(3));
                 dm.setMoTa(rs.getString(4));
@@ -54,7 +56,7 @@ public class DanhMucRepo {
     }
     public boolean addDanhMuc(DanhMuc dm) {
         int check = 0;
-        String sqlInsert = """
+        String sql = """
                      INSERT INTO [dbo].[danh_muc_san_pham]
                                 ([id]
                                 ,[ma]
@@ -66,35 +68,65 @@ public class DanhMucRepo {
                           VALUES
                                 (?,?,?,?,?,?,? )                           
                      """;
-        try ( java.sql.Connection con = DBConnect.getConnection("PRO1041_Duan1");  PreparedStatement ps = con.prepareStatement(sqlInsert);) {
-            
-            ps.setString(2, dm.getMa());
-            ps.setString(3, dm.getTen());
-            ps.setString(4, dm.getMoTa());
-            ps.setDate(5, (Date) dm.getNgayTao());
-            ps.setDate(6, (Date) dm.getNgaySua());
+        try ( java.sql.Connection con = DBConnect.getConnection("PRO1041_Duan1");  PreparedStatement ps = con.prepareStatement(sql);) {
+            ps.setObject(1, dm.getId());
+            ps.setObject(2, dm.getMa());
+            ps.setObject(3, dm.getTen());
+            ps.setObject(4, dm.getMoTa());
+            ps.setObject(5, dm.getNgayTao());
+            ps.setObject(6, dm.getNgaySua());
             check = ps.executeUpdate();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            e.fillInStackTrace();
         }
         return check > 0;   
     }
-    public boolean deleteDanhMuc(String ma) {
+    public boolean updateDanhMuc(DanhMuc dm, String id) {
+        int check = 0;
+        String sql = """
+                    UPDATE [dbo].[danh_muc_san_pham]
+                       SET [id] = ?
+                          ,[ma] = ?
+                          ,[ten] = ?
+                          ,[mo_ta] = ?
+                          ,[ngay_tao] = ?
+                          ,[ngay_sua] = ?
+                          ,[trang_thai] = ?
+                     WHERE id = ?
+                     """;
+        try (java.sql.Connection con = DBConnect.getConnection("PRO1041_Duan1");  PreparedStatement ps = con.prepareStatement(sql);) {
+            ps.setObject(1, dm.getId());
+            ps.setObject(2, dm.getMa());
+            ps.setObject(3, dm.getTen());
+            ps.setObject(4, dm.getMoTa());
+            ps.setObject(5, dm.getNgayTao());
+            ps.setObject(6, dm.getNgaySua());
+            check = ps.executeUpdate();
+        } catch (Exception e) {
+            e.fillInStackTrace();
+        }
+        return check > 0;
+    }
+    public boolean deleteDanhMuc(String id) {
         int check = 0;
         String sql = """
                      DELETE FROM [dbo].[danh_muc_san_pham]
-                           WHERE ma = ?
+                           WHERE id = ?
                      """;
         try ( java.sql.Connection con = DBConnect.getConnection("PRO1041_Duan1");  
                 PreparedStatement ps = con.prepareStatement(sql)
                 ) {
-            ps.setObject(2, ma);
+            ps.setObject(1, id);
             check = ps.executeUpdate();
 
         } catch (Exception e) {
             e.fillInStackTrace();
         }
         return check > 0;
+    }
+
+    public Object updateDanhMuc(DanhMuc dataDanhMuc) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
