@@ -1,16 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package duan1_nhom1.model;
 
 import java.util.UUID;
 import java.sql.Date;
 
-/**
- *
- * @author maccuacu
- */
 public class Khach {
     private String id;
     private String maKhachHang;
@@ -32,7 +24,6 @@ public class Khach {
         this.ngaySua = ngaySua;
         this.trangThai = trangThai;
     }
-
     public String getId() {
         return id;
     }
@@ -88,7 +79,4 @@ public class Khach {
     public void setTrangThai(Boolean trangThai) {
         this.trangThai = trangThai;
     }
-
-   
-    
 }

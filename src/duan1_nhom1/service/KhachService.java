@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package duan1_nhom1.service;
 
 import duan1_nhom1.model.Khach;
@@ -15,10 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-/**
- *
- * @author WEB
- */
 public class KhachService implements IService<Khach> {
 
     private List<Khach> listKhach = new ArrayList<>();
@@ -122,4 +114,5 @@ public class KhachService implements IService<Khach> {
     }
     return null;
 }
+
 }

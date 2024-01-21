@@ -16,6 +16,7 @@ public class ChiTietHoaDonDto {
     private UUID id;
     private UUID idHD;
     private UUID idSP;
+    private UUID idNv;
     private Integer soLuong;
     private DecimalFormat giaBan;
     private Date ngayTao;
@@ -25,15 +26,24 @@ public class ChiTietHoaDonDto {
     public ChiTietHoaDonDto() {
     }
 
-    public ChiTietHoaDonDto(UUID id, UUID idHD, UUID idSP, Integer soLuong, DecimalFormat giaBan, Date ngayTao, Date ngaySua, Boolean trangThai) {
+    public ChiTietHoaDonDto(UUID id, UUID idHD, UUID idSP, UUID idNv, Integer soLuong, DecimalFormat giaBan, Date ngayTao, Date ngaySua, Boolean trangThai) {
         this.id = id;
         this.idHD = idHD;
         this.idSP = idSP;
+        this.idNv = idNv;
         this.soLuong = soLuong;
         this.giaBan = giaBan;
         this.ngayTao = ngayTao;
         this.ngaySua = ngaySua;
         this.trangThai = trangThai;
+    }
+
+    public UUID getIdNv() {
+        return idNv;
+    }
+
+    public void setIdNv(UUID idNv) {
+        this.idNv = idNv;
     }
 
     public UUID getId() {

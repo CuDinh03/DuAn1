@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package duan1_nhom1.repository;
 
 import duan1_nhom1.model.Khach;
@@ -13,11 +9,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
-/**
- *
- * @author WEB
- */
 public class KhachRepo {
 
     private List<Khach> listKhach = new ArrayList<>();
@@ -147,7 +138,6 @@ public class KhachRepo {
                 kh.setNgayTao(rs.getDate(5));
                 kh.setNgaySua(rs.getDate(6));
                 kh.setTrangThai(rs.getBoolean(7));
-
                 khach.add(kh);
             }
             return khach;
@@ -219,3 +209,4 @@ public class KhachRepo {
         return null;
     }
 }
+
