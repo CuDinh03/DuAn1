@@ -13,9 +13,9 @@ import java.sql.Date;
  * @author maccuacu
  */
 public class ThanhToan {
-    private UUID id;
+    private String id;
     private String maThanhToan;
-    private UUID id_hd;
+    private String id_hd;
     private String phuongThucTT;
     private BigDecimal soTien;
     private Date ngayTT;
@@ -26,7 +26,7 @@ public class ThanhToan {
     public ThanhToan() {
     }
 
-    public ThanhToan(UUID id, String maThanhToan, UUID id_hd, String phuongThucTT, BigDecimal soTien, Date ngayTT, Date ngayTao, Date ngaySua, Boolean trangThai) {
+    public ThanhToan(String id, String maThanhToan, String id_hd, String phuongThucTT, BigDecimal soTien, Date ngayTT, Date ngayTao, Date ngaySua, Boolean trangThai) {
         this.id = id;
         this.maThanhToan = maThanhToan;
         this.id_hd = id_hd;
@@ -38,11 +38,11 @@ public class ThanhToan {
         this.trangThai = trangThai;
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -54,11 +54,11 @@ public class ThanhToan {
         this.maThanhToan = maThanhToan;
     }
 
-    public UUID getId_hd() {
+    public String getId_hd() {
         return id_hd;
     }
 
-    public void setId_hd(UUID id_hd) {
+    public void setId_hd(String id_hd) {
         this.id_hd = id_hd;
     }
 
@@ -110,10 +110,6 @@ public class ThanhToan {
         this.trangThai = trangThai;
     }
 
-    @Override
-    public String toString() {
-        return "ThanhToan{" + "id=" + id + ", maThanhToan=" + maThanhToan + ", id_hd=" + id_hd + ", phuongThucTT=" + phuongThucTT + ", soTien=" + soTien + ", ngayTT=" + ngayTT + ", ngayTao=" + ngayTao + ", ngaySua=" + ngaySua + ", trangThai=" + trangThai + '}';
-    }
-
+   
    
 }

@@ -92,7 +92,7 @@ public class ThanhToanRepo {
         }
     }
 
-    public void deleteThanhToan(UUID id) {
+    public void deleteThanhToan(String  id) {
         String sql = """
          DELETE FROM [dbo].[Thanh_Toan]
                     WHERE id=?;

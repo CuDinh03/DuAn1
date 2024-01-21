@@ -22,12 +22,12 @@ public class ThanhToanService implements IService<ThanhToan> {
     }
 
     @Override
-    public void update(ThanhToan t, UUID id) {
+    public void update(ThanhToan t, String  id) {
    thanhToanService.update(t, id);
     }
 
     @Override
-    public void delete(UUID id) {
+    public void delete(String id) {
     thanhToanService.delete(id);
     }
 
@@ -37,7 +37,7 @@ public class ThanhToanService implements IService<ThanhToan> {
     }
 
     @Override
-    public ThanhToan findById(UUID id) {
+    public ThanhToan findById(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     

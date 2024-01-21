@@ -12,7 +12,7 @@ import java.sql.Date;
  * @author maccuacu
  */
 public class Khach {
-    private UUID id;
+    private String id;
     private String maKhachHang;
     private String tenKhachHang;
     private String sdt;
@@ -23,7 +23,7 @@ public class Khach {
     public Khach() {
     }
 
-    public Khach(UUID id, String maKhachHang, String tenKhachHang, String sdt, Date ngayTao, Date ngaySua, Boolean trangThai) {
+    public Khach(String id, String maKhachHang, String tenKhachHang, String sdt, Date ngayTao, Date ngaySua, Boolean trangThai) {
         this.id = id;
         this.maKhachHang = maKhachHang;
         this.tenKhachHang = tenKhachHang;
@@ -33,11 +33,11 @@ public class Khach {
         this.trangThai = trangThai;
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -88,7 +88,7 @@ public class Khach {
     public void setTrangThai(Boolean trangThai) {
         this.trangThai = trangThai;
     }
-    
-    
+
+   
     
 }

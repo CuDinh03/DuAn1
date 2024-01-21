@@ -12,12 +12,12 @@ public class SanPhamService implements IService<SanPham>{
     }
 
     @Override
-    public void update(SanPham t, UUID id) {
+    public void update(SanPham t, String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void delete(UUID id) {
+    public void delete(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -27,8 +27,9 @@ public class SanPhamService implements IService<SanPham>{
     }
 
     @Override
-    public SanPham findById(UUID id) {
+    public SanPham findById(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
+   
 }
