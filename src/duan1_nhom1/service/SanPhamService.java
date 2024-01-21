@@ -21,7 +21,6 @@ public class SanPhamService implements IService<SanPham> {
 
     @Override
     public void delete(String id) {
-
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -34,7 +33,6 @@ public class SanPhamService implements IService<SanPham> {
     public SanPham findById(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
     public String getTenById(String id) {
         return sanPhamRepository.getTenById(id);
     }

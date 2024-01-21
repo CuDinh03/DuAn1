@@ -1,5 +1,7 @@
 package duan1_nhom1.repository;
+
 import duan1_nhom1.model.Khach;
+import duan1_nhom1.utils.DBconnect;
 import duan1_nhom1.utils.JdbcHelper;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,7 +9,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
 public class KhachRepo {
 
     private List<Khach> listKhach = new ArrayList<>();
@@ -130,14 +131,13 @@ public class KhachRepo {
             List<Khach> khach = new ArrayList<>();
             while (rs.next()) {
                 Khach kh = new Khach();
-                UUID id = UUID.fromString((String) rs.getObject("id"));
+                kh.setId(rs.getString(1));
                 kh.setMaKhachHang(rs.getString(2));
                 kh.setTenKhachHang(rs.getString(3));
                 kh.setSdt(rs.getString(4));
                 kh.setNgayTao(rs.getDate(5));
                 kh.setNgaySua(rs.getDate(6));
                 kh.setTrangThai(rs.getBoolean(7));
-                kh.setId(id);
                 khach.add(kh);
             }
             return khach;
@@ -157,7 +157,7 @@ public class KhachRepo {
                        FROM [dbo].[Khach_Hang]
                        where [ma] = ? or  [ten] = ? or[sdt]=? or [trang_thai]=? ;
                      """;
-        try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+        try (Connection con = DBconnect.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setObject(1, ma);
             ResultSet rs = ps.executeQuery();
             List<Khach> list = new ArrayList<>();
@@ -188,7 +188,7 @@ public class KhachRepo {
                        FROM [dbo].[Khach_Hang]
                        where [ma] = ? or  [ten] = ? or[sdt]=? or [trang_thai]=? ;
                      """;
-        try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+        try (Connection con = DBconnect.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setObject(1, trangThai);
             ResultSet rs = ps.executeQuery();
             List<Khach> list = new ArrayList<>();
@@ -209,3 +209,4 @@ public class KhachRepo {
         return null;
     }
 }
+
