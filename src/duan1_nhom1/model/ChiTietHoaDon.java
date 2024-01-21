@@ -1,23 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package duan1_nhom1.model;
 
-import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.UUID;
 
-/**
- *
- * @author maccuacu
- */
 public class ChiTietHoaDon {
     private UUID id;
-    private UUID idHD;
-    private UUID idSP;
+    private UUID idHoaDon;
+    private UUID idSanPham;
     private Integer soLuong;
-    private DecimalFormat giaBan;
+    private Double giaBan;
     private Date ngayTao;
     private Date ngaySua;
     private Boolean trangThai;
@@ -25,10 +16,10 @@ public class ChiTietHoaDon {
     public ChiTietHoaDon() {
     }
 
-    public ChiTietHoaDon(UUID id, UUID idHD, UUID idSP, Integer soLuong, DecimalFormat giaBan, Date ngayTao, Date ngaySua, Boolean trangThai) {
+    public ChiTietHoaDon(UUID id, UUID idHoaDon, UUID idSanPham, Integer soLuong, Double giaBan, Date ngayTao, Date ngaySua, Boolean trangThai) {
         this.id = id;
-        this.idHD = idHD;
-        this.idSP = idSP;
+        this.idHoaDon = idHoaDon;
+        this.idSanPham = idSanPham;
         this.soLuong = soLuong;
         this.giaBan = giaBan;
         this.ngayTao = ngayTao;
@@ -44,20 +35,20 @@ public class ChiTietHoaDon {
         this.id = id;
     }
 
-    public UUID getIdHD() {
-        return idHD;
+    public UUID getIdHoaDon() {
+        return idHoaDon;
     }
 
-    public void setIdHD(UUID idHD) {
-        this.idHD = idHD;
+    public void setIdHoaDon(UUID idHoaDon) {
+        this.idHoaDon = idHoaDon;
     }
 
-    public UUID getIdSP() {
-        return idSP;
+    public UUID getIdSanPham() {
+        return idSanPham;
     }
 
-    public void setIdSP(UUID idSP) {
-        this.idSP = idSP;
+    public void setIdSanPham(UUID idSanPham) {
+        this.idSanPham = idSanPham;
     }
 
     public Integer getSoLuong() {
@@ -68,11 +59,11 @@ public class ChiTietHoaDon {
         this.soLuong = soLuong;
     }
 
-    public DecimalFormat getGiaBan() {
+    public Double getGiaBan() {
         return giaBan;
     }
 
-    public void setGiaBan(DecimalFormat giaBan) {
+    public void setGiaBan(Double giaBan) {
         this.giaBan = giaBan;
     }
 
@@ -99,7 +90,4 @@ public class ChiTietHoaDon {
     public void setTrangThai(Boolean trangThai) {
         this.trangThai = trangThai;
     }
-    
-    
-     
 }
