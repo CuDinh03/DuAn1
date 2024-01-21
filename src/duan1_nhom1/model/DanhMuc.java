@@ -4,7 +4,9 @@
  */
 package duan1_nhom1.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -16,16 +18,19 @@ public class DanhMuc {
     private UUID id;
     private String ma;
     private String ten;
+    private String moTa;
     private Date ngayTao;
     private Date ngaySua;
+    
 
     public DanhMuc() {
     }
 
-    public DanhMuc(UUID id, String ma, String ten, Date ngayTao, Date ngaySua) {
+    public DanhMuc(UUID id, String ma, String ten, String moTa, Date ngayTao, Date ngaySua) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
+        this.moTa = moTa;
         this.ngayTao = ngayTao;
         this.ngaySua = ngaySua;
     }
@@ -54,6 +59,14 @@ public class DanhMuc {
         this.ten = ten;
     }
 
+    public String getMoTa() {
+        return moTa;
+    }
+
+    public void setMoTa(String moTa) {
+        this.moTa = moTa;
+    }
+
     public Date getNgayTao() {
         return ngayTao;
     }
@@ -69,5 +82,9 @@ public class DanhMuc {
     public void setNgaySua(Date ngaySua) {
         this.ngaySua = ngaySua;
     }
+
+    
+    
+    
         
 }
