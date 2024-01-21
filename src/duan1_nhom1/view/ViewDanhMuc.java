@@ -46,14 +46,14 @@ public class ViewDanhMuc extends javax.swing.JFrame {
     }
     }
     public DanhMuc getDataDanhMuc(){
-        UUID id = UUID.randomUUID();
         String ma = txtMa.getText();
         String ten = txtTen.getText();
         String moTa = txaMoTa.getText();
         Date ngayTao = dcTao.getDate();
         Date ngaySua = dcSua.getDate();;
         
-        return new DanhMuc(id, ma, ten, moTa, ngayTao, ngaySua);
+        
+        return new DanhMuc("", ma, ten, moTa, ngayTao, ngaySua,true);
     }
 
     /**

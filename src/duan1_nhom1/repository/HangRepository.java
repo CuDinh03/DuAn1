@@ -1,11 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package duan1_nhom1.repository;
 
 import duan1_nhom1.model.Hang;
-import duan1_nhom1.model.MauSac;
 import duan1_nhom1.utils.JdbcHelper;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,13 +16,12 @@ import java.util.List;
  */
 public class HangRepository {
 
-    private JdbcHelper jdbcHelper;
     List<Hang> listHang = new ArrayList();
     Connection conn = JdbcHelper.getConnection();
 
     public List<Hang> getAll() {
 
-        String sql = "SELECT id,ma,ten,mo_ta,ngay_tao,ngay_sua,trang_thai FROM mau_sac";
+        String sql = "SELECT * FROM Hang";
 
         try {
             PreparedStatement pr = conn.prepareStatement(sql);

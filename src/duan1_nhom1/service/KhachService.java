@@ -2,15 +2,12 @@ package duan1_nhom1.service;
 
 import duan1_nhom1.model.Khach;
 import duan1_nhom1.repository.KhachRepo;
-import duan1_nhom1.utils.DBconnect;
 import duan1_nhom1.utils.JdbcHelper;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
-
 public class KhachService implements IService<Khach> {
 
     private List<Khach> listKhach = new ArrayList<>();
@@ -53,7 +50,7 @@ public class KhachService implements IService<Khach> {
                    WHERE [ma] = ? OR [ten] = ? OR [sdt] = ?;
                  """;
 
-        try (Connection con = DBconnect.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+        try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setObject(1, ma);
             ps.setObject(2, ten);
@@ -88,7 +85,7 @@ public class KhachService implements IService<Khach> {
                  WHERE (trang_thai = ? OR ? IS NULL);
                  """;
 
-    try (Connection con = DBconnect.getConnection(); 
+    try (Connection con = JdbcHelper.getConnection(); 
          PreparedStatement ps = con.prepareStatement(sql)) {
 
         ps.setObject(1, trangThai);

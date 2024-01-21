@@ -1,18 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package duan1_nhom1.dto;
 
 import java.sql.Date;
-import java.util.UUID;
 
-/**
- *
- * @author maccuacu
- */
 public class KhachDto {
-    private UUID id;
+    private String id;
     private String maKhachHang;
     private String tenKhachHang;
     private String sdt;
@@ -23,7 +14,7 @@ public class KhachDto {
     public KhachDto() {
     }
 
-    public KhachDto(UUID id, String maKhachHang, String tenKhachHang, String sdt, Date ngayTao, Date ngaySua, Boolean trangThai) {
+    public KhachDto(String id, String maKhachHang, String tenKhachHang, String sdt, Date ngayTao, Date ngaySua, Boolean trangThai) {
         this.id = id;
         this.maKhachHang = maKhachHang;
         this.tenKhachHang = tenKhachHang;
@@ -33,14 +24,14 @@ public class KhachDto {
         this.trangThai = trangThai;
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
-
+    
     public String getMaKhachHang() {
         return maKhachHang;
     }

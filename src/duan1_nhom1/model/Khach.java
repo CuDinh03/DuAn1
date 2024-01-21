@@ -1,6 +1,5 @@
 package duan1_nhom1.model;
 
-import java.util.UUID;
 import java.sql.Date;
 
 public class Khach {

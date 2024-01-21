@@ -5,7 +5,7 @@
 package duan1_nhom1.repository;
 
 import duan1_nhom1.model.ThanhToan;
-import duan1_nhom1.utils.DBconnect;
+import duan1_nhom1.utils.JdbcHelper;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -40,7 +40,7 @@ public class ThanhToanRepo {
                                     ,?
                                     ,?);  
                      """;
-        try (Connection con = DBconnect.getConnection(); PreparedStatement stm = con.prepareStatement(sql)) {
+        try (Connection con = JdbcHelper.getConnection(); PreparedStatement stm = con.prepareStatement(sql)) {
             stm.setString(1, thanhToan.getMaThanhToan());
             stm.setString(2, thanhToan.getPhuongThucTT());
             stm.setString(3, thanhToan.getSoTien().toString());
@@ -73,7 +73,7 @@ public class ThanhToanRepo {
                ,[trang_thai] = ?
           WHERE where id=?;
             """;
-        try (Connection con = DBconnect.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+        try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setObject(1, tt.getMaThanhToan());
             ps.setObject(2, tt.getPhuongThucTT());
             ps.setObject(3, tt.getNgayTT());
@@ -97,7 +97,7 @@ public class ThanhToanRepo {
          DELETE FROM [dbo].[Thanh_Toan]
                     WHERE id=?;
             """;
-        try (Connection con = DBconnect.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+        try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setObject(1, id);
             int chek = ps.executeUpdate();
             if (chek > 0) {
@@ -122,7 +122,7 @@ public class ThanhToanRepo {
                         ,[trang_thai]
                     FROM [dbo].[Thanh_Toan];
             """;
-        try (Connection con = DBconnect.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+        try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
             List<ThanhToan> thanhToan = new ArrayList<>();
             while (rs.next()) {

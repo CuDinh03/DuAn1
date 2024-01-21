@@ -1,7 +1,6 @@
 package duan1_nhom1.repository;
 
 import duan1_nhom1.model.Khach;
-import duan1_nhom1.utils.DBconnect;
 import duan1_nhom1.utils.JdbcHelper;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -157,7 +156,7 @@ public class KhachRepo {
                        FROM [dbo].[Khach_Hang]
                        where [ma] = ? or  [ten] = ? or[sdt]=? or [trang_thai]=? ;
                      """;
-        try (Connection con = DBconnect.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+        try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setObject(1, ma);
             ResultSet rs = ps.executeQuery();
             List<Khach> list = new ArrayList<>();
@@ -188,7 +187,7 @@ public class KhachRepo {
                        FROM [dbo].[Khach_Hang]
                        where [ma] = ? or  [ten] = ? or[sdt]=? or [trang_thai]=? ;
                      """;
-        try (Connection con = DBconnect.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+        try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setObject(1, trangThai);
             ResultSet rs = ps.executeQuery();
             List<Khach> list = new ArrayList<>();

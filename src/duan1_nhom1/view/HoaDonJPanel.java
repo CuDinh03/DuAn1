@@ -1,66 +1,65 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package duan1_nhom1.view;
 
 import duan1_nhom1.dto.HoaDonDto;
-import duan1_nhom1.dto.KhachDto;
-import duan1_nhom1.service.KhachService;
+import duan1_nhom1.model.Khach;
 import duan1_nhom1.service.HoaDonService;
+import duan1_nhom1.service.KhachService;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author maccuacu
  */
-public class HoaDonJFrame extends javax.swing.JFrame {
+public class HoaDonJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form HoaDonJFrame
+     * Creates new form HoaDonJPanel
      */
-    
     private DefaultTableModel dtm = new DefaultTableModel();
 
     HoaDonService hds = new HoaDonService();
-    
+
     KhachService ks = new KhachService();
-    
-    public HoaDonJFrame() {
+
+    public HoaDonJPanel() {
         initComponents();
-        setLocationRelativeTo(null);
-        
+        initComponents();
         this.loadTable();
         this.loadCbbKhack();
-        
     }
-    public void loadCbbKhack(){
-        for (KhachDto khach : ks.getAll() ) {
+
+    public void loadCbbKhack() {
+        for (Khach khach : ks.getAll()) {
             KhachCbb.addItem(khach.getSdt());
         }
     }
-    public void loadTable(){
+
+    public void loadTable() {
         dtm = (DefaultTableModel) tblHoaDon.getModel();
         dtm.setRowCount(0);
-        
-        for (HoaDonDto hd : hds.getAll() ) {
+
+        for (HoaDonDto hd : hds.getAll()) {
             String status;
             if (hd.getTrangThai()) {
                 status = "Đã thanh toán";
-            }else {
+            } else {
                 status = "Chưa thanh toán";
             }
-             Object[] rowData = {
-                 hd.getId(),
-                 hd.getIdKhachHang(),
-                 hd.getIdNv(),
-                 hd.getMa(),
-                 hd.getTongTien(),
-                 hd.getNgayMua(),
-                 hd.getNgayTao(),
-                 hd.getNgaySua(),
-                 status
-             };   
+            Object[] rowData = {
+                hd.getId(),
+                hd.getIdKhachHang(),
+                hd.getIdNv(),
+                hd.getMa(),
+                hd.getTongTien(),
+                hd.getNgayMua(),
+                hd.getNgayTao(),
+                hd.getNgaySua(),
+                status
+            };
             dtm.addRow(rowData);
 
         }
@@ -101,7 +100,7 @@ public class HoaDonJFrame extends javax.swing.JFrame {
         txtNgaySua = new com.toedter.calendar.JDateChooser();
         txtTrangThai = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jPanel1.setBackground(new java.awt.Color(203, 233, 162));
 
         tblHoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -136,6 +135,9 @@ public class HoaDonJFrame extends javax.swing.JFrame {
                 showActionPerformed(evt);
             }
         });
+
+        jPanel2.setBackground(new java.awt.Color(203, 233, 162));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel1.setText("ID");
 
@@ -197,7 +199,7 @@ public class HoaDonJFrame extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(NhanVienCbb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(KhachCbb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addContainerGap(321, Short.MAX_VALUE))
+                .addContainerGap(421, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -238,7 +240,7 @@ public class HoaDonJFrame extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(txtTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -278,8 +280,8 @@ public class HoaDonJFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -288,21 +290,19 @@ public class HoaDonJFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
         // TODO add your handling code here:
-        try{
+        try {
             String ma = this.txtMahd.getText().trim();
             String tongTien = this.txtTongTien.getText().trim();
-//            java.sql.Date mua = new java.sql.Date(txtngaymua.getDate());
-//            java.sql.Date tao = new java.sql.Date(txtngayTao.getDate());
-//            java.sql.Date sua = new java.sql.Date(txtNgaySua.getDate());
-            
-        }catch(Exception e){
-            
+            //            java.sql.Date mua = new java.sql.Date(txtngaymua.getDate());
+            //            java.sql.Date tao = new java.sql.Date(txtngayTao.getDate());
+            //            java.sql.Date sua = new java.sql.Date(txtNgaySua.getDate());
+
+        } catch (Exception e) {
+
         }
     }//GEN-LAST:event_addActionPerformed
 
@@ -314,40 +314,6 @@ public class HoaDonJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_showActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(HoaDonJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(HoaDonJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(HoaDonJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(HoaDonJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new HoaDonJFrame().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> KhachCbb;

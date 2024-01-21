@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package duan1_nhom1.utils;
 
 import com.toedter.calendar.JDateChooser;
@@ -14,10 +10,6 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-/**
- *
- * @author Oanhbvb
- */
 public class Uhelper {
 
     public static Boolean checkNull(JTextField txt, String mess) {

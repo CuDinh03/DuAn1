@@ -16,7 +16,6 @@ import java.sql.Connection;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-import org.apache.poi.ss.formula.functions.T;
 
 /**
  *
@@ -24,7 +23,6 @@ import org.apache.poi.ss.formula.functions.T;
  */
 public class DanhMucRepository {
 
-    private JdbcHelper jdbcHelper;
     List<DanhMuc> listDanhMuc = new ArrayList();
     Connection conn = JdbcHelper.getConnection();
 
