@@ -2,6 +2,7 @@ CREATE DATABASE PRO1041_Duan1;
 
 USE PRO1041_Duan1;
 
+
 CREATE TABLE chuc_vu
 (
     id UNIQUEIDENTIFIER DEFAULT (newid()) NOT NULL PRIMARY KEY,
@@ -13,8 +14,8 @@ CREATE TABLE chuc_vu
 
 );
 
-CREATE TABLE tai_khoan
-(
+CREATE TABLE tai_khoan (
+
     id UNIQUEIDENTIFIER DEFAULT NEWID() NOT NULL PRIMARY KEY,
     ma Nvarchar(10),
     ten_dang_nhap Nvarchar(10),
@@ -27,8 +28,9 @@ CREATE TABLE tai_khoan
 
 
 
+
 CREATE TABLE san_pham
-(
+
     id UNIQUEIDENTIFIER DEFAULT NEWID() NOT NULL PRIMARY KEY,
     ma Nvarchar(10),
     ten Nvarchar(50),
@@ -56,6 +58,7 @@ CREATE TABLE san_pham_chi_tiet
     ngay_tao Date,
     ngay_sua Date,
     trang_thai BIT
+
 );
 CREATE TABLE danh_muc_san_pham
 (
@@ -67,6 +70,7 @@ CREATE TABLE danh_muc_san_pham
     ngay_sua Date,
     trang_thai BIT
 );
+
 CREATE TABLE Hang
 (
     id UNIQUEIDENTIFIER DEFAULT NEWID() NOT NULL PRIMARY KEY,
@@ -77,6 +81,7 @@ CREATE TABLE Hang
     ngay_sua Date,
     trang_thai BIT
 );
+
 CREATE TABLE mau_sac
 (
     id UNIQUEIDENTIFIER DEFAULT NEWID() NOT NULL PRIMARY KEY,
@@ -88,6 +93,7 @@ CREATE TABLE mau_sac
     trang_thai BIT
 );
 
+
 CREATE TABLE chat_lieu
 (
     id UNIQUEIDENTIFIER DEFAULT NEWID() NOT NULL PRIMARY KEY,
@@ -98,6 +104,7 @@ CREATE TABLE chat_lieu
     ngay_sua Date,
     trang_thai BIT
 );
+
 
 CREATE TABLE Size_ao
 (
@@ -123,6 +130,7 @@ CREATE TABLE hinh_anh
 
 CREATE TABLE San_Pham_Danh_Muc
 (
+
     id_sp UNIQUEIDENTIFIER,
     id_dm UNIQUEIDENTIFIER,
     ngay_tao Date,
@@ -130,6 +138,7 @@ CREATE TABLE San_Pham_Danh_Muc
     trang_thai BIT,
     PRIMARY KEY (id_sp, id_dm)
 );
+
 CREATE TABLE San_Pham_Mau_Sac
 (
     id_sp UNIQUEIDENTIFIER,
@@ -139,6 +148,7 @@ CREATE TABLE San_Pham_Mau_Sac
     trang_thai BIT,
     PRIMARY KEY (id_sp, id_ms)
 );
+
 
 CREATE TABLE San_Pham_Kich_Thuoc
 (
@@ -165,6 +175,7 @@ CREATE TABLE Voucher
     trang_thai BIT
 );
 
+
 CREATE TABLE Khach_Hang
 (
     id UNIQUEIDENTIFIER DEFAULT NEWID() NOT NULL PRIMARY KEY,
@@ -175,6 +186,7 @@ CREATE TABLE Khach_Hang
     ngay_sua Date,
     trang_thai BIT
 );
+
 
 CREATE TABLE Hoa_Don
 (
@@ -191,6 +203,7 @@ CREATE TABLE Hoa_Don
 
 
 
+
 CREATE TABLE Hoa_Don_Chi_Tiet
 (
     id UNIQUEIDENTIFIER DEFAULT NEWID() NOT NULL PRIMARY KEY,
@@ -202,6 +215,7 @@ CREATE TABLE Hoa_Don_Chi_Tiet
     ngay_sua Date,
     trang_thai BIT
 );
+
 
 CREATE TABLE Hoa_Don_Voucher
 (
@@ -224,6 +238,7 @@ CREATE TABLE Gio_Hang
     ngay_sua Date,
     trang_thai BIT
 );
+
 
 CREATE TABLE Gio_Hang_Chi_Tiet
 (
@@ -263,6 +278,7 @@ CREATE TABLE Thanh_Toan
 
 DROP table Thanh_Toan
 
+
 CREATE TABLE Nguoi_Dung
 (
     id UNIQUEIDENTIFIER DEFAULT NEWID() NOT NULL PRIMARY KEY,
@@ -283,7 +299,6 @@ ALTER TABLE Nguoi_Dung ADD CONSTRAINT FK_Nguoi_Dung_ChucVu FOREIGN KEY (id_cv) R
 ALTER TABLE Thanh_Toan ADD CONSTRAINT FK_thanh_toan_hoa_don FOREIGN KEY (id_hd) REFERENCES Hoa_Don(ID);
 ALTER TABLE Hoa_Don ADD CONSTRAINT FK_hoa_don_nguoi_dung FOREIGN KEY (id_nv) REFERENCES Nguoi_Dung(ID);
 ALTER TABLE san_pham_chi_tiet ADD CONSTRAINT FK_SanPhamChiTiet_Hang FOREIGN KEY (id_hang) REFERENCES Hang(ID)
-
 ALTER TABLE san_pham_chi_tiet ADD CONSTRAINT FK_SanPhamChiTiet_MauSac FOREIGN KEY (id_ms) REFERENCES San_Pham_Mau_Sac(id_ms)
 ALTER TABLE san_pham_chi_tiet ADD CONSTRAINT FK_SanPhamChiTiet_DanhMuc FOREIGN KEY (id_dm) REFERENCES San_Pham_Danh_Muc(id_dm)
 ALTER TABLE san_pham_chi_tiet ADD CONSTRAINT FK_SanPhamChiTiet_Size FOREIGN KEY (id_size) REFERENCES San_Pham_Kich_Thuoc(id_kt)
@@ -311,8 +326,6 @@ ALTER TABLE Gio_Hang_Hoa_Don ADD FOREIGN KEY (id_gh) REFERENCES Gio_Hang(ID)
 ALTER TABLE Gio_Hang_Hoa_Don ADD FOREIGN KEY (id_hd) REFERENCES Hoa_Don(ID)
 ALTER TABLE Hoa_Don_Voucher ADD FOREIGN KEY (id_voucher) REFERENCES Voucher(ID)
 ALTER TABLE Hoa_Don_Voucher ADD FOREIGN KEY (id_hd) REFERENCES Hoa_Don(ID)
-
-
 
 --- them data---
 
@@ -774,3 +787,4 @@ VALUES
             id
         FROM chuc_vu
         WHERE ma = 'CV001'), '2024-01-22', '2024-01-22', '2024-01-22', 1);
+

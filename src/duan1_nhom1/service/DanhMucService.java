@@ -1,50 +1,56 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package duan1_nhom1.service;
 
-import duan1_nhom1.model.SanPham;
-import duan1_nhom1.repository.SanPhamRepository;
-import duan1_nhom1.viewModel.QLSanPhamViewModel;
+import duan1_nhom1.repository.DanhMucRepository;
 import java.util.List;
+import org.apache.poi.ss.formula.functions.T;
 
-public class SanPhamService implements IService<SanPham> {
+/**
+ *
+ * @author anhtuanle
+ */
+public class DanhMucService implements IService {
 
-    private SanPhamRepository sanPhamRepository = new SanPhamRepository();
+    private DanhMucRepository danhMucRepository = new DanhMucRepository();
 
     @Override
-    public void add(SanPham t) {
+    public void add(Object t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void update(SanPham t, String id) {
+    public void update(Object t, String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public void delete(String id) {
-
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public List<SanPham> getAll() {
-        return sanPhamRepository.getAll();
+    public List getAll() {
+        return danhMucRepository.getAll();
     }
 
     @Override
-    public SanPham findById(String id) {
+    public Object findById(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     public String getTenById(String id) {
-        return sanPhamRepository.getTenById(id);
+        return danhMucRepository.getTenById(id);
     }
 
     public List<String> getAllTen() {
-        return sanPhamRepository.getAllTen();
+        return danhMucRepository.getAllTen();
     }
 
     public List<String> getAllId() {
-        return sanPhamRepository.getAllId();
+        return danhMucRepository.getAllId();
     }
 
 }

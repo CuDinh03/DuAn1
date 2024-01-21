@@ -1,50 +1,56 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package duan1_nhom1.service;
 
-import duan1_nhom1.model.SanPham;
-import duan1_nhom1.repository.SanPhamRepository;
-import duan1_nhom1.viewModel.QLSanPhamViewModel;
+import duan1_nhom1.model.ChatLieu;
+import duan1_nhom1.repository.ChatLieuRepository;
 import java.util.List;
 
-public class SanPhamService implements IService<SanPham> {
-
-    private SanPhamRepository sanPhamRepository = new SanPhamRepository();
+/**
+ *
+ * @author anhtuanle
+ */
+public class ChatLieuService implements IService<ChatLieu>{
+    
+    private ChatLieuRepository chatLieuRepository = new ChatLieuRepository();
 
     @Override
-    public void add(SanPham t) {
+    public void add(ChatLieu t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void update(SanPham t, String id) {
+    public void update(ChatLieu t, String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public void delete(String id) {
-
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public List<SanPham> getAll() {
-        return sanPhamRepository.getAll();
+    public List<ChatLieu> getAll() {
+       return chatLieuRepository.getAll();
     }
 
     @Override
-    public SanPham findById(String id) {
+    public ChatLieu findById(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
     public String getTenById(String id) {
-        return sanPhamRepository.getTenById(id);
+        return chatLieuRepository.getTenById(id);
     }
 
     public List<String> getAllTen() {
-        return sanPhamRepository.getAllTen();
+        return chatLieuRepository.getAllTen();
     }
 
     public List<String> getAllId() {
-        return sanPhamRepository.getAllId();
+        return chatLieuRepository.getAllId();
     }
-
+    
 }

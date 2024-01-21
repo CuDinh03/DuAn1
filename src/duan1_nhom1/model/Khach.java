@@ -3,11 +3,8 @@ package duan1_nhom1.model;
 import java.util.UUID;
 import java.sql.Date;
 
-/**
- *
- * @author maccuacu
- */
 public class Khach {
+
     private UUID id;
     private String maKhachHang;
     private String tenKhachHang;

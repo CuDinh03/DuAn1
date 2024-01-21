@@ -1,3 +1,4 @@
+
 package duan1_nhom1.model;
 
 import java.util.Date;
@@ -34,6 +35,7 @@ public class ChiTietHoaDon {
     public void setId(UUID id) {
         this.id = id;
     }
+
 
     public UUID getIdHoaDon() {
         return idHoaDon;
