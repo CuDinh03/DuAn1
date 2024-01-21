@@ -5,7 +5,9 @@
 package duan1_nhom1.tranf;
 
 import duan1_nhom1.dto.HoaDonDto;
+import duan1_nhom1.dto.KhachDto;
 import duan1_nhom1.model.HoaDon;
+import duan1_nhom1.model.Khach;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,5 +51,69 @@ public class TranferData {
         }
         return dtoList;
     }
+    
+       public static KhachDto convertToDto(Khach khach) {
+        KhachDto dto = new KhachDto();
+        if (khach.getId() != null) {
+            dto.setId(khach.getId());
+        }
+        if (khach.getMaKhachHang() != null) {
+            dto.setMaKhachHang(khach.getMaKhachHang());
+        }
+        if (khach.getTenKhachHang() != null) {
+            dto.setTenKhachHang(khach.getTenKhachHang());
+        }
+        if (khach.getSdt() != null) {
+            dto.setSdt(khach.getSdt());
+        }
+        if (khach.getNgayTao() != null) {
+            dto.setNgayTao(khach.getNgayTao());
+        }
+        if (khach.getNgaySua() != null) {
+            dto.setNgaySua(khach.getNgaySua());
+        }
+        if (khach.getTrangThai() != null) {
+            dto.setTrangThai(khach.getTrangThai());
+        }
+        
+        return dto;
+    }
+       
+        public static Khach convertToModel(KhachDto dto) {
+        Khach model = new Khach();
+
+        if (dto.getId() != null) {
+            model.setId(dto.getId());
+        }
+        if (dto.getMaKhachHang() != null) {
+            model.setMaKhachHang(dto.getMaKhachHang());
+        }
+        if (dto.getTenKhachHang() != null) {
+            model.setTenKhachHang(dto.getTenKhachHang());
+        }
+        if (dto.getSdt() != null) {
+            model.setSdt(dto.getSdt());
+        }
+        if (dto.getNgayTao() != null) {
+            model.setNgayTao(dto.getNgayTao());
+        }
+        if (dto.getNgaySua() != null) {
+            model.setNgaySua(dto.getNgaySua());
+        }
+        if (dto.getTrangThai() != null) {
+            model.setTrangThai(dto.getTrangThai());
+        }
+
+        return model;
+    }
+    public static List<KhachDto> convertListKhachToDto(List<Khach> entityList) {
+        List<KhachDto> dtoList = new ArrayList<>();
+        for (Khach entity : entityList) {
+            dtoList.add(convertToDto(entity));
+        }
+        return dtoList;
+    }
+        
+   
 
 }

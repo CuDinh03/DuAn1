@@ -48,9 +48,9 @@ public class HoaDonRepository {
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    UUID id = (UUID) resultSet.getObject("id");
-                    UUID id_kh = (UUID) resultSet.getObject("id_kh");
-                    UUID id_Nv = (UUID) resultSet.getObject("id_Nv");
+                    UUID id = UUID.fromString((String) resultSet.getObject("id"));
+                    UUID id_kh = UUID.fromString((String) resultSet.getObject("id_kh"));
+                    UUID id_Nv =  UUID.fromString((String) resultSet.getObject("id_Nv"));
                     String ma = resultSet.getString("ma");
                     Date ngay_mua = resultSet.getDate("ngay_mua");
                     Double tong_tien = resultSet.getDouble("tong_tien");
@@ -107,9 +107,9 @@ public class HoaDonRepository {
              ResultSet resultSet = preparedStatement.executeQuery()) {
 
             while (resultSet.next()) {
-                    UUID id = (UUID) resultSet.getObject("id");
-                    UUID id_kh = (UUID) resultSet.getObject("id_kh");
-                    UUID id_Nv = (UUID) resultSet.getObject("id_Nv");
+                    UUID id = UUID.fromString((String) resultSet.getObject("id"));
+                    UUID id_kh = UUID.fromString((String) resultSet.getObject("id_kh"));
+                    UUID id_Nv = UUID.fromString((String) resultSet.getObject("id_Nv"));
                     String ma = resultSet.getString("ma");
                     Date ngay_mua = resultSet.getDate("ngay_mua");
                     Double tong_tien = resultSet.getDouble("tong_tien");
