@@ -45,16 +45,16 @@ public class ViewDanhMuc extends javax.swing.JFrame {
         });
     }
     }
-//    public DanhMuc getDataDanhMuc(){
-//        String id = 
-//        String ma = txtMa.getText();
-//        String ten = txtTen.getText();
-//        String moTa = txaMoTa.getText();
-//        Date ngayTao = dcTao.getDate();
-//        Date ngaySua = dcSua.getDate();;
-//        
-//        return new DanhMuc(id, ma, ten, moTa, ngayTao, ngaySua);
-//    }
+    public DanhMuc getDataDanhMuc(){
+        
+        String ma = txtMa.getText();
+        String ten = txtTen.getText();
+        String moTa = txaMoTa.getText();
+        Date ngayTao = dcTao.getDate();
+        Date ngaySua = dcSua.getDate();;
+        
+        return new DanhMuc(id, ma, ten, moTa, ngayTao, ngaySua);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -97,6 +97,11 @@ public class ViewDanhMuc extends javax.swing.JFrame {
         });
 
         btnXoa.setText("Xóa");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
 
         btnSua.setText("Sửa");
 
@@ -263,10 +268,17 @@ public class ViewDanhMuc extends javax.swing.JFrame {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-//        JOptionPane.showMessageDialog(rootPane, danhMucRepo.add(getDataDanhMuc()));
+        JOptionPane.showMessageDialog(rootPane, danhMucRepo.addDanhMuc(getDataDanhMuc()));
             danhMucs = danhMucRepo.getAllDanhMuc();
             showDataDanhMuc(danhMucs);
     }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        // TODO add your handling code here:
+         JOptionPane.showMessageDialog(rootPane, danhMucRepo.deleteDanhMuc(getDataDanhMuc().getMa()));
+        danhMucs = danhMucRepo.getAllDanhMuc();
+            showDataDanhMuc(danhMucs);
+    }//GEN-LAST:event_btnXoaActionPerformed
 
     /**
      * @param args the command line arguments

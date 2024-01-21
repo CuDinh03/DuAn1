@@ -22,7 +22,7 @@ public class DanhMucRepo {
     
     public List<DanhMuc> getAllDanhMuc(){
         
-            String query = """
+            String sql = """
                     SELECT [id]
                           ,[ma]
                           ,[ten]
@@ -33,13 +33,15 @@ public class DanhMucRepo {
                       FROM [dbo].[danh_muc_san_pham]
                     """;
             try ( java.sql.Connection con = DBConnect.getConnection("PRO1041_Duan1"); 
-            PreparedStatement ps = con.prepareStatement(query)) {
+            PreparedStatement ps = con.prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
             List<DanhMuc> list = new ArrayList<>();
             while (rs.next()) {
                 DanhMuc dm = new DanhMuc();
+                
                 dm.setMa(rs.getString(2));
                 dm.setTen(rs.getString(3));
+                dm.setMoTa(rs.getString(4));
                 dm.setNgayTao(rs.getDate(5));
                 dm.setNgaySua(rs.getDate(6));
                 list.add(dm);
@@ -62,9 +64,10 @@ public class DanhMucRepo {
                                 ,[ngay_sua]
                                 ,[trang_thai])
                           VALUES
-                                ?,?,?,?,?,?,?                            
+                                (?,?,?,?,?,?,? )                           
                      """;
-        try ( java.sql.Connection con = DBConnect.getConnection("AsmGD2d");  PreparedStatement ps = con.prepareStatement(sqlInsert);) {
+        try ( java.sql.Connection con = DBConnect.getConnection("PRO1041_Duan1");  PreparedStatement ps = con.prepareStatement(sqlInsert);) {
+            
             ps.setString(2, dm.getMa());
             ps.setString(3, dm.getTen());
             ps.setString(4, dm.getMoTa());
@@ -77,8 +80,21 @@ public class DanhMucRepo {
         }
         return check > 0;   
     }
+    public boolean deleteDanhMuc(String ma) {
+        int check = 0;
+        String sql = """
+                     DELETE FROM [dbo].[danh_muc_san_pham]
+                           WHERE ma = ?
+                     """;
+        try ( java.sql.Connection con = DBConnect.getConnection("PRO1041_Duan1");  
+                PreparedStatement ps = con.prepareStatement(sql)
+                ) {
+            ps.setObject(2, ma);
+            check = ps.executeUpdate();
 
-    public Object add(DanhMuc dataDanhMuc) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        } catch (Exception e) {
+            e.fillInStackTrace();
+        }
+        return check > 0;
     }
 }
