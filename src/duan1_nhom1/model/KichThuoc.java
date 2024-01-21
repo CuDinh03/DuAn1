@@ -7,10 +7,6 @@ package duan1_nhom1.model;
 import java.util.Date;
 import java.util.UUID;
 
-/**
- *
- * @author maccuacu
- */
 public class KichThuoc {
     private String id;
     private String ma;
@@ -88,7 +84,6 @@ public class KichThuoc {
     public void setTrangThai(boolean trangThai) {
         this.trangThai = trangThai;
     }
-
 
     
 }

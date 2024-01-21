@@ -3,9 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package duan1_nhom1.model;
-
 import java.util.Date;
 import java.util.UUID;
+
 
 /**
  *

@@ -4,7 +4,8 @@
  */
 package duan1_nhom1;
 
-import duan1_nhom1.view.SanPhamFrame;
+
+import duan1_nhom1.view.MainJFrame;
 
 /**
  *
@@ -12,12 +13,9 @@ import duan1_nhom1.view.SanPhamFrame;
  */
 public class DuAn1_nhom1 {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        new SanPhamFrame().setVisible(true);
+    public static void main(String args[]) {  
+                new MainJFrame().setVisible(true);
     }
+
     
 }
