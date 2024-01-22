@@ -4,10 +4,14 @@
  */
 package duan1_nhom1.dto;
 
+
+import java.util.Date;
+import java.util.UUID;
+
 /**
  *
  * @author maccuacu
  */
 public class NguoiDungDto {
-    
+
 }

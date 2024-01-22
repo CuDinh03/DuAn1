@@ -1,19 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package duan1_nhom1.model;
 
-import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.UUID;
 
-/**
- *
- * @author maccuacu
- */
 public class ChiTietHoaDon {
-   private UUID id;
+    private UUID id;
     private UUID idHoaDon;
     private UUID idSanPham;
     private Integer soLuong;
@@ -43,6 +35,7 @@ public class ChiTietHoaDon {
     public void setId(UUID id) {
         this.id = id;
     }
+
 
     public UUID getIdHoaDon() {
         return idHoaDon;
@@ -99,5 +92,4 @@ public class ChiTietHoaDon {
     public void setTrangThai(Boolean trangThai) {
         this.trangThai = trangThai;
     }
-     
 }

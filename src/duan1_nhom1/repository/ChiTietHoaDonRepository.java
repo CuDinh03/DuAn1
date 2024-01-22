@@ -4,23 +4,20 @@
  */
 package duan1_nhom1.repository;
 
+/**
+ *
+ * @author maccuacu
+ */
 import duan1_nhom1.model.ChiTietHoaDon;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import duan1_nhom1.utils.JdbcHelper;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-/**
- *
- * @author WEB
- */
 public class ChiTietHoaDonRepository {
-    
-    
+
     private final Connection connection = JdbcHelper.getConnection();
 
     public void createChiTietHoaDon(ChiTietHoaDon chiTietHoaDon) {
@@ -39,7 +36,7 @@ public class ChiTietHoaDonRepository {
 
                 preparedStatement.executeUpdate();
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -63,7 +60,7 @@ public class ChiTietHoaDonRepository {
                     return new ChiTietHoaDon(id, id_hd, id_sp, so_luong, gia_ban, ngay_tao, ngay_sua, trang_thai);
                 }
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
@@ -84,7 +81,7 @@ public class ChiTietHoaDonRepository {
 
                 preparedStatement.executeUpdate();
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -120,9 +117,10 @@ public class ChiTietHoaDonRepository {
                 ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon(id, id_hd, id_sp, so_luong, gia_ban, ngay_tao, ngay_sua, trang_thai);
                 chiTietHoaDons.add(chiTietHoaDon);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return chiTietHoaDons;
     }
 }
+

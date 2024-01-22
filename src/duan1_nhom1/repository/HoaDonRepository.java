@@ -3,21 +3,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package duan1_nhom1.repository;
+
+/**
+ *
+ * @author maccuacu
+ */
 import duan1_nhom1.model.HoaDon;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import duan1_nhom1.utils.JdbcHelper;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-/**
- *
- * @author WEB
- */
 public class HoaDonRepository {
-    
+
     private final Connection connection = JdbcHelper.getConnection();
 
     public void createHoaDon(HoaDon hoaDon) {
@@ -37,7 +36,7 @@ public class HoaDonRepository {
 
                 preparedStatement.executeUpdate();
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -62,7 +61,7 @@ public class HoaDonRepository {
                     return new HoaDon(id, id_kh, id_Nv, ma, ngay_mua, tong_tien, trang_thai, ngay_tao, ngay_sua);
                 }
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
@@ -84,7 +83,7 @@ public class HoaDonRepository {
 
                 preparedStatement.executeUpdate();
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -96,7 +95,7 @@ public class HoaDonRepository {
                 preparedStatement.setObject(1, hoaDonId);
                 preparedStatement.executeUpdate();
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -122,10 +121,12 @@ public class HoaDonRepository {
                 HoaDon hoaDon = new HoaDon(id, id_kh, id_Nv, ma, ngay_mua, tong_tien, trang_thai, ngay_tao, ngay_sua);
                 hoaDons.add(hoaDon);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return hoaDons;
     }
-    
 }
+
+    
+
