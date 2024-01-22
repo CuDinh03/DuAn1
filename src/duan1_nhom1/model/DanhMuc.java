@@ -4,9 +4,7 @@
  */
 package duan1_nhom1.model;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -14,32 +12,19 @@ import java.util.UUID;
  * @author maccuacu
  */
 public class DanhMuc {
-    
-    private UUID id;
+    private String id;
     private String ma;
     private String ten;
     private String moTa;
     private Date ngayTao;
     private Date ngaySua;
-    
+    private boolean trangThai;
 
-    public DanhMuc() {
-    }
-
-    public DanhMuc(UUID id, String ma, String ten, String moTa, Date ngayTao, Date ngaySua) {
-        this.id = id;
-        this.ma = ma;
-        this.ten = ten;
-        this.moTa = moTa;
-        this.ngayTao = ngayTao;
-        this.ngaySua = ngaySua;
-    }
-
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -83,9 +68,25 @@ public class DanhMuc {
         this.ngaySua = ngaySua;
     }
 
-    @Override
-    public String toString() {
-        return "DanhMuc{" + "id=" + id + ", ma=" + ma + ", ten=" + ten + ", moTa=" + moTa + ", ngayTao=" + ngayTao + ", ngaySua=" + ngaySua + '}';
+    public boolean isTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(boolean trangThai) {
+        this.trangThai = trangThai;
+    }
+
+    public DanhMuc(String id, String ma, String ten, String moTa, Date ngayTao, Date ngaySua, boolean trangThai) {
+        this.id = id;
+        this.ma = ma;
+        this.ten = ten;
+        this.moTa = moTa;
+        this.ngayTao = ngayTao;
+        this.ngaySua = ngaySua;
+        this.trangThai = trangThai;
+    }
+
+    public DanhMuc() {
     }
     
 }

@@ -40,7 +40,7 @@ public class DanhMucRepo {
             while (rs.next()) {
                 DanhMuc dm = new DanhMuc();
                 UUID id = UUID.fromString((String)rs.getObject("id"));
-                dm.setId(id);
+                dm.setId(rs.getString(1));
                 dm.setMa(rs.getString(2));
                 dm.setTen(rs.getString(3));
                 dm.setMoTa(rs.getString(4));
