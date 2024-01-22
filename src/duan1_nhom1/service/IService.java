@@ -5,6 +5,7 @@
 package duan1_nhom1.service;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -12,11 +13,7 @@ import java.util.List;
  */
 public interface IService<T> {
    void add (T t);
-<<<<<<< HEAD
-   void update(T t, String id);
-=======
    void update(T t, String  id);
->>>>>>> master
    void delete(String  id);
    List<T> getAll();
    T findById( String  id);

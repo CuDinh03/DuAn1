@@ -4,14 +4,8 @@
  */
 package duan1_nhom1.model;
 
-<<<<<<< HEAD
-import java.util.UUID;
-import java.math.BigDecimal;
-import java.sql.Date;
-=======
 import java.math.BigDecimal;
 import java.util.Date;
->>>>>>> master
 
 /**
  *
@@ -115,9 +109,4 @@ public class ThanhToan {
         this.trangThai = trangThai;
     }
 
-<<<<<<< HEAD
-   
-   
-=======
->>>>>>> master
 }
