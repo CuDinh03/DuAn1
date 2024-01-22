@@ -5,6 +5,7 @@
 package duan1_nhom1.controller;
 
 import duan1_nhom1.bean.DanhMucBean;
+import duan1_nhom1.view.BaoCaoJPanel;
 import duan1_nhom1.view.HoaDonJPanel;
 import duan1_nhom1.view.SanPhamJPanel;
 import duan1_nhom1.view.TrangChuJPanel;
@@ -67,6 +68,7 @@ public class ChuyenManHinhController {
             switch (kind) {
                 case "TrangChu" -> node = new TrangChuJPanel();
                 case "SanPham" -> node = new SanPhamJPanel();
+                case "BaoCao" -> node = new BaoCaoJPanel();
                 case "HoaDon" -> node = new HoaDonJPanel();
                 default -> {
                 }

@@ -54,55 +54,27 @@ public class TranferData {
     
        public static KhachDto convertToDto(Khach khach) {
         KhachDto dto = new KhachDto();
-        if (khach.getId() != null) {
-            dto.setId(khach.getId());
-        }
-        if (khach.getMaKhachHang() != null) {
-            dto.setMaKhachHang(khach.getMaKhachHang());
-        }
-        if (khach.getTenKhachHang() != null) {
-            dto.setTenKhachHang(khach.getTenKhachHang());
-        }
-        if (khach.getSdt() != null) {
-            dto.setSdt(khach.getSdt());
-        }
-        if (khach.getNgayTao() != null) {
-            dto.setNgayTao(khach.getNgayTao());
-        }
-        if (khach.getNgaySua() != null) {
-            dto.setNgaySua(khach.getNgaySua());
-        }
-        if (khach.getTrangThai() != null) {
-            dto.setTrangThai(khach.getTrangThai());
-        }
-        
+        if (khach.getId() != null) dto.setId(khach.getId());        
+        if (khach.getMaKhachHang() != null) dto.setMaKhachHang(khach.getMaKhachHang());       
+        if (khach.getTenKhachHang() != null) dto.setTenKhachHang(khach.getTenKhachHang());        
+        if (khach.getSdt() != null) dto.setSdt(khach.getSdt());        
+        if (khach.getNgayTao() != null) dto.setNgayTao(khach.getNgayTao());       
+        if (khach.getNgaySua() != null) dto.setNgaySua(khach.getNgaySua());
+        if (khach.getTrangThai() != null) dto.setTrangThai(khach.getTrangThai());        
         return dto;
     }
        
         public static Khach convertToModel(KhachDto dto) {
         Khach model = new Khach();
 
-        if (dto.getId() != null) {
-            model.setId(dto.getId());
-        }
-        if (dto.getMaKhachHang() != null) {
-            model.setMaKhachHang(dto.getMaKhachHang());
-        }
-        if (dto.getTenKhachHang() != null) {
-            model.setTenKhachHang(dto.getTenKhachHang());
-        }
-        if (dto.getSdt() != null) {
-            model.setSdt(dto.getSdt());
-        }
-        if (dto.getNgayTao() != null) {
-            model.setNgayTao(dto.getNgayTao());
-        }
-        if (dto.getNgaySua() != null) {
-            model.setNgaySua(dto.getNgaySua());
-        }
-        if (dto.getTrangThai() != null) {
-            model.setTrangThai(dto.getTrangThai());
-        }
+        if (dto.getId() != null) model.setId(dto.getId());   
+        if (dto.getMaKhachHang() != null) model.setMaKhachHang(dto.getMaKhachHang());      
+        if (dto.getTenKhachHang() != null) model.setTenKhachHang(dto.getTenKhachHang());       
+        if (dto.getSdt() != null) model.setSdt(dto.getSdt());       
+        if (dto.getNgayTao() != null) model.setNgayTao(dto.getNgayTao());       
+        if (dto.getNgaySua() != null) model.setNgaySua(dto.getNgaySua());       
+        if (dto.getTrangThai() != null) model.setTrangThai(dto.getTrangThai());
+        
 
         return model;
     }
