@@ -7,6 +7,10 @@ package duan1_nhom1.repository;
 import duan1_nhom1.model.ThanhToan;
 import duan1_nhom1.utils.DBconnect;
 import java.sql.Connection;
+<<<<<<< HEAD
+=======
+import java.sql.Date;
+>>>>>>> master
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -44,9 +48,15 @@ public class ThanhToanRepo {
             stm.setString(1, thanhToan.getMaThanhToan());
             stm.setString(2, thanhToan.getPhuongThucTT());
             stm.setString(3, thanhToan.getSoTien().toString());
+<<<<<<< HEAD
             stm.setDate(4, thanhToan.getNgayTT());
             stm.setDate(5, thanhToan.getNgayTao());
             stm.setDate(6, thanhToan.getNgaySua());
+=======
+            stm.setDate(4, (Date) thanhToan.getNgayTT());
+            stm.setDate(5, (Date) thanhToan.getNgayTao());
+            stm.setDate(6, (Date) thanhToan.getNgaySua());
+>>>>>>> master
             stm.setBoolean(7, thanhToan.getTrangThai());
             int chek = stm.executeUpdate();
 
@@ -60,7 +70,11 @@ public class ThanhToanRepo {
         }
     }
 
+<<<<<<< HEAD
     public void updateThanhToan(ThanhToan tt) {
+=======
+    public void updateThanhToan(ThanhToan tt, String id ) {
+>>>>>>> master
         String sql = """
          UPDATE [dbo].[Thanh_Toan]
             SET
@@ -110,6 +124,7 @@ public class ThanhToanRepo {
         }
     }
 
+<<<<<<< HEAD
     private List<ThanhToan> getAll() {
         String sql = """
              SELECT 
@@ -143,5 +158,44 @@ public class ThanhToanRepo {
         }
         return null;
     }
+=======
+    public List<ThanhToan> getAll() {
+    String sql = """
+        SELECT 
+            [ma],
+            [phuong_thuc_thanh_toan],
+            [tien_thanh_toan],
+            [ngay_thanh_toan],
+            [ngay_tao],
+            [ngay_sua],
+            [trang_thai]
+        FROM [dbo].[Thanh_Toan]
+    """;
+
+    try (Connection con = DBconnect.getConnection();
+         PreparedStatement ps = con.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
+
+        List<ThanhToan> listTT = new ArrayList<>();
+        while (rs.next()) {
+            ThanhToan thanhToan = new ThanhToan();
+            thanhToan.setMaThanhToan(rs.getString("ma"));
+            thanhToan.setPhuongThucTT(rs.getString("phuong_thuc_thanh_toan"));
+            thanhToan.setSoTien(rs.getBigDecimal("tien_thanh_toan"));
+            thanhToan.setNgayTT(rs.getDate("ngay_thanh_toan"));
+            thanhToan.setNgayTao(rs.getDate("ngay_tao"));
+            thanhToan.setNgaySua(rs.getDate("ngay_sua"));
+            thanhToan.setTrangThai(rs.getBoolean("trang_thai"));
+
+            listTT.add(thanhToan);
+        }
+        return listTT;
+
+    } catch (Exception e) {
+        // Log the exception or rethrow it as a runtime exception
+        throw new RuntimeException("Error retrieving payments", e);
+    }
+}
+>>>>>>> master
 
 }

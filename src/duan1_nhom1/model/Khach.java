@@ -4,15 +4,23 @@
  */
 package duan1_nhom1.model;
 
+<<<<<<< HEAD
 import java.util.UUID;
 import java.sql.Date;
+=======
+import java.util.Date;
+>>>>>>> master
 
 /**
  *
  * @author maccuacu
  */
 public class Khach {
+<<<<<<< HEAD
     private String id;
+=======
+     private String id;
+>>>>>>> master
     private String maKhachHang;
     private String tenKhachHang;
     private String sdt;
@@ -32,7 +40,10 @@ public class Khach {
         this.ngaySua = ngaySua;
         this.trangThai = trangThai;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
     public String getId() {
         return id;
     }
@@ -88,7 +99,10 @@ public class Khach {
     public void setTrangThai(Boolean trangThai) {
         this.trangThai = trangThai;
     }
+<<<<<<< HEAD
 
    
+=======
+>>>>>>> master
     
 }

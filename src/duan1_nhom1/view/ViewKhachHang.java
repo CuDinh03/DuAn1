@@ -82,6 +82,10 @@ public class ViewKhachHang extends javax.swing.JFrame {
         txtTimKiem.setText("");
         buttonGroup1.clearSelection();
         buttonGroup2.clearSelection();
+<<<<<<< HEAD
+=======
+        
+>>>>>>> master
     }
 
     public void addKhach() {
