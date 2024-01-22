@@ -1,10 +1,13 @@
 package duan1_nhom1.service;
 
 import duan1_nhom1.model.SanPham;
+import duan1_nhom1.repository.SanPhamRepository;
+import duan1_nhom1.viewModel.QLSanPhamViewModel;
 import java.util.List;
-import java.util.UUID;
 
-public class SanPhamService implements IService<SanPham>{
+public class SanPhamService implements IService<SanPham> {
+
+    private SanPhamRepository sanPhamRepository = new SanPhamRepository();
 
     @Override
     public void add(SanPham t) {
@@ -23,13 +26,23 @@ public class SanPhamService implements IService<SanPham>{
 
     @Override
     public List<SanPham> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return sanPhamRepository.getAll();
     }
 
     @Override
     public SanPham findById(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+    public String getTenById(String id) {
+        return sanPhamRepository.getTenById(id);
+    }
 
-   
+    public List<String> getAllTen() {
+        return sanPhamRepository.getAllTen();
+    }
+
+    public List<String> getAllId() {
+        return sanPhamRepository.getAllId();
+    }
+
 }

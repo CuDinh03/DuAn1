@@ -5,7 +5,6 @@
 package duan1_nhom1.service;
 
 import duan1_nhom1.model.ThanhToan;
-import duan1_nhom1.repository.ThanhToanRepo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -15,26 +14,26 @@ import java.util.UUID;
  * @author WEB
  */
 public class ThanhToanService implements IService<ThanhToan> {
-    private List<ThanhToan>listTT=new ArrayList<>();
-    private ThanhToanRepo thanhToanRepo=new ThanhToanRepo();
+    private List<ThanhToan> litsThanhToan = new ArrayList<>();
+    private ThanhToanService thanhToanService=new ThanhToanService();
     @Override
     public void add(ThanhToan t) {
-       thanhToanRepo.addThanhToan(t);
+       thanhToanService.add(t);
     }
 
     @Override
     public void update(ThanhToan t, String  id) {
-   thanhToanRepo.updateThanhToan(t, id);
+   thanhToanService.update(t, id);
     }
 
     @Override
     public void delete(String id) {
-    thanhToanRepo.deleteThanhToan(id);
+    thanhToanService.delete(id);
     }
 
     @Override
     public List<ThanhToan> getAll() {
-      return thanhToanRepo.getAll();
+      return thanhToanService.getAll();
     }
 
     @Override

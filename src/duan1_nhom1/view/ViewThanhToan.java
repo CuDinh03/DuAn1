@@ -4,42 +4,17 @@
  */
 package duan1_nhom1.view;
 
-import duan1_nhom1.model.ThanhToan;
-import duan1_nhom1.service.ThanhToanService;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.table.DefaultTableModel;
-
 /**
  *
  * @author WEB
  */
 public class ViewThanhToan extends javax.swing.JFrame {
- private ThanhToanService thanhToanService=new ThanhToanService();
- private  List<ThanhToan>listTT=new ArrayList<>();
- private DefaultTableModel tableModel = new DefaultTableModel();
+
+    /**
+     * Creates new form ViewThanhToan
+     */
     public ViewThanhToan() {
-        
         initComponents();
-        setLocationRelativeTo(null);
-        listTT=thanhToanService.getAll();
-        showDateThanhToan();
-        
-    }
-    
-   public  void showDateThanhToan(){
-    tableModel = (DefaultTableModel) tblThanhToan.getModel();
-        tableModel.setRowCount(0);   
-        for (ThanhToan thanhToan : listTT) {
-            tableModel.addRow(new Object[]{
-                thanhToan.getMaThanhToan(),
-                thanhToan.getPhuongThucTT(),
-                thanhToan.getSoTien(),
-                thanhToan.getNgayTT(),
-                thanhToan.getTrangThai() ? "Chưa thanh toán " : "Đã thanh toán  "
-            });
-        }
-        
     }
 
     /**
@@ -55,7 +30,7 @@ public class ViewThanhToan extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblThanhToan = new javax.swing.JTable();
+        jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -78,20 +53,20 @@ public class ViewThanhToan extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(204, 255, 153));
 
-        jLabel2.setText("QUẢN LÝ THANH TOÁN ");
+        jLabel2.setText("HÓA ĐƠN CHỜ ");
 
-        tblThanhToan.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "MÃ THANH TOÁN ", "PHƯƠNG THỨC THANH TOÁN  ", "TỔNG SỐ TIỀN ", "NGÀY THANH TOÁN", "TRẠNG THÁI "
+                "ID", "MÃ KHÁCH HÀNG ", "TÊN KHÁCH HÀNG ", "TỔNG SỐ TIỀN ", "NGÀY THANH TOÁN", "TRẠNG THÁI "
             }
         ));
-        jScrollPane1.setViewportView(tblThanhToan);
+        jScrollPane1.setViewportView(jTable1);
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 153));
 
@@ -353,9 +328,9 @@ public class ViewThanhToan extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JRadioButton rdoChuyenKhoan;
     private javax.swing.JRadioButton rdoTienMat;
-    private javax.swing.JTable tblThanhToan;
     // End of variables declaration//GEN-END:variables
 }
