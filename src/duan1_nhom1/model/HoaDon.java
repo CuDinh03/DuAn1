@@ -2,12 +2,11 @@
 package duan1_nhom1.model;
 
 import java.util.Date;
-import java.util.UUID;
 
 public class HoaDon {
-    private UUID id;
-    private UUID idKhachHang;
-    private UUID idNv;
+    private String id;
+    private String idKhachHang;
+    private String idNv;
     private String ma;
     private Date ngayMua;
     private Double tongTien;
@@ -18,7 +17,7 @@ public class HoaDon {
     public HoaDon() {
     }
 
-    public HoaDon(UUID id, UUID idKhachHang, UUID idNv, String ma, Date ngayMua, Double tongTien, Boolean trangThai, Date ngayTao, Date ngaySua) {
+    public HoaDon(String id, String idKhachHang, String idNv, String ma, Date ngayMua, Double tongTien, Boolean trangThai, Date ngayTao, Date ngaySua) {
         this.id = id;
         this.idKhachHang = idKhachHang;
         this.idNv = idNv;
@@ -30,28 +29,28 @@ public class HoaDon {
         this.ngaySua = ngaySua;
     }
 
-    public UUID getIdNv() {
+    public String getIdNv() {
         return idNv;
     }
 
-    public void setIdNv(UUID idNv) {
+    public void setIdNv(String idNv) {
         this.idNv = idNv;
     }
 
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public UUID getIdKhachHang() {
+    public String getIdKhachHang() {
         return idKhachHang;
     }
 
-    public void setIdKhachHang(UUID idKhachHang) {
+    public void setIdKhachHang(String idKhachHang) {
         this.idKhachHang = idKhachHang;
     }
 

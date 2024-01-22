@@ -30,7 +30,7 @@ public class KhachService implements IService<Khach> {
 
     @Override
     public Khach findById(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       return khachHangRepo.findById(id);
     }
 
     @Override
