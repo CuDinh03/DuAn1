@@ -4,7 +4,6 @@
  */
 package duan1_nhom1.repository;
 
-import duan1_nhom1.dto.DanhMucDto;
 import duan1_nhom1.model.ChatLieu;
 import duan1_nhom1.model.DanhMuc;
 import duan1_nhom1.model.Hang;
@@ -26,10 +25,10 @@ import java.util.UUID;
  */
 public class DanhMucRepository {
 
-    List<DanhMucDto> listDanhMuc = new ArrayList();
+    List<DanhMuc> listDanhMuc = new ArrayList();
     Connection conn = JdbcHelper.getConnection();
 
-    public List<DanhMucDto> getAll() {
+    public List<DanhMuc> getAll() {
 
         String sql = "SELECT id,ma,ten,mo_ta,ngay_tao,ngay_sua,trang_thai FROM danh_muc_san_pham";
 
