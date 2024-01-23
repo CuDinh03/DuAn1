@@ -6,9 +6,8 @@ package duan1_nhom1.repository;
 
 import com.sun.jdi.connect.spi.Connection;
 import duan1_nhom1.model.DanhMuc;
-import duan1_nhom1.utils.DBConnect;
 import duan1_nhom1.utils.JdbcHelper;
-import java.sql.Date;
+import java.sql.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -20,6 +19,7 @@ import java.util.UUID;
  * @author bachh
  */
 public class DanhMucRepo {
+    
     
     public List<DanhMuc> getAllDanhMuc(){
         
@@ -33,7 +33,7 @@ public class DanhMucRepo {
                           ,[trang_thai]
                       FROM [dbo].[danh_muc_san_pham]
                     """;
-            try ( java.sql.Connection con = DBConnect.getConnection("PRO1041_Duan1"); 
+            try ( java.sql.Connection con = JdbcHelper.getConnection(); 
             PreparedStatement ps = con.prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
             List<DanhMuc> list = new ArrayList<>();
@@ -68,7 +68,7 @@ public class DanhMucRepo {
                           VALUES
                                 (?,?,?,?,?,?,? )                           
                      """;
-        try ( java.sql.Connection con = DBConnect.getConnection("PRO1041_Duan1");  PreparedStatement ps = con.prepareStatement(sql);) {
+        try ( java.sql.Connection con = JdbcHelper.getConnection();  PreparedStatement ps = con.prepareStatement(sql);) {
             ps.setObject(1, dm.getId());
             ps.setObject(2, dm.getMa());
             ps.setObject(3, dm.getTen());
@@ -95,7 +95,7 @@ public class DanhMucRepo {
                           ,[trang_thai] = ?
                      WHERE id = ?
                      """;
-        try (java.sql.Connection con = DBConnect.getConnection("PRO1041_Duan1");  PreparedStatement ps = con.prepareStatement(sql);) {
+        try (java.sql.Connection con = JdbcHelper.getConnection();  PreparedStatement ps = con.prepareStatement(sql);) {
             ps.setObject(1, dm.getId());
             ps.setObject(2, dm.getMa());
             ps.setObject(3, dm.getTen());
@@ -114,7 +114,7 @@ public class DanhMucRepo {
                      DELETE FROM [dbo].[danh_muc_san_pham]
                            WHERE id = ?
                      """;
-        try ( java.sql.Connection con = DBConnect.getConnection("PRO1041_Duan1");  
+        try ( java.sql.Connection con = JdbcHelper.getConnection();  
                 PreparedStatement ps = con.prepareStatement(sql)
                 ) {
             ps.setObject(1, id);

@@ -63,7 +63,7 @@ public class SanPhamJPanel extends javax.swing.JPanel {
         loadDanhMuc();
         loadSanPham();
         loadChatLieu();
-        addTable(sPChiTietService.getAll());
+//        addTable(sPChiTietService.getAll());
         loadTableKT();
 //        loadHang();
 //        loadMauSac();
@@ -196,8 +196,10 @@ public class SanPhamJPanel extends javax.swing.JPanel {
             }
             defaultTableModel.addRow(new Object[]{
                 count++,
-                qLSanPhamViewModel.getMaSP(),
-                qLSanPhamViewModel.getTenSP(),
+//                qLSanPhamViewModel.getMaSP(),
+//                qLSanPhamViewModel.getTenSP(),
+                1,
+                1,
                 this.hangService.getTenById(qLSanPhamViewModel.getIdThuongHieu().toString()),
                 this.chatLieuService.getTenById(qLSanPhamViewModel.getIdChatLieu().toString()),
                 this.mauSacService.getTenById(qLSanPhamViewModel.getIdMauSac().toString()),
@@ -1348,7 +1350,7 @@ public class SanPhamJPanel extends javax.swing.JPanel {
         }
 
         boolean trangThai = true;
-        QLSanPhamViewModel ctsp = new QLSanPhamViewModel(maSP, idTenSP, uuidIdKichCo, uuidIdThuongHieu, uuidIdMauSac, uuidIdChatLieu, uuidIdDanhMuc, giaNhap, giaBan, soLuong, ngayTao, ngaySua, ngayNhap, trangThai);
+        QLSanPhamViewModel ctsp = new QLSanPhamViewModel(maSP, uuidIdTenSP, uuidIdKichCo, uuidIdThuongHieu, uuidIdMauSac, uuidIdChatLieu, uuidIdDanhMuc, giaNhap, giaBan, soLuong, ngayTao, ngaySua, ngayNhap, trangThai);
 
         ////        if (this.checkDuplicateObject(ctsp)) {
         ////            if (!checkDuplicateMaSP(maSP)) {
