@@ -8,6 +8,7 @@ import duan1_nhom1.dto.HoaDonDto;
 import duan1_nhom1.dto.KhachDto;
 import duan1_nhom1.model.HoaDon;
 import duan1_nhom1.model.Khach;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,8 +59,8 @@ public class TranferData {
         if (khach.getMaKhachHang() != null) dto.setMaKhachHang(khach.getMaKhachHang());       
         if (khach.getTenKhachHang() != null) dto.setTenKhachHang(khach.getTenKhachHang());        
         if (khach.getSdt() != null) dto.setSdt(khach.getSdt());        
-        if (khach.getNgayTao() != null) dto.setNgayTao(khach.getNgayTao());       
-        if (khach.getNgaySua() != null) dto.setNgaySua(khach.getNgaySua());
+        if (khach.getNgayTao() != null) dto.setNgayTao((Date) khach.getNgayTao());       
+        if (khach.getNgaySua() != null) dto.setNgaySua((Date) khach.getNgaySua());
         if (khach.getTrangThai() != null) dto.setTrangThai(khach.getTrangThai());        
         return dto;
     }

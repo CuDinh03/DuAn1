@@ -4,7 +4,7 @@
  */
 package duan1_nhom1.repository;
 
-import Utilities.JDBCConnection;
+
 import duan1_nhom1.model.DanhMuc;
 import duan1_nhom1.model.KichThuoc;
 import duan1_nhom1.model.MauSac;

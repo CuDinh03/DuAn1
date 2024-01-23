@@ -2,15 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/WEB/DuAn1/src/duan1_nhom1/view/ViewKhachHang.java</file>
-            <file>file:/C:/Users/WEB/DuAn1/src/duan1_nhom1/model/ChatLieu.java</file>
-            <file>file:/C:/Users/WEB/DuAn1/src/duan1_nhom1/repository/KhachRepo.java</file>
-            <file>file:/C:/Users/WEB/DuAn1/src/duan1_nhom1/repository/ThanhToanRepo.java</file>
-            <file>file:/C:/Users/WEB/DuAn1/src/duan1_nhom1/service/KhachService.java</file>
-            <file>file:/C:/Users/WEB/DuAn1/src/duan1_nhom1/service/SanPhamService.java</file>
-            <file>file:/C:/Users/WEB/DuAn1/src/duan1_nhom1/model/Khach.java</file>
-            <file>file:/C:/Users/WEB/DuAn1/src/duan1_nhom1/service/IService.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

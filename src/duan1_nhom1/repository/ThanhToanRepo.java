@@ -124,7 +124,7 @@ public class ThanhToanRepo {
         FROM [dbo].[Thanh_Toan]
     """;
 
-    try (Connection con = DBconnect.getConnection();
+    try (Connection con = JdbcHelper.getConnection();
          PreparedStatement ps = con.prepareStatement(sql);
          ResultSet rs = ps.executeQuery()) {
 
