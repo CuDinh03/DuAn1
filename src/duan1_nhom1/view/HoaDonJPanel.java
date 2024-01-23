@@ -41,6 +41,7 @@ public class HoaDonJPanel extends javax.swing.JPanel {
     public void loadTable() {
         dtm = (DefaultTableModel) tblHoaDon.getModel();
         dtm.setRowCount(0);
+            int count = 0;
 
         for (HoaDonDto hd : hds.getAll()) {
             String status;
@@ -49,9 +50,12 @@ public class HoaDonJPanel extends javax.swing.JPanel {
             } else {
                 status = "Chưa thanh toán";
             }
+            Khach k = ks.findById(hd.getIdKhachHang());
             Object[] rowData = {
+                ++count,
                 hd.getId(),
-                hd.getIdKhachHang(),
+                k.getTenKhachHang(),
+                k.getSdt(),
                 hd.getIdNv(),
                 hd.getMa(),
                 hd.getTongTien(),
@@ -104,13 +108,13 @@ public class HoaDonJPanel extends javax.swing.JPanel {
 
         tblHoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "ID Khách", "ID Nhân viên", "Mã hoá đơn", "Tổng tiền", "Ngày mua", "Ngày tạo", "Ngày sửa", "Trạng thái"
+                "No", "ID", "Tên khách", "Số điện thoại khách", "ID Nhân viên", "Mã hoá đơn", "Tổng tiền", "Ngày mua", "Ngày tạo", "Ngày sửa", "Trạng thái"
             }
         ));
         jScrollPane1.setViewportView(tblHoaDon);

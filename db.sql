@@ -545,7 +545,7 @@ VALUES
         WHERE ma = 'SPCT001'), (SELECT TOP 1
             id
         FROM mau_sac
-        WHERE ma = 'MS001'), '2024-01-20', '2024-01-20', 1),
+        WHERE ma = 'MS001'), '2023-12-20', '2024-01-20', 1),
     ((SELECT TOP 1
             id
         FROM san_pham_chi_tiet
@@ -610,24 +610,59 @@ VALUES
     (NEWID(), (SELECT TOP 1
             id
         FROM Khach_Hang
-        WHERE ma = 'KH001'), 'HD001', (SELECT TOP 1
+        WHERE ma = 'KH002'), 'HD012', (SELECT TOP 1
             id
         FROM Nguoi_Dung
-        WHERE ten = 'nv1'), '2024-01-20', 150.00, '2024-01-20', '2024-01-20', 1),
+        WHERE ten = 'nv1'), '2023-2-2', 150.00, '2024-01-20', '2024-01-21', 1),
     (NEWID(), (SELECT TOP 1
             id
         FROM Khach_Hang
-        WHERE ma = 'KH002'), 'HD002', (SELECT TOP 1
+        WHERE ma = 'KH002'), 'HD013', (SELECT TOP 1
             id
         FROM Nguoi_Dung
-        WHERE ten = 'nv2'), '2024-01-21', 200.00, '2024-01-21', '2024-01-21', 1),
+        WHERE ten = 'nv2'), '2023-01-3', 200.00, '2024-01-21', '2024-01-22', 1),
+        (NEWID(), (SELECT TOP 1
+            id
+        FROM Khach_Hang
+        WHERE ma = 'KH002'), 'HD013', (SELECT TOP 1
+            id
+        FROM Nguoi_Dung
+        WHERE ten = 'nv2'), '2023-06-4', 200.00, '2024-01-21', '2024-01-22', 1),
+        (NEWID(), (SELECT TOP 1
+            id
+        FROM Khach_Hang
+        WHERE ma = 'KH002'), 'HD013', (SELECT TOP 1
+            id
+        FROM Nguoi_Dung
+        WHERE ten = 'nv2'), '2023-01-5', 200.00, '2024-01-21', '2024-01-22', 1),
+        (NEWID(), (SELECT TOP 1
+            id
+        FROM Khach_Hang
+        WHERE ma = 'KH002'), 'HD013', (SELECT TOP 1
+            id
+        FROM Nguoi_Dung
+        WHERE ten = 'nv2'), '2023-01-6', 200.00, '2024-01-21', '2024-01-22', 1),
+        (NEWID(), (SELECT TOP 1
+            id
+        FROM Khach_Hang
+        WHERE ma = 'KH002'), 'HD013', (SELECT TOP 1
+            id
+        FROM Nguoi_Dung
+        WHERE ten = 'nv2'), '2023-01-7', 200.00, '2024-01-21', '2024-01-22', 1),
+        (NEWID(), (SELECT TOP 1
+            id
+        FROM Khach_Hang
+        WHERE ma = 'KH002'), 'HD013', (SELECT TOP 1
+            id
+        FROM Nguoi_Dung
+        WHERE ten = 'nv2'), '2023-01-8', 200.00, '2024-01-21', '2024-01-22', 1),
     (NEWID(), (SELECT TOP 1
             id
         FROM Khach_Hang
-        WHERE ma = 'KH003'), 'HD003', (SELECT TOP 1
+        WHERE ma = 'KH003'), 'HD014', (SELECT TOP 1
             id
         FROM Nguoi_Dung
-        WHERE ten = 'nv3'), '2024-01-22', 120.00, '2024-01-22', '2024-01-22', 1);
+        WHERE ten = 'nv3'), '2023-9-9', 120.00, '2024-01-22', '2024-01-23', 1);
 
 -- data Hoa_Don_Chi_Tiet
 INSERT INTO Hoa_Don_Chi_Tiet
@@ -715,14 +750,14 @@ VALUES
         WHERE ma = 'GH002'), (SELECT TOP 1
             id
         FROM san_pham
-        WHERE ma = 'SP002'), 3, '2024-01-21', '2024-01-21', 1),
+        WHERE ma = 'SP002'), 3, '2024-01-21', '2024-01-20', 1),
     (NEWID(), (SELECT TOP 1
             id
         FROM Gio_Hang
         WHERE ma = 'GH003'), (SELECT TOP 1
             id
         FROM san_pham
-        WHERE ma = 'SP003'), 1, '2024-01-22', '2024-01-22', 1);
+        WHERE ma = 'SP003'), 1, '2024-01-22', '2024-01-20', 1);
 
 -- data Gio_Hang_Hoa_Don
 INSERT INTO Gio_Hang_Hoa_Don
@@ -788,3 +823,5 @@ VALUES
         FROM chuc_vu
         WHERE ma = 'CV001'), '2024-01-22', '2024-01-22', '2024-01-22', 1);
 
+
+SELECT ngay_mua, COUNT(*)  FROM Hoa_Don GROUP BY ngay_mua
