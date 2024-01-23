@@ -1,36 +1,33 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package duan1_nhom1.view;
-
 import duan1_nhom1.model.Khach;
 import duan1_nhom1.service.KhachService;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
 /**
  *
  * @author WEB
  */
-public class ViewKhachHang extends javax.swing.JFrame {
-
-    private DefaultTableModel tableModel = new DefaultTableModel();
+public class KhachhangJPanel extends javax.swing.JPanel {
+private DefaultTableModel tableModel = new DefaultTableModel();
     private KhachService khachService = new KhachService();
     private List<Khach> listKH = new ArrayList<>();
 
-    public ViewKhachHang() {
+    /**
+  
+     */
+    public KhachhangJPanel() {
         initComponents();
-        setLocationRelativeTo(null);
         listKH = khachService.getAll();
         showDataKhach();
     }
-
-    public void showDataKhach() {
+public void showDataKhach() {
         tableModel = (DefaultTableModel) tblKhachHang.getModel();
         tableModel.setRowCount(0);   
         for (Khach khachHang : listKH) {
@@ -175,7 +172,6 @@ public class ViewKhachHang extends javax.swing.JFrame {
         showDataKhach();
 
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -223,8 +219,6 @@ public class ViewKhachHang extends javax.swing.JFrame {
         khongHoatDong = new javax.swing.JRadioButton();
         btnAdd = new javax.swing.JButton();
         btnUpdateKH = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         ViewKhachHang.setBackground(new java.awt.Color(255, 255, 255));
         ViewKhachHang.setForeground(new java.awt.Color(203, 233, 191));
@@ -361,10 +355,10 @@ public class ViewKhachHang extends javax.swing.JFrame {
 
         jLabel43.setText("Ngày sửa ");
 
-        buttonGroup1.add(rioHoatdong);
+        buttonGroup2.add(rioHoatdong);
         rioHoatdong.setText("Hoạt động");
 
-        buttonGroup1.add(riodunghoatdong);
+        buttonGroup2.add(riodunghoatdong);
         riodunghoatdong.setText("Không hoạt động");
 
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
@@ -457,10 +451,10 @@ public class ViewKhachHang extends javax.swing.JFrame {
             }
         });
 
-        buttonGroup2.add(hoatDong);
+        buttonGroup1.add(hoatDong);
         hoatDong.setText("Hoạt động");
 
-        buttonGroup2.add(khongHoatDong);
+        buttonGroup1.add(khongHoatDong);
         khongHoatDong.setText("Không hoạt động ");
 
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
@@ -576,11 +570,11 @@ public class ViewKhachHang extends javax.swing.JFrame {
                     .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1061, Short.MAX_VALUE)
+            .addGap(0, 1043, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(ViewKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -588,15 +582,13 @@ public class ViewKhachHang extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 773, Short.MAX_VALUE)
+            .addGap(0, 759, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ViewKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblDanhSachMuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachMuaMouseClicked
@@ -611,8 +603,8 @@ public class ViewKhachHang extends javax.swing.JFrame {
         // TODO add your handling code here:
         int row = tblKhachHang.getSelectedRow();
         showDetaiKhach(row);
-//                listHD = sevice.DanhSachMuaHang(list.get(row).getId());
-//                showHoaDonKhachHangMua();
+        //                listHD = sevice.DanhSachMuaHang(list.get(row).getId());
+        //                showHoaDonKhachHangMua();
     }//GEN-LAST:event_tblKhachHangMouseClicked
 
     private void txtTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKiemActionPerformed
@@ -649,40 +641,6 @@ public class ViewKhachHang extends javax.swing.JFrame {
         updateKhach();
     }//GEN-LAST:event_btnUpdateKHActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ViewKhachHang().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ViewKhachHang;

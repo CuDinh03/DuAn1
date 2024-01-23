@@ -5,7 +5,7 @@
 package duan1_nhom1.view;
 
 import duan1_nhom1.model.DanhMuc;
-import duan1_nhom1.repository.DanhMucRepo;
+import duan1_nhom1.repository.DanhMucRepository;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,11 +24,11 @@ public class ViewDanhMuc extends javax.swing.JFrame {
      */
     private DefaultTableModel model = new DefaultTableModel();
     private List<DanhMuc> danhMucs = new ArrayList<>();
-    private DanhMucRepo danhMucRepo = new DanhMucRepo();
+    private DanhMucRepository danhMucRepo = new DanhMucRepository();
     public ViewDanhMuc() {
         initComponents();
         model = (DefaultTableModel) tblDanhMuc.getModel();
-        danhMucs = danhMucRepo.getAllDanhMuc();
+        danhMucs = danhMucRepo.getAll();
         showDataDanhMuc(danhMucs);
         
     }
@@ -289,8 +289,8 @@ public class ViewDanhMuc extends javax.swing.JFrame {
 //        JOptionPane.showMessageDialog(rootPane, danhMucRepo.addDanhMuc(getDataDanhMuc()));
 //            danhMucs = danhMucRepo.getAllDanhMuc();
 //            showDataDanhMuc(danhMucs);
-        danhMucRepo.addDanhMuc(getDataDanhMuc());
-        danhMucs = danhMucRepo.getAllDanhMuc();
+//        danhMucRepo.addDanhMuc(getDataDanhMuc());
+//        danhMucs = danhMucRepo.getAllDanhMuc();
         showDataDanhMuc(danhMucs);
     }//GEN-LAST:event_btnThemActionPerformed
 
@@ -298,8 +298,8 @@ public class ViewDanhMuc extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (tblDanhMuc.getSelectedRow() != -1) {
             String id = tblDanhMuc.getValueAt(tblDanhMuc.getSelectedRow(), 0).toString();
-                JOptionPane.showMessageDialog(rootPane, danhMucRepo.deleteDanhMuc(getDataDanhMuc().getMa()));
-                danhMucs = danhMucRepo.getAllDanhMuc();
+//                JOptionPane.showMessageDialog(rootPane, danhMucRepo.deleteDanhMuc(getDataDanhMuc().getMa()));
+//                danhMucs = danhMucRepo.getAllDanhMuc();
                 showDataDanhMuc(danhMucs);
         }
     }//GEN-LAST:event_btnXoaActionPerformed
@@ -312,9 +312,9 @@ public class ViewDanhMuc extends javax.swing.JFrame {
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
         if (tblDanhMuc.getSelectedRow() >= 0) {
-            DanhMuc dm = danhMucRepo.getAllDanhMuc().get(tblDanhMuc.getSelectedRow());
-            JOptionPane.showMessageDialog(rootPane,danhMucRepo.updateDanhMuc(getDataDanhMuc()));
-            danhMucs = danhMucRepo.getAllDanhMuc();
+//            DanhMuc dm = danhMucRepo.getAllDanhMuc().get(tblDanhMuc.getSelectedRow());
+//            JOptionPane.showMessageDialog(rootPane,danhMucRepo.updateDanhMuc(getDataDanhMuc()));
+//            danhMucs = danhMucRepo.getAllDanhMuc();
             showDataDanhMuc(danhMucs);
         }
     }//GEN-LAST:event_btnSuaActionPerformed

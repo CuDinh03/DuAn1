@@ -3,6 +3,7 @@ package duan1_nhom1.repository;
 import duan1_nhom1.model.Khach;
 import duan1_nhom1.utils.JdbcHelper;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -39,8 +40,8 @@ public class KhachRepo {
             stm.setString(1, khachHang.getMaKhachHang());
             stm.setString(2, khachHang.getTenKhachHang());
             stm.setString(3, khachHang.getSdt());
-            stm.setDate(4, khachHang.getNgayTao());
-            stm.setDate(5, khachHang.getNgaySua());
+            stm.setDate(4, (Date) khachHang.getNgayTao());
+            stm.setDate(5, (Date) khachHang.getNgaySua());
             stm.setBoolean(6, khachHang.getTrangThai());
 
             int chek = stm.executeUpdate();
