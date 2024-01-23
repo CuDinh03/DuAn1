@@ -5,9 +5,11 @@
         <group>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/repository/SPChiTietRepository.java</file>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/MauSacFrame.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/HangFrame.java</file>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/service/SPChiTietService.java</file>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/repository/KichThuocRepository.java</file>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/model/MauSac.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/SanPhamFrame.java</file>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/service/IService.java</file>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/utils/JdbcHelper.java</file>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/repository/MauSacRepository.java</file>

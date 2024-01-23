@@ -27,7 +27,7 @@ public class HangRepository {
 
     public List<Hang> getAll() {
 
-        String sql = "SELECT id,ma,ten,mo_ta,ngay_tao,ngay_sua,trang_thai FROM mau_sac";
+        String sql = "SELECT id,ma,ten,mo_ta,ngay_tao,ngay_sua,trang_thai FROM hang";
 
         try {
             PreparedStatement pr = conn.prepareStatement(sql);

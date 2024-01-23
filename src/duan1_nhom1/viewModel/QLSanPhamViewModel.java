@@ -14,8 +14,8 @@ import java.util.UUID;
  */
 public class QLSanPhamViewModel {
 
-    private String maSP;
-    private String tenSP;
+    private String ma;
+    private UUID idSanPham;
     private UUID idKichThuoc;
     private UUID idThuongHieu;
     private UUID idMauSac;
@@ -32,9 +32,9 @@ public class QLSanPhamViewModel {
     public QLSanPhamViewModel() {
     }
 
-    public QLSanPhamViewModel(String maSP, String tenSP, UUID idKichThuoc, UUID idThuongHieu, UUID idMauSac, UUID idChatLieu, UUID idDanhMuc, BigDecimal giaNhap, BigDecimal giaBan, int soLuong, Date ngayTao, Date ngaySua, Date ngayNhap, boolean trangThai) {
-        this.maSP = maSP;
-        this.tenSP = tenSP;
+    public QLSanPhamViewModel(String ma, UUID idSanPham, UUID idKichThuoc, UUID idThuongHieu, UUID idMauSac, UUID idChatLieu, UUID idDanhMuc, BigDecimal giaNhap, BigDecimal giaBan, int soLuong, Date ngayTao, Date ngaySua, Date ngayNhap, boolean trangThai) {
+        this.ma = ma;
+        this.idSanPham = idSanPham;
         this.idKichThuoc = idKichThuoc;
         this.idThuongHieu = idThuongHieu;
         this.idMauSac = idMauSac;
@@ -49,20 +49,20 @@ public class QLSanPhamViewModel {
         this.trangThai = trangThai;
     }
 
-    public String getMaSP() {
-        return maSP;
+    public String getMa() {
+        return ma;
     }
 
-    public void setMaSP(String maSP) {
-        this.maSP = maSP;
+    public void setMa(String ma) {
+        this.ma = ma;
     }
 
-    public String getTenSP() {
-        return tenSP;
+    public UUID getIdSanPham() {
+        return idSanPham;
     }
 
-    public void setTenSP(String tenSP) {
-        this.tenSP = tenSP;
+    public void setIdSanPham(UUID idSanPham) {
+        this.idSanPham = idSanPham;
     }
 
     public UUID getIdKichThuoc() {
@@ -160,9 +160,6 @@ public class QLSanPhamViewModel {
     public void setTrangThai(boolean trangThai) {
         this.trangThai = trangThai;
     }
-    
-  
-    
 
     
 }

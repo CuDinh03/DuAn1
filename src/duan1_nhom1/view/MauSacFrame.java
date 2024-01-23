@@ -5,6 +5,7 @@
 package duan1_nhom1.view;
 
 import duan1_nhom1.model.MauSac;
+import duan1_nhom1.service.DanhMucService;
 import duan1_nhom1.service.MauSacService;
 import duan1_nhom1.utils.Uhelper;
 import java.text.ParseException;
@@ -26,7 +27,7 @@ public class MauSacFrame extends javax.swing.JFrame {
 
     private MauSacService mauSacService = new MauSacService();
     private DefaultTableModel defaultTableModel = new DefaultTableModel();
-    List<MauSac> listMauSac = mauSacService.getAll();
+  
     int _index;
 
     /**
@@ -34,26 +35,32 @@ public class MauSacFrame extends javax.swing.JFrame {
      */
     public MauSacFrame() {
         initComponents();
-        loadTable();
+        loadTableMauSac();
     }
 
-    public void loadTable() {
+    public void loadTableMauSac() {
 
-        DefaultTableModel dfm = (DefaultTableModel) tbl_mausac.getModel();
-
-        dfm.setRowCount(0);
+        defaultTableModel = (DefaultTableModel) tbl_mausac.getModel();
+        defaultTableModel.setRowCount(0);
         int count = 1;
-        for (MauSac mauSac : listMauSac) {
-            Object[] row = new Object[]{
-                count++,
+        for (MauSac mauSac : mauSacService.getAll() ) {
+            String status;
+            if (mauSac.isTrangThai()) {
+                status = "Còn";
+            }else {
+                status = "Hết";
+            }
+             Object[] rowData = {
+                 count++,
                 mauSac.getMa(),
                 mauSac.getTen(),
                 mauSac.getMoTa(),
                 mauSac.getNgaySua(),
                 mauSac.getNgayTao(),
-                mauSac.isTrangThai()
-            };
-            dfm.addRow(row);
+                
+                 status
+             };   
+            defaultTableModel.addRow(rowData);
 
         }
 
@@ -91,15 +98,33 @@ public class MauSacFrame extends javax.swing.JFrame {
             }
             MauSac ms = getMauSac();
             mauSacService.add(ms);
-            listMauSac = mauSacService.getAll();
-            listMauSac.clear();
-
-            listMauSac.addAll(mauSacService.getAll());
+       
             JOptionPane.showMessageDialog(this, "thêm thành công");
-            loadTable();
+            loadTableMauSac();
             clearForm();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "thêm thất bại");
+        }
+
+    }
+    
+       
+    public void updateMauSac() {
+        try {
+            int check = JOptionPane.showConfirmDialog(this, "bạn có muốn update không");
+            if (check != JOptionPane.YES_OPTION) {
+                return;
+            }
+            MauSac ms = getMauSac();
+            int row = tbl_mausac.getSelectedRow();
+            String id = mauSacService.getAll().get(row).getId();
+            mauSacService.update(ms, id);
+            loadTableMauSac();
+            JOptionPane.showMessageDialog(this, "Update thành công");
+            
+            clearForm();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Update thất bại");
         }
 
     }
@@ -334,7 +359,7 @@ public class MauSacFrame extends javax.swing.JFrame {
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
         // TODO add your handling code here:
         addMauSac();
-        loadTable();
+        loadTableMauSac();
     }//GEN-LAST:event_btn_themActionPerformed
 
     private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
@@ -385,13 +410,11 @@ public class MauSacFrame extends javax.swing.JFrame {
                 return;
             }
             int row = tbl_mausac.getSelectedRow();
-            String id = listMauSac.get(row).getId();
+            String id = mauSacService.getAll().get(row).getId();
             mauSacService.delete(id);
-            listMauSac.clear();
-
-            listMauSac.addAll(mauSacService.getAll());
+          
             JOptionPane.showMessageDialog(this, "xóa thành công");
-            loadTable();
+            loadTableMauSac();
             clearForm();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "xóa thất bại ");
@@ -401,26 +424,11 @@ public class MauSacFrame extends javax.swing.JFrame {
 
     private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
         // TODO add your handling code here:
-        
-         try {
-            int check = JOptionPane.showConfirmDialog(this, "bạn có muốn update không");
-            if (check != JOptionPane.YES_OPTION) {
-                return;
-            }
-            MauSac ms = getMauSac();
-            int row = tbl_mausac.getSelectedRow();
-            String id = listMauSac.get(row).getId();
-            mauSacService.update(ms, id);
-            loadTable();
-            JOptionPane.showMessageDialog(this, "Update thành công");
-            clearForm();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Update thất bại");
-        }
+        updateMauSac();
     }//GEN-LAST:event_btn_suaActionPerformed
 
     /**
-     * @param args the command line arguments
+     * @param args the command line arguments   
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

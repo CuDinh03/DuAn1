@@ -29,7 +29,7 @@ public class MauSacService implements IService<MauSac>{
 
     @Override
     public void update(MauSac mauSac, String id) {
-        mauSacRepository.update(mauSac);
+        mauSacRepository.update(mauSac, id);
     }
 
     @Override

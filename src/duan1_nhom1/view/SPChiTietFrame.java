@@ -4,6 +4,7 @@
  */
 package duan1_nhom1.view;
 
+import duan1_nhom1.model.ChiTietSanPham;
 import duan1_nhom1.model.DanhMuc;
 import duan1_nhom1.service.ChatLieuService;
 import duan1_nhom1.service.DanhMucService;
@@ -46,6 +47,7 @@ public class SPChiTietFrame extends javax.swing.JFrame {
     private SanPhamService sanPhamService = new SanPhamService();
     private DanhMucService danhMucService = new DanhMucService();
     private ChatLieuService chatLieuService = new ChatLieuService();
+    int _index;
     private int index = -1;
 
     /**
@@ -64,28 +66,36 @@ public class SPChiTietFrame extends javax.swing.JFrame {
 
     }
 
-    public void addTable(List<QLSanPhamViewModel> list) {
+    private void clearForm() {
+//        txt_ma.setText("");
+//        txt_ten.setText("");
+//        txt_mota.setText("");
+//        clr_ngaysua.setDate(null);
+//        clr_ngaytao.setDate(null);
+
+    }
+
+    public void addTable(List<ChiTietSanPham> list) {
         defaultTableModel = (DefaultTableModel) tbl_sanpham.getModel();
         defaultTableModel.setRowCount(0);
         int count = 1;
-        for (QLSanPhamViewModel qLSanPhamViewModel : list) {
+        for (ChiTietSanPham chiTietSanPham : list) {
             defaultTableModel.addRow(new Object[]{
                 count++,
-                qLSanPhamViewModel.getMaSP(),
-                qLSanPhamViewModel.getTenSP(),
-                this.hangService.getTenById(qLSanPhamViewModel.getIdThuongHieu().toString()),
-                this.chatLieuService.getTenById(qLSanPhamViewModel.getIdChatLieu().toString()),
-                this.mauSacService.getTenById(qLSanPhamViewModel.getIdMauSac().toString()),
-                this.kichCoService.getTenById(qLSanPhamViewModel.getIdKichThuoc().toString()),
-                this.danhMucService.getTenById(qLSanPhamViewModel.getIdDanhMuc().toString()),
-                qLSanPhamViewModel.getGiaNhap(),
-                qLSanPhamViewModel.getGiaBan(),
-                qLSanPhamViewModel.getSoLuong(),
-                qLSanPhamViewModel.getNgayNhap(),
-                qLSanPhamViewModel.getNgaySua(),
-                qLSanPhamViewModel.getNgayTao(),
-                qLSanPhamViewModel.isTrangThai()
-
+                chiTietSanPham.getMa(),
+                this.sanPhamService.getTenById(chiTietSanPham.getIdSanPham().toString()),
+                this.hangService.getTenById(chiTietSanPham.getIdThuongHieu().toString()),
+                this.chatLieuService.getTenById(chiTietSanPham.getIdChatLieu().toString()),
+                this.mauSacService.getTenById(chiTietSanPham.getIdMauSac().toString()),
+                this.kichCoService.getTenById(chiTietSanPham.getIdKichThuoc().toString()),
+                this.danhMucService.getTenById(chiTietSanPham.getIdDanhMuc().toString()),
+                chiTietSanPham.getGiaNhap(),
+                chiTietSanPham.getGiaBan(),
+                chiTietSanPham.getSoLuong(),
+                chiTietSanPham.getNgayNhap(),
+                chiTietSanPham.getNgaySua(),
+                chiTietSanPham.getNgayTao(),
+                chiTietSanPham.isTrangThai()
             });
         }
     }
@@ -136,6 +146,183 @@ public class SPChiTietFrame extends javax.swing.JFrame {
         for (String str : list) {
             model.addElement(hangService.getTenById(str));
         }
+    }
+
+    private void getSanPham() {
+
+    }
+
+    private void updateSP() {
+        if (Uhelper.checkNull(txt_giaban, "Không để trống giá bán")) {
+            return;
+        }
+        if (Uhelper.checkNull(txt_gianhap, "Không để trống giá nhập")) {
+            return;
+        }
+        if (Uhelper.checkKiTuDacBiet(txt_giaban, "Không nhập các kí tự đặc biệt !")) {
+            return;
+        }
+        if (Uhelper.checkKiTuDacBiet(txt_gianhap, "Không nhập các kí tự đặc biệt !")) {
+            return;
+        }
+        if (Uhelper.checkNumber(txt_giaban, "Vui lòng nhập giá bán là số")) {
+            return;
+        }
+        if (Uhelper.checkNumber(txt_gianhap, "Vui lòng nhập giá nhập là số")) {
+            return;
+        }
+        if (Uhelper.checkNull(txt_masp, "Vui lòng nhập mã sản phẩm")) {
+            return;
+        }
+
+        UUID id = this.sPChiTietService.getAll().get(index).getId();
+        String maSP = txt_masp.getText().trim();
+        String idTenSP = sanPhamService.getAllId().get(cb_tensp.getSelectedIndex());
+        String idThuongHieu = hangService.getAllId().get(cb_hang.getSelectedIndex());
+        String idMauSac = mauSacService.getAllId().get(cb_mausac.getSelectedIndex());
+        String idChatLieu = chatLieuService.getAllId().get(cb_chatlieu.getSelectedIndex());
+        String idKichCo = kichCoService.getAllId().get(cb_kichco.getSelectedIndex());
+        String idDanhMuc = danhMucService.getAllId().get(cb_danhmuc.getSelectedIndex());
+        BigDecimal giaNhap = new BigDecimal(txt_gianhap.getText());
+        BigDecimal giaBan = new BigDecimal(txt_giaban.getText());
+//        boolean trangThai = Boolean.parseBoolean(txt_trangthai.getText());
+        int soLuong = Integer.parseInt(txt_soluong.getText());
+
+        UUID uuidIdTenSP = UUID.fromString(idTenSP);
+        UUID uuidIdThuongHieu = UUID.fromString(idThuongHieu);
+        UUID uuidIdMauSac = UUID.fromString(idMauSac);
+        UUID uuidIdChatLieu = UUID.fromString(idChatLieu);
+        UUID uuidIdKichCo = UUID.fromString(idKichCo);
+        UUID uuidIdDanhMuc = UUID.fromString(idDanhMuc);
+
+        if (giaBan.compareTo(giaNhap) != 0 && giaBan.compareTo(giaNhap) != 1) {
+            JOptionPane.showMessageDialog(this, "Giá bán lớn hơn giá nhập, bạn vui lòng nhập lại giá bán !");
+            return;
+        }
+
+        Date ngayNhap = new Date();
+        String timeStamp = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy").format(Calendar.getInstance().getTime());
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
+        try {
+            ngayNhap = sdf.parse(timeStamp);
+        } catch (ParseException ex) {
+            Logger.getLogger(SPChiTietFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        Date ngayTao = new Date();
+        try {
+            ngayTao = sdf.parse(timeStamp);
+        } catch (ParseException ex) {
+            Logger.getLogger(SPChiTietFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        Date ngaySua = new Date();
+        try {
+            ngaySua = sdf.parse(timeStamp);
+        } catch (ParseException ex) {
+            Logger.getLogger(SPChiTietFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        boolean trangThai = true;
+        ChiTietSanPham ctsp = new ChiTietSanPham(id, maSP, uuidIdTenSP, uuidIdKichCo, uuidIdThuongHieu, uuidIdMauSac, uuidIdChatLieu, uuidIdDanhMuc, giaNhap, giaBan, soLuong, ngayTao, ngaySua, ngayNhap, trangThai);
+        this.sPChiTietService.update(ctsp, id);
+        addTable(sPChiTietService.getAll());
+
+    }
+
+    private void deleteSP() {
+        try {
+            int check = JOptionPane.showConfirmDialog(this, "bạn có muốn xóa không");
+            if (check != JOptionPane.YES_OPTION) {
+                return;
+            }
+            int row = tbl_sanpham.getSelectedRow();
+            UUID id = sPChiTietService.getAll().get(row).getId();
+            sPChiTietService.deleteSP(id);
+
+            JOptionPane.showMessageDialog(this, "xóa thành công");
+            addTable(sPChiTietService.getAll());
+            clearForm();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "xóa thất bại ");
+        }
+    }
+
+    private void addSanPham() {
+        if (Uhelper.checkNull(txt_giaban, "Không để trống giá bán")) {
+            return;
+        }
+        if (Uhelper.checkNull(txt_gianhap, "Không để trống giá nhập")) {
+            return;
+        }
+        if (Uhelper.checkKiTuDacBiet(txt_giaban, "Không nhập các kí tự đặc biệt !")) {
+            return;
+        }
+        if (Uhelper.checkKiTuDacBiet(txt_gianhap, "Không nhập các kí tự đặc biệt !")) {
+            return;
+        }
+        if (Uhelper.checkNumber(txt_giaban, "Vui lòng nhập giá bán là số")) {
+            return;
+        }
+        if (Uhelper.checkNumber(txt_gianhap, "Vui lòng nhập giá nhập là số")) {
+            return;
+        }
+        if (Uhelper.checkNull(txt_masp, "Vui lòng nhập mã sản phẩm")) {
+            return;
+        }
+
+        String maSP = txt_masp.getText().trim();
+        String idTenSP = sanPhamService.getAllId().get(cb_tensp.getSelectedIndex());
+        String idThuongHieu = hangService.getAllId().get(cb_hang.getSelectedIndex());
+        String idMauSac = mauSacService.getAllId().get(cb_mausac.getSelectedIndex());
+        String idChatLieu = chatLieuService.getAllId().get(cb_chatlieu.getSelectedIndex());
+        String idKichCo = kichCoService.getAllId().get(cb_kichco.getSelectedIndex());
+        String idDanhMuc = danhMucService.getAllId().get(cb_danhmuc.getSelectedIndex());
+        BigDecimal giaNhap = new BigDecimal(txt_gianhap.getText());
+        BigDecimal giaBan = new BigDecimal(txt_giaban.getText());
+//        boolean trangThai = Boolean.parseBoolean(txt_trangthai.getText());
+        int soLuong = Integer.parseInt(txt_soluong.getText());
+
+        UUID uuidIdTenSP = UUID.fromString(idTenSP);
+        UUID uuidIdThuongHieu = UUID.fromString(idThuongHieu);
+        UUID uuidIdMauSac = UUID.fromString(idMauSac);
+        UUID uuidIdChatLieu = UUID.fromString(idChatLieu);
+        UUID uuidIdKichCo = UUID.fromString(idKichCo);
+        UUID uuidIdDanhMuc = UUID.fromString(idDanhMuc);
+
+        if (giaBan.compareTo(giaNhap) != 0 && giaBan.compareTo(giaNhap) != 1) {
+            JOptionPane.showMessageDialog(this, "Giá bán lớn hơn giá nhập, bạn vui lòng nhập lại giá bán !");
+            return;
+        }
+
+        Date ngayNhap = new Date();
+        String timeStamp = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy").format(Calendar.getInstance().getTime());
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
+        try {
+            ngayNhap = sdf.parse(timeStamp);
+        } catch (ParseException ex) {
+            Logger.getLogger(SPChiTietFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        Date ngayTao = new Date();
+        try {
+            ngayTao = sdf.parse(timeStamp);
+        } catch (ParseException ex) {
+            Logger.getLogger(SPChiTietFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        Date ngaySua = new Date();
+        try {
+            ngaySua = sdf.parse(timeStamp);
+        } catch (ParseException ex) {
+            Logger.getLogger(SPChiTietFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        boolean trangThai = true;
+        QLSanPhamViewModel ctsp = new QLSanPhamViewModel(maSP, uuidIdTenSP, uuidIdKichCo, uuidIdThuongHieu, uuidIdMauSac, uuidIdChatLieu, uuidIdDanhMuc, giaNhap, giaBan, soLuong, ngayTao, ngaySua, ngayNhap, trangThai);
+
+        sPChiTietService.insert(ctsp);
+        addTable(sPChiTietService.getAll());
     }
 
     /**
@@ -287,6 +474,11 @@ public class SPChiTietFrame extends javax.swing.JFrame {
                 "STT", "Mã SP", "Tên SP", "Hãng", "Chất liệu", "Màu sắc", "Kích cỡ", "Danh mục", "Giá nhập", "Giá bán", "Số lượng", "Ngày nhập", "Ngày sửa", "Ngày tạo", "Trạng thái"
             }
         ));
+        tbl_sanpham.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_sanphamMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbl_sanpham);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -549,6 +741,7 @@ public class SPChiTietFrame extends javax.swing.JFrame {
 
     private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
         // TODO add your handling code here:
+        updateSP();
     }//GEN-LAST:event_btn_suaActionPerformed
 
     private void cb_mausacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_mausacActionPerformed
@@ -556,159 +749,85 @@ public class SPChiTietFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_cb_mausacActionPerformed
 
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
-        // TODO add your handling code here:
-        if (Uhelper.checkNull(txt_giaban, "Không để trống giá bán")) {
-            return;
-        }
-        if (Uhelper.checkNull(txt_gianhap, "Không để trống giá nhập")) {
-            return;
-        }
-        if (Uhelper.checkKiTuDacBiet(txt_giaban, "Không nhập các kí tự đặc biệt !")) {
-            return;
-        }
-        if (Uhelper.checkKiTuDacBiet(txt_gianhap, "Không nhập các kí tự đặc biệt !")) {
-            return;
-        }
-        if (Uhelper.checkNumber(txt_giaban, "Vui lòng nhập giá bán là số")) {
-            return;
-        }
-        if (Uhelper.checkNumber(txt_gianhap, "Vui lòng nhập giá nhập là số")) {
-            return;
-        }
-        if (Uhelper.checkNull(txt_masp, "Vui lòng nhập mã sản phẩm")) {
-            return;
-        }
-
-        String maSP = txt_masp.getText();
-        String idTenSP = sanPhamService.getAllId().get(cb_tensp.getSelectedIndex());
-        String idThuongHieu = hangService.getAllId().get(cb_hang.getSelectedIndex());
-        String idMauSac = mauSacService.getAllId().get(cb_mausac.getSelectedIndex());
-        String idChatLieu = chatLieuService.getAllId().get(cb_chatlieu.getSelectedIndex());
-        String idKichCo = kichCoService.getAllId().get(cb_kichco.getSelectedIndex());
-        String idDanhMuc = danhMucService.getAllId().get(cb_danhmuc.getSelectedIndex());
-        BigDecimal giaNhap = new BigDecimal(txt_gianhap.getText());
-        BigDecimal giaBan = new BigDecimal(txt_giaban.getText());
-//        boolean trangThai = Boolean.parseBoolean(txt_trangthai.getText());
-        int soLuong = Integer.parseInt(txt_soluong.getText());
-
-        
-        UUID uuidIdTenSP = UUID.fromString(idTenSP);
-        UUID uuidIdThuongHieu = UUID.fromString(idThuongHieu);
-        UUID uuidIdMauSac = UUID.fromString(idMauSac);
-        UUID uuidIdChatLieu = UUID.fromString(idChatLieu);
-        UUID uuidIdKichCo = UUID.fromString(idKichCo);
-        UUID uuidIdDanhMuc = UUID.fromString(idDanhMuc);
-        
-
-        if (giaBan.compareTo(giaNhap) != 0 && giaBan.compareTo(giaNhap) != 1) {
-            JOptionPane.showMessageDialog(this, "Giá bán lớn hơn giá nhập, bạn vui lòng nhập lại giá bán !");
-            return;
-        }
-
-        Date ngayNhap = new Date();
-        String timeStamp = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy").format(Calendar.getInstance().getTime());
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
-        try {
-            ngayNhap = sdf.parse(timeStamp);
-        } catch (ParseException ex) {
-            Logger.getLogger(SPChiTietFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        Date ngayTao = new Date();
-        try {
-            ngayTao = sdf.parse(timeStamp);
-        } catch (ParseException ex) {
-            Logger.getLogger(SPChiTietFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        Date ngaySua = new Date();
-        try {
-            ngaySua = sdf.parse(timeStamp);
-        } catch (ParseException ex) {
-            Logger.getLogger(SPChiTietFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        boolean trangThai = true;
-        QLSanPhamViewModel ctsp = new QLSanPhamViewModel(maSP, idTenSP, uuidIdKichCo, uuidIdThuongHieu, uuidIdMauSac, uuidIdChatLieu, uuidIdDanhMuc, giaNhap, giaBan, soLuong, ngayTao, ngaySua, ngayNhap, trangThai);
-
-////        if (this.checkDuplicateObject(ctsp)) {
-////            if (!checkDuplicateMaSP(maSP)) {
-////                JOptionPane.showMessageDialog(this, this.sPChiTietService.insert(ctsp));
-////                this.addTable(sPChiTietService.getAll());
-////            } else {
-////                JOptionPane.showMessageDialog(this, "Mã sản phẩm đã tồn tại");
-////                return;
-////            }
-////
-////        } else {
-////            JOptionPane.showMessageDialog(this, "Sản phẩm này đã tồn tại");
-////            return;
-////        }
-//////
-    sPChiTietService.insert(ctsp);
+        addSanPham();
     }//GEN-LAST:event_btn_themActionPerformed
 
     private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
-        // TODO add your handling code here:
-//        
-//        index = tbl_sanpham.getSelectedRow();
-//
-//        if (index == -1) {
-//            JOptionPane.showMessageDialog(this, "Bạn vui lòng chọn sản phẩm cần xóa !");
-//            return;
-//        }
-//
-//        QLSanPhamViewModel ctsp = this.sPChiTietService.getAll().get(index);
-//        String id = ctsp.getId();
-//
-//        int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa không ?");
-//        if (confirm != JOptionPane.YES_OPTION) {
-//            JOptionPane.showMessageDialog(this, "Xóa thất bại !");
-//            return;
-//        } else {
-//            JOptionPane.showMessageDialog(this, this.iCTSPService.delete(id));
-//            loadDataChiTietSP(iCTSPService.getAllSP());
-//        }
+        deleteSP();
     }//GEN-LAST:event_btn_xoaActionPerformed
-//
-//    private boolean checkDuplicateObject(QLSanPhamViewModel vModelCheck) {
-//
-//        int count = 0;
-//        List<QLSanPhamViewModel> listViewModel = this.sPChiTietService.getAll();
-//        for (int i = 0; i < listViewModel.size(); i++) {
-//            if (listViewModel.get(i).getTenSP().equals(vModelCheck.getTenSP())
-//                    && listViewModel.get(i).getChatLieu().equals(vModelCheck.getChatLieu())
-//                    && listViewModel.get(i).getDanhMuc().equals(vModelCheck.getDanhMuc())
-//                    && listViewModel.get(i).getKichThuoc().equals(vModelCheck.getKichThuoc())
-//                    && listViewModel.get(i).getMauSac().equals(vModelCheck.getMauSac())
-//                    && listViewModel.get(i).getThuongHieu().equals(vModelCheck.getThuongHieu())) {
-//                count++;
-//            }
-//        }
-//        if (count == 0) {
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
-//
-//    private boolean checkDuplicateMaSP(String maSP) {
-//        int count = 0;
-//        for (int i = 0; i < this.sPChiTietService.getAll().size(); i++) {
-//            if (maSP.equalsIgnoreCase(this.sPChiTietService.getAll().get(i).getMaSP())) {
-//                count++;
-//            }
-//        }
-//        if (count == 0) {
-//            return false;
-//        } else {
-//            return true;
-//        }
-//    }
 
-    /**
-     * @param args the command line arguments
-     */
+    private void tbl_sanphamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_sanphamMouseClicked
+        // TODO add your handling code here:
+        
+        int banGhiChon = tbl_sanpham.getSelectedRow();
+        if (banGhiChon == -1) {
+            return;
+        }
+//        _index = tbl_sanpham.getSelectedRow();
+        String ma = tbl_sanpham.getValueAt(banGhiChon, 1).toString();
+        String tenSP = tbl_sanpham.getValueAt(banGhiChon, 2).toString();
+        String hang = tbl_sanpham.getValueAt(banGhiChon, 3).toString();
+        String chatLieu = tbl_sanpham.getValueAt(banGhiChon, 4).toString();
+        String mauSac = tbl_sanpham.getValueAt(banGhiChon, 5).toString();
+        String kichCo = tbl_sanpham.getValueAt(banGhiChon, 6).toString();
+        String danhMuc = tbl_sanpham.getValueAt(banGhiChon, 7).toString();
+        String giaNhap = tbl_sanpham.getValueAt(banGhiChon, 8).toString();
+        String giaBan = tbl_sanpham.getValueAt(banGhiChon, 9).toString();
+        String soLuong = tbl_sanpham.getValueAt(banGhiChon, 10).toString();
+        
+        txt_masp.setText(ma);
+        cb_tensp.setSelectedItem(tenSP);
+        cb_hang.setSelectedItem(hang);
+        cb_chatlieu.setSelectedItem(chatLieu);
+        cb_mausac.setSelectedItem(mauSac);
+        cb_kichco.setSelectedItem(kichCo);
+        cb_danhmuc.setSelectedItem(danhMuc);
+        txt_gianhap.setText(giaNhap);
+        txt_giaban.setText(giaBan);
+        txt_soluong.setText(soLuong);
+        
+        String ngayNhapString = tbl_sanpham.getValueAt(banGhiChon, 11).toString();
+        Date ngayNhap = null;
+
+        try {
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            ngayNhap = dateFormat.parse(ngayNhapString);
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
+        
+        String ngaySuaString = tbl_sanpham.getValueAt(banGhiChon, 12).toString();
+        Date ngaySua = null;
+
+        try {
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            ngaySua = dateFormat.parse(ngaySuaString);
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
+        
+        String ngayTaoString = tbl_sanpham.getValueAt(banGhiChon, 13).toString();
+        Date ngayTao = null;
+
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            ngayTao = dateFormat.parse(ngayTaoString);
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        
+
+        date_ngaynhap.setDate(ngayNhap);
+        date_ngaysua.setDate(ngaySua);
+        date_ngaytao.setDate(ngayTao);
+
+        txt_trangthai.setText(tbl_sanpham.getValueAt(_index, 14).toString());
+
+    }//GEN-LAST:event_tbl_sanphamMouseClicked
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
