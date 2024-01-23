@@ -12,28 +12,19 @@ import java.util.UUID;
  * @author maccuacu
  */
 public class DanhMucDto {
-    private UUID id;
+    private String id;
     private String ma;
     private String ten;
+    private String moTa;
     private Date ngayTao;
     private Date ngaySua;
+    private boolean trangThai;
 
-    public DanhMucDto() {
-    }
-
-    public DanhMucDto(UUID id, String ma, String ten, Date ngayTao, Date ngaySua) {
-        this.id = id;
-        this.ma = ma;
-        this.ten = ten;
-        this.ngayTao = ngayTao;
-        this.ngaySua = ngaySua;
-    }
-
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -53,6 +44,14 @@ public class DanhMucDto {
         this.ten = ten;
     }
 
+    public String getMoTa() {
+        return moTa;
+    }
+
+    public void setMoTa(String moTa) {
+        this.moTa = moTa;
+    }
+
     public Date getNgayTao() {
         return ngayTao;
     }
@@ -67,5 +66,26 @@ public class DanhMucDto {
 
     public void setNgaySua(Date ngaySua) {
         this.ngaySua = ngaySua;
+    }
+
+    public boolean isTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(boolean trangThai) {
+        this.trangThai = trangThai;
+    }
+
+    public DanhMucDto(String id, String ma, String ten, String moTa, Date ngayTao, Date ngaySua, boolean trangThai) {
+        this.id = id;
+        this.ma = ma;
+        this.ten = ten;
+        this.moTa = moTa;
+        this.ngayTao = ngayTao;
+        this.ngaySua = ngaySua;
+        this.trangThai = trangThai;
+    }
+
+    public DanhMucDto() {
     }
 }

@@ -4,9 +4,12 @@
  */
 package duan1_nhom1.repository;
 
+import duan1_nhom1.dto.DanhMucDto;
 import duan1_nhom1.model.ChatLieu;
 import duan1_nhom1.model.DanhMuc;
 import duan1_nhom1.model.Hang;
+import duan1_nhom1.model.HoaDon;
+import duan1_nhom1.model.Khach;
 import duan1_nhom1.utils.JdbcHelper;
 import java.util.ArrayList;
 import java.sql.PreparedStatement;
@@ -23,10 +26,10 @@ import java.util.UUID;
  */
 public class DanhMucRepository {
 
-    List<DanhMuc> listDanhMuc = new ArrayList();
+    List<DanhMucDto> listDanhMuc = new ArrayList();
     Connection conn = JdbcHelper.getConnection();
 
-    public List<DanhMuc> getAll() {
+    public List<DanhMucDto> getAll() {
 
         String sql = "SELECT id,ma,ten,mo_ta,ngay_tao,ngay_sua,trang_thai FROM danh_muc_san_pham";
 
@@ -97,5 +100,49 @@ public class DanhMucRepository {
             e.printStackTrace();
         }
         return listId;
+    }
+    public void addDanhMuc(DanhMuc danhMuc) {
+        if (danhMuc == null) {
+            return;
+        }
+
+        String sql = """
+        INSERT INTO [dbo].[danh_muc_san_pham]
+                   ([id]
+                   ,[ma]
+                   ,[ten]
+                   ,[mo_ta]
+                   ,[ngay_tao]
+                   ,[ngay_sua]
+                   ,[trang_thai])
+               VALUES
+                     (?
+                     ,?
+                     ,?
+                     ,?
+                     ,?
+                     ,?
+                     ,?);  
+                 """;
+
+        try (Connection con = JdbcHelper.getConnection(); PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+            preparedStatement.setObject(1, danhMuc.getId());
+            preparedStatement.setString(2, danhMuc.getMa());
+            preparedStatement.setString(3, danhMuc.getTen());
+            preparedStatement.setString(4, danhMuc.getMoTa());
+            preparedStatement.setDate(5, new java.sql.Date(danhMuc.getNgayTao().getTime()));
+            preparedStatement.setDate(6, new java.sql.Date(danhMuc.getNgaySua().getTime()));
+            preparedStatement.setBoolean(7, danhMuc.isTrangThai());
+
+            int chek = preparedStatement.executeUpdate();
+
+            if (chek > 0) {
+                System.out.println("Danh Mục Đã thêm thành công ");
+            } else {
+                System.out.println("Thêm thất bại ");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

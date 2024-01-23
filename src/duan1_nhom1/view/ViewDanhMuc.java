@@ -4,8 +4,12 @@
  */
 package duan1_nhom1.view;
 
+import duan1_nhom1.dto.DanhMucDto;
 import duan1_nhom1.model.DanhMuc;
-import duan1_nhom1.repository.DanhMucRepo;
+import duan1_nhom1.model.Khach;
+import duan1_nhom1.repository.DanhMucRepository;
+import duan1_nhom1.repository.DanhMucRepository;
+import duan1_nhom1.service.DanhMucService;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,37 +27,63 @@ public class ViewDanhMuc extends javax.swing.JFrame {
      * Creates new form View
      */
     private DefaultTableModel model = new DefaultTableModel();
-    private List<DanhMuc> danhMucs = new ArrayList<>();
-    private DanhMucRepo danhMucRepo = new DanhMucRepo();
+    private List<DanhMucDto> danhMuc = new ArrayList<>();
+    private DanhMucService danhMucService = new DanhMucService();
+
     public ViewDanhMuc() {
         initComponents();
         model = (DefaultTableModel) tblDanhMuc.getModel();
-        danhMucs = danhMucRepo.getAllDanhMuc();
-        showDataDanhMuc(danhMucs);
-        
+        danhMuc = danhMucService.getAll();
+        showDataDanhMuc(danhMuc);
+
     }
-    public void showDataDanhMuc(List<DanhMuc>list){
+
+    public void showDataDanhMuc(List<DanhMucDto> list) {
         model.setRowCount(0);
-        for (DanhMuc dm : list) {
+        for (DanhMucDto dmto : list) {
             model.addRow(new Object[]{
-                dm.getId(),
-                dm.getMa(),
-                dm.getTen(),
-//                dm.getMoTa(),
-                dm.getNgayTao(),
-                dm.getNgaySua(),
-        });
+                dmto.getId(),
+                dmto.getMa(),
+                dmto.getTen(),
+                //                dmto.getMoTa(),
+                dmto.getNgayTao(),
+                dmto.getNgaySua(),});
+        }
     }
-    }
-    public DanhMuc getDataDanhMuc(){
+
+    public DanhMucDto getDataDanhMuc() {
         String ma = txtMa.getText();
         String ten = txtTen.getText();
         String moTa = txaMoTa.getText();
         Date ngayTao = dcTao.getDate();
         Date ngaySua = dcSua.getDate();;
-        
-        
-        return new DanhMuc("", ma, ten, moTa, ngayTao, ngaySua,true);
+
+        return new DanhMucDto("", ma, ten, moTa, ngayTao, ngaySua, true);
+    }
+    private void clearFormDanhMuc() {
+        txtMa.setText("");
+        txtTen.setText("");
+//        dcTao.setCalendar("");
+//        dcSua.setCalendar("");
+        txaMoTa.setText("");
+        txtSearch.setText("");
+    }
+    public void addDanhMuc() {
+        try {
+            int check = JOptionPane.showConfirmDialog(this, "bạn có muốn thêm không");
+            if (check != JOptionPane.YES_OPTION) {
+                return;
+            }
+            DanhMucDto dmto = getDataDanhMuc();
+            danhMucService.add(dmto);
+            danhMuc = danhMucService.getAll();
+            showDataDanhMuc(danhMuc);
+            JOptionPane.showMessageDialog(this, "Thêm thành công");
+            clearFormDanhMuc();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Thêm thất bại");
+        }
+
     }
 
     /**
@@ -287,21 +317,29 @@ public class ViewDanhMuc extends javax.swing.JFrame {
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
 //        JOptionPane.showMessageDialog(rootPane, danhMucRepo.addDanhMuc(getDataDanhMuc()));
-//            danhMucs = danhMucRepo.getAllDanhMuc();
-//            showDataDanhMuc(danhMucs);
-        danhMucRepo.addDanhMuc(getDataDanhMuc());
-        danhMucs = danhMucRepo.getAllDanhMuc();
-        showDataDanhMuc(danhMucs);
+//            danhMuc = danhMucRepo.getAll();
+//            showDataDanhMuc(danhMuc);
+//        try {
+//            String ma = this.txtMa.getText().trim();
+//            String ten = this.txtTen.getText().trim();
+//            String moTa = this.txaMoTa.getText().trim();
+////            java.sql.Date tao = new java.sql.Date(dcTao.getDate());
+////            java.sql.Date sua = new java.sql.Date(dcSua.getDate());
+//
+//        } catch (Exception e) {
+//
+//        }
+        addDanhMuc();
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
-        if (tblDanhMuc.getSelectedRow() != -1) {
-            String id = tblDanhMuc.getValueAt(tblDanhMuc.getSelectedRow(), 0).toString();
-                JOptionPane.showMessageDialog(rootPane, danhMucRepo.deleteDanhMuc(getDataDanhMuc().getMa()));
-                danhMucs = danhMucRepo.getAllDanhMuc();
-                showDataDanhMuc(danhMucs);
-        }
+//        if (tblDanhMuc.getSelectedRow() != -1) {
+//            String id = tblDanhMuc.getValueAt(tblDanhMuc.getSelectedRow(), 0).toString();
+//                JOptionPane.showMessageDialog(rootPane, danhMucRepo.delete(getDataDanhMuc().getMa()));
+//                danhMucs = danhMucRepo.getAllDanhMuc();
+//                showDataDanhMuc(danhMucs);
+//        }
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
@@ -311,12 +349,12 @@ public class ViewDanhMuc extends javax.swing.JFrame {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
-        if (tblDanhMuc.getSelectedRow() >= 0) {
-            DanhMuc dm = danhMucRepo.getAllDanhMuc().get(tblDanhMuc.getSelectedRow());
-            JOptionPane.showMessageDialog(rootPane,danhMucRepo.updateDanhMuc(getDataDanhMuc()));
-            danhMucs = danhMucRepo.getAllDanhMuc();
-            showDataDanhMuc(danhMucs);
-        }
+//        if (tblDanhMuc.getSelectedRow() >= 0) {
+//            DanhMuc dm = danhMucRepo.getAllDanhMuc().get(tblDanhMuc.getSelectedRow());
+//            JOptionPane.showMessageDialog(rootPane,danhMucRepo.updateDanhMuc(getDataDanhMuc()));
+//            danhMucs = danhMucRepo.getAllDanhMuc();
+//            showDataDanhMuc(danhMucs);
+//        }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     /**

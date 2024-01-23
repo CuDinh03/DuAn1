@@ -4,8 +4,10 @@
  */
 package duan1_nhom1.tranf;
 
+import duan1_nhom1.dto.DanhMucDto;
 import duan1_nhom1.dto.HoaDonDto;
 import duan1_nhom1.dto.KhachDto;
+import duan1_nhom1.model.DanhMuc;
 import duan1_nhom1.model.HoaDon;
 import duan1_nhom1.model.Khach;
 import java.util.ArrayList;
@@ -114,6 +116,33 @@ public class TranferData {
         return dtoList;
     }
         
-   
+   public static DanhMucDto convertToDto(DanhMuc model) {
+        DanhMucDto dto = new DanhMucDto();
+        if (model.getId() != null)dto.setId(model.getId());
+        if (model.getMa() != null) dto.setMa(model.getMa());
+        if (model.getTen()!= null) dto.setTen(model.getTen());
+        if (model.getMoTa()!= null) dto.setMoTa(model.getMoTa());
+        if (model.getNgayTao() != null) dto.setNgayTao(model.getNgayTao());
+        if (model.getNgaySua() != null) dto.setNgaySua(model.getNgaySua());
+        return dto;
+    }
+
+    public static DanhMuc convertToEntity(DanhMucDto dto) {
+        DanhMuc model = new DanhMuc();
+        if (dto.getId() != null) model.setId(dto.getId());
+        if (dto.getMa() != null) model.setMa(dto.getMa());
+        if (dto.getTen()!= null) model.setTen(dto.getTen());
+        if (dto.getMoTa()!= null) model.setMoTa(dto.getMoTa());
+        if (dto.getNgayTao() != null) model.setNgayTao(dto.getNgayTao());
+        if (dto.getNgaySua() != null) model.setNgaySua(dto.getNgaySua());
+        return model;
+    }
+    public static List<DanhMucDto> convertListDanhMucToDto(List<DanhMuc> entityList) {
+        List<DanhMucDto> dtoList = new ArrayList<>();
+        for (DanhMuc entity : entityList) {
+            dtoList.add(convertToDto(entity));
+        }
+        return dtoList;
+    }
 
 }
