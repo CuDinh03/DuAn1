@@ -124,37 +124,53 @@ public class SPChiTietRepository {
         }
     }
 
-    public boolean updateSP(ChiTietSanPham t, UUID id) {
-       String sql = "String sql = \"UPDATE san_pham_chi_tiet\\n\"\n" +
-"            + \"SET ma = ?, id_sp = ?, id_hang = ?, id_cl = ?, id_ms = ?, id_size = ?, id_dm = ?, gia_nhap = ?, gia_ban = ?, so_luong = ?, ngay_nhap = ?, ngay_tao = ?, ngay_sua = ?, trang_thai = ?\\n\"\n" +
-"            + \"WHERE id = ?;\";";
+   public boolean updateSP(ChiTietSanPham t, UUID id) {
+    String sql = """
+            UPDATE [dbo].[san_pham_chi_tiet]
+            SET [ma] = ?,
+                [id_sp] = ?,
+                [id_hang] = ?,
+                [id_cl] = ?,
+                [id_ms] = ?,
+                [id_size] = ?,
+                [id_dm] = ?,
+                [gia_nhap] = ?,
+                [gia_ban] = ?,
+                [so_luong] = ?,
+                [ngay_nhap] = ?,
+                [ngay_tao] = ?,
+                [ngay_sua] = ?,
+                [trang_thai] = ?
+            WHERE [id] = ?;
+            """;
 
-        try {
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setObject(1, t.getMa());
-            ps.setObject(2, t.getIdSanPham());
-            ps.setObject(3, t.getIdThuongHieu());
-            ps.setObject(4, t.getIdChatLieu());
-            ps.setObject(5, t.getIdMauSac());
-            ps.setObject(6, t.getIdKichThuoc());
-            ps.setObject(7, t.getIdDanhMuc());
-            ps.setBigDecimal(8, t.getGiaNhap());
-            ps.setBigDecimal(9, t.getGiaBan());
-            ps.setInt(10, t.getSoLuong());
-            ps.setDate(11, new java.sql.Date(t.getNgayNhap().getTime()));
-            ps.setDate(12, new java.sql.Date(t.getNgaySua().getTime()));
-            ps.setDate(13, new java.sql.Date(t.getNgayTao().getTime()));
-            ps.setBoolean(14, t.isTrangThai());
-            ps.setObject(15, id);
+    try {
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setObject(1, t.getMa());
+        ps.setObject(2, t.getIdSanPham());
+        ps.setObject(3, t.getIdThuongHieu());
+        ps.setObject(4, t.getIdChatLieu());
+        ps.setObject(5, t.getIdMauSac());
+        ps.setObject(6, t.getIdKichThuoc());
+        ps.setObject(7, t.getIdDanhMuc());
+        ps.setBigDecimal(8, t.getGiaNhap());
+        ps.setBigDecimal(9, t.getGiaBan());
+        ps.setInt(10, t.getSoLuong());
+        ps.setDate(11, new java.sql.Date(t.getNgayNhap().getTime()));
+        ps.setDate(12, new java.sql.Date(t.getNgaySua().getTime()));
+        ps.setDate(13, new java.sql.Date(t.getNgayTao().getTime()));
+        ps.setBoolean(14, t.isTrangThai());
+        ps.setObject(15, id);
 
-            int result = ps.executeUpdate();
-            return result > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return false;
+        int result = ps.executeUpdate();
+        return result > 0;
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+
+    return false;
+}
+
 
     
 

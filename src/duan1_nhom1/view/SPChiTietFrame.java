@@ -174,6 +174,12 @@ public class SPChiTietFrame extends javax.swing.JFrame {
         if (Uhelper.checkNull(txt_masp, "Vui lòng nhập mã sản phẩm")) {
             return;
         }
+        index = tbl_sanpham.getSelectedRow();
+
+        if (index == -1) {
+            JOptionPane.showMessageDialog(this, "Bạn vui lòng chọn sản phẩm cần sửa !");
+            return;
+        }
 
         UUID id = this.sPChiTietService.getAll().get(index).getId();
         String maSP = txt_masp.getText().trim();
@@ -758,35 +764,24 @@ public class SPChiTietFrame extends javax.swing.JFrame {
 
     private void tbl_sanphamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_sanphamMouseClicked
         // TODO add your handling code here:
-        
-        int banGhiChon = tbl_sanpham.getSelectedRow();
-        if (banGhiChon == -1) {
-            return;
-        }
+
+        index = tbl_sanpham.getSelectedRow();
+
 //        _index = tbl_sanpham.getSelectedRow();
-        String ma = tbl_sanpham.getValueAt(banGhiChon, 1).toString();
-        String tenSP = tbl_sanpham.getValueAt(banGhiChon, 2).toString();
-        String hang = tbl_sanpham.getValueAt(banGhiChon, 3).toString();
-        String chatLieu = tbl_sanpham.getValueAt(banGhiChon, 4).toString();
-        String mauSac = tbl_sanpham.getValueAt(banGhiChon, 5).toString();
-        String kichCo = tbl_sanpham.getValueAt(banGhiChon, 6).toString();
-        String danhMuc = tbl_sanpham.getValueAt(banGhiChon, 7).toString();
-        String giaNhap = tbl_sanpham.getValueAt(banGhiChon, 8).toString();
-        String giaBan = tbl_sanpham.getValueAt(banGhiChon, 9).toString();
-        String soLuong = tbl_sanpham.getValueAt(banGhiChon, 10).toString();
-        
-        txt_masp.setText(ma);
-        cb_tensp.setSelectedItem(tenSP);
-        cb_hang.setSelectedItem(hang);
-        cb_chatlieu.setSelectedItem(chatLieu);
-        cb_mausac.setSelectedItem(mauSac);
-        cb_kichco.setSelectedItem(kichCo);
-        cb_danhmuc.setSelectedItem(danhMuc);
-        txt_gianhap.setText(giaNhap);
-        txt_giaban.setText(giaBan);
-        txt_soluong.setText(soLuong);
-        
-        String ngayNhapString = tbl_sanpham.getValueAt(banGhiChon, 11).toString();
+        ChiTietSanPham ctsp = this.sPChiTietService.getAll().get(index);
+
+        txt_masp.setText(ctsp.getMa());
+        cb_tensp.setSelectedItem(sanPhamService.getTenById(ctsp.getIdSanPham().toString()));
+        cb_hang.setSelectedItem(hangService.getTenById(ctsp.getIdThuongHieu().toString()));
+        cb_chatlieu.setSelectedItem(chatLieuService.getTenById(ctsp.getIdChatLieu().toString()));
+        cb_mausac.setSelectedItem(mauSacService.getTenById(ctsp.getIdMauSac().toString()));
+        cb_kichco.setSelectedItem(kichCoService.getTenById(ctsp.getIdKichThuoc().toString()));
+        cb_danhmuc.setSelectedItem((danhMucService.getTenById(ctsp.getIdDanhMuc().toString())));
+        txt_gianhap.setText("" + ctsp.getGiaNhap());
+        txt_giaban.setText("" + ctsp.getGiaBan());
+        txt_soluong.setText("" + ctsp.getSoLuong());
+
+        String ngayNhapString = tbl_sanpham.getValueAt(index, 11).toString();
         Date ngayNhap = null;
 
         try {
@@ -796,8 +791,8 @@ public class SPChiTietFrame extends javax.swing.JFrame {
         } catch (ParseException ex) {
             ex.printStackTrace();
         }
-        
-        String ngaySuaString = tbl_sanpham.getValueAt(banGhiChon, 12).toString();
+
+        String ngaySuaString = tbl_sanpham.getValueAt(index, 12).toString();
         Date ngaySua = null;
 
         try {
@@ -807,8 +802,8 @@ public class SPChiTietFrame extends javax.swing.JFrame {
         } catch (ParseException ex) {
             ex.printStackTrace();
         }
-        
-        String ngayTaoString = tbl_sanpham.getValueAt(banGhiChon, 13).toString();
+
+        String ngayTaoString = tbl_sanpham.getValueAt(index, 13).toString();
         Date ngayTao = null;
 
         try {
@@ -818,13 +813,13 @@ public class SPChiTietFrame extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
-        
-
         date_ngaynhap.setDate(ngayNhap);
         date_ngaysua.setDate(ngaySua);
         date_ngaytao.setDate(ngayTao);
+        tbl_sanpham.setRowSelectionInterval(index, index);
 
-        txt_trangthai.setText(tbl_sanpham.getValueAt(_index, 14).toString());
+//
+//        txt_trangthai.setText(tbl_sanpham.getValueAt(_index, 14).toString());
 
     }//GEN-LAST:event_tbl_sanphamMouseClicked
 
