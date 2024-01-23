@@ -127,9 +127,18 @@ public class MauSacRepository {
             System.out.println("An error occurred: " + e.getMessage());
         }
     }
-    
-     public void update(MauSac mauSac) {
-         String sql = "UPDATE mau_sac SET ma = ?, ten = ?, mo_ta = ?, ngay_tao = ?, ngay_sua = ?, trang_thai = ? WHERE id  = ? ";
+
+    public void update(MauSac mauSac, String id) {
+        String sql = """
+                UPDATE [dbo].[mau_sac]
+                SET [ma] = ?,
+                    [ten] = ?,
+                    [mo_ta] = ?,
+                    [ngay_tao] = ?,
+                    [ngay_sua] = ?,
+                    [trang_thai] = ?
+                WHERE id = ?;
+                """;
 
         try (Connection con = jdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setObject(1, mauSac.getMa());
@@ -138,7 +147,7 @@ public class MauSacRepository {
             ps.setObject(4, mauSac.getNgayTao());
             ps.setObject(5, mauSac.getNgaySua());
             ps.setObject(6, mauSac.isTrangThai());
-            ps.setObject(7, mauSac.getId());
+            ps.setObject(7, id);
 
             int chek = ps.executeUpdate();
 
@@ -168,6 +177,5 @@ public class MauSacRepository {
             e.printStackTrace(System.out);
         }
     }
-    
 
 }

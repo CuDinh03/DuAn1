@@ -23,7 +23,6 @@ import javax.swing.table.DefaultTableModel;
 public class KichThuocFrame extends javax.swing.JFrame {
 
     private KichCoService kichCoService = new KichCoService();
-    List<KichThuoc> list = kichCoService.getAll();
     private KichThuoc kichThuoc = new KichThuoc();
 
     /**
@@ -31,16 +30,16 @@ public class KichThuocFrame extends javax.swing.JFrame {
      */
     public KichThuocFrame() {
         initComponents();
-        loadTable();
+        loadTableKichThuoc();
     }
 
-    public void loadTable() {
+    public void loadTableKichThuoc() {
 
         DefaultTableModel dfm = (DefaultTableModel) tbl_kichthuoc.getModel();
 
         dfm.setRowCount(0);
 
-        for (KichThuoc kichThuoc : list) {
+        for (KichThuoc kichThuoc : kichCoService.getAll()) {
             Object[] row = new Object[]{
                 kichThuoc.getMa(),
                 kichThuoc.getTen(),
@@ -87,8 +86,7 @@ public class KichThuocFrame extends javax.swing.JFrame {
             }
             KichThuoc size = getData();
             kichCoService.add(size);
-            list = kichCoService.getAll();
-            loadTable();
+            loadTableKichThuoc();
             JOptionPane.showMessageDialog(this, "thêm thành công");
 
         } catch (Exception e) {
@@ -104,7 +102,7 @@ public class KichThuocFrame extends javax.swing.JFrame {
                 return;
             }
 
-            loadTable();
+            loadTableKichThuoc();
             JOptionPane.showMessageDialog(this, "xóa thành công");
             clearForm();
         } catch (Exception e) {
