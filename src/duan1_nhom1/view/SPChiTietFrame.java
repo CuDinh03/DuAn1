@@ -5,7 +5,6 @@
 package duan1_nhom1.view;
 
 import duan1_nhom1.model.ChiTietSanPham;
-import duan1_nhom1.model.DanhMuc;
 import duan1_nhom1.service.ChatLieuService;
 import duan1_nhom1.service.DanhMucService;
 import duan1_nhom1.service.HangService;
@@ -19,8 +18,6 @@ import duan1_nhom1.viewModel.QLSanPhamViewModel;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -67,11 +64,19 @@ public class SPChiTietFrame extends javax.swing.JFrame {
     }
 
     private void clearForm() {
-//        txt_ma.setText("");
-//        txt_ten.setText("");
-//        txt_mota.setText("");
-//        clr_ngaysua.setDate(null);
-//        clr_ngaytao.setDate(null);
+        txt_masp.setText("");
+        cb_tensp.setSelectedIndex(0);
+        cb_hang.setSelectedIndex(0);
+        cb_chatlieu.setSelectedIndex(0);
+        cb_mausac.setSelectedIndex(0);
+        cb_kichco.setSelectedIndex(0);
+        cb_danhmuc.setSelectedIndex(0);
+        txt_gianhap.setText("");
+        txt_giaban.setText("");
+        txt_soluong.setText("");
+        date_ngaynhap.setDate(null);
+        date_ngaytao.setDate(null);
+        date_ngaysua.setDate(null);
 
     }
 
@@ -79,6 +84,7 @@ public class SPChiTietFrame extends javax.swing.JFrame {
         defaultTableModel = (DefaultTableModel) tbl_sanpham.getModel();
         defaultTableModel.setRowCount(0);
         int count = 1;
+       
         for (ChiTietSanPham chiTietSanPham : list) {
             defaultTableModel.addRow(new Object[]{
                 count++,
@@ -148,9 +154,6 @@ public class SPChiTietFrame extends javax.swing.JFrame {
         }
     }
 
-    private void getSanPham() {
-
-    }
 
     private void updateSP() {
         if (Uhelper.checkNull(txt_giaban, "Không để trống giá bán")) {
@@ -581,6 +584,11 @@ public class SPChiTietFrame extends javax.swing.JFrame {
         });
 
         btn_clear.setText("Clear");
+        btn_clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_clearActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -822,6 +830,11 @@ public class SPChiTietFrame extends javax.swing.JFrame {
 //        txt_trangthai.setText(tbl_sanpham.getValueAt(_index, 14).toString());
 
     }//GEN-LAST:event_tbl_sanphamMouseClicked
+
+    private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
+        // TODO add your handling code here:
+        clearForm();
+    }//GEN-LAST:event_btn_clearActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
