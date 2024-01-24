@@ -25,6 +25,18 @@ public class Nhan_vien {
     public Nhan_vien() {
     }
 
+    public Nhan_vien(String ten, String diaChi, String sdt, String id_cv, Date ngayBD, Date ngayTao, Date ngaySua, boolean trangThai) {
+        this.ten = ten;
+        this.diaChi = diaChi;
+        this.sdt = sdt;
+        this.id_cv = id_cv;
+        this.ngayBD = ngayBD;
+        this.ngayTao = ngayTao;
+        this.ngaySua = ngaySua;
+        this.trangThai = trangThai;
+    }
+    
+    
     public Nhan_vien(String id, String ten, String diaChi, String sdt, String id_cv, Date ngayBD, Date ngayTao, Date ngaySua, boolean trangThai) {
         this.id = id;
         this.ten = ten;

@@ -11,6 +11,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -55,6 +56,8 @@ public class NhanVienRepository {
         return check > 0;
     }
 
+    
+    
     public Boolean them(Nhan_vien nv) {
         String sql = "INSERT INTO Nguoi_Dung (ten,dia_chi,sdt,ngay_bd,ngay_tao,ngay_sua,trang_thai) VALUES(?,?,?,?,?,?,?)";
         int check = 0;
@@ -93,4 +96,72 @@ public class NhanVienRepository {
         return check > 0;
     }
     
+    
+    public String getTenById(String id) {
+        String sql = "SELECT ten FROM Nguoi_Dung WHERE id = ?";
+        java.sql.Connection cn = DBConnect.getConnection();
+        try {
+            PreparedStatement ps = cn.prepareStatement(sql);
+            ps.setString(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getString("ten");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<String> getAllId() {
+        ArrayList<String> listId = new ArrayList<>();
+        java.sql.Connection cn = DBConnect.getConnection();
+        String sql = "SELECT id FROM Nguoi_Dung";
+        try {
+            PreparedStatement ps = cn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                listId.add(rs.getString("id"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listId;
+    }
+
+    public List<String> getAllTen() {
+        ArrayList<String> listId = new ArrayList<>();
+        java.sql.Connection cn = DBConnect.getConnection();
+        String sql = "SELECT ten FROM Nguoi_Dung where TrangThai = 0";
+        try {
+            PreparedStatement ps = cn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                listId.add(rs.getString("ten"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listId;
+    }
+
+    public boolean insert(Nhan_vien domainModel) {
+        String sql = "INSERT INTO Nguoi_Dung (ten,dia_chi,sdt,id_cv,ngay_bd,ngay_tao,ngay_sua,trang_thai) VALUES(?,?,?,?,?,?,?,?)";
+        int check = 0;
+        try (java.sql.Connection cn = DBConnect.getConnection(); PreparedStatement ps = cn.prepareStatement(sql)) {
+            ps.setObject(1, domainModel.getTen());
+            ps.setObject(2, domainModel.getDiaChi());
+            ps.setObject(3, domainModel.getSdt());
+            ps.setObject(4, domainModel.getId_cv());
+            ps.setObject(5, domainModel.getNgayBD());
+            ps.setObject(6, domainModel.getNgayTao());
+            ps.setObject(7, domainModel.getNgaySua());
+            ps.setObject(8, domainModel.isTrangThai());
+            check=ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return check > 0;
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

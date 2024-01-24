@@ -13,6 +13,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -25,10 +26,30 @@ public class NhanVienService implements IService<Nhan_vien>{
         return nhanVienRepository.getNhanVien();
     }
 
+    
+    public String insert(Nhan_vien t) {
+        Nhan_vien domainModel = new Nhan_vien();
+        domainModel.setTen(t.getTen());
+
+        domainModel.setDiaChi(t.getDiaChi());
+        domainModel.setSdt(t.getSdt());
+        domainModel.setId_cv(t.getId_cv());
+        
+        domainModel.setNgayBD(t.getNgayBD());
+        domainModel.setNgaySua(t.getNgaySua());
+        domainModel.setNgayTao(t.getNgayTao());
+        domainModel.setTrangThai(t.isTrangThai());
+
+        if (this.nhanVienRepository.insert(domainModel)) {
+            return "Thêm thành công !";
+        } else {
+            return "Thêm thất bại !";
+        }
+    }
     @Override
     public void add(Nhan_vien t) {
-        nhanVienRepository.them(t);
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
@@ -46,6 +67,18 @@ public class NhanVienService implements IService<Nhan_vien>{
     @Override
     public Nhan_vien findById(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+     public String getTenById(String id) {
+        return nhanVienRepository.getTenById(id);
+    }
+
+    public List<String> getAllTen() {
+        return nhanVienRepository.getAllId();
+    }
+
+    public List<String> getAllId() {
+        return nhanVienRepository.getAllId();
     }
 
 }

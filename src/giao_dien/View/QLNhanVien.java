@@ -10,12 +10,14 @@ import giao_dien.DBConnect.DBConnect;
 import giao_dien.Repository.NhanVienRepository;
 import giao_dien.model.Nhan_vien;
 import giao_dien.model.TaiKhoan;
+import giao_dien.service.ChucVuService;
 import giao_dien.service.NhanVienService;
 import giao_dien.service.TaiKhoanService;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -35,7 +37,7 @@ public class QLNhanVien extends javax.swing.JFrame {
     private DefaultComboBoxModel<String> cbb = new DefaultComboBoxModel<>();
     private NhanVienService service = new NhanVienService();
     private NhanVienRepository nhanVienRepository = new NhanVienRepository();
-
+    private ChucVuService chucVuService=new ChucVuService();
     private ArrayList<Nhan_vien> list = new ArrayList<>();
 
     /**
@@ -47,22 +49,22 @@ public class QLNhanVien extends javax.swing.JFrame {
         dtm = (DefaultTableModel) tblNhanVien.getModel();
         list = nhanVienRepository.getNhanVien();
         loadData(list);
+        loadChucVu();
     }
 
     public void loadData(ArrayList<Nhan_vien> li) {
+   
         dtm.setRowCount(0);
         for (Nhan_vien nv : li) {
-            dtm.addRow(new Object[]{nv.getId(), nv.getTen(), nv.getDiaChi(), nv.getSdt(), nv.getId_cv(), nv.getNgayBD(), nv.getNgayTao(), nv.getNgaySua(), nv.isTrangThai() == true ? "Đang làm" : "Đã nghỉ làm"});
+            dtm.addRow(new Object[]{ nv.getTen(), nv.getDiaChi(), nv.getSdt(), this.chucVuService.getTenById(nv.getId_cv()), nv.getNgayBD(), nv.getNgayTao(), nv.getNgaySua(), nv.isTrangThai() == true ? "Đang làm" : "Đã nghỉ làm"});
         }
     }
 
     public void FillData(Nhan_vien nv) {
-        txtID.setText(nv.getId());
+        
         txtTenNhanVien.setText(nv.getTen());
         txtDiaChi.setText(nv.getDiaChi());
         txtSDT.setText(nv.getSdt());
-
-        txtIDCV.setText(nv.getId_cv());
         txtNgayBD.setText(nv.getNgayBD().toString());
         txtNgayTao.setText(nv.getNgayTao().toString());
         txtNgaySua.setText(nv.getNgaySua().toString());
@@ -71,23 +73,30 @@ public class QLNhanVien extends javax.swing.JFrame {
     }
 
     public void clearForm() {
-        txtID.setText("");
+        
         txtTenNhanVien.setText("");
         txtDiaChi.setText("");
         txtSDT.setText("");
-        txtIDCV.setText("");
+        
         txtNgayBD.setText("");
         txtNgayTao.setText("");
         txtNgaySua.setText("");
         rdDangLam.isSelected();
     }
 
+    public void loadChucVu(){
+        DefaultComboBoxModel model=(DefaultComboBoxModel) cboCV.getModel();
+        List<String>list=chucVuService.getAllId();
+        for (String str :list) {
+            model.addElement(chucVuService.getTenById(str));
+        }
+    }
     public Nhan_vien getDataForm() {
-        String id = txtID.getText();
+        
         String ten = txtTenNhanVien.getText();
         String dc = txtDiaChi.getText();
         String sdt = txtSDT.getText();
-        String idcv = txtIDCV.getText();
+        String idCV=chucVuService.getAllId().get(cboCV.getSelectedIndex());
         Date ngayBD = new Date(WIDTH);
         Date ngayTao = new Date(WIDTH);
         Date ngaySua = new Date(WIDTH);
@@ -98,12 +107,12 @@ public class QLNhanVien extends javax.swing.JFrame {
             trangThai = false;
         }
 
-        if (ten.isEmpty() || id.isEmpty() || dc.isEmpty() || sdt.isEmpty() || idcv.isEmpty()) {
+        if (ten.isEmpty() ||  dc.isEmpty() || sdt.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Không được để trống dữ liệu !!");
             return null;
         }
 
-        Nhan_vien nv = new Nhan_vien(id, ten, dc, sdt, idcv, ngayBD, ngayTao, ngaySua, trangThai);
+        Nhan_vien nv = new Nhan_vien(ten, dc, sdt, idCV, ngayBD, ngayTao, ngaySua, trangThai);
         return nv;
     }
     private void add(){
@@ -113,7 +122,7 @@ public class QLNhanVien extends javax.swing.JFrame {
             return;
         }
         Nhan_vien nv =getNhanVien();
-        service.add(nv);
+        service.insert(nv);
         JOptionPane.showMessageDialog(this, "Thêm thành công !!");
         
         clearForm();
@@ -147,6 +156,7 @@ public class QLNhanVien extends javax.swing.JFrame {
         nhan_vien.setTen(txtTenNhanVien.getText());
         nhan_vien.setDiaChi(txtDiaChi.getText());
         nhan_vien.setSdt(txtSDT.getText());
+        nhan_vien.setId_cv((String) cboCV.getSelectedItem());
         Date ngayBD = new Date(WIDTH);
         Date ngayTao = new Date(WIDTH);
         Date ngaySua = new Date(WIDTH);
@@ -206,12 +216,9 @@ public class QLNhanVien extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jLabel12 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        txtID = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         txtTenNhanVien = new javax.swing.JTextField();
-        txtIDCV = new javax.swing.JTextField();
         txtSDT = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         txtNgayBD = new javax.swing.JTextField();
@@ -229,6 +236,7 @@ public class QLNhanVien extends javax.swing.JFrame {
         txtNgayTao = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtNgaySua = new javax.swing.JTextField();
+        cboCV = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -344,11 +352,9 @@ public class QLNhanVien extends javax.swing.JFrame {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        jLabel12.setText("ID");
-
         jLabel9.setText("Trạng thái");
 
-        jLabel13.setText("ID chức vụ");
+        jLabel13.setText("Chức vụ");
 
         txtTenNhanVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -363,13 +369,13 @@ public class QLNhanVien extends javax.swing.JFrame {
 
         tblNhanVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Tên NV", "Địa chỉ ", "SDT", "ID chức vụ", "Ngày BD", "Ngày tạo", "Ngày sửa", "Trạng thái"
+                "Tên NV", "Địa chỉ ", "SDT", "Chức vụ", "Ngày BD", "Ngày tạo", "Ngày sửa", "Trạng thái"
             }
         ));
         tblNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -417,8 +423,7 @@ public class QLNhanVien extends javax.swing.JFrame {
                                 .addComponent(k)
                                 .addComponent(jLabel3)
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(jPanel3Layout.createSequentialGroup()
                                     .addGap(27, 27, 27)
@@ -430,14 +435,11 @@ public class QLNhanVien extends javax.swing.JFrame {
                                         .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtTenNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(1, 1, 1))))
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(jLabel13)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtIDCV, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(cboCV, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txtTenNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE))
+                                    .addGap(2, 2, 2))))
+                        .addComponent(jLabel13))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
@@ -479,18 +481,14 @@ public class QLNhanVien extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(347, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap(375, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtTenNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(txtIDCV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cboCV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -668,6 +666,7 @@ public class QLNhanVien extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JComboBox<String> cboCV;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -676,7 +675,6 @@ public class QLNhanVien extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
@@ -696,8 +694,6 @@ public class QLNhanVien extends javax.swing.JFrame {
     private javax.swing.JRadioButton rdDangLam;
     private javax.swing.JTable tblNhanVien;
     private javax.swing.JTextField txtDiaChi;
-    private javax.swing.JTextField txtID;
-    private javax.swing.JTextField txtIDCV;
     private javax.swing.JTextField txtNgayBD;
     private javax.swing.JTextField txtNgaySua;
     private javax.swing.JTextField txtNgayTao;
