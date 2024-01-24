@@ -14,7 +14,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
+
 public class HoaDonRepository {
 
     private final Connection connection = JdbcHelper.getConnection();
@@ -41,16 +41,16 @@ public class HoaDonRepository {
         }
     }
 
-    public HoaDon getHoaDonById(UUID hoaDonId) {
+    public HoaDon getHoaDonById(String  hoaDonId) {
         String query = "SELECT * FROM hoa_don WHERE id = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setObject(1, hoaDonId);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    UUID id = UUID.fromString((String) resultSet.getObject("id"));
-                    UUID id_kh = UUID.fromString((String) resultSet.getObject("id_kh"));
-                    UUID id_Nv =  UUID.fromString((String) resultSet.getObject("id_Nv"));
+                    String  id =  resultSet.getString("id");
+                    String id_kh = resultSet.getString("id_kh");
+                    String id_Nv =  resultSet.getString("id_Nv");
                     String ma = resultSet.getString("ma");
                     Date ngay_mua = resultSet.getDate("ngay_mua");
                     Double tong_tien = resultSet.getDouble("tong_tien");
@@ -88,7 +88,7 @@ public class HoaDonRepository {
         }
     }
 
-    public void deleteHoaDon(UUID hoaDonId) {
+    public void deleteHoaDon(String  hoaDonId) {
         try {
             String query = "DELETE FROM hoa_don WHERE id = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -107,9 +107,9 @@ public class HoaDonRepository {
              ResultSet resultSet = preparedStatement.executeQuery()) {
 
             while (resultSet.next()) {
-                    UUID id = UUID.fromString((String) resultSet.getObject("id"));
-                    UUID id_kh = UUID.fromString((String) resultSet.getObject("id_kh"));
-                    UUID id_Nv = UUID.fromString((String) resultSet.getObject("id_Nv"));
+                   String  id =  resultSet.getString("id");
+                    String id_kh = resultSet.getString("id_kh");
+                    String id_Nv =  resultSet.getString("id_Nv");
                     String ma = resultSet.getString("ma");
                     Date ngay_mua = resultSet.getDate("ngay_mua");
                     Double tong_tien = resultSet.getDouble("tong_tien");
