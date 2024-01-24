@@ -2,21 +2,67 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package giao_dien;
+package giao_dien.View;
+
+import com.sun.jdi.connect.spi.Connection;
+import giao_dien.DBConnect.DBConnect;
+import java.sql.*;
+import javax.swing.JOptionPane;
+import java.util.ArrayList;
 
 /**
  *
  * @author acer
  */
 public class DangNhap extends javax.swing.JFrame {
-
+    DBConnect dBConnect=new DBConnect();
+    java.sql.Connection conn=dBConnect.getConnection();
+    DBConnect cn=new DBConnect();
     /**
      * Creates new form DangNhap
      */
     public DangNhap() {
         initComponents();
+        java.sql.Connection conn=dBConnect.getConnection();
+                
     }
-
+    
+    private void login(){
+        conn=cn.getConnection();
+        String uid =Tdn_txt.getText().toString().trim();
+        String pwd =mk_txt.getText().toString().trim();
+        String quyen;
+        StringBuffer sb =new StringBuffer();
+        
+        if (uid.equals("")) {
+            sb.append("Ten dang nhap khong duoc de trong");
+        }
+        if (pwd.equals("")) {
+            sb.append("mat khau khong duoc de trong");
+        }
+        if (sb.length()>0) {
+            JOptionPane.showMessageDialog(this, sb.toString());
+            return;
+        }
+        String sql_login="select * from tai_khoan where ten_dang_nhap=? and mat_khai=?";
+        
+        try {
+            PreparedStatement pst=conn.prepareStatement(sql_login);
+            pst.setString(1, uid);
+            pst.setString(2, pwd);
+            ResultSet rs=pst.executeQuery();
+            if (rs.next()) {
+                
+                quyen=rs.getString("id_chuc_vu");
+                JOptionPane.showMessageDialog(this, "Dang nhap thanh cong");
+                new QLNhanVien(uid,pwd,quyen).setVisible(true);
+                this.setVisible(false);
+            }else{
+                JOptionPane.showMessageDialog(this, "Tai khoan hoac mat khau khong hop le");
+            }
+        } catch (Exception e) {
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,8 +76,8 @@ public class DangNhap extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        Tdn_txt = new javax.swing.JTextField();
+        mk_txt = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
@@ -50,8 +96,18 @@ public class DangNhap extends javax.swing.JFrame {
         jLabel4.setText("Mật khẩu");
 
         jButton1.setText("Đăng nhập");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Thoát");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/giao_dien/1.jpg"))); // NOI18N
 
@@ -76,8 +132,8 @@ public class DangNhap extends javax.swing.JFrame {
                                 .addComponent(jLabel4))
                             .addGap(18, 18, 18)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTextField1)
-                                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(Tdn_txt)
+                                .addComponent(mk_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGap(40, 40, 40)
                             .addComponent(jButton1)
@@ -100,13 +156,13 @@ public class DangNhap extends javax.swing.JFrame {
                         .addComponent(jLabel5)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(Tdn_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel2)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(mk_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton1)
@@ -128,6 +184,16 @@ public class DangNhap extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        login();
+      
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -139,7 +205,7 @@ public class DangNhap extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -164,6 +230,7 @@ public class DangNhap extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Tdn_txt;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -172,7 +239,6 @@ public class DangNhap extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPasswordField mk_txt;
     // End of variables declaration//GEN-END:variables
 }
