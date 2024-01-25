@@ -17,16 +17,15 @@ public class VoucherDto {
     private Float giamGia;
     private Date ngayDau;
     private Date ngayCuoi;
-    private int soLuong;
-    private String moTa;
+    private Integer soLuong;
     private Date ngayTao;
     private Date ngaySua;
-    private boolean trangThai;
+    private Boolean trangThai;
 
     public VoucherDto() {
     }
 
-    public VoucherDto(String id, String ma, String ten, Float giamGia, Date ngayDau, Date ngayCuoi, int soLuong, String moTa, Date ngayTao, Date ngaySua, boolean trangThai) {
+    public VoucherDto(String id, String ma, String ten, Float giamGia, Date ngayDau, Date ngayCuoi, Integer soLuong, Date ngayTao, Date ngaySua, Boolean trangThai) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
@@ -34,7 +33,6 @@ public class VoucherDto {
         this.ngayDau = ngayDau;
         this.ngayCuoi = ngayCuoi;
         this.soLuong = soLuong;
-        this.moTa = moTa;
         this.ngayTao = ngayTao;
         this.ngaySua = ngaySua;
         this.trangThai = trangThai;
@@ -88,20 +86,12 @@ public class VoucherDto {
         this.ngayCuoi = ngayCuoi;
     }
 
-    public int getSoLuong() {
+    public Integer getSoLuong() {
         return soLuong;
     }
 
-    public void setSoLuong(int soLuong) {
+    public void setSoLuong(Integer soLuong) {
         this.soLuong = soLuong;
-    }
-
-    public String getMoTa() {
-        return moTa;
-    }
-
-    public void setMoTa(String moTa) {
-        this.moTa = moTa;
     }
 
     public Date getNgayTao() {
@@ -120,11 +110,11 @@ public class VoucherDto {
         this.ngaySua = ngaySua;
     }
 
-    public boolean isTrangThai() {
+    public Boolean getTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(boolean trangThai) {
+    public void setTrangThai(Boolean trangThai) {
         this.trangThai = trangThai;
     }
 }

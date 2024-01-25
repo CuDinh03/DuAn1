@@ -4,27 +4,26 @@
  */
 package duan1_nhom1.service;
 
-import duan1_nhom1.dto.DanhMucDto;
-import duan1_nhom1.model.DanhMuc;
-import duan1_nhom1.repository.DanhMucRepository;
+import duan1_nhom1.dto.VoucherDto;
+import duan1_nhom1.model.Voucher;
+import duan1_nhom1.repository.VoucherRepo;
 import duan1_nhom1.tranf.TranferData;
 import java.util.List;
 
 /**
  *
- * @author anhtuanle
+ * @author bachh
  */
-public class DanhMucService implements IService<DanhMuc> {
-
-    DanhMucRepository danhMucRepository = new DanhMucRepository();
+public class VoucherService implements IService<VoucherDto> {
+    VoucherRepo voucherRepo = new VoucherRepo();
 
     @Override
-    public void add(DanhMuc t) {
-       danhMucRepository.addDanhMuc(t);
+    public void add(VoucherDto t) {
+        this.voucherRepo.createVoucher(TranferData.convertToEntity(t));
     }
 
     @Override
-    public void update(DanhMuc t, String id) {
+    public void update(VoucherDto t, String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -34,15 +33,14 @@ public class DanhMucService implements IService<DanhMuc> {
     }
 
     @Override
-    public List<DanhMuc> getAll() {
-         return danhMucRepository.getAll();
+    public List<VoucherDto> getAll() {
+        return TranferData.convertListVoucherToDto(this.voucherRepo.getAll());
     }
 
     @Override
-    public DanhMuc findById(String id) {
+    public VoucherDto findById(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-  
-   
+    
 }

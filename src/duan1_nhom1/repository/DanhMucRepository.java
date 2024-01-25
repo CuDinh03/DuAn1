@@ -3,21 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package duan1_nhom1.repository;
-
-import duan1_nhom1.model.ChatLieu;
 import duan1_nhom1.model.DanhMuc;
-import duan1_nhom1.model.Hang;
-import duan1_nhom1.model.HoaDon;
-import duan1_nhom1.model.Khach;
 import duan1_nhom1.utils.JdbcHelper;
 import java.util.ArrayList;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Connection;
-import java.util.Date;
+import java .sql.Date;
 import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -30,7 +24,16 @@ public class DanhMucRepository {
 
     public List<DanhMuc> getAll() {
 
-        String sql = "SELECT id,ma,ten,mo_ta,ngay_tao,ngay_sua,trang_thai FROM danh_muc_san_pham";
+        String sql = """
+                     SELECT [id]
+                           ,[ma]
+                           ,[ten]
+                           ,[mo_ta]
+                           ,[ngay_tao]
+                           ,[ngay_sua]
+                           ,[trang_thai]
+                       FROM [dbo].[danh_muc_san_pham];
+                     """;
 
         try {
             PreparedStatement pr = conn.prepareStatement(sql);
@@ -42,7 +45,7 @@ public class DanhMucRepository {
                 String moTa = rs.getString("mo_ta");
                 Date ngayTao = rs.getDate("ngay_tao");
                 Date ngaySua = rs.getDate("ngay_tao");
-                boolean trangThai = rs.getBoolean("trang_thai");
+                Boolean trangThai = rs.getBoolean("trang_thai");
                 DanhMuc danhMuc = new DanhMuc(id, ma, ten, moTa, ngayTao, ngaySua, trangThai);
                 listDanhMuc.add(danhMuc);
             }
@@ -101,39 +104,36 @@ public class DanhMucRepository {
         return listId;
     }
     public void addDanhMuc(DanhMuc danhMuc) {
-        if (danhMuc == null) {
-            return;
-        }
+//        if (danhMuc == null) {
+//            return;
+//        }
 
         String sql = """
-        INSERT INTO [dbo].[danh_muc_san_pham]
-                   ([id]
-                   ,[ma]
-                   ,[ten]
-                   ,[mo_ta]
-                   ,[ngay_tao]
-                   ,[ngay_sua]
-                   ,[trang_thai])
-               VALUES
-                     (?
-                     ,?
-                     ,?
-                     ,?
-                     ,?
-                     ,?
-                     ,?);  
+       INSERT INTO [dbo].[danh_muc_san_pham]
+                                ([ma]
+                                ,[ten]
+                                ,[mo_ta]
+                                ,[ngay_tao]
+                                ,[ngay_sua]
+                                ,[trang_thai])
+                          VALUES
+                                (?
+                                ,?
+                                ,?
+                                ,?
+                                ,?
+                                ,?);  
                  """;
 
-        try (Connection con = JdbcHelper.getConnection(); PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
-            preparedStatement.setObject(1, danhMuc.getId());
-            preparedStatement.setString(2, danhMuc.getMa());
-            preparedStatement.setString(3, danhMuc.getTen());
-            preparedStatement.setString(4, danhMuc.getMoTa());
-            preparedStatement.setDate(5, new java.sql.Date(danhMuc.getNgayTao().getTime()));
-            preparedStatement.setDate(6, new java.sql.Date(danhMuc.getNgaySua().getTime()));
-            preparedStatement.setBoolean(7, danhMuc.isTrangThai());
+        try (Connection conn = JdbcHelper.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, danhMuc.getMa());
+            ps.setString(2, danhMuc.getTen());
+            ps.setString(3, danhMuc.getMoTa());
+//            ps.setDate(4, danhMuc.getNgayTao().toString());
+//            ps.setDate(5, );
+            ps.setBoolean(6, danhMuc.getTrangThai());
 
-            int chek = preparedStatement.executeUpdate();
+            int chek = ps.executeUpdate();
 
             if (chek > 0) {
                 System.out.println("Danh Mục Đã thêm thành công ");
