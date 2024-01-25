@@ -9,7 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import duan1_nhom1.model.KichThuoc;
-import duan1_nhom1.model.MauSac;
+import duan1_nhom1.model.MauSac; 
 import duan1_nhom1.utils.JdbcHelper;
 import java.util.ArrayList;
 import java.util.Date;

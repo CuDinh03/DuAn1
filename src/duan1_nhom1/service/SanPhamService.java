@@ -2,7 +2,6 @@ package duan1_nhom1.service;
 
 import duan1_nhom1.model.SanPham;
 import duan1_nhom1.repository.SanPhamRepository;
-import duan1_nhom1.viewModel.QLSanPhamViewModel;
 import java.util.List;
 
 public class SanPhamService implements IService<SanPham> {

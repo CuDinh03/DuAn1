@@ -1,4 +1,4 @@
-/*
+/*1
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
@@ -7,7 +7,6 @@ package duan1_nhom1.view;
 import duan1_nhom1.dto.DanhMucDto;
 import duan1_nhom1.model.DanhMuc;
 import duan1_nhom1.model.Khach;
-import duan1_nhom1.repository.DanhMucRepository;
 import duan1_nhom1.repository.DanhMucRepository;
 import duan1_nhom1.service.DanhMucService;
 import java.util.ArrayList;
@@ -360,12 +359,12 @@ public class ViewDanhMuc extends javax.swing.JFrame {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
-//        if (tblDanhMuc.getSelectedRow() >= 0) {
-//            DanhMuc dm = danhMucRepo.getAllDanhMuc().get(tblDanhMuc.getSelectedRow());
-//            JOptionPane.showMessageDialog(rootPane,danhMucRepo.updateDanhMuc(getDataDanhMuc()));
-//            danhMucs = danhMucRepo.getAllDanhMuc();
-//            showDataDanhMuc(danhMucs);
-//        }
+        if (tblDanhMuc.getSelectedRow() >= 0) {
+            DanhMuc dm = danhMucRepo.getAllDanhMuc().get(tblDanhMuc.getSelectedRow());
+            JOptionPane.showMessageDialog(rootPane,danhMucRepo.updateDanhMuc(getDataDanhMuc()));
+            danhMucs = danhMucRepo.getAllDanhMuc();
+            showDataDanhMuc(danhMucs);
+        }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     /**

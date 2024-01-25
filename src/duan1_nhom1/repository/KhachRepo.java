@@ -3,11 +3,12 @@ package duan1_nhom1.repository;
 import duan1_nhom1.model.Khach;
 import duan1_nhom1.utils.JdbcHelper;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 public class KhachRepo {
 
     private List<Khach> listKhach = new ArrayList<>();
@@ -38,8 +39,8 @@ public class KhachRepo {
             stm.setString(1, khachHang.getMaKhachHang());
             stm.setString(2, khachHang.getTenKhachHang());
             stm.setString(3, khachHang.getSdt());
-            stm.setDate(4, khachHang.getNgayTao());
-            stm.setDate(5, khachHang.getNgaySua());
+            stm.setDate(4, (Date) khachHang.getNgayTao());
+            stm.setDate(5, (Date) khachHang.getNgaySua());
             stm.setBoolean(6, khachHang.getTrangThai());
 
             int chek = stm.executeUpdate();
@@ -207,5 +208,34 @@ public class KhachRepo {
         }
         return null;
     }
+    
+    public Khach findById(String id ){
+        String sql = "Select * from [dbo].[Khach_hang] where id = ?";
+        try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Khach kh = new Khach();
+                kh.setMaKhachHang(rs.getString(2));
+                kh.setTenKhachHang(rs.getString(3));
+                kh.setSdt(rs.getString(4));
+                kh.setNgayTao(rs.getDate(5));
+                kh.setNgaySua(rs.getDate(6));
+                kh.setTrangThai(rs.getBoolean(7));
+                return kh;
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+//    public static void main(String[] args) {
+//        Khach k = new Khach();
+//        KhachRepo repo = new KhachRepo();
+//            
+//        k = repo.findById("5291043a-e9b3-46d8-8545-84f02050fda1");
+//        System.out.println(k);
+//    }
 }
 

@@ -6,10 +6,9 @@ package duan1_nhom1.model;
 
 import java.util.Date;
 
-/**
- *
- * @author maccuacu
- */
+import java.util.Date;
+
+
 public class Voucher {
     private String id;
     private String ma;

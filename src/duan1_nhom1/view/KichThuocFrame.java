@@ -9,6 +9,8 @@ import duan1_nhom1.model.MauSac;
 import duan1_nhom1.service.IService;
 import duan1_nhom1.service.KichCoService;
 import java.lang.reflect.Array;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,106 +19,167 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ *1
  * @author anhtuanle
  */
 public class KichThuocFrame extends javax.swing.JFrame {
 
     private KichCoService kichCoService = new KichCoService();
-    List<KichThuoc> list = kichCoService.getAll();
     private KichThuoc kichThuoc = new KichThuoc();
+    DefaultTableModel defaultTableModel = new DefaultTableModel();
+    int _index;
 
     /**
      * Creates new form KichThuocFrame
      */
     public KichThuocFrame() {
         initComponents();
-        loadTable();
+        loadTableKichThuoc();
     }
 
-    public void loadTable() {
+        public void loadTableKichThuoc() {
 
-        DefaultTableModel dfm = (DefaultTableModel) tbl_kichthuoc.getModel();
-
-        dfm.setRowCount(0);
-
-        for (KichThuoc kichThuoc : list) {
-            Object[] row = new Object[]{
-                kichThuoc.getMa(),
-                kichThuoc.getTen(),
-                kichThuoc.getMoTa(),
-                kichThuoc.getNgaySua(),
-                kichThuoc.getNgayTao(),
-                kichThuoc.isTrangThai()
-            };
-            dfm.addRow(row);
+         defaultTableModel = (DefaultTableModel) tbl_kichthuoc.getModel();
+        defaultTableModel.setRowCount(0);
+        int count = 1;
+        for (KichThuoc hang : kichCoService.getAll()) {
+            String status;
+            if (hang.isTrangThai()) {
+                status = "Còn";
+            }else {
+                status = "Hết";
+            }
+             Object[] rowData = {
+             
+                hang.getMa(),
+                hang.getTen(),
+                hang.getMoTa(),
+                hang.getNgaySua(),
+                hang.getNgayTao(),
+                 status
+             };   
+            defaultTableModel.addRow(rowData);
 
         }
 
     }
     
-      private void clearForm() {
+     private void clearForm() {
         txt_ma.setText("");
         txt_ten.setText("");
         txt_mota.setText("");
         clr_ngaysua.setDate(null);
         clr_ngaytao.setDate(null);
+        
     }
 
-    private KichThuoc getData() {
+    private KichThuoc getKichCo() {
         KichThuoc kichThuoc = new KichThuoc();
         kichThuoc.setMa(txt_ma.getText());
-        kichThuoc.setTen(txt_ma.getText());
-        kichThuoc.setMoTa(txt_ma.getText());
+        kichThuoc.setTen(txt_ten.getText());
+        kichThuoc.setMoTa(txt_mota.getText());
 
         Date ngayTao = clr_ngaytao.getDate();
         kichThuoc.setNgayTao(ngayTao);
 
         Date ngaySua = clr_ngaysua.getDate();
         kichThuoc.setNgaySua(ngaySua);
-        
-
+//        hang.isTrangThai(true);
         return kichThuoc;
     }
 
-    public void addSize() {
+    public void addKichThuoc() {
         try {
             int check = JOptionPane.showConfirmDialog(this, "bạn có muốn thêm không");
             if (check != JOptionPane.YES_OPTION) {
                 return;
             }
-            KichThuoc size = getData();
-            kichCoService.add(size);
-            list = kichCoService.getAll();
-            loadTable();
+            KichThuoc kt = getKichCo();
+            kichCoService.add(kt);
+           
             JOptionPane.showMessageDialog(this, "thêm thành công");
-
+            
+            loadTableKichThuoc();
+            clearForm();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "thêm thất bại");
         }
 
     }
     
-    public void xoa() {
+    
+    public void updateKichThuoc() {
         try {
+            int check = JOptionPane.showConfirmDialog(this, "bạn có muốn update không");
+            if (check != JOptionPane.YES_OPTION) {
+                return;
+            }
+            KichThuoc kichThuoc = getKichCo();
+            int row = tbl_kichthuoc.getSelectedRow();
+            String id = kichCoService.getAll().get(row).getId();
+            kichCoService.update(kichThuoc, id);
+            loadTableKichThuoc();
+            JOptionPane.showMessageDialog(this, "Update thành công");
+            
+            clearForm();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Update thất bại");
+        }
+
+    }
+    
+    public void deleteKichThuoc(){
+          try {
             int check = JOptionPane.showConfirmDialog(this, "bạn có muốn xóa không");
             if (check != JOptionPane.YES_OPTION) {
                 return;
             }
-
-            loadTable();
+            int row = tbl_kichthuoc.getSelectedRow();
+            String id = kichCoService.getAll().get(row).getId();
+            kichCoService.delete(id);
+            kichCoService.getAll().clear();
             JOptionPane.showMessageDialog(this, "xóa thành công");
+            loadTableKichThuoc();
             clearForm();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "xóa thất bại");
+            JOptionPane.showMessageDialog(this, "xóa thất bại ");
         }
     }
+    
+    public void clickKichThuoc(){
+        _index = tbl_kichthuoc.getSelectedRow();
+        txt_ma.setText(tbl_kichthuoc.getValueAt(_index, 0).toString());
+        txt_ten.setText(tbl_kichthuoc.getValueAt(_index, 1).toString());
+        txt_mota.setText(tbl_kichthuoc.getValueAt(_index, 2).toString());
+        String ngayTaoString = tbl_kichthuoc.getValueAt(_index, 3).toString();
+        Date ngayTao = null;
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            ngayTao = dateFormat.parse(ngayTaoString);
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        String ngaySuaString = tbl_kichthuoc.getValueAt(_index, 4).toString();
+        Date ngaySua = null;
+
+        try {
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            ngaySua = dateFormat.parse(ngaySuaString);
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        clr_ngaytao.setDate(ngayTao);
+        clr_ngaysua.setDate(ngaySua);
+
+        
+    }
+
+
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -193,6 +256,11 @@ public class KichThuocFrame extends javax.swing.JFrame {
         });
 
         btn_sua.setText("Sửa");
+        btn_sua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_suaActionPerformed(evt);
+            }
+        });
 
         btn_xoa.setText("Xóa");
         btn_xoa.addActionListener(new java.awt.event.ActionListener() {
@@ -276,7 +344,6 @@ public class KichThuocFrame extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(txt_ten, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_them))
-                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(23, 23, 23)
@@ -320,7 +387,7 @@ public class KichThuocFrame extends javax.swing.JFrame {
 
     private void tbl_kichthuocMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_kichthuocMouseClicked
         // TODO add your handling code here:
-
+        clickKichThuoc();
     }//GEN-LAST:event_tbl_kichthuocMouseClicked
 
     private void tbl_kichthuocMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_kichthuocMousePressed
@@ -329,19 +396,23 @@ public class KichThuocFrame extends javax.swing.JFrame {
 
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
         // TODO add your handling code here:
-        addSize();
+        addKichThuoc();
     }//GEN-LAST:event_btn_themActionPerformed
 
     private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
         // TODO add your handling code here:
         clearForm();
-
     }//GEN-LAST:event_btn_clearActionPerformed
 
     private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
         // TODO add your handling code here:
-      
+      deleteKichThuoc();
     }//GEN-LAST:event_btn_xoaActionPerformed
+
+    private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
+        // TODO add your handling code here:
+        updateKichThuoc();
+    }//GEN-LAST:event_btn_suaActionPerformed
 
     /**
      * @param args the command line arguments

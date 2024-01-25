@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package duan1_nhom1.repository;
 import duan1_nhom1.model.DanhMuc;
 import duan1_nhom1.utils.JdbcHelper;
@@ -19,7 +16,6 @@ import java.util.List;
  */
 public class DanhMucRepository {
 
-    List<DanhMuc> listDanhMuc = new ArrayList();
     Connection conn = JdbcHelper.getConnection();
 
     public List<DanhMuc> getAll() {

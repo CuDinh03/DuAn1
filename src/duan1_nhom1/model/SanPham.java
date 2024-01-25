@@ -1,7 +1,6 @@
 package duan1_nhom1.model;
 
 import java.util.Date;
-import java.util.UUID;
 
 public class SanPham {
     private String id;

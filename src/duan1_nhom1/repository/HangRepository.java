@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
+/** 
  *
  * @author anhtuanle
  */
@@ -21,7 +21,7 @@ public class HangRepository {
 
     public List<Hang> getAll() {
 
-        String sql = "SELECT * FROM Hang";
+        String sql = "SELECT id,ma,ten,mo_ta,ngay_tao,ngay_sua,trang_thai FROM hang";
 
         try {
             PreparedStatement pr = conn.prepareStatement(sql);

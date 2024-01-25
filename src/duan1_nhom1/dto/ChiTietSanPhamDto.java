@@ -4,6 +4,7 @@
  */
 package duan1_nhom1.dto;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.UUID;
@@ -13,137 +14,119 @@ import java.util.UUID;
  * @author maccuacu
  */
 public class ChiTietSanPhamDto {
-    private UUID id;
-    private UUID idHang;
-    private UUID idMS;
-    private UUID idCL;
-    private UUID idSize;
-    private UUID idAnh;
-    private UUID idDM;
-    private UUID idSP;
-    private DecimalFormat giaBan;
-    private DecimalFormat giaNhap;
-    private Integer soLuong;
-    private Date ngayNhap;
+     private String ma;
+    private UUID idSanPham;
+    private UUID idKichThuoc;
+    private UUID idThuongHieu;
+    private UUID idMauSac;
+    private UUID idChatLieu;
+    private UUID idDanhMuc;
+    private BigDecimal giaNhap;
+    private BigDecimal giaBan;
+    private int soLuong;
     private Date ngayTao;
     private Date ngaySua;
-    private Boolean trangThai;
+    private Date ngayNhap;
+    private boolean trangThai;
 
     public ChiTietSanPhamDto() {
     }
 
-    public ChiTietSanPhamDto(UUID id, UUID idHang, UUID idMS, UUID idCL, UUID idSize, UUID idAnh, UUID idDM, UUID idSP, DecimalFormat giaBan, DecimalFormat giaNhap, Integer soLuong, Date ngayNhap, Date ngayTao, Date ngaySua, Boolean trangThai) {
-        this.id = id;
-        this.idHang = idHang;
-        this.idMS = idMS;
-        this.idCL = idCL;
-        this.idSize = idSize;
-        this.idAnh = idAnh;
-        this.idDM = idDM;
-        this.idSP = idSP;
-        this.giaBan = giaBan;
+    public ChiTietSanPhamDto(String ma, UUID idSanPham, UUID idKichThuoc, UUID idThuongHieu, UUID idMauSac, UUID idChatLieu, UUID idDanhMuc, BigDecimal giaNhap, BigDecimal giaBan, int soLuong, Date ngayTao, Date ngaySua, Date ngayNhap, boolean trangThai) {
+        this.ma = ma;
+        this.idSanPham = idSanPham;
+        this.idKichThuoc = idKichThuoc;
+        this.idThuongHieu = idThuongHieu;
+        this.idMauSac = idMauSac;
+        this.idChatLieu = idChatLieu;
+        this.idDanhMuc = idDanhMuc;
         this.giaNhap = giaNhap;
+        this.giaBan = giaBan;
         this.soLuong = soLuong;
-        this.ngayNhap = ngayNhap;
         this.ngayTao = ngayTao;
         this.ngaySua = ngaySua;
+        this.ngayNhap = ngayNhap;
         this.trangThai = trangThai;
     }
 
-    public UUID getId() {
-        return id;
+    public String getMa() {
+        return ma;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
+    public void setMa(String ma) {
+        this.ma = ma;
     }
 
-    public UUID getIdHang() {
-        return idHang;
+    public UUID getIdSanPham() {
+        return idSanPham;
     }
 
-    public void setIdHang(UUID idHang) {
-        this.idHang = idHang;
+    public void setIdSanPham(UUID idSanPham) {
+        this.idSanPham = idSanPham;
     }
 
-    public UUID getIdMS() {
-        return idMS;
+    public UUID getIdKichThuoc() {
+        return idKichThuoc;
     }
 
-    public void setIdMS(UUID idMS) {
-        this.idMS = idMS;
+    public void setIdKichThuoc(UUID idKichThuoc) {
+        this.idKichThuoc = idKichThuoc;
     }
 
-    public UUID getIdCL() {
-        return idCL;
+    public UUID getIdThuongHieu() {
+        return idThuongHieu;
     }
 
-    public void setIdCL(UUID idCL) {
-        this.idCL = idCL;
+    public void setIdThuongHieu(UUID idThuongHieu) {
+        this.idThuongHieu = idThuongHieu;
     }
 
-    public UUID getIdSize() {
-        return idSize;
+    public UUID getIdMauSac() {
+        return idMauSac;
     }
 
-    public void setIdSize(UUID idSize) {
-        this.idSize = idSize;
+    public void setIdMauSac(UUID idMauSac) {
+        this.idMauSac = idMauSac;
     }
 
-    public UUID getIdAnh() {
-        return idAnh;
+    public UUID getIdChatLieu() {
+        return idChatLieu;
     }
 
-    public void setIdAnh(UUID idAnh) {
-        this.idAnh = idAnh;
+    public void setIdChatLieu(UUID idChatLieu) {
+        this.idChatLieu = idChatLieu;
     }
 
-    public UUID getIdDM() {
-        return idDM;
+    public UUID getIdDanhMuc() {
+        return idDanhMuc;
     }
 
-    public void setIdDM(UUID idDM) {
-        this.idDM = idDM;
+    public void setIdDanhMuc(UUID idDanhMuc) {
+        this.idDanhMuc = idDanhMuc;
     }
 
-    public UUID getIdSP() {
-        return idSP;
-    }
-
-    public void setIdSP(UUID idSP) {
-        this.idSP = idSP;
-    }
-
-    public DecimalFormat getGiaBan() {
-        return giaBan;
-    }
-
-    public void setGiaBan(DecimalFormat giaBan) {
-        this.giaBan = giaBan;
-    }
-
-    public DecimalFormat getGiaNhap() {
+    public BigDecimal getGiaNhap() {
         return giaNhap;
     }
 
-    public void setGiaNhap(DecimalFormat giaNhap) {
+    public void setGiaNhap(BigDecimal giaNhap) {
         this.giaNhap = giaNhap;
     }
 
-    public Integer getSoLuong() {
+    public BigDecimal getGiaBan() {
+        return giaBan;
+    }
+
+    public void setGiaBan(BigDecimal giaBan) {
+        this.giaBan = giaBan;
+    }
+
+    public int getSoLuong() {
         return soLuong;
     }
 
-    public void setSoLuong(Integer soLuong) {
+    public void setSoLuong(int soLuong) {
         this.soLuong = soLuong;
-    }
-
-    public Date getNgayNhap() {
-        return ngayNhap;
-    }
-
-    public void setNgayNhap(Date ngayNhap) {
-        this.ngayNhap = ngayNhap;
     }
 
     public Date getNgayTao() {
@@ -162,14 +145,22 @@ public class ChiTietSanPhamDto {
         this.ngaySua = ngaySua;
     }
 
-    public Boolean getTrangThai() {
+    public Date getNgayNhap() {
+        return ngayNhap;
+    }
+
+    public void setNgayNhap(Date ngayNhap) {
+        this.ngayNhap = ngayNhap;
+    }
+
+    public boolean isTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(Boolean trangThai) {
+    public void setTrangThai(boolean trangThai) {
         this.trangThai = trangThai;
     }
-    
+
     
 
 }
