@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- *
+ *1
  * @author anhtuanle
  */
 public class SPChiTietService implements IService<ChiTietSanPham> {

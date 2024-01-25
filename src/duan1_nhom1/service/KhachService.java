@@ -17,7 +17,7 @@ public class KhachService implements IService<Khach> {
     public void add(Khach khachhang) {
         khachHangRepo.addKhachHang(khachhang);
     }
-
+//    sout    
     @Override
     public void update(Khach kh, String id) {
         khachHangRepo.updateKhachHang(kh, id);

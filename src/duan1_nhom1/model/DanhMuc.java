@@ -16,7 +16,7 @@ public class DanhMuc {
     private String ma;
     private String ten;
     private String moTa;
-    private Date ngayTao;
+    private Date ngayTao;  
     private Date ngaySua;
     private boolean trangThai;
 

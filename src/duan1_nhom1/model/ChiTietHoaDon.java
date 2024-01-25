@@ -14,7 +14,7 @@ public class ChiTietHoaDon {
     private Date ngaySua;
     private Boolean trangThai;
 
-    public ChiTietHoaDon() {
+    public ChiTietHoaDon() { 
     }
 
     public ChiTietHoaDon(UUID id, UUID idHoaDon, UUID idSanPham, Integer soLuong, Double giaBan, Date ngayTao, Date ngaySua, Boolean trangThai) {

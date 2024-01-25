@@ -1,6 +1,6 @@
 package duan1_nhom1.view;
 
-
+//1
 public class TrangChuJPanel extends javax.swing.JPanel {
 
     public TrangChuJPanel() {

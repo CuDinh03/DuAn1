@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author maccuacu
  */
-public class HoaDonJPanel extends javax.swing.JPanel {
+public class HoaDonJPanel  extends javax.swing.JPanel {
 
     /**
      * Creates new form HoaDonJPanel
@@ -26,7 +26,6 @@ public class HoaDonJPanel extends javax.swing.JPanel {
     KhachService ks = new KhachService();
 
     public HoaDonJPanel() {
-        initComponents();
         initComponents();
         this.loadTable();
         this.loadCbbKhack();

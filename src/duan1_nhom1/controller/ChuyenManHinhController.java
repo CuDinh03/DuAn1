@@ -7,7 +7,7 @@ package duan1_nhom1.controller;
 import duan1_nhom1.bean.DanhMucBean;
 import duan1_nhom1.view.BaoCaoJPanel;
 import duan1_nhom1.view.HoaDonJPanel;
-import duan1_nhom1.view.KhachhangJPanel;
+import duan1_nhom1.view.KhachHangJPanel;
 import duan1_nhom1.view.SanPhamJPanel;
 import duan1_nhom1.view.TrangChuJPanel;
 import java.awt.BorderLayout;
@@ -24,7 +24,7 @@ import javax.swing.JPanel;
  */
 public class ChuyenManHinhController {
 
-    private JPanel root;
+    private JPanel root = new JPanel();  
     private String kindSelected = "";
     private List<DanhMucBean> listItem = null;
 
@@ -71,7 +71,7 @@ public class ChuyenManHinhController {
                 case "SanPham" -> node = new SanPhamJPanel();
                 case "BaoCao" -> node = new BaoCaoJPanel();
                 case "HoaDon" -> node = new HoaDonJPanel();
-                case "Khach" -> node = new KhachhangJPanel();
+                case "KhachHang" -> node = new KhachHangJPanel();
                 default -> {
                 }
             }

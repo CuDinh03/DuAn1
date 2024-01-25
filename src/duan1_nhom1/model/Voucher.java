@@ -4,10 +4,7 @@
  */
 package duan1_nhom1.model;
 
-/**
- *
- * @author maccuacu
- */
+
 public class Voucher {
     
 }

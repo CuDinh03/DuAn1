@@ -825,3 +825,6 @@ VALUES
 
 
 SELECT ngay_mua, COUNT(*)  FROM Hoa_Don GROUP BY ngay_mua
+
+
+create DATABASE demo5

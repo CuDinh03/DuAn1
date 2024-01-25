@@ -1,4 +1,4 @@
-/*
+/*1
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
@@ -9,7 +9,6 @@ import duan1_nhom1.service.KhachService;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
