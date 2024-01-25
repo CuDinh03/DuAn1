@@ -722,7 +722,7 @@ public class ViewKhachHang extends javax.swing.JFrame {
     private void btnNewKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewKHActionPerformed
 
         clearFormKhach();
-        showDataKhach2();
+        showDataKhach();
         showDateHoaDon();
     }//GEN-LAST:event_btnNewKHActionPerformed
 

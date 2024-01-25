@@ -71,11 +71,11 @@ public class HoaDonService implements IService<HoaDonDto>{
                     hd.setIdKhachHang(rs.getString(2));
                     hd.setIdNv(rs.getString(3));
                     hd.setMa(rs.getString(4));
-                    hd.setNgayMua(rs.getDate(5));
+//                    hd.setNgayMua(rs.getDate(5));
                     hd.setTongTien(rs.getDouble(5));
-                    hd.setTrangThai(rs.getBoolean(7));
-                    hd.setNgayTao(rs.getDate(8));
-                    hd.setNgaySua(rs.getDate(9));
+                    hd.setTrangThai(rs.getBoolean(6));
+                    hd.setNgayTao(rs.getDate(7));
+                    hd.setNgaySua(rs.getDate(8));
                     list.add(hd);
                 }
                 return list;
