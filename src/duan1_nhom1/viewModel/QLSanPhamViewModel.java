@@ -32,6 +32,19 @@ public class QLSanPhamViewModel {
     public QLSanPhamViewModel() {
     }
 
+    public QLSanPhamViewModel(String ma, UUID idSanPham, UUID idKichThuoc, UUID idThuongHieu, UUID idMauSac, UUID idDanhMuc, BigDecimal giaBan, int soLuong) {
+        this.ma = ma;
+        this.idSanPham = idSanPham;
+        this.idKichThuoc = idKichThuoc;
+        this.idThuongHieu = idThuongHieu;
+        this.idMauSac = idMauSac;
+        this.idDanhMuc = idDanhMuc;
+        this.giaBan = giaBan;
+        this.soLuong = soLuong;
+    }
+    
+    
+
     public QLSanPhamViewModel(String ma, UUID idSanPham, UUID idKichThuoc, UUID idThuongHieu, UUID idMauSac, UUID idChatLieu, UUID idDanhMuc, BigDecimal giaNhap, BigDecimal giaBan, int soLuong, Date ngayTao, Date ngaySua, Date ngayNhap, boolean trangThai) {
         this.ma = ma;
         this.idSanPham = idSanPham;
