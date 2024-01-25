@@ -960,7 +960,7 @@ public class SPChiTietFrame extends javax.swing.JFrame {
 
     private void btn_them2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_them2ActionPerformed
         // TODO add your handling code here:
-        new HangFrame().setVisible(true);
+        new HangJPanel().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_them2ActionPerformed
 
@@ -971,7 +971,7 @@ public class SPChiTietFrame extends javax.swing.JFrame {
 
     private void btn_them4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_them4ActionPerformed
         // TODO add your handling code here:
-        new DanhMucFrame().setVisible(true);
+        new DanhMucJPanel().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_them4ActionPerformed
 
