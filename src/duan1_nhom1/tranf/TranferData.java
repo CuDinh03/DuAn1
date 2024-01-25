@@ -4,12 +4,15 @@
  */
 package duan1_nhom1.tranf;
 
+import duan1_nhom1.dto.DanhMucDto;
 import duan1_nhom1.dto.ChiTietSanPhamDto;
 import duan1_nhom1.dto.HoaDonDto;
 import duan1_nhom1.dto.KhachDto;
-import duan1_nhom1.model.ChiTietSanPham;
+import duan1_nhom1.dto.VoucherDto;
+import duan1_nhom1.model.DanhMuc;
 import duan1_nhom1.model.HoaDon;
 import duan1_nhom1.model.Khach;
+import duan1_nhom1.model.Voucher;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -90,6 +93,72 @@ public class TranferData {
         return dtoList;
     }
         
+   public static DanhMucDto convertToDto(DanhMuc model) {
+        DanhMucDto dto = new DanhMucDto();
+        if (model.getId() != null)dto.setId(model.getId());
+        if (model.getMa() != null) dto.setMa(model.getMa());
+        if (model.getTen()!= null) dto.setTen(model.getTen());
+        if (model.getMoTa()!= null) dto.setMoTa(model.getMoTa());
+        if (model.getNgayTao() != null) dto.setNgayTao(model.getNgayTao());
+        if (model.getNgaySua() != null) dto.setNgaySua(model.getNgaySua());
+        if (model.getTrangThai()!= null) dto.setTrangThai(model.getTrangThai());
+        return dto;
+    }
+
+    public static DanhMuc convertToEntity(DanhMucDto dto) {
+        DanhMuc model = new DanhMuc();
+        if (dto.getId() != null) model.setId(dto.getId());
+        if (dto.getMa() != null) model.setMa(dto.getMa());
+        if (dto.getTen()!= null) model.setTen(dto.getTen());
+        if (dto.getMoTa()!= null) model.setMoTa(dto.getMoTa());
+        if (dto.getNgayTao() != null) model.setNgayTao(dto.getNgayTao());
+        if (dto.getNgaySua() != null) model.setNgaySua(dto.getNgaySua());
+        if (dto.getTrangThai() != null) model.setTrangThai(dto.getTrangThai());
+        return model;
+    }
+    public static List<DanhMucDto> convertListDanhMucToDto(List<DanhMuc> entityList) {
+        List<DanhMucDto> dtoList = new ArrayList<>();
+        for (DanhMuc entity : entityList) {
+            dtoList.add(convertToDto(entity));
+        }
+        return dtoList;
+    }
+    public static VoucherDto convertToDto(Voucher model) {
+        VoucherDto dto = new VoucherDto();
+        if (model.getId() != null)dto.setId(model.getId());
+        if (model.getMa() != null) dto.setMa(model.getMa());
+        if (model.getTen()!= null) dto.setTen(model.getTen());
+        if (model.getGiamGia()!= null) dto.setGiamGia(model.getGiamGia());
+        if (model.getNgayDau()!= null) dto.setNgayDau(model.getNgayDau());
+        if (model.getNgayCuoi()!= null) dto.setNgayCuoi(model.getNgayCuoi());
+        if (model.getSoLuong() != null)dto.setSoLuong(model.getSoLuong() );
+        if (model.getNgayTao() != null) dto.setNgayTao(model.getNgayTao());
+        if (model.getNgaySua() != null) dto.setNgaySua(model.getNgaySua());
+        if (model.getTrangThai()!= null) dto.setTrangThai(model.getTrangThai());
+        return dto;
+    }
+
+    public static Voucher convertToEntity(VoucherDto dto) {
+        Voucher model = new Voucher();
+        if (dto.getId() != null) model.setId(dto.getId());
+        if (dto.getMa() != null) model.setMa(dto.getMa());
+        if (dto.getTen()!= null) model.setTen(dto.getTen());
+        if (dto.getGiamGia()!= null) model.setGiamGia(dto.getGiamGia());
+        if (dto.getNgayDau() != null) model.setNgayDau(dto.getNgayDau());
+        if (dto.getNgayCuoi()!= null) model.setNgayCuoi(dto.getNgayCuoi());
+        if (dto.getSoLuong() != null) model.setSoLuong(dto.getSoLuong());
+        if (dto.getNgayTao() != null) model.setNgayTao(dto.getNgayTao());
+        if (dto.getNgaySua()!= null) model.setNgaySua(dto.getNgaySua());
+        if (dto.getTrangThai() != null) model.setTrangThai(dto.getTrangThai());
+        return model;
+    }
+    public static List<VoucherDto> convertListVoucherToDto(List<Voucher> entityList) {
+        List<VoucherDto> dtoList = new ArrayList<>();
+        for (Voucher entity : entityList) {
+            dtoList.add(convertToDto(entity));
+        }
+        return dtoList;
+    }
     
     public static ChiTietSanPhamDto convertToDto(ChiTietSanPham model) {
         ChiTietSanPhamDto dto = new ChiTietSanPhamDto();

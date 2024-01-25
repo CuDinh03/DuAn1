@@ -4,8 +4,11 @@
  */
 package duan1_nhom1.view;
 
+import duan1_nhom1.dto.DanhMucDto;
 import duan1_nhom1.model.DanhMuc;
+import duan1_nhom1.model.Khach;
 import duan1_nhom1.repository.DanhMucRepository;
+import duan1_nhom1.service.DanhMucService;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,37 +26,70 @@ public class ViewDanhMuc extends javax.swing.JFrame {
      * Creates new form View
      */
     private DefaultTableModel model = new DefaultTableModel();
-    private List<DanhMuc> danhMucs = new ArrayList<>();
-    private DanhMucRepository danhMucRepo = new DanhMucRepository();
+    private List<DanhMuc> danhMuc = new ArrayList<>();
+    private DanhMucService danhMucService = new DanhMucService();
+    
     public ViewDanhMuc() {
         initComponents();
         model = (DefaultTableModel) tblDanhMuc.getModel();
-        danhMucs = danhMucRepo.getAll();
-        showDataDanhMuc(danhMucs);
+        danhMuc = danhMucService.getAll();
+        showDataDanhMuc();
         
     }
-    public void showDataDanhMuc(List<DanhMuc>list){
+    
+    public void showDataDanhMuc() {
         model.setRowCount(0);
-        for (DanhMuc dm : list) {
+        for (DanhMuc dmto : danhMuc) {
             model.addRow(new Object[]{
-                dm.getId(),
-                dm.getMa(),
-                dm.getTen(),
-//                dm.getMoTa(),
-                dm.getNgayTao(),
-                dm.getNgaySua(),
-        });
+                dmto.getId(),
+                dmto.getMa(),
+                dmto.getTen(),
+                dmto.getMoTa(),
+                dmto.getNgayTao(),
+                dmto.getNgaySua(),
+                dmto.getTrangThai()?"hoạt động":"ngừng hoạt động "
+            });
+        }
     }
-    }
-    public DanhMuc getDataDanhMuc(){
-        String ma = txtMa.getText();
-        String ten = txtTen.getText();
-        String moTa = txaMoTa.getText();
-        Date ngayTao = dcTao.getDate();
-        Date ngaySua = dcSua.getDate();;
+    
+    public DanhMuc getDataDanhMuc() {
+        DanhMuc danhMuc = new DanhMuc();
+        danhMuc.setMa(txtMa.getText());
+        danhMuc.setTen(txtTen.getText());
+        danhMuc.setMoTa(txaMoTa.getText());
+        danhMuc.setNgayTao(dcTao.getDate());
+        danhMuc.setNgaySua(dcSua.getDate());
         
         
-        return new DanhMuc("", ma, ten, moTa, ngayTao, ngaySua,true);
+        return danhMuc;
+    }
+    
+    private void clearFormDanhMuc() {
+        txtMa.setText("");
+        txtTen.setText("");
+//        dcTao.setCalendar("");
+//        dcSua.setCalendar("");
+        txaMoTa.setText("");
+        txtSearch.setText("");
+    }
+    
+    public void addDanhMuc() {
+        try {
+            int check = JOptionPane.showConfirmDialog(this, "bạn có muốn thêm không");
+            if (check != JOptionPane.YES_OPTION) {
+                return;
+            }
+            DanhMuc dm=getDataDanhMuc();
+            danhMucService.add(dm);
+            danhMuc = danhMucService.getAll();
+            showDataDanhMuc();
+            JOptionPane.showMessageDialog(this, "Thêm thành công");
+            clearFormDanhMuc();
+        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(this, "Thêm thất bại");
+            throw new RuntimeException(e);
+        }
+        
     }
 
     /**
@@ -85,6 +121,8 @@ public class ViewDanhMuc extends javax.swing.JFrame {
         btnThoat = new javax.swing.JButton();
         dcSua = new com.toedter.calendar.JDateChooser();
         dcTao = new com.toedter.calendar.JDateChooser();
+        jLabel10 = new javax.swing.JLabel();
+        txtTrangThai = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -166,23 +204,26 @@ public class ViewDanhMuc extends javax.swing.JFrame {
             }
         });
 
+        jLabel10.setForeground(new java.awt.Color(60, 63, 65));
+        jLabel10.setText("Trạng Thái");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(94, 94, 94)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(94, 94, 94)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(dcTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtMa))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(dcTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtMa))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -191,33 +232,34 @@ public class ViewDanhMuc extends javax.swing.JFrame {
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(dcSua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(33, 33, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnThem)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnSua)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnXoa))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 266, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnThoat)))
-                .addContainerGap())
+                        .addGap(113, 113, 113)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane2)
+                        .addComponent(txtTrangThai))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnThem)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSua)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnXoa)))
+                .addContainerGap(124, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(150, 150, 150)
                 .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 43, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 880, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 44, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnThoat)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 880, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 32, Short.MAX_VALUE))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {dcSua, dcTao, txtMa, txtTen});
@@ -246,20 +288,23 @@ public class ViewDanhMuc extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
-                            .addComponent(dcTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(24, 24, 24)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(dcSua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                            .addComponent(dcTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(dcSua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel10)
+                        .addComponent(txtTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnXoa)
+                    .addComponent(btnThem)
                     .addComponent(btnSua)
-                    .addComponent(btnThem))
-                .addGap(9, 9, 9)
+                    .addComponent(btnXoa))
+                .addGap(61, 61, 61)
                 .addComponent(btnThoat)
-                .addContainerGap())
+                .addGap(31, 31, 31))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {dcSua, dcTao, txtMa, txtTen});
@@ -287,21 +332,29 @@ public class ViewDanhMuc extends javax.swing.JFrame {
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
 //        JOptionPane.showMessageDialog(rootPane, danhMucRepo.addDanhMuc(getDataDanhMuc()));
-//            danhMucs = danhMucRepo.getAllDanhMuc();
-//            showDataDanhMuc(danhMucs);
-//        danhMucRepo.addDanhMuc(getDataDanhMuc());
-//        danhMucs = danhMucRepo.getAllDanhMuc();
-        showDataDanhMuc(danhMucs);
+//            danhMuc = danhMucRepo.getAll();
+//            showDataDanhMuc(danhMuc);
+//        try {
+//            String ma = this.txtMa.getText().trim();
+//            String ten = this.txtTen.getText().trim();
+//            String moTa = this.txaMoTa.getText().trim();
+////            java.sql.Date tao = new java.sql.Date(dcTao.getDate());
+////            java.sql.Date sua = new java.sql.Date(dcSua.getDate());
+//
+//        } catch (Exception e) {
+//
+//        }
+        addDanhMuc();
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
-        if (tblDanhMuc.getSelectedRow() != -1) {
-            String id = tblDanhMuc.getValueAt(tblDanhMuc.getSelectedRow(), 0).toString();
-//                JOptionPane.showMessageDialog(rootPane, danhMucRepo.deleteDanhMuc(getDataDanhMuc().getMa()));
+//        if (tblDanhMuc.getSelectedRow() != -1) {
+//            String id = tblDanhMuc.getValueAt(tblDanhMuc.getSelectedRow(), 0).toString();
+//                JOptionPane.showMessageDialog(rootPane, danhMucRepo.delete(getDataDanhMuc().getMa()));
 //                danhMucs = danhMucRepo.getAllDanhMuc();
-                showDataDanhMuc(danhMucs);
-        }
+//                showDataDanhMuc(danhMucs);
+//        }
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
@@ -312,9 +365,9 @@ public class ViewDanhMuc extends javax.swing.JFrame {
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
         if (tblDanhMuc.getSelectedRow() >= 0) {
-//            DanhMuc dm = danhMucRepo.getAllDanhMuc().get(tblDanhMuc.getSelectedRow());
-//            JOptionPane.showMessageDialog(rootPane,danhMucRepo.updateDanhMuc(getDataDanhMuc()));
-//            danhMucs = danhMucRepo.getAllDanhMuc();
+            DanhMuc dm = danhMucRepo.getAllDanhMuc().get(tblDanhMuc.getSelectedRow());
+            JOptionPane.showMessageDialog(rootPane,danhMucRepo.updateDanhMuc(getDataDanhMuc()));
+            danhMucs = danhMucRepo.getAllDanhMuc();
             showDataDanhMuc(danhMucs);
         }
     }//GEN-LAST:event_btnSuaActionPerformed
@@ -366,6 +419,7 @@ public class ViewDanhMuc extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser dcSua;
     private com.toedter.calendar.JDateChooser dcTao;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -378,6 +432,7 @@ public class ViewDanhMuc extends javax.swing.JFrame {
     private javax.swing.JTextField txtMa;
     private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtTen;
+    private javax.swing.JTextField txtTrangThai;
     // End of variables declaration//GEN-END:variables
 
 }

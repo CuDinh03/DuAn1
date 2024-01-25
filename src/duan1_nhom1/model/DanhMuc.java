@@ -5,7 +5,6 @@
 package duan1_nhom1.model;
 
 import java.util.Date;
-import java.util.UUID;
 
 /**
  *
@@ -18,7 +17,7 @@ public class DanhMuc {
     private String moTa;
     private Date ngayTao;  
     private Date ngaySua;
-    private boolean trangThai;
+    private Boolean trangThai;
 
     public String getId() {
         return id;
@@ -68,15 +67,15 @@ public class DanhMuc {
         this.ngaySua = ngaySua;
     }
 
-    public boolean isTrangThai() {
+    public Boolean getTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(boolean trangThai) {
+    public void setTrangThai(Boolean trangThai) {
         this.trangThai = trangThai;
     }
 
-    public DanhMuc(String id, String ma, String ten, String moTa, Date ngayTao, Date ngaySua, boolean trangThai) {
+    public DanhMuc(String id, String ma, String ten, String moTa, Date ngayTao, Date ngaySua, Boolean trangThai) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
