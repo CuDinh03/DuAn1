@@ -68,8 +68,8 @@ public class ViewDanhMuc extends javax.swing.JFrame {
     private void clearFormDanhMuc() {
         txtMa.setText("");
         txtTen.setText("");
-//        dcTao.setCalendar("");
-//        dcSua.setCalendar("");
+        dcTao.setDate(null);
+        dcSua.setDate(null);
         txaMoTa.setText("");
         txtSearch.setText("");
     }
@@ -123,7 +123,6 @@ public class ViewDanhMuc extends javax.swing.JFrame {
         dcSua = new com.toedter.calendar.JDateChooser();
         dcTao = new com.toedter.calendar.JDateChooser();
         jLabel10 = new javax.swing.JLabel();
-        txtTrangThai = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -239,9 +238,7 @@ public class ViewDanhMuc extends javax.swing.JFrame {
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane2)
-                        .addComponent(txtTrangThai))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnThem)
                         .addGap(18, 18, 18)
@@ -295,9 +292,7 @@ public class ViewDanhMuc extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(dcSua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel10)
-                        .addComponent(txtTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThem)
@@ -433,7 +428,6 @@ public class ViewDanhMuc extends javax.swing.JFrame {
     private javax.swing.JTextField txtMa;
     private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtTen;
-    private javax.swing.JTextField txtTrangThai;
     // End of variables declaration//GEN-END:variables
 
 }

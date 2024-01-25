@@ -26,18 +26,18 @@ public class VoucherFrame extends javax.swing.JFrame {
      * Creates new form VoucherFrame
      */
     private DefaultTableModel model = new DefaultTableModel();
-    private List<VoucherDto> vouchers = new ArrayList<>();
+    private List<Voucher> vouchers = new ArrayList<>();
     private VoucherService service = new VoucherService();
     
     public VoucherFrame() {
         initComponents();
         model = (DefaultTableModel) tblVoucher.getModel();
-        vouchers = service.getAll();
+         vouchers = service.getAll();
         showDataVoucher();
     }
     private void showDataVoucher(){
         model.setRowCount(0);
-        for (VoucherDto vc : vouchers) {
+        for (Voucher vc : vouchers) {
             model.addRow(new Object[]{
                 vc.getId(),
                 vc.getMa(),
@@ -52,8 +52,8 @@ public class VoucherFrame extends javax.swing.JFrame {
             });
         }
     }
-    private VoucherDto getDataVoucher() {
-        VoucherDto voucher = new VoucherDto();
+    private Voucher getDataVoucher() {
+        Voucher voucher = new Voucher();
         voucher.setMa(txtMa.getText());
         voucher.setTen(txtTen.getText());
         voucher.setGiamGia(Float.parseFloat(txtGiam.getText()));
@@ -82,7 +82,7 @@ public class VoucherFrame extends javax.swing.JFrame {
             if (check != JOptionPane.YES_OPTION) {
                 return;
             }
-            VoucherDto vc = getDataVoucher();
+            Voucher vc = getDataVoucher();
             service.add(vc);
             vouchers = service.getAll();
             showDataVoucher();
@@ -90,6 +90,24 @@ public class VoucherFrame extends javax.swing.JFrame {
             clearFormVoucher();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Thêm thất bại");
+        }
+
+    }
+    public void updateVoucher() {
+        try {
+            int check = JOptionPane.showConfirmDialog(this, "bạn có muốn update không");
+            if (check != JOptionPane.YES_OPTION) {
+                return;
+            }
+            Voucher vc = getDataVoucher();
+            int row = tblVoucher.getSelectedRow();
+            String id = vouchers.get(row).getId();
+            service.update(vc, id);
+            showDataVoucher();
+            JOptionPane.showMessageDialog(this, "Update thành công");
+            clearFormVoucher();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Update thất bại");
         }
 
     }
@@ -147,6 +165,11 @@ public class VoucherFrame extends javax.swing.JFrame {
         btnXoa.setText("Xóa");
 
         btnSua.setText("Sửa");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
 
         btnThem.setText("Thêm");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
@@ -168,10 +191,7 @@ public class VoucherFrame extends javax.swing.JFrame {
 
         tblVoucher.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Mã Voucher", "Tên Voucher", "% Khuyễn mãi", "Ngày bắt đầu", "Ngày kết thúc", "Số lượng", "Ngày tạo", "Ngày sửa", "Trạng thái"
@@ -400,6 +420,11 @@ public class VoucherFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         addVoucher();
     }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        // TODO add your handling code here:
+        updateVoucher();
+    }//GEN-LAST:event_btnSuaActionPerformed
 
     /**
      * @param args the command line arguments

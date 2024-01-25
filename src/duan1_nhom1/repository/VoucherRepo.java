@@ -6,6 +6,7 @@ package duan1_nhom1.repository;
 
 import duan1_nhom1.model.DanhMuc;
 import duan1_nhom1.model.HoaDon;
+import duan1_nhom1.model.Khach;
 import duan1_nhom1.model.Voucher;
 import duan1_nhom1.utils.JdbcHelper;
 import java.sql.Connection;
@@ -104,5 +105,48 @@ public class VoucherRepo {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public void updateVoucher(Voucher voucher,String id ) {
+
+        String query = """
+                           UPDATE [dbo].[Voucher]
+                              SET [id] = ?
+                                 ,[ma] = ?
+                                 ,[ten] = ?
+                                 ,[giam_gia] = ?
+                                 ,[ngay_bat_dau] = ?
+                                 ,[ngay_het_han] = ?
+                                 ,[so_luong] = ?
+                                 ,[ngay_tao] = ?
+                                 ,[ngay_sua] = ?
+                                 ,[trang_thai] = ?
+                            WHERE = ?
+                           """;
+
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+                preparedStatement.setString(1, voucher.getMa());
+                preparedStatement.setString(2, voucher.getTen());
+                preparedStatement.setFloat(3, voucher.getGiamGia());
+                preparedStatement.setDate(4, new java.sql.Date(voucher.getNgayDau().getTime()));
+                preparedStatement.setDate(5, new java.sql.Date(voucher.getNgayCuoi().getTime()));
+                preparedStatement.setInt(6, voucher.getSoLuong());
+                preparedStatement.setDate(7, new java.sql.Date(voucher.getNgayTao().getTime()));
+                preparedStatement.setDate(8, new java.sql.Date(voucher.getNgaySua().getTime()));
+                preparedStatement.setBoolean(9, voucher.getTrangThai());
+            // Execute the update
+            preparedStatement.executeUpdate();
+            
+//            int chek = preparedStatement.executeUpdate();
+//
+//            // Check the result
+//            if (chek > 0) {
+//                System.out.println("update   thành công ");
+//            } else {
+//               System.out.println("update thất bại  ");
+//            }
+        } catch (Exception e) {
+            throw new RuntimeException("Error updating KhachHang.", e);
+        }
+    
     }
 }
