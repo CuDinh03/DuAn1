@@ -6,12 +6,13 @@ package duan1_nhom1.dto;
 
 import java.util.Date;
 
+
 /**
  *
  * @author maccuacu
  */
 public class HoaDonDto {
-     private String id;
+     private String  id;
     private String idKhachHang;
     private String idNv;
     private String ma;
@@ -36,14 +37,6 @@ public class HoaDonDto {
         this.ngaySua = ngaySua;
     }
 
-    public String getIdNv() {
-        return idNv;
-    }
-
-    public void setIdNv(String idNv) {
-        this.idNv = idNv;
-    }
-
     public String getId() {
         return id;
     }
@@ -58,6 +51,14 @@ public class HoaDonDto {
 
     public void setIdKhachHang(String idKhachHang) {
         this.idKhachHang = idKhachHang;
+    }
+
+    public String getIdNv() {
+        return idNv;
+    }
+
+    public void setIdNv(String idNv) {
+        this.idNv = idNv;
     }
 
     public String getMa() {
@@ -107,4 +108,7 @@ public class HoaDonDto {
     public void setNgaySua(Date ngaySua) {
         this.ngaySua = ngaySua;
     }
+
+    
+    
 }

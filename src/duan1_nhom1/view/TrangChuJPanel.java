@@ -1,10 +1,41 @@
 package duan1_nhom1.view;
 
-//1
+import duan1_nhom1.dto.HoaDonDto;
+import duan1_nhom1.model.ChiTietSanPham;
+import duan1_nhom1.model.HoaDon;
+import duan1_nhom1.service.HoaDonService;
+import duan1_nhom1.service.SPChiTietService;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 public class TrangChuJPanel extends javax.swing.JPanel {
+
+    private DefaultTableModel tableModel = new DefaultTableModel();
+    private List<HoaDon> listHD = new ArrayList<>();
+    private HoaDonService hds = new HoaDonService();
+    private List<ChiTietSanPham> listCTSP = new ArrayList<>();
+    private SPChiTietService CTSP = new SPChiTietService();
 
     public TrangChuJPanel() {
         initComponents();
+        showDateHoaDon();
+    }
+
+    public void showDateHoaDon() {
+        tableModel = (DefaultTableModel) tblHoaDon.getModel();
+        tableModel.setRowCount(0);
+
+        for (HoaDonDto hd : hds.getAll()) {
+            Object[] rowData = {
+                hd.getMa(),
+                hd.getNgayMua(),
+                hd.getTongTien(),
+                hd.getTrangThai() ? "Đã thanh toán" : "Chưa thanh toán"
+            };
+            tableModel.addRow(rowData);
+
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -19,7 +50,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblHoaDon = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
@@ -83,7 +114,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
         jLabel3.setText("Giỏ hàng");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblHoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -94,7 +125,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                 "STT", "Mã HD", "Ngày tạo", "Mã nhân viên"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tblHoaDon);
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
         jLabel4.setText("Sản phẩm");
@@ -190,7 +221,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                                     .addGroup(jPanel6Layout.createSequentialGroup()
                                         .addGap(14, 14, 14)
                                         .addComponent(jButton12)
-                                        .addGap(0, 56, Short.MAX_VALUE))))
+                                        .addGap(0, 65, Short.MAX_VALUE))))
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel12)
@@ -386,7 +417,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 696, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -450,7 +481,6 @@ public class TrangChuJPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
@@ -459,5 +489,6 @@ public class TrangChuJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
+    private javax.swing.JTable tblHoaDon;
     // End of variables declaration//GEN-END:variables
 }

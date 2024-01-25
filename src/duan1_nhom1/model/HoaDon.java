@@ -1,9 +1,9 @@
-
 package duan1_nhom1.model;
 
 import java.util.Date;
 
 public class HoaDon {
+
     private String id;
     private String idKhachHang;
     private String idNv;
@@ -29,15 +29,6 @@ public class HoaDon {
         this.ngaySua = ngaySua;
     }
 
-    public String getIdNv() {
-        return idNv;
-    }
-
-    public void setIdNv(String idNv) {
-        this.idNv = idNv;
-    }
-
-
     public String getId() {
         return id;
     }
@@ -52,6 +43,14 @@ public class HoaDon {
 
     public void setIdKhachHang(String idKhachHang) {
         this.idKhachHang = idKhachHang;
+    }
+
+    public String getIdNv() {
+        return idNv;
+    }
+
+    public void setIdNv(String idNv) {
+        this.idNv = idNv;
     }
 
     public String getMa() {
@@ -101,4 +100,5 @@ public class HoaDon {
     public void setNgaySua(Date ngaySua) {
         this.ngaySua = ngaySua;
     }
+
 }
