@@ -4,17 +4,12 @@
  */
 package duan1_nhom1.repository;
 
-/**
- *1
- * @author maccuacu
- */
 import duan1_nhom1.model.ChiTietHoaDon;
 import duan1_nhom1.utils.JdbcHelper;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 public class ChiTietHoaDonRepository {
 
@@ -41,16 +36,16 @@ public class ChiTietHoaDonRepository {
         }
     }
 
-    public ChiTietHoaDon getChiTietHoaDonById(UUID chiTietHoaDonId) {
+    public ChiTietHoaDon getChiTietHoaDonById(String chiTietHoaDonId) {
         String query = "SELECT * FROM Hoa_Don_Chi_Tiet WHERE id = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setObject(1, chiTietHoaDonId);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    UUID id = (UUID) resultSet.getObject("id");
-                    UUID id_hd = (UUID) resultSet.getObject("id_hd");
-                    UUID id_sp = (UUID) resultSet.getObject("id_sp");
+                    String id = (String) resultSet.getObject("id");
+                    String id_hd = (String) resultSet.getObject("id_hd");
+                    String id_sp = (String) resultSet.getObject("id_sp");
                     Integer so_luong = resultSet.getInt("so_luong");
                     Double gia_ban = resultSet.getDouble("gia_ban");
                     Date ngay_tao = resultSet.getDate("ngay_tao");
@@ -86,28 +81,34 @@ public class ChiTietHoaDonRepository {
         }
     }
 
-//    public void deleteChiTietHoaDon(UUID chiTietHoaDonId) {
-//        try {
-//            String query = "DELETE FROM Hoa_Don_Chi_Tiet WHERE id = ?";
-//            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-//                preparedStatement.setObject(1, chiTietHoaDonId);
-//                preparedStatement.executeUpdate();
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public void deleteChiTietHoaDon(String chiTietHoaDonId) {
+        try {
+            String query = "UPDATE Hoa_Don_Chi_Tiet set trang_thai = 0 WHERE id = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setObject(1, chiTietHoaDonId);
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public List<ChiTietHoaDon> getAllChiTietHoaDon() {
         List<ChiTietHoaDon> chiTietHoaDons = new ArrayList<>();
-        String query = "SELECT * FROM Hoa_Don_Chi_Tiet";
+        /*
+        status/ trang thai
+        0: da xoa
+        1: dang ton tai
+        */
+        String query = "SELECT * FROM Hoa_Don_Chi_Tiet where trang_thai = 1";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query);
+              
              ResultSet resultSet = preparedStatement.executeQuery()) {
 
             while (resultSet.next()) {
-                UUID id = (UUID) resultSet.getObject("id");
-                UUID id_hd = (UUID) resultSet.getObject("id_hd");
-                UUID id_sp = (UUID) resultSet.getObject("id_sp");
+                String id = (String) resultSet.getObject("id");
+                String id_hd = (String) resultSet.getObject("id_hd");
+                String id_sp = (String) resultSet.getObject("id_sp");
                 Integer so_luong = resultSet.getInt("so_luong");
                 Double gia_ban = resultSet.getDouble("gia_ban");
                 Date ngay_tao = resultSet.getDate("ngay_tao");

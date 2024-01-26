@@ -4,15 +4,15 @@
  */
 package duan1_nhom1.view;
 
-import duan1_nhom1.dto.DanhMucDto;
 import duan1_nhom1.model.DanhMuc;
-import duan1_nhom1.model.Khach;
-import duan1_nhom1.repository.DanhMucRepository;
+import duan1_nhom1.model.Hang;
+import duan1_nhom1.model.MauSac;
 import duan1_nhom1.service.DanhMucService;
-import java.util.ArrayList;
+import duan1_nhom1.service.MauSacService;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,81 +22,110 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ViewDanhMuc extends javax.swing.JFrame {
 
-    /**
-     * Creates new form View
-     */
-    private DefaultTableModel model = new DefaultTableModel();
-    private List<DanhMuc> danhMuc = new ArrayList<>();
     private DanhMucService danhMucService = new DanhMucService();
-    
+   
+    DefaultTableModel defaultTableModel = new DefaultTableModel();
+    int _index;
+
+    /**
+     * Creates new form DanhMucFrame
+     */
     public ViewDanhMuc() {
         initComponents();
-        model = (DefaultTableModel) tblDanhMuc.getModel();
-        danhMuc = danhMucService.getAll();
-        showDataDanhMuc();
+        loadTableDanhMuc();
+    }
+    
+    private void loadTableDanhMuc() {
+
+        defaultTableModel = (DefaultTableModel) tblDanhMuc.getModel();
+        defaultTableModel.setRowCount(0);
+        int count = 1;
+        for (DanhMuc danhMuc : danhMucService.getAll()) {
+            String status;
+            if (danhMuc.getTrangThai()) {
+                status = "Còn";
+            }else {
+                status = "Hết";
+            }
+             Object[] rowData = {
+             
+                danhMuc.getMa(),
+                danhMuc.getTen(),
+                danhMuc.getMoTa(),
+                danhMuc.getNgaySua(),
+                danhMuc.getNgayTao(),
+                 status
+             };   
+            defaultTableModel.addRow(rowData);
+
+        }
+
+    }
+    
+     private void clearForm() {
+        txtMa.setText("");
+        txtTen.setText("");
+        txaMoTa.setText("");
+        dcTao.setDate(null);
+        dcSua.setDate(null);
         
     }
-    
-    public void showDataDanhMuc() {
-        model.setRowCount(0);
-        for (DanhMuc dmto : danhMuc) {
-            model.addRow(new Object[]{
-                dmto.getId(),
-                dmto.getMa(),
-                dmto.getTen(),
-                dmto.getMoTa(),
-                dmto.getNgayTao(),
-                dmto.getNgaySua(),
-                dmto.getTrangThai()?"hoạt động":"ngừng hoạt động "
-            });
-        }
-    }
-    
-    public DanhMuc getDataDanhMuc() {
+
+    private DanhMuc getDanhMuc() {
         DanhMuc danhMuc = new DanhMuc();
         danhMuc.setMa(txtMa.getText());
         danhMuc.setTen(txtTen.getText());
         danhMuc.setMoTa(txaMoTa.getText());
-        danhMuc.setNgayTao(dcTao.getDate());
-        danhMuc.setNgaySua(dcSua.getDate());
-        
-        
+
+        Date ngayTao = dcTao.getDate();
+        danhMuc.setNgayTao(ngayTao);
+
+        Date ngaySua = dcSua.getDate();
+        danhMuc.setNgaySua(ngaySua);
+//        danhMuc.isTrangThai(true);
         return danhMuc;
     }
-    
-    private void clearFormDanhMuc() {
-        txtMa.setText("");
-        txtTen.setText("");
-//        dcTao.setCalendar("");
-//        dcSua.setCalendar("");
-        txaMoTa.setText("");
-        txtSearch.setText("");
-    }
-    
-    public void addDanhMuc() {
+
+    private void addDanhMuc() {
         try {
             int check = JOptionPane.showConfirmDialog(this, "bạn có muốn thêm không");
             if (check != JOptionPane.YES_OPTION) {
                 return;
             }
-            DanhMuc dm=getDataDanhMuc();
-            danhMucService.add(dm);
-            danhMuc = danhMucService.getAll();
-            showDataDanhMuc();
-            JOptionPane.showMessageDialog(this, "Thêm thành công");
-            clearFormDanhMuc();
+            DanhMuc dm = getDanhMuc();
+            danhMucService.add(dm);           
+            
+
+            JOptionPane.showMessageDialog(this, "thêm thành công");
+            clearForm();
         } catch (Exception e) {
-//            JOptionPane.showMessageDialog(this, "Thêm thất bại");
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(this, "thêm thất bại");
         }
-        
+
+    }
+    
+    
+    private void updateDanhMuc() {
+        try {
+            int check = JOptionPane.showConfirmDialog(this, "bạn có muốn update không");
+            if (check != JOptionPane.YES_OPTION) {
+                return;
+            }
+            DanhMuc dm = getDanhMuc();
+            int row = tblDanhMuc.getSelectedRow();
+            String id = danhMucService.getAll().get(row).getId();
+            danhMucService.update(dm, id);
+          
+            loadTableDanhMuc();
+            JOptionPane.showMessageDialog(this, "Update thành công");
+            
+            clearForm();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Update thất bại");
+        }
+
     }
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -330,31 +359,27 @@ public class ViewDanhMuc extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTenActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        // TODO add your handling code here:
-//        JOptionPane.showMessageDialog(rootPane, danhMucRepo.addDanhMuc(getDataDanhMuc()));
-//            danhMuc = danhMucRepo.getAll();
-//            showDataDanhMuc(danhMuc);
-//        try {
-//            String ma = this.txtMa.getText().trim();
-//            String ten = this.txtTen.getText().trim();
-//            String moTa = this.txaMoTa.getText().trim();
-////            java.sql.Date tao = new java.sql.Date(dcTao.getDate());
-////            java.sql.Date sua = new java.sql.Date(dcSua.getDate());
-//
-//        } catch (Exception e) {
-//
-//        }
+       
         addDanhMuc();
+        loadTableDanhMuc();
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        // TODO add your handling code here:
-//        if (tblDanhMuc.getSelectedRow() != -1) {
-//            String id = tblDanhMuc.getValueAt(tblDanhMuc.getSelectedRow(), 0).toString();
-//                JOptionPane.showMessageDialog(rootPane, danhMucRepo.delete(getDataDanhMuc().getMa()));
-//                danhMucs = danhMucRepo.getAllDanhMuc();
-//                showDataDanhMuc(danhMucs);
-//        }
+        try {
+            int check = JOptionPane.showConfirmDialog(this, "bạn có muốn xóa không");
+            if (check != JOptionPane.YES_OPTION) {
+                return;
+            }
+            int row = tblDanhMuc.getSelectedRow();
+            String id = danhMucService.getAll().get(row).getId();
+            danhMucService.delete(id);
+            danhMucService.getAll().clear();
+            JOptionPane.showMessageDialog(this, "xóa thành công");
+            loadTableDanhMuc();
+            clearForm();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "xóa thất bại ");
+        }
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
@@ -364,12 +389,9 @@ public class ViewDanhMuc extends javax.swing.JFrame {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
-        if (tblDanhMuc.getSelectedRow() >= 0) {
-            DanhMuc dm = danhMucRepo.getAllDanhMuc().get(tblDanhMuc.getSelectedRow());
-            JOptionPane.showMessageDialog(rootPane,danhMucRepo.updateDanhMuc(getDataDanhMuc()));
-            danhMucs = danhMucRepo.getAllDanhMuc();
-            showDataDanhMuc(danhMucs);
-        }
+       updateDanhMuc();
+       loadTableDanhMuc();
+
     }//GEN-LAST:event_btnSuaActionPerformed
 
     /**

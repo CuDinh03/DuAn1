@@ -3,25 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/view/DanhMucFrame.java</file>
-            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/view/MauSacFrame.java</file>
-            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/view/HangFrame.java</file>
-            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/tranf/TranferData.java</file>
-            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/view/SanPhamFrame.java</file>
-            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/view/KichThuocFrame.java</file>
-            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/utils/JdbcHelper.java</file>
-            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/dto/ChiTietSanPhamDto.java</file>
-            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/view/SPChiTietFrame.java</file>
-            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/model/ChiTietSanPham.java</file>
-            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/view/SPChiTietFrame.java</file>
-            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/service/HangService.java</file>
-            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/view/HoaDonJPanel.java</file>
-            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/repository/SPChiTietRepository.java</file>
-            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/view/SanPhamJPanel.java</file>
-            <file>file:/C:/Users/bachh/DuAn1/src/duan1_nhom1/view/ViewDanhMuc.java</file>
-            <file>file:/C:/Users/bachh/DuAn1/src/duan1_nhom1/model/Voucher.java</file>
-            <file>file:/C:/Users/bachh/DuAn1/src/duan1_nhom1/dto/VoucherDto.java</file>
-            <file>file:/C:/Users/bachh/DuAn1/src/duan1_nhom1/view/VoucherFrame.java</file>
+            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/DuAn1_nhom1.java</file>
+            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/view/TrangChuJPanel.java</file>
+            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/repository/HoaDonRepository.java</file>
+            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/view/BanHangFrame.java</file>
         </group>
     </open-files>
 </project-private>

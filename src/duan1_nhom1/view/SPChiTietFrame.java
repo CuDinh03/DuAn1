@@ -948,7 +948,6 @@ public class SPChiTietFrame extends javax.swing.JFrame {
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
         // TODO add your handling code here:
-        new ViewSanPham().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_BackActionPerformed
 

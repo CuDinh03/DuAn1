@@ -3,10 +3,18 @@ package duan1_nhom1.view;
 import duan1_nhom1.dto.HoaDonDto;
 import duan1_nhom1.model.ChiTietSanPham;
 import duan1_nhom1.model.HoaDon;
+import duan1_nhom1.service.ChatLieuService;
+import duan1_nhom1.service.DanhMucService;
+import duan1_nhom1.service.HangService;
 import duan1_nhom1.service.HoaDonService;
+import duan1_nhom1.service.IService;
+import duan1_nhom1.service.KichCoService;
+import duan1_nhom1.service.MauSacService;
 import duan1_nhom1.service.SPChiTietService;
+import duan1_nhom1.service.SanPhamService;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 public class TrangChuJPanel extends javax.swing.JPanel {
@@ -16,10 +24,22 @@ public class TrangChuJPanel extends javax.swing.JPanel {
     private HoaDonService hds = new HoaDonService();
     private List<ChiTietSanPham> listCTSP = new ArrayList<>();
     private SPChiTietService CTSP = new SPChiTietService();
+    private IService iService = new SanPhamService();
+    private SPChiTietService sPChiTietService = new SPChiTietService();
+    private DefaultComboBoxModel defaultComboBoxModel;
+    private DefaultTableModel defaultTableModel;
+    private MauSacService mauSacService = new MauSacService();
+    private HangService hangService = new HangService();
+    private KichCoService kichCoService = new KichCoService();
+    private SanPhamService sanPhamService = new SanPhamService();
+    private DanhMucService danhMucService = new DanhMucService();
+    private ChatLieuService chatLieuService = new ChatLieuService();
 
     public TrangChuJPanel() {
         initComponents();
         showDateHoaDon();
+        loadBanHangGH(sPChiTietService.getAll());
+        loadBanHangSp(sPChiTietService.getAll());
     }
 
     public void showDateHoaDon() {
@@ -38,6 +58,39 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         }
     }
 
+    public void loadBanHangGH(List<ChiTietSanPham> list) {
+        defaultTableModel = (DefaultTableModel) tbl_banhanggh.getModel();
+        defaultTableModel.setRowCount(0);
+        int count = 1;
+        for (ChiTietSanPham chiTietSanPham : list) {
+            defaultTableModel.addRow(new Object[]{
+                count++,
+                this.sanPhamService.getTenById(chiTietSanPham.getIdSanPham().toString()),
+                this.hangService.getTenById(chiTietSanPham.getIdThuongHieu().toString()),
+                this.kichCoService.getTenById(chiTietSanPham.getIdKichThuoc().toString()),
+                this.mauSacService.getTenById(chiTietSanPham.getIdMauSac().toString()),
+                chiTietSanPham.getSoLuong(),
+                chiTietSanPham.getGiaBan(),});
+        }
+    }
+
+    public void loadBanHangSp(List<ChiTietSanPham> list) {
+        defaultTableModel = (DefaultTableModel) tbl_banhangsp.getModel();
+        defaultTableModel.setRowCount(0);
+        int count = 1;
+        for (ChiTietSanPham chiTietSanPham : list) {
+            defaultTableModel.addRow(new Object[]{
+                count++,
+                this.sanPhamService.getTenById(chiTietSanPham.getIdSanPham().toString()),
+                this.hangService.getTenById(chiTietSanPham.getIdThuongHieu().toString()),
+                this.kichCoService.getTenById(chiTietSanPham.getIdKichThuoc().toString()),
+                this.mauSacService.getTenById(chiTietSanPham.getIdMauSac().toString()),
+                this.danhMucService.getTenById(chiTietSanPham.getIdDanhMuc().toString()),
+                chiTietSanPham.getSoLuong(),
+                chiTietSanPham.getGiaBan(),});
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -47,13 +100,13 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbl_banhangsp = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblHoaDon = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        tbl_banhanggh = new javax.swing.JTable();
         jTextField1 = new javax.swing.JTextField();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
@@ -98,18 +151,18 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
         jLabel2.setText("Hóa đơn chờ");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_banhangsp.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Tên sản phẩm", "Hãng", "Kích cỡ", "Màu sắc", "Danh mục", "Đơn giá"
+                "STT", "Tên sản phẩm", "Hãng", "Kích cỡ", "Màu sắc", "Danh mục", "Số lượng", "Đơn giá"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbl_banhangsp);
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
         jLabel3.setText("Giỏ hàng");
@@ -130,18 +183,18 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
         jLabel4.setText("Sản phẩm");
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_banhanggh.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Tên sản phẩm", "Hãng", "Kích cỡ", "Màu sắc", "Đơn giá"
+                "STT", "Tên sản phẩm", "Hãng", "Kích cỡ", "Màu sắc", "Số lượng", "Đơn giá"
             }
         ));
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(tbl_banhanggh);
 
         jButton8.setText("Tìm kiếm");
 
@@ -480,8 +533,6 @@ public class TrangChuJPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
@@ -490,5 +541,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTable tblHoaDon;
+    private javax.swing.JTable tbl_banhanggh;
+    private javax.swing.JTable tbl_banhangsp;
     // End of variables declaration//GEN-END:variables
 }

@@ -31,7 +31,7 @@ public class HoaDonService implements IService<HoaDonDto>{
     @Override
     public List<HoaDonDto> getAll() {
         
-        return TranferData.convertListToDto(this.repo.getAllHoaDon());
+        return TranferData.convertListHoaDonToDto(this.repo.getAllHoaDon());
     }
 
     @Override
