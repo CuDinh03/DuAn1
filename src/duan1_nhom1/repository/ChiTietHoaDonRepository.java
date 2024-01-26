@@ -17,8 +17,8 @@ public class ChiTietHoaDonRepository {
 
     public void createChiTietHoaDon(ChiTietHoaDon chiTietHoaDon) {
         try {
-            String query = "INSERT INTO Hoa_Don_Chi_Tiet (id, id_hd, id_sp, so_luong, gia_ban, ngay_tao, ngay_sua, trang_thai) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO Hoa_Don_Chi_Tiet (id, id_hd, id_sp, so_luong, gia_ban, ngay_tao, ngay_sua, trang_thai) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setObject(1, chiTietHoaDon.getId());
                 preparedStatement.setObject(2, chiTietHoaDon.getIdHoaDon());
@@ -63,8 +63,8 @@ public class ChiTietHoaDonRepository {
 
     public void updateChiTietHoaDon(ChiTietHoaDon chiTietHoaDon) {
         try {
-            String query = "UPDATE Hoa_Don_Chi_Tiet SET id_hd = ?, id_sp = ?, so_luong = ?, " +
-                    "gia_ban = ?, ngay_sua = ?, trang_thai = ? WHERE id = ?";
+            String query = "UPDATE Hoa_Don_Chi_Tiet SET id_hd = ?, id_sp = ?, so_luong = ?, "
+                    + "gia_ban = ?, ngay_sua = ?, trang_thai = ? WHERE id = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setObject(1, chiTietHoaDon.getIdHoaDon());
                 preparedStatement.setObject(2, chiTietHoaDon.getIdSanPham());
@@ -99,11 +99,9 @@ public class ChiTietHoaDonRepository {
         status/ trang thai
         0: da xoa
         1: dang ton tai
-        */
+         */
         String query = "SELECT * FROM Hoa_Don_Chi_Tiet where trang_thai = 1";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query);
-              
-             ResultSet resultSet = preparedStatement.executeQuery()) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query); ResultSet resultSet = preparedStatement.executeQuery()) {
 
             while (resultSet.next()) {
                 String id = (String) resultSet.getObject("id");
@@ -123,5 +121,32 @@ public class ChiTietHoaDonRepository {
         }
         return chiTietHoaDons;
     }
-}
 
+    public List<ChiTietHoaDon> getAllChiTietHoaDonByIDHd(String id) {
+        List<ChiTietHoaDon> chiTietHoaDons = new ArrayList<>();
+        System.out.println(id);
+        String query = "SELECT * from Hoa_Don_Chi_Tiet WHERE id_hd = ? ";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, id);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                String id_hd = (String) resultSet.getObject("id_hd");
+                String id_sp = (String) resultSet.getObject("id_sp");
+                Integer so_luong = resultSet.getInt("so_luong");
+                Double gia_ban = resultSet.getDouble("gia_ban");
+                Date ngay_tao = resultSet.getDate("ngay_tao");
+                Date ngay_sua = resultSet.getDate("ngay_sua");
+                Boolean trang_thai = resultSet.getBoolean("trang_thai");
+
+                ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon(id, id_hd, id_sp, so_luong, gia_ban, ngay_tao, ngay_sua, trang_thai);
+                chiTietHoaDons.add(chiTietHoaDon);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return chiTietHoaDons;
+    }
+    
+}

@@ -4,17 +4,23 @@
  */
 package duan1_nhom1.tranf;
 
+import duan1_nhom1.dto.ChatLieuDto;
 import duan1_nhom1.dto.ChiTietHoaDonDto;
 import duan1_nhom1.dto.DanhMucDto;
 import duan1_nhom1.dto.ChiTietSanPhamDto;
+import duan1_nhom1.dto.HangDto;
 import duan1_nhom1.dto.HoaDonDto;
 import duan1_nhom1.dto.KhachDto;
+import duan1_nhom1.dto.SanPhamDto;
 import duan1_nhom1.dto.VoucherDto;
+import duan1_nhom1.model.ChatLieu;
 import duan1_nhom1.model.ChiTietHoaDon;
 import duan1_nhom1.model.ChiTietSanPham;
 import duan1_nhom1.model.DanhMuc;
+import duan1_nhom1.model.Hang;
 import duan1_nhom1.model.HoaDon;
 import duan1_nhom1.model.Khach;
+import duan1_nhom1.model.SanPham;
 import duan1_nhom1.model.Voucher;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -302,6 +308,9 @@ public class TranferData {
 
     public static ChiTietSanPhamDto convertToDto(ChiTietSanPham model) {
         ChiTietSanPhamDto dto = new ChiTietSanPhamDto();
+        if (model.getId() != null) {
+            dto.setId(model.getId());
+        }
         if (model.getMa() != null) {
             dto.setMa(model.getMa());
         }
@@ -329,7 +338,9 @@ public class TranferData {
         if (model.getGiaBan() != null) {
             dto.setGiaBan(model.getGiaBan());
         }
-        model.setSoLuong(dto.getSoLuong());
+        if (model.getSoLuong() != null) {
+            dto.setSoLuong(model.getSoLuong());
+        }
         if (model.getNgayTao() != null) {
             dto.setNgayTao(model.getNgayTao());
         }
@@ -345,7 +356,10 @@ public class TranferData {
 
     public static ChiTietSanPham convertToEntity(ChiTietSanPhamDto dto) {
         ChiTietSanPham model = new ChiTietSanPham();
-        model.setId(UUID.randomUUID()); // Assuming you generate a new UUID for a new entity
+        if (dto.getId() != null) {
+            model.setId(dto.getId());
+        }
+        model.setId(dto.getId());
         if (dto.getMa() != null) {
             model.setMa(dto.getMa());
         }
@@ -373,7 +387,9 @@ public class TranferData {
         if (dto.getGiaBan() != null) {
             model.setGiaBan(dto.getGiaBan());
         }
-        dto.setSoLuong(model.getSoLuong());
+                if (dto.getSoLuong() != null) {
+            model.setSoLuong(dto.getSoLuong());
+        }
         if (dto.getNgayTao() != null) {
             model.setNgayTao(dto.getNgayTao());
         }
@@ -383,11 +399,11 @@ public class TranferData {
         if (dto.getNgayNhap() != null) {
             model.setNgayNhap(dto.getNgayNhap());
         }
-        model.setTrangThai(dto.isTrangThai());
+        model.setTrangThai(dto.getTrangThai());
         return model;
     }
 
-    public static List<ChiTietSanPhamDto> convertListToEntity(List<ChiTietSanPham> entityList) {
+    public static List<ChiTietSanPhamDto> convertListToDtos(List<ChiTietSanPham> entityList) {
         List<ChiTietSanPhamDto> dtoList = new ArrayList<>();
         for (ChiTietSanPham entity : entityList) {
             dtoList.add(convertToDto(entity));
@@ -460,6 +476,162 @@ public class TranferData {
         }
         return dtoList;
 
+    }
+
+    public static SanPhamDto convertToDto(SanPham model) {
+        SanPhamDto dto = new SanPhamDto();
+        if (model.getId() != null) {
+            dto.setId(model.getId());
+        }
+        if (model.getMa() != null) {
+            dto.setMa(model.getMa());
+        }
+        if (model.getTen() != null) {
+            dto.setTen(model.getTen());
+        }
+        if (model.getMoTa() != null) {
+            dto.setMoTa(model.getMoTa());
+        }
+        if (model.getNgayTao() != null) {
+            dto.setNgayTao(model.getNgayTao());
+        }
+        if (model.getNgaySua() != null) {
+            dto.setNgaySua(model.getNgaySua());
+        }
+        if (model.getTrangThai() != null) {
+            dto.setTrangThai(model.getTrangThai());
+        }
+        return dto;
+    }
+
+    public static SanPham convertToEntity(SanPhamDto dto) {
+        SanPham model = new SanPham();
+        if (dto.getId() != null) {
+            model.setId(dto.getId());
+        }
+        if (dto.getMa() != null) {
+            model.setMa(dto.getMa());
+        }
+        if (dto.getTen() != null) {
+            model.setTen(dto.getTen());
+        }
+        if (dto.getMoTa() != null) {
+            model.setMoTa(dto.getMoTa());
+        }
+        if (dto.getNgayTao() != null) {
+            model.setNgayTao(dto.getNgayTao());
+        }
+        if (dto.getNgaySua() != null) {
+            model.setNgaySua(dto.getNgaySua());
+        }
+        if (dto.getTrangThai() != null) {
+            model.setTrangThai(dto.getTrangThai());
+        }
+        return model;
+    }
+
+    public static List<SanPhamDto> convertListSanPhamToDto(List<SanPham> entityList) {
+        List<SanPhamDto> dtoList = new ArrayList<>();
+        for (SanPham entity : entityList) {
+            dtoList.add(convertToDto(entity));
+        }
+        return dtoList;
+    }
+
+    public static ChatLieuDto convertToDto(ChatLieu model) {
+        ChatLieuDto dto = new ChatLieuDto();
+        if (model.getId() != null) {
+            dto.setId(model.getId());
+        }
+        if (model.getMa() != null) {
+            dto.setMa(model.getMa());
+        }
+        if (model.getTen() != null) {
+            dto.setTen(model.getTen());
+        }
+        if (model.getMoTa() != null) {
+            dto.setMoTa(model.getMoTa());
+        }
+        if (model.getTrangThai() != null) {
+            dto.setTrangThai(model.getTrangThai());
+        }
+        return dto;
+    }
+
+    public static ChatLieu convertToEntity(ChatLieuDto dto) {
+        ChatLieu model = new ChatLieu();
+        if (dto.getId() != null) {
+            model.setId(dto.getId());
+        }
+        if (dto.getMa() != null) {
+            model.setMa(dto.getMa());
+        }
+        if (dto.getTen() != null) {
+            model.setTen(dto.getTen());
+        }
+        if (dto.getMoTa() != null) {
+            model.setMoTa(dto.getMoTa());
+        }
+        if (dto.getTrangThai() != null) {
+            model.setTrangThai(dto.getTrangThai());
+        }
+        return model;
+    }
+
+    public static List<ChatLieuDto> convertListChatLieuToDto(List<ChatLieu> entityList) {
+        List<ChatLieuDto> dtoList = new ArrayList<>();
+        for (ChatLieu entity : entityList) {
+            dtoList.add(convertToDto(entity));
+        }
+        return dtoList;
+    }
+
+    public static HangDto convertToDto(Hang model) {
+        HangDto dto = new HangDto();
+        if (model.getId() != null) {
+            dto.setId(model.getId());
+        }
+        if (model.getMa() != null) {
+            dto.setMa(model.getMa());
+        }
+        if (model.getTen() != null) {
+            dto.setTen(model.getTen());
+        }
+        if (model.getMoTa() != null) {
+            dto.setMoTa(model.getMoTa());
+        }
+        if (model.getTrangThai() != null) {
+            dto.setTrangThai(model.getTrangThai());
+        }
+        return dto;
+    }
+
+    public static Hang convertToEntity(HangDto dto) {
+        Hang model = new Hang();
+        if (dto.getId() != null) {
+            model.setId(dto.getId());
+        }
+        if (dto.getMa() != null) {
+            model.setMa(dto.getMa());
+        }
+        if (dto.getTen() != null) {
+            model.setTen(dto.getTen());
+        }
+        if (dto.getMoTa() != null) {
+            model.setMoTa(dto.getMoTa());
+        }
+        if (dto.getTrangThai() != null) {
+            model.setTrangThai(dto.getTrangThai());
+        }
+        return model;
+    }
+
+    public static List<HangDto> convertListHangToDto(List<Hang> entityList) {
+        List<HangDto> dtoList = new ArrayList<>();
+        for (Hang entity : entityList) {
+            dtoList.add(convertToDto(entity));
+        }
+        return dtoList;
     }
 
 }

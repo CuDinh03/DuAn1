@@ -4,7 +4,7 @@
  */
 package duan1_nhom1.view;
 
-import duan1_nhom1.model.ChiTietSanPham;
+import duan1_nhom1.dto.ChiTietSanPhamDto;
 import duan1_nhom1.service.ChatLieuService;
 import duan1_nhom1.service.DanhMucService;
 import duan1_nhom1.service.HangService;
@@ -14,14 +14,12 @@ import duan1_nhom1.service.MauSacService;
 import duan1_nhom1.service.SPChiTietService;
 import duan1_nhom1.service.SanPhamService;
 import duan1_nhom1.utils.Uhelper;
-import duan1_nhom1.viewModel.QLSanPhamViewModel;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -80,12 +78,12 @@ public class SPChiTietFrame extends javax.swing.JFrame {
 
     }
 
-    public void addTable(List<ChiTietSanPham> list) {
+    public void addTable(List<ChiTietSanPhamDto> list) {
         defaultTableModel = (DefaultTableModel) tbl_sanpham.getModel();
         defaultTableModel.setRowCount(0);
         int count = 1;
        
-        for (ChiTietSanPham chiTietSanPham : list) {
+        for (ChiTietSanPhamDto chiTietSanPham : list) {
             defaultTableModel.addRow(new Object[]{
                 count++,
                 chiTietSanPham.getMa(),
@@ -101,7 +99,7 @@ public class SPChiTietFrame extends javax.swing.JFrame {
                 chiTietSanPham.getNgayNhap(),
                 chiTietSanPham.getNgaySua(),
                 chiTietSanPham.getNgayTao(),
-                chiTietSanPham.isTrangThai()
+                chiTietSanPham.getTrangThai()
             });
         }
     }
@@ -184,7 +182,7 @@ public class SPChiTietFrame extends javax.swing.JFrame {
             return;
         }
 
-        UUID id = this.sPChiTietService.getAll().get(index).getId();
+        String id = this.sPChiTietService.getAll().get(index).getId();
         String maSP = txt_masp.getText().trim();
         String idTenSP = sanPhamService.getAllId().get(cb_tensp.getSelectedIndex());
         String idThuongHieu = hangService.getAllId().get(cb_hang.getSelectedIndex());
@@ -195,14 +193,7 @@ public class SPChiTietFrame extends javax.swing.JFrame {
         BigDecimal giaNhap = new BigDecimal(txt_gianhap.getText());
         BigDecimal giaBan = new BigDecimal(txt_giaban.getText());
 //        boolean trangThai = Boolean.parseBoolean(txt_trangthai.getText());
-        int soLuong = Integer.parseInt(txt_soluong.getText());
-
-        UUID uuidIdTenSP = UUID.fromString(idTenSP);
-        UUID uuidIdThuongHieu = UUID.fromString(idThuongHieu);
-        UUID uuidIdMauSac = UUID.fromString(idMauSac);
-        UUID uuidIdChatLieu = UUID.fromString(idChatLieu);
-        UUID uuidIdKichCo = UUID.fromString(idKichCo);
-        UUID uuidIdDanhMuc = UUID.fromString(idDanhMuc);
+        Integer soLuong = Integer.parseInt(txt_soluong.getText());
 
         if (giaBan.compareTo(giaNhap) != 0 && giaBan.compareTo(giaNhap) != 1) {
             JOptionPane.showMessageDialog(this, "Giá bán lớn hơn giá nhập, bạn vui lòng nhập lại giá bán !");
@@ -233,7 +224,7 @@ public class SPChiTietFrame extends javax.swing.JFrame {
         }
 
         boolean trangThai = true;
-        ChiTietSanPham ctsp = new ChiTietSanPham(id, maSP, uuidIdTenSP, uuidIdKichCo, uuidIdThuongHieu, uuidIdMauSac, uuidIdChatLieu, uuidIdDanhMuc, giaNhap, giaBan, soLuong, ngayTao, ngaySua, ngayNhap, trangThai);
+        ChiTietSanPhamDto ctsp = new ChiTietSanPhamDto(id, maSP, idTenSP, idKichCo, idThuongHieu, idMauSac, idChatLieu, idDanhMuc, giaNhap, giaBan, soLuong, ngayTao, ngaySua, ngayNhap, trangThai);
         this.sPChiTietService.update(ctsp, id);
         addTable(sPChiTietService.getAll());
 
@@ -246,7 +237,7 @@ public class SPChiTietFrame extends javax.swing.JFrame {
                 return;
             }
             int row = tbl_sanpham.getSelectedRow();
-            UUID id = sPChiTietService.getAll().get(row).getId();
+            String id = sPChiTietService.getAll().get(row).getId();
             sPChiTietService.deleteSP(id);
 
             JOptionPane.showMessageDialog(this, "xóa thành công");
@@ -292,13 +283,6 @@ public class SPChiTietFrame extends javax.swing.JFrame {
 //        boolean trangThai = Boolean.parseBoolean(txt_trangthai.getText());
         int soLuong = Integer.parseInt(txt_soluong.getText());
 
-        UUID uuidIdTenSP = UUID.fromString(idTenSP);
-        UUID uuidIdThuongHieu = UUID.fromString(idThuongHieu);
-        UUID uuidIdMauSac = UUID.fromString(idMauSac);
-        UUID uuidIdChatLieu = UUID.fromString(idChatLieu);
-        UUID uuidIdKichCo = UUID.fromString(idKichCo);
-        UUID uuidIdDanhMuc = UUID.fromString(idDanhMuc);
-
         if (giaBan.compareTo(giaNhap) != 0 && giaBan.compareTo(giaNhap) != 1) {
             JOptionPane.showMessageDialog(this, "Giá bán lớn hơn giá nhập, bạn vui lòng nhập lại giá bán !");
             return;
@@ -328,7 +312,7 @@ public class SPChiTietFrame extends javax.swing.JFrame {
         }
 
         boolean trangThai = true;
-        QLSanPhamViewModel ctsp = new QLSanPhamViewModel(maSP, uuidIdTenSP, uuidIdKichCo, uuidIdThuongHieu, uuidIdMauSac, uuidIdChatLieu, uuidIdDanhMuc, giaNhap, giaBan, soLuong, ngayTao, ngaySua, ngayNhap, trangThai);
+        ChiTietSanPhamDto ctsp = new ChiTietSanPhamDto("", maSP, idTenSP, idKichCo, idThuongHieu, idMauSac, idChatLieu, idDanhMuc, giaNhap, giaBan, soLuong, ngayTao, ngaySua, ngayNhap, trangThai);
 
         sPChiTietService.insert(ctsp);
         addTable(sPChiTietService.getAll());
@@ -886,15 +870,15 @@ public class SPChiTietFrame extends javax.swing.JFrame {
         index = tbl_sanpham.getSelectedRow();
 
 //        _index = tbl_sanpham.getSelectedRow();
-        ChiTietSanPham ctsp = this.sPChiTietService.getAll().get(index);
+        ChiTietSanPhamDto ctsp = this.sPChiTietService.getAll().get(index);
 
         txt_masp.setText(ctsp.getMa());
-        cb_tensp.setSelectedItem(sanPhamService.getTenById(ctsp.getIdSanPham().toString()));
-        cb_hang.setSelectedItem(hangService.getTenById(ctsp.getIdThuongHieu().toString()));
-        cb_chatlieu.setSelectedItem(chatLieuService.getTenById(ctsp.getIdChatLieu().toString()));
-        cb_mausac.setSelectedItem(mauSacService.getTenById(ctsp.getIdMauSac().toString()));
-        cb_kichco.setSelectedItem(kichCoService.getTenById(ctsp.getIdKichThuoc().toString()));
-        cb_danhmuc.setSelectedItem((danhMucService.getTenById(ctsp.getIdDanhMuc().toString())));
+        cb_tensp.setSelectedItem(sanPhamService.getTenById(ctsp.getIdSanPham()));
+        cb_hang.setSelectedItem(hangService.getTenById(ctsp.getIdThuongHieu()));
+        cb_chatlieu.setSelectedItem(chatLieuService.getTenById(ctsp.getIdChatLieu()));
+        cb_mausac.setSelectedItem(mauSacService.getTenById(ctsp.getIdMauSac()));
+        cb_kichco.setSelectedItem(kichCoService.getTenById(ctsp.getIdKichThuoc()));
+        cb_danhmuc.setSelectedItem((danhMucService.getTenById(ctsp.getIdDanhMuc())));
         txt_gianhap.setText("" + ctsp.getGiaNhap());
         txt_giaban.setText("" + ctsp.getGiaBan());
         txt_soluong.setText("" + ctsp.getSoLuong());

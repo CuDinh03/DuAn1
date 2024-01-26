@@ -4,28 +4,26 @@
  */
 package duan1_nhom1.service;
 
-import duan1_nhom1.dto.ChatLieuDto;
-import duan1_nhom1.model.ChatLieu;
-import duan1_nhom1.repository.ChatLieuRepository;
+import duan1_nhom1.dto.ChiTietHoaDonDto;
+import duan1_nhom1.repository.ChiTietHoaDonRepository;
 import duan1_nhom1.tranf.TranferData;
 import java.util.List;
 
 /**
- * 1
  *
- * @author anhtuanle
+ * @author maccuacu
  */
-public class ChatLieuService implements IService<ChatLieuDto> {
-
-    private ChatLieuRepository chatLieuRepository = new ChatLieuRepository();
+public class ChiTietHoaDonService implements IService<ChiTietHoaDonDto>{
+    
+    private ChiTietHoaDonRepository repo = new ChiTietHoaDonRepository();
 
     @Override
-    public void add(ChatLieuDto t) {
+    public void add(ChiTietHoaDonDto t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void update(ChatLieuDto t, String id) {
+    public void update(ChiTietHoaDonDto t, String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -35,25 +33,17 @@ public class ChatLieuService implements IService<ChatLieuDto> {
     }
 
     @Override
-    public List<ChatLieuDto> getAll() {
-        return TranferData.convertListChatLieuToDto(chatLieuRepository.getAll());
+    public List<ChiTietHoaDonDto> getAll() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public ChatLieuDto findById(String id) {
-        return TranferData.convertToDto(this.chatLieuRepository.findByid(id));
+    public ChiTietHoaDonDto findById(String id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
-    public String getTenById(String id) {
-        return chatLieuRepository.getTenById(id);
+    
+    public List<ChiTietHoaDonDto> getAllByIdHd(String id){
+        return TranferData.convertListCTHDToDto(repo.getAllChiTietHoaDonByIDHd(id));
     }
-
-    public List<String> getAllTen() {
-        return chatLieuRepository.getAllTen();
-    }
-
-    public List<String> getAllId() {
-        return chatLieuRepository.getAllId();
-    }
-
+    
 }
