@@ -3,12 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package duan1_nhom1.view;
-
-import duan1_nhom1.dto.HoaDonDto;
 import duan1_nhom1.model.HoaDon;
 import duan1_nhom1.model.Khach;
 import duan1_nhom1.repository.HoaDonRepository;
-import duan1_nhom1.service.HoaDonService;
 import duan1_nhom1.service.KhachService;
 import java.sql.Date;
 import java.util.ArrayList;

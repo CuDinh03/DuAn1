@@ -15,7 +15,7 @@ import javax.swing.Timer;
  */
 public class chao extends javax.swing.JDialog {
 
-    /** Creates new form chao */
+   
     public chao(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
