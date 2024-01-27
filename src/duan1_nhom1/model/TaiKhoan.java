@@ -6,10 +6,8 @@ package duan1_nhom1.model;
 
 import java.sql.Date;
 
-/**
- *
- * @author maccuacu
- */
+
+
 public class TaiKhoan {
      private  String id;
     private  String ma;

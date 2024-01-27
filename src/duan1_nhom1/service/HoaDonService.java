@@ -15,7 +15,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
+/**1
  *
  * @author maccuacu
  */
@@ -31,7 +31,7 @@ public class HoaDonService implements IService<HoaDonDto>{
     @Override
     public List<HoaDonDto> getAll() {
         
-        return TranferData.convertListToDto(this.repo.getAllHoaDon());
+        return TranferData.convertListHoaDonToDto(this.repo.getAllHoaDon());
     }
 
     @Override
@@ -46,7 +46,7 @@ public class HoaDonService implements IService<HoaDonDto>{
 
     @Override
     public HoaDonDto findById(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return TranferData.convertToDto(repo.getHoaDonById(id));
     }
 
    public List<HoaDon> searhListNhanVien(String maKhach) {

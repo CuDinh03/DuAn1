@@ -11,7 +11,7 @@ public class Khach {
     private Date ngaySua;
     private Boolean trangThai;
 
-    public Khach() {
+    public Khach() { 
     }
 
     public Khach(String id, String maKhachHang, String tenKhachHang, String sdt, Date ngayTao, Date ngaySua, Boolean trangThai) {

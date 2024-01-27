@@ -1,6 +1,7 @@
 package duan1_nhom1.view;
 
 import duan1_nhom1.dto.ChiTietSanPhamDto;
+import duan1_nhom1.dto.ChiTietSanPhamDto;
 import duan1_nhom1.dto.HoaDonDto;
 import duan1_nhom1.model.ChiTietSanPham;
 import duan1_nhom1.model.HoaDon;
@@ -41,11 +42,14 @@ public class TrangChuJPanel extends javax.swing.JPanel {
     private SanPhamService sanPhamService = new SanPhamService();
     private DanhMucService danhMucService = new DanhMucService();
     private ChatLieuService chatLieuService = new ChatLieuService();
+    int _index =-1;
 
     public TrangChuJPanel() {
         initComponents();
 
         showDateHoaDon();
+//        loadBanHangGH(sPChiTietService.getAll());
+        loadBanHangSp(sPChiTietService.getAll());
     }
 
     public void showDateHoaDon() {
@@ -157,15 +161,20 @@ public class TrangChuJPanel extends javax.swing.JPanel {
 
         tbl_banhangsp.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Tên sản phẩm", "Hãng", "Kích cỡ", "Màu sắc", "Danh mục", "Đơn giá"
+                "STT", "Tên sản phẩm", "Hãng", "Kích cỡ", "Màu sắc", "Danh mục", "Số lượng", "Đơn giá"
             }
         ));
+        tbl_banhangsp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_banhangspMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbl_banhangsp);
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
@@ -188,16 +197,18 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         jLabel4.setText("Sản phẩm");
 
         tbl_banhanggh.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_banhanggh.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Tên sản phẩm", "Hãng", "Kích cỡ", "Màu sắc", "Đơn giá"
+                "STT", "Tên sản phẩm", "Hãng", "Kích cỡ", "Màu sắc", "Số lượng", "Đơn giá"
             }
         ));
+        jScrollPane3.setViewportView(tbl_banhanggh);
         jScrollPane3.setViewportView(tbl_banhanggh);
 
         jButton8.setText("Tìm kiếm");
@@ -451,35 +462,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Tạo hóa đơn", jPanel3);
-
-        jPanel4.setBackground(new java.awt.Color(203, 233, 162));
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1135, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 665, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Tất cả hóa đơn", jPanel4);
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1135, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 665, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Hóa đơn đã hủy", jPanel5);
+        jTabbedPane1.addTab("Trang chủ", jPanel3);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -514,6 +497,12 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tbl_banhangspMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_banhangspMouseClicked
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_tbl_banhangspMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -547,8 +536,6 @@ public class TrangChuJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

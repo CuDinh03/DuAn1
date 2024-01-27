@@ -9,7 +9,7 @@ import duan1_nhom1.repository.MauSacRepository;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
+/**1
  *
  * @author anhtuanle
  */
@@ -28,7 +28,7 @@ public class MauSacService implements IService<MauSac>{
 
     @Override
     public void update(MauSac mauSac, String id) {
-        mauSacRepository.update(mauSac);
+        mauSacRepository.update(mauSac, id);
     }
 
     @Override

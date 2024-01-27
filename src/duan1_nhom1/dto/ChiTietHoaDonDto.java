@@ -4,21 +4,19 @@
  */
 package duan1_nhom1.dto;
 
-import java.text.DecimalFormat;
 import java.util.Date;
-import java.util.UUID;
 
 /**
  *
  * @author maccuacu
  */
 public class ChiTietHoaDonDto {
-    private UUID id;
-    private UUID idHD;
-    private UUID idSP;
-    private UUID idNv;
+    private String id;
+    private String idHD;
+    private String idSP;
+    private String idNv;
     private Integer soLuong;
-    private DecimalFormat giaBan;
+    private Double giaBan;
     private Date ngayTao;
     private Date ngaySua;
     private Boolean trangThai;
@@ -26,7 +24,7 @@ public class ChiTietHoaDonDto {
     public ChiTietHoaDonDto() {
     }
 
-    public ChiTietHoaDonDto(UUID id, UUID idHD, UUID idSP, UUID idNv, Integer soLuong, DecimalFormat giaBan, Date ngayTao, Date ngaySua, Boolean trangThai) {
+    public ChiTietHoaDonDto(String id, String idHD, String idSP, String idNv, Integer soLuong, Double giaBan, Date ngayTao, Date ngaySua, Boolean trangThai) {
         this.id = id;
         this.idHD = idHD;
         this.idSP = idSP;
@@ -38,35 +36,35 @@ public class ChiTietHoaDonDto {
         this.trangThai = trangThai;
     }
 
-    public UUID getIdNv() {
+    public String getIdNv() {
         return idNv;
     }
 
-    public void setIdNv(UUID idNv) {
+    public void setIdNv(String idNv) {
         this.idNv = idNv;
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public UUID getIdHD() {
+    public String getIdHD() {
         return idHD;
     }
 
-    public void setIdHD(UUID idHD) {
+    public void setIdHD(String idHD) {
         this.idHD = idHD;
     }
 
-    public UUID getIdSP() {
+    public String getIdSP() {
         return idSP;
     }
 
-    public void setIdSP(UUID idSP) {
+    public void setIdSP(String idSP) {
         this.idSP = idSP;
     }
 
@@ -78,11 +76,11 @@ public class ChiTietHoaDonDto {
         this.soLuong = soLuong;
     }
 
-    public DecimalFormat getGiaBan() {
+    public Double getGiaBan() {
         return giaBan;
     }
 
-    public void setGiaBan(DecimalFormat giaBan) {
+    public void setGiaBan(Double giaBan) {
         this.giaBan = giaBan;
     }
 

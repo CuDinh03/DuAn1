@@ -5,15 +5,13 @@
 package duan1_nhom1.repository;
 
 import duan1_nhom1.bean.HoaDonBean;
-import duan1_nhom1.model.SanPham;
 import duan1_nhom1.utils.JdbcHelper;
 import java.util.List;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-/**
+
+/**1
  *
  * @author maccuacu
  */
@@ -22,13 +20,13 @@ public class ThongKeRepository {
     public List<HoaDonBean> getList() {
         try {
             Connection conn = JdbcHelper.getConnection();
-            String sql = "SELECT ngay_mua, COUNT(*) as so_luong FROM Hoa_Don GROUP BY ngay_mua";
+            String sql = "  SELECT ngay_mua, COUNT(*) as so_luong FROM Hoa_Don GROUP BY ngay_mua ORDER BY ngay_mua";
             List<HoaDonBean> list = new ArrayList<>();
             PreparedStatement ps = conn.prepareCall(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 HoaDonBean hoaDonBean = new HoaDonBean();
-                hoaDonBean.setNgayBan(rs.getString("ngay_mua"));
+                hoaDonBean.setNgayBan(((java.sql.Date) rs.getObject("ngay_mua")).toLocalDate());
                 hoaDonBean.setSoLuongDaBan(rs.getInt("so_luong"));
                 list.add(hoaDonBean);
             }

@@ -4,41 +4,46 @@
  */
 package duan1_nhom1.service;
 
-import duan1_nhom1.model.ChiTietHoaDon;
+import duan1_nhom1.dto.ChiTietHoaDonDto;
 import duan1_nhom1.repository.ChiTietHoaDonRepository;
-import java.util.ArrayList;
+import duan1_nhom1.tranf.TranferData;
 import java.util.List;
 
 /**
  *
- * @author WEB
+ * @author maccuacu
  */
-public class ChiTietHoaDonService implements IService<ChiTietHoaDon>{
- private List<ChiTietHoaDon>listHDCT=new ArrayList<>();
- private ChiTietHoaDonRepository ChiTietHoaDon=new ChiTietHoaDonRepository();
+public class ChiTietHoaDonService implements IService<ChiTietHoaDonDto>{
+    
+    private ChiTietHoaDonRepository repo = new ChiTietHoaDonRepository();
+
     @Override
-    public void add(ChiTietHoaDon t) {
-      ChiTietHoaDon.createChiTietHoaDon(t);
+    public void add(ChiTietHoaDonDto t) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void update(ChiTietHoaDon t, String id) {
-    ChiTietHoaDon.updateChiTietHoaDon(t);
+    public void update(ChiTietHoaDonDto t, String id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public void delete(String id) {
-    
-    }
-
-    @Override
-    public List<ChiTietHoaDon> getAll() {
-    return ChiTietHoaDon.getAllChiTietHoaDon();
-    }
-
-    @Override
-    public ChiTietHoaDon findById(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<ChiTietHoaDonDto> getAll() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public ChiTietHoaDonDto findById(String id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    public List<ChiTietHoaDonDto> getAllByIdHd(String id){
+        return TranferData.convertListCTHDToDto(repo.getAllChiTietHoaDonByIDHd(id));
     }
     
 }

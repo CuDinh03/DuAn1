@@ -9,7 +9,7 @@ import duan1_nhom1.repository.ThongKeRepository;
 import java.util.List;
 
 /**
- *
+ *1
  * @author maccuacu
  */
 public interface IThongKeService {

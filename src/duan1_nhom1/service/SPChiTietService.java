@@ -4,65 +4,97 @@
  */
 package duan1_nhom1.service;
 
+import duan1_nhom1.dto.ChiTietSanPhamDto;
 import duan1_nhom1.repository.SPChiTietRepository;
-import duan1_nhom1.viewModel.QLSanPhamViewModel;
+import duan1_nhom1.tranf.TranferData;
 import java.util.List;
+import java.util.UUID;
 
 /**
+ * 1
  *
  * @author anhtuanle
  */
-public class SPChiTietService implements IService<QLSanPhamViewModel> {
+public class SPChiTietService implements IService<ChiTietSanPhamDto> {
 
     private SPChiTietRepository sPChiTietRepository = new SPChiTietRepository();
 
-    @Override
-    public void add(QLSanPhamViewModel t) {
-       sPChiTietRepository.insert(t);
-    }
+    public String insert(ChiTietSanPhamDto t) {
+        t.setMa(t.getMa());
 
-    @Override
-    public void update(QLSanPhamViewModel t, String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+        t.setIdThuongHieu(t.getIdThuongHieu());
+        t.setIdMauSac(t.getIdMauSac());
+        t.setIdDanhMuc(t.getIdDanhMuc());
+        t.setIdChatLieu(t.getIdChatLieu());
+        t.setIdSanPham(t.getIdSanPham());
+        t.setIdKichThuoc(t.getIdKichThuoc());
+        t.setGiaNhap(t.getGiaNhap());
+        t.setGiaBan(t.getGiaBan());
+        t.setSoLuong(t.getSoLuong());
+        t.setNgayNhap(t.getNgayNhap());
+        t.setNgaySua(t.getNgaySua());
+        t.setNgayTao(t.getNgayTao());
+        t.setTrangThai(t.getTrangThai());
 
-    @Override
-    public void delete(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public List<QLSanPhamViewModel> getAll() {
-        return sPChiTietRepository.getAll();
-    }
-
-    @Override
-    public QLSanPhamViewModel findById(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public String insert(QLSanPhamViewModel t) {
-        QLSanPhamViewModel domainModel = new QLSanPhamViewModel();
-
-        domainModel.setIdThuongHieu(t.getIdThuongHieu());
-        domainModel.setIdMauSac(t.getIdMauSac());
-        domainModel.setIdDanhMuc(t.getIdDanhMuc());
-        domainModel.setIdChatLieu(t.getIdChatLieu());
-        domainModel.setTenSP(t.getTenSP());
-        domainModel.setMaSP(t.getMaSP());
-        domainModel.setIdKichThuoc(t.getIdKichThuoc());
-        domainModel.setGiaNhap(t.getGiaNhap());
-        domainModel.setGiaBan(t.getGiaBan());
-        domainModel.setSoLuong(t.getSoLuong());
-        domainModel.setNgayNhap(t.getNgayNhap());
-        domainModel.setNgaySua(t.getNgaySua());
-        domainModel.setNgayTao(t.getNgayTao());
-        domainModel.setTrangThai(t.isTrangThai());
-
-        if (this.sPChiTietRepository.insert(domainModel)) {
+        if (this.sPChiTietRepository.insert(TranferData.convertToEntity(t))) {
             return "Thêm thành công !";
         } else {
             return "Thêm thất bại !";
         }
     }
+
+    @Override
+    public void add(ChiTietSanPhamDto t) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void update(ChiTietSanPhamDto t, String id) {
+        t.setMa(t.getMa());
+
+        t.setIdThuongHieu(t.getIdThuongHieu());
+        t.setIdMauSac(t.getIdMauSac());
+        t.setIdDanhMuc(t.getIdDanhMuc());
+        t.setIdChatLieu(t.getIdChatLieu());
+        t.setIdSanPham(t.getIdSanPham());
+        t.setIdKichThuoc(t.getIdKichThuoc());
+        t.setGiaNhap(t.getGiaNhap());
+        t.setGiaBan(t.getGiaBan());
+        t.setSoLuong(t.getSoLuong());
+        t.setNgayNhap(t.getNgayNhap());
+        t.setNgaySua(t.getNgaySua());
+        t.setNgayTao(t.getNgayTao());
+        t.setTrangThai(t.getTrangThai());
+
+        if (this.sPChiTietRepository.updateSP(TranferData.convertToEntity(t), id)) {
+            System.out.println("Thêm thành công !");
+        } else {
+            System.out.println("Thêm thất bại !");
+
+        }
+    }
+
+    @Override
+    public void delete(String id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+    }
+
+    @Override
+    public List<ChiTietSanPhamDto> getAll() {
+        return TranferData.convertListToDtos(sPChiTietRepository.getAll());
+    }
+
+    @Override
+    public ChiTietSanPhamDto findById(String id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void deleteSP(String id) {
+        sPChiTietRepository.delete(id);
+    }
+    public ChiTietSanPhamDto findByMa(String ma){
+        return TranferData.convertToDto(this.sPChiTietRepository.findByMa(ma));
+    }
+
 }

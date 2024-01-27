@@ -20,6 +20,7 @@ import java.util.List;
  * @author anhtuanle
  */
 public class ChatLieuRepository {
+
     private JdbcHelper jdbcHelper;
     List<ChatLieu> listChatLieu = new ArrayList();
     Connection conn = JdbcHelper.getConnection();
@@ -64,10 +65,34 @@ public class ChatLieuRepository {
         }
         return null;
     }
-    
-     public List<String> getAllId() {
+
+    public ChatLieu findByid(String id1) {
+        String sql = "SELECT * FROM chat_lieu WHERE id = ?";
+
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, id1);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                String id = rs.getString("id");
+                String ma = rs.getString("ma");
+                String ten = rs.getString("ten");
+                String moTa = rs.getString("mo_ta");
+                Date ngayTao = rs.getDate("ngay_tao");
+                Date ngaySua = rs.getDate("ngay_tao");
+                boolean trangThai = rs.getBoolean("trang_thai");
+                ChatLieu chatLieu = new ChatLieu(id, ma, ten, moTa, ngayTao, ngaySua, trangThai);
+                return chatLieu;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<String> getAllId() {
         ArrayList<String> listId = new ArrayList<>();
-        
+
         String sql = "SELECT id FROM chat_lieu";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -83,7 +108,7 @@ public class ChatLieuRepository {
 
     public List<String> getAllTen() {
         ArrayList<String> listId = new ArrayList<>();
-        
+
         String sql = "SELECT ten FROM chat_lieu where TrangThai = 0";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
