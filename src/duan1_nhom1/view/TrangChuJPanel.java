@@ -31,7 +31,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
     private HoaDonService hds = new HoaDonService();
     private List<ChiTietSanPham> listCTSP = new ArrayList<>();
     private SPChiTietService CTSP = new SPChiTietService();
-     private IService iService = new SanPhamService();
+    private IService iService = new SanPhamService();
     private SPChiTietService sPChiTietService = new SPChiTietService();
     private DefaultComboBoxModel defaultComboBoxModel;
     private DefaultTableModel defaultTableModel;

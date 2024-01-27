@@ -6,8 +6,10 @@ package duan1_nhom1.tranf;
 
 import duan1_nhom1.dto.HoaDonDto;
 import duan1_nhom1.dto.KhachDto;
+import duan1_nhom1.dto.ThanhToanDto;
 import duan1_nhom1.model.HoaDon;
 import duan1_nhom1.model.Khach;
+import duan1_nhom1.model.ThanhToan;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -86,7 +88,6 @@ public class TranferData {
         }
         return dtoList;
     }
-        
-   
 
+   
 }
