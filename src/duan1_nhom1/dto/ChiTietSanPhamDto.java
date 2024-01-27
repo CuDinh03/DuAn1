@@ -14,7 +14,7 @@ import java.util.UUID;
  * @author maccuacu
  */
 public class ChiTietSanPhamDto {
-     private String ma;
+    private String ma;
     private UUID idSanPham;
     private UUID idKichThuoc;
     private UUID idThuongHieu;

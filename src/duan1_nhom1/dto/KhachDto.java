@@ -12,7 +12,7 @@ import java.util.UUID;
  * @author maccuacu
  */
 public class KhachDto {
-    private UUID id;
+    private String id;
     private String maKhachHang;
     private String tenKhachHang;
     private String sdt;
@@ -23,7 +23,7 @@ public class KhachDto {
     public KhachDto() {
     }
 
-    public KhachDto(UUID id, String maKhachHang, String tenKhachHang, String sdt, Date ngayTao, Date ngaySua, Boolean trangThai) {
+    public KhachDto(String id, String maKhachHang, String tenKhachHang, String sdt, Date ngayTao, Date ngaySua, Boolean trangThai) {
         this.id = id;
         this.maKhachHang = maKhachHang;
         this.tenKhachHang = tenKhachHang;
@@ -33,11 +33,11 @@ public class KhachDto {
         this.trangThai = trangThai;
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -88,7 +88,7 @@ public class KhachDto {
     public void setTrangThai(Boolean trangThai) {
         this.trangThai = trangThai;
     }
-    
+
 
     
 }
