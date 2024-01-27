@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package duan1_nhom1.repository;
+
 import duan1_nhom1.model.DanhMuc;
 import duan1_nhom1.service.DanhMucService;
 import duan1_nhom1.utils.JdbcHelper;
@@ -11,7 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Connection;
-import java .sql.Date;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -19,11 +20,11 @@ import java.util.List;
  * @author anhtuanle
  */
 public class DanhMucRepository {
-    List<DanhMuc> list = new ArrayList<>();
+
     Connection conn = JdbcHelper.getConnection();
 
     public List<DanhMuc> getAll() {
-            List<DanhMuc> listDanhMuc = new ArrayList<>();
+        List<DanhMuc> listDanhMuc = new ArrayList<>();
         String sql = """
                      SELECT [id]
                            ,[ma]
@@ -47,13 +48,15 @@ public class DanhMucRepository {
                 Date ngaySua = rs.getDate("ngay_tao");
                 Boolean trangThai = rs.getBoolean("trang_thai");
                 DanhMuc danhMuc = new DanhMuc(id, ma, ten, moTa, ngayTao, ngaySua, trangThai);
-                list.add(danhMuc);
+                listDanhMuc.add(danhMuc);
+                
             }
+            return listDanhMuc;
         } catch (SQLException ex) {
             System.out.println("Lỗi kết nối");
             ex.printStackTrace();
         }
-        return list;
+        return null;
     }
 
     public String getTenById(String id) {
@@ -81,11 +84,12 @@ public class DanhMucRepository {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 listId.add(rs.getString("id"));
+                return listId;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return listId;
+        return null;
     }
 
     public List<String> getAllTen() {
@@ -97,40 +101,38 @@ public class DanhMucRepository {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 listId.add(rs.getString("ten"));
+                return listId;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return listId;
+        return null;
     }
-    public void addDanhMuc(DanhMuc danhMuc) {
-//        if (danhMuc == null) {
-//            return;
-//        }
 
+    public void addDanhMuc(DanhMuc danhMuc) {
         String sql = """
        INSERT INTO [dbo].[danh_muc_san_pham]
-                                ([ma]
-                                ,[ten]
-                                ,[mo_ta]
-                                ,[ngay_tao]
-                                ,[ngay_sua]
-                                ,[trang_thai])
-                          VALUES
-                                (?
-                                ,?
-                                ,?
-                                ,?
-                                ,?
-                                ,?);  
+                  ([ma]
+                  ,[ten]
+                  ,[mo_ta]
+                  ,[ngay_tao]
+                  ,[ngay_sua]
+                  ,[trang_thai])
+            VALUES
+                  (?
+                  ,?
+                  ,?
+                  ,?
+                  ,?
+                  ,?);
                  """;
 
         try (Connection conn = JdbcHelper.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, danhMuc.getMa());
             ps.setString(2, danhMuc.getTen());
             ps.setString(3, danhMuc.getMoTa());
-//            ps.setDate(4, danhMuc.getNgayTao().toString());
-//            ps.setDate(5, );
+            ps.setDate(4, new java.sql.Date(danhMuc.getNgayTao().getTime()));
+            ps.setDate(5, new java.sql.Date(danhMuc.getNgaySua().getTime()));
             ps.setBoolean(6, danhMuc.getTrangThai());
 
             int chek = ps.executeUpdate();
@@ -144,11 +146,12 @@ public class DanhMucRepository {
             throw new RuntimeException(e);
         }
     }
+
     public void update(DanhMuc danhMuc, String id) {
-        List<DanhMuc> listDanhMuc = new ArrayList();
         String sql = """
                 UPDATE [dbo].[danh_muc_san_pham]
-                SET [ma] = ?,
+                SET [id] = ?,
+                    [ma] = ?,
                     [ten] = ?,
                     [mo_ta] = ?,
                     [ngay_tao] = ?,
@@ -160,14 +163,15 @@ public class DanhMucRepository {
         try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 
             // Set parameters
-            ps.setObject(1, danhMuc.getMa());
-            ps.setObject(2, danhMuc.getTen());
-            ps.setObject(3, danhMuc.getMoTa());
-            ps.setObject(4, danhMuc.getNgayTao());
-            ps.setObject(5, danhMuc.getNgaySua());
-            ps.setObject(6, danhMuc.getTrangThai());
-            ps.setObject(7, danhMuc.getId());
-            ps.setObject(7, id);
+            ps.setObject(1, danhMuc.getId());
+            ps.setObject(2, danhMuc.getMa());
+            ps.setObject(3, danhMuc.getTen());
+            ps.setObject(4, danhMuc.getMoTa());
+            ps.setObject(5, danhMuc.getNgayTao());
+            ps.setObject(6, danhMuc.getNgaySua());
+            ps.setObject(7, danhMuc.getTrangThai());
+            
+//            ps.setObject(7, id);
             // Execute the update
             int chek = ps.executeUpdate();
 
@@ -183,7 +187,6 @@ public class DanhMucRepository {
     }
 
     public void delete(String id) {
-        List<DanhMuc> listDanhMuc = new ArrayList();
         String sql = "DELETE FROM danh_muc_san_pham WHERE id = ?";
 
         try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {

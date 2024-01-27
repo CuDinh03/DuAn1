@@ -10,7 +10,8 @@ import duan1_nhom1.repository.DanhMucRepository;
 import duan1_nhom1.tranf.TranferData;
 import java.util.List;
 
-/**1
+/**
+ * 1
  *
  * @author anhtuanle
  */
@@ -20,12 +21,12 @@ public class DanhMucService implements IService<DanhMuc> {
 
     @Override
     public void add(DanhMuc t) {
-       danhMucRepository.addDanhMuc(t);
+        danhMucRepository.addDanhMuc(t);
     }
 
     @Override
     public List<DanhMuc> getAll() {
-         return danhMucRepository.getAll();
+        return danhMucRepository.getAll();
     }
 
     public String getTenById(String id) {
@@ -42,11 +43,14 @@ public class DanhMucService implements IService<DanhMuc> {
 
     @Override
     public void update(DanhMuc danhMuc, String id) {
-        danhMucRepository.update(danhMuc, id);}
+        danhMucRepository.update(danhMuc, id);
+    }
 
     @Override
     public void delete(String id) {
-        danhMucRepository.delete(id);}
+        danhMucRepository.delete(id);
+    }
+
     @Override
     public DanhMuc findById(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

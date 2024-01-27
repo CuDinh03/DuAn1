@@ -29,7 +29,7 @@ public class ViewDanhMuc extends javax.swing.JFrame {
         initComponents();
         loadTableDanhMuc();
     }
-    
+
     private void loadTableDanhMuc() {
 
         model = (DefaultTableModel) tblDanhMuc.getModel();
@@ -39,32 +39,32 @@ public class ViewDanhMuc extends javax.swing.JFrame {
             String status;
             if (danhMuc.getTrangThai()) {
                 status = "Còn";
-            }else {
+            } else {
                 status = "Hết";
             }
-             Object[] rowData = {
+            Object[] rowData = {
                 danhMuc.getId(),
                 danhMuc.getMa(),
                 danhMuc.getTen(),
                 danhMuc.getMoTa(),
                 danhMuc.getNgaySua(),
                 danhMuc.getNgayTao(),
-                 status
-             };   
+                status
+            };
             model.addRow(rowData);
 
         }
 
     }
-    
-     private void clearForm() {
+
+    private void clearForm() {
         txtMa.setText("");
         txtTen.setText("");
         txaMoTa.setText("");
         dcTao.setDate(null);
         dcSua.setDate(null);
         TrangThaiGroup.clearSelection();
-        
+
     }
 
     private DanhMuc getDanhMuc() {
@@ -72,13 +72,13 @@ public class ViewDanhMuc extends javax.swing.JFrame {
         danhMuc.setMa(txtMa.getText());
         danhMuc.setTen(txtTen.getText());
         danhMuc.setMoTa(txaMoTa.getText());
-
-        Date ngayTao = dcTao.getDate();
-        danhMuc.setNgayTao(ngayTao);
-
-        Date ngaySua = dcSua.getDate();
-        danhMuc.setNgaySua(ngaySua);
-        danhMuc.setTrangThai(true);
+//        Date ngayTao = dcTao.getDate();
+//        danhMuc.setNgayTao(ngayTao);
+//        Date ngaySua = dcSua.getDate();
+//        danhMuc.setNgaySua(ngaySua);
+        danhMuc.setNgayTao(dcTao.getDate());
+        danhMuc.setNgaySua(dcSua.getDate());
+        danhMuc.setTrangThai(rioHoatDong.isSelected());
         return danhMuc;
     }
 
@@ -89,18 +89,16 @@ public class ViewDanhMuc extends javax.swing.JFrame {
                 return;
             }
             DanhMuc dm = getDanhMuc();
-            service.add(dm);           
-            
-
+            service.add(dm);
+            danhMucs = service.getAll();
             JOptionPane.showMessageDialog(this, "thêm thành công");
             clearForm();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "thêm thất bại");
+            throw new RuntimeException(e);
         }
 
     }
-    
-    
+
     private void updateDanhMuc() {
         try {
             int check = JOptionPane.showConfirmDialog(this, "bạn có muốn update không");
@@ -111,10 +109,10 @@ public class ViewDanhMuc extends javax.swing.JFrame {
             int row = tblDanhMuc.getSelectedRow();
             String id = service.getAll().get(row).getId();
             service.update(dm, id);
-          
+
             loadTableDanhMuc();
             JOptionPane.showMessageDialog(this, "Update thành công");
-            
+
             clearForm();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Update thất bại");
@@ -404,8 +402,8 @@ public class ViewDanhMuc extends javax.swing.JFrame {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
-       updateDanhMuc();
-       loadTableDanhMuc();
+        updateDanhMuc();
+        loadTableDanhMuc();
 
     }//GEN-LAST:event_btnSuaActionPerformed
 
