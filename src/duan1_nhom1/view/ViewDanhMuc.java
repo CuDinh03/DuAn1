@@ -43,7 +43,7 @@ public class ViewDanhMuc extends javax.swing.JFrame {
                 status = "Hết";
             }
              Object[] rowData = {
-             
+                danhMuc.getId(),
                 danhMuc.getMa(),
                 danhMuc.getTen(),
                 danhMuc.getMoTa(),
@@ -63,6 +63,7 @@ public class ViewDanhMuc extends javax.swing.JFrame {
         txaMoTa.setText("");
         dcTao.setDate(null);
         dcSua.setDate(null);
+        TrangThaiGroup.clearSelection();
         
     }
 
@@ -77,7 +78,7 @@ public class ViewDanhMuc extends javax.swing.JFrame {
 
         Date ngaySua = dcSua.getDate();
         danhMuc.setNgaySua(ngaySua);
-//        danhMuc.isTrangThai(true);
+        danhMuc.setTrangThai(true);
         return danhMuc;
     }
 
@@ -235,11 +236,11 @@ public class ViewDanhMuc extends javax.swing.JFrame {
 
         TrangThaiGroup.add(rioHoatDong);
         rioHoatDong.setForeground(new java.awt.Color(60, 63, 65));
-        rioHoatDong.setText("Hoạt động");
+        rioHoatDong.setText("Còn");
 
         TrangThaiGroup.add(rioNgungHoatDong);
         rioNgungHoatDong.setForeground(new java.awt.Color(60, 63, 65));
-        rioNgungHoatDong.setText("Ngừng hoạt động");
+        rioNgungHoatDong.setText("Hết");
         rioNgungHoatDong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rioNgungHoatDongActionPerformed(evt);
