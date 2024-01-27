@@ -158,55 +158,6 @@ public class TranferData {
             dtoList.add(convertToDto(entity));
         }
         return dtoList;
-    }
-    
-    public static ChiTietSanPhamDto convertToDto(ChiTietSanPham model) {
-        ChiTietSanPhamDto dto = new ChiTietSanPhamDto();
-        if (model.getMa() != null) dto.setMa(model.getMa());
-        if (model.getIdSanPham() != null) dto.setIdSanPham(model.getIdSanPham());
-        if (model.getIdKichThuoc() != null) dto.setIdKichThuoc(model.getIdKichThuoc());
-        if (model.getIdThuongHieu() != null) dto.setIdThuongHieu(model.getIdThuongHieu());
-        if (model.getIdMauSac() != null) dto.setIdMauSac(model.getIdMauSac());
-        if (model.getIdChatLieu() != null) dto.setIdChatLieu(model.getIdChatLieu());
-        if (model.getIdDanhMuc() != null) dto.setIdDanhMuc(model.getIdDanhMuc());
-        if (model.getGiaNhap() != null) dto.setGiaNhap(model.getGiaNhap());
-        if (model.getGiaBan() != null) dto.setGiaBan(model.getGiaBan());
-        model.setSoLuong(dto.getSoLuong());
-        if (model.getNgayTao() != null) dto.setNgayTao(model.getNgayTao());
-        if (model.getNgaySua() != null) dto.setNgaySua(model.getNgaySua());
-        if (model.getNgayNhap() != null) dto.setNgayNhap(model.getNgayNhap());
-        dto.setTrangThai(model.isTrangThai());
-        return dto;
-    }
-
-    public static ChiTietSanPham convertToEntity(ChiTietSanPhamDto dto) {
-        ChiTietSanPham model = new ChiTietSanPham();
-        model.setId(UUID.randomUUID()); // Assuming you generate a new UUID for a new entity
-        if (dto.getMa() != null) model.setMa(dto.getMa());
-        if (dto.getIdSanPham() != null) model.setIdSanPham(dto.getIdSanPham());
-        if (dto.getIdKichThuoc() != null) model.setIdKichThuoc(dto.getIdKichThuoc());
-        if (dto.getIdThuongHieu() != null) model.setIdThuongHieu(dto.getIdThuongHieu());
-        if (dto.getIdMauSac() != null) model.setIdMauSac(dto.getIdMauSac());
-        if (dto.getIdChatLieu() != null) model.setIdChatLieu(dto.getIdChatLieu());
-        if (dto.getIdDanhMuc() != null) model.setIdDanhMuc(dto.getIdDanhMuc());
-        if (dto.getGiaNhap() != null) model.setGiaNhap(dto.getGiaNhap());
-        if (dto.getGiaBan() != null) model.setGiaBan(dto.getGiaBan());
-        dto.setSoLuong(model.getSoLuong());
-        if (dto.getNgayTao() != null) model.setNgayTao(dto.getNgayTao());
-        if (dto.getNgaySua() != null) model.setNgaySua(dto.getNgaySua());
-        if (dto.getNgayNhap() != null) model.setNgayNhap(dto.getNgayNhap());
-        model.setTrangThai(dto.isTrangThai());
-        return model;
-    }
-
-
-    public static List<ChiTietSanPham> convertListToEntity(List<ChiTietSanPhamDto> dtoList) {
-        List<ChiTietSanPham> entityList = new ArrayList<>();
-        for (ChiTietSanPhamDto dto : dtoList) {
-            entityList.add(convertToEntity(dto));
-        }
-        return entityList;
-    }
-   
+    }  
 
 }

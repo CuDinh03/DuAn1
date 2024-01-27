@@ -1,6 +1,10 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package duan1_nhom1.repository;
 import duan1_nhom1.model.DanhMuc;
+import duan1_nhom1.service.DanhMucService;
 import duan1_nhom1.utils.JdbcHelper;
 import java.util.ArrayList;
 import java.sql.PreparedStatement;
@@ -15,7 +19,7 @@ import java.util.List;
  * @author anhtuanle
  */
 public class DanhMucRepository {
-
+    List<DanhMuc> list = new ArrayList<>();
     Connection conn = JdbcHelper.getConnection();
 
     public List<DanhMuc> getAll() {
@@ -43,13 +47,13 @@ public class DanhMucRepository {
                 Date ngaySua = rs.getDate("ngay_tao");
                 Boolean trangThai = rs.getBoolean("trang_thai");
                 DanhMuc danhMuc = new DanhMuc(id, ma, ten, moTa, ngayTao, ngaySua, trangThai);
-                listDanhMuc.add(danhMuc);
+                list.add(danhMuc);
             }
         } catch (SQLException ex) {
             System.out.println("Lỗi kết nối");
             ex.printStackTrace();
         }
-        return listDanhMuc;
+        return list;
     }
 
     public String getTenById(String id) {
