@@ -39,6 +39,7 @@ public class BanHangFrame extends javax.swing.JFrame {
         loadBanHangGH(sPChiTietService.getAll());
         loadBanHangSp(sPChiTietService.getAll());
     }
+   
 
     public void loadBanHangGH(List<ChiTietSanPhamDto> list) {
         defaultTableModel = (DefaultTableModel) tbl_banhanggh.getModel();

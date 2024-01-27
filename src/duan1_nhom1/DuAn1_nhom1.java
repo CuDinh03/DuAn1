@@ -14,6 +14,7 @@ import duan1_nhom1.view.MainJFrame;
 public class DuAn1_nhom1 {
 
     public static void main(String args[]) {  
+                
                 new MainJFrame().setVisible(true);
     }
 

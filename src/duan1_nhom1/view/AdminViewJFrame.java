@@ -4,6 +4,12 @@
  */
 package duan1_nhom1.view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.Timer;
+
 /**
  *
  * @author maccuacu
@@ -16,7 +22,7 @@ public class AdminViewJFrame extends javax.swing.JFrame {
     public AdminViewJFrame() {
         initComponents();
     }
-
+ 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
