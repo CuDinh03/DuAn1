@@ -42,6 +42,9 @@ public class BaoCaoJPanel extends javax.swing.JPanel {
         jMonthChooser1 = new com.toedter.calendar.JMonthChooser();
         jYearChooser1 = new com.toedter.calendar.JYearChooser();
 
+        jPanel1.setBackground(new java.awt.Color(203, 233, 162));
+
+        jpnChart1.setBackground(new java.awt.Color(203, 233, 162));
         jpnChart1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout jpnChart1Layout = new javax.swing.GroupLayout(jpnChart1);
@@ -55,6 +58,7 @@ public class BaoCaoJPanel extends javax.swing.JPanel {
             .addGap(0, 244, Short.MAX_VALUE)
         );
 
+        jpnChart2.setBackground(new java.awt.Color(203, 233, 162));
         jpnChart2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout jpnChart2Layout = new javax.swing.GroupLayout(jpnChart2);
@@ -68,6 +72,7 @@ public class BaoCaoJPanel extends javax.swing.JPanel {
             .addGap(0, 229, Short.MAX_VALUE)
         );
 
+        jpnMenu.setBackground(new java.awt.Color(203, 233, 162));
         jpnMenu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jPanel2.setPreferredSize(new java.awt.Dimension(100, 77));

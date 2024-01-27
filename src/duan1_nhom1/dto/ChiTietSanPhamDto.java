@@ -5,34 +5,35 @@
 package duan1_nhom1.dto;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.Date;
-import java.util.UUID;
 
 /**
  *
  * @author maccuacu
  */
 public class ChiTietSanPhamDto {
-     private String ma;
-    private UUID idSanPham;
-    private UUID idKichThuoc;
-    private UUID idThuongHieu;
-    private UUID idMauSac;
-    private UUID idChatLieu;
-    private UUID idDanhMuc;
+
+    private String id;
+    private String ma;
+    private String idSanPham;
+    private String idKichThuoc;
+    private String idThuongHieu;
+    private String idMauSac;
+    private String idChatLieu;
+    private String idDanhMuc;
     private BigDecimal giaNhap;
     private BigDecimal giaBan;
-    private int soLuong;
+    private Integer soLuong;
     private Date ngayTao;
     private Date ngaySua;
     private Date ngayNhap;
-    private boolean trangThai;
+    private Boolean trangThai;
 
     public ChiTietSanPhamDto() {
     }
 
-    public ChiTietSanPhamDto(String ma, UUID idSanPham, UUID idKichThuoc, UUID idThuongHieu, UUID idMauSac, UUID idChatLieu, UUID idDanhMuc, BigDecimal giaNhap, BigDecimal giaBan, int soLuong, Date ngayTao, Date ngaySua, Date ngayNhap, boolean trangThai) {
+    public ChiTietSanPhamDto(String id, String ma, String idSanPham, String idKichThuoc, String idThuongHieu, String idMauSac, String idChatLieu, String idDanhMuc, BigDecimal giaNhap, BigDecimal giaBan, Integer soLuong, Date ngayTao, Date ngaySua, Date ngayNhap, Boolean trangThai) {
+        this.id = id;
         this.ma = ma;
         this.idSanPham = idSanPham;
         this.idKichThuoc = idKichThuoc;
@@ -49,6 +50,14 @@ public class ChiTietSanPhamDto {
         this.trangThai = trangThai;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getMa() {
         return ma;
     }
@@ -57,51 +66,51 @@ public class ChiTietSanPhamDto {
         this.ma = ma;
     }
 
-    public UUID getIdSanPham() {
+    public String getIdSanPham() {
         return idSanPham;
     }
 
-    public void setIdSanPham(UUID idSanPham) {
+    public void setIdSanPham(String idSanPham) {
         this.idSanPham = idSanPham;
     }
 
-    public UUID getIdKichThuoc() {
+    public String getIdKichThuoc() {
         return idKichThuoc;
     }
 
-    public void setIdKichThuoc(UUID idKichThuoc) {
+    public void setIdKichThuoc(String idKichThuoc) {
         this.idKichThuoc = idKichThuoc;
     }
 
-    public UUID getIdThuongHieu() {
+    public String getIdThuongHieu() {
         return idThuongHieu;
     }
 
-    public void setIdThuongHieu(UUID idThuongHieu) {
+    public void setIdThuongHieu(String idThuongHieu) {
         this.idThuongHieu = idThuongHieu;
     }
 
-    public UUID getIdMauSac() {
+    public String getIdMauSac() {
         return idMauSac;
     }
 
-    public void setIdMauSac(UUID idMauSac) {
+    public void setIdMauSac(String idMauSac) {
         this.idMauSac = idMauSac;
     }
 
-    public UUID getIdChatLieu() {
+    public String getIdChatLieu() {
         return idChatLieu;
     }
 
-    public void setIdChatLieu(UUID idChatLieu) {
+    public void setIdChatLieu(String idChatLieu) {
         this.idChatLieu = idChatLieu;
     }
 
-    public UUID getIdDanhMuc() {
+    public String getIdDanhMuc() {
         return idDanhMuc;
     }
 
-    public void setIdDanhMuc(UUID idDanhMuc) {
+    public void setIdDanhMuc(String idDanhMuc) {
         this.idDanhMuc = idDanhMuc;
     }
 
@@ -121,11 +130,11 @@ public class ChiTietSanPhamDto {
         this.giaBan = giaBan;
     }
 
-    public int getSoLuong() {
+    public Integer getSoLuong() {
         return soLuong;
     }
 
-    public void setSoLuong(int soLuong) {
+    public void setSoLuong(Integer soLuong) {
         this.soLuong = soLuong;
     }
 
@@ -153,14 +162,12 @@ public class ChiTietSanPhamDto {
         this.ngayNhap = ngayNhap;
     }
 
-    public boolean isTrangThai() {
+    public Boolean getTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(boolean trangThai) {
+    public void setTrangThai(Boolean trangThai) {
         this.trangThai = trangThai;
     }
-
-    
 
 }

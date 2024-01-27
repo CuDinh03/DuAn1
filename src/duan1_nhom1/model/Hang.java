@@ -4,7 +4,6 @@
  */
 package duan1_nhom1.model;
 import java.util.Date;
-import java.util.UUID;
 /**
  *
  * @author maccuacu
@@ -16,12 +15,12 @@ public class Hang {
     private String moTa;
     private Date ngayTao;
     private Date ngaySua;
-    private boolean trangThai;
+    private Boolean trangThai;
 
     public Hang() {
     }
 
-    public Hang(String id, String ma, String ten, String moTa, Date ngayTao, Date ngaySua, boolean trangThai) {
+    public Hang(String id, String ma, String ten, String moTa, Date ngayTao, Date ngaySua, Boolean trangThai) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
@@ -79,13 +78,15 @@ public class Hang {
         this.ngaySua = ngaySua;
     }
 
-    public boolean isTrangThai() {
+    public Boolean getTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(boolean trangThai) {
+    public void setTrangThai(Boolean trangThai) {
         this.trangThai = trangThai;
     }
+
+
 
     
     @Override

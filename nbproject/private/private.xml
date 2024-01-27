@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/bachh/DuAn1/src/duan1_nhom1/view/ViewDanhMuc.java</file>
-            <file>file:/C:/Users/bachh/DuAn1/src/duan1_nhom1/view/VoucherFrame.java</file>
-            <file>file:/C:/Users/bachh/DuAn1/src/duan1_nhom1/repository/DanhMucRepository.java</file>
-            <file>file:/C:/Users/bachh/DuAn1/src/duan1_nhom1/repository/VoucherRepo.java</file>
-            <file>file:/C:/Users/bachh/DuAn1/src/duan1_nhom1/service/DanhMucService.java</file>
-            <file>file:/C:/Users/bachh/DuAn1/src/duan1_nhom1/view/KhachHangJPanel.java</file>
+            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/DuAn1_nhom1.java</file>
+            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/view/TrangChuJPanel.java</file>
+            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/repository/HoaDonRepository.java</file>
+            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/view/BanHangFrame.java</file>
         </group>
     </open-files>
 </project-private>

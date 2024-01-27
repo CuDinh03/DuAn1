@@ -23,7 +23,7 @@ public class DanhMucRepository {
     Connection conn = JdbcHelper.getConnection();
 
     public List<DanhMuc> getAll() {
-
+            List<DanhMuc> listDanhMuc = new ArrayList<>();
         String sql = """
                      SELECT [id]
                            ,[ma]
@@ -142,6 +142,61 @@ public class DanhMucRepository {
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+    }
+    public void update(DanhMuc danhMuc, String id) {
+        List<DanhMuc> listDanhMuc = new ArrayList();
+        String sql = """
+                UPDATE [dbo].[danh_muc_san_pham]
+                SET [ma] = ?,
+                    [ten] = ?,
+                    [mo_ta] = ?,
+                    [ngay_tao] = ?,
+                    [ngay_sua] = ?,
+                    [trang_thai] = ?
+                WHERE id = ?;
+                """;
+
+        try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+
+            // Set parameters
+            ps.setObject(1, danhMuc.getMa());
+            ps.setObject(2, danhMuc.getTen());
+            ps.setObject(3, danhMuc.getMoTa());
+            ps.setObject(4, danhMuc.getNgayTao());
+            ps.setObject(5, danhMuc.getNgaySua());
+            ps.setObject(6, danhMuc.getTrangThai());
+            ps.setObject(7, danhMuc.getId());
+            ps.setObject(7, id);
+            // Execute the update
+            int chek = ps.executeUpdate();
+
+            // Check the result
+            if (chek > 0) {
+                System.out.println("update thành công ");
+            } else {
+                System.out.println("update thất bại  ");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Error updating danh muc.", e);
+        }
+    }
+
+    public void delete(String id) {
+        List<DanhMuc> listDanhMuc = new ArrayList();
+        String sql = "DELETE FROM danh_muc_san_pham WHERE id = ?";
+
+        try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setObject(1, id);
+            int chek = ps.executeUpdate();
+
+            if (chek > 0) {
+                System.out.println("Xóa thành công ");
+            } else {
+                System.out.println("Xóa thất bại ");
+            }
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
         }
     }
 }

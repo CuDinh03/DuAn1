@@ -24,23 +24,8 @@ public class DanhMucService implements IService<DanhMuc> {
     }
 
     @Override
-    public void update(DanhMuc t, String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void delete(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
     public List<DanhMuc> getAll() {
          return danhMucRepository.getAll();
-    }
-
-    @Override
-    public DanhMuc findById(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     public String getTenById(String id) {
@@ -54,4 +39,17 @@ public class DanhMucService implements IService<DanhMuc> {
     public List<String> getAllId() {
         return danhMucRepository.getAllId();
     }
+
+    @Override
+    public void update(DanhMuc danhMuc, String id) {
+        danhMucRepository.update(danhMuc, id);}
+
+    @Override
+    public void delete(String id) {
+        danhMucRepository.delete(id);}
+    @Override
+    public DanhMuc findById(String id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }
