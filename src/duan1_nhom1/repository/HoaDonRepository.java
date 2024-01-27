@@ -21,8 +21,8 @@ public class HoaDonRepository {
 
     public void createHoaDon(HoaDon hoaDon) {
         try {
-            String query = "INSERT INTO hoa_don (id, id_kh, id_nv, ma, ngay_mua, tong_tien, trang_thai, ngay_tao, ngay_sua) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO hoa_don (id, id_kh, id_nv, ma, ngay_mua, tong_tien, trang_thai, ngay_tao, ngay_sua) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setObject(1, hoaDon.getId());
                 preparedStatement.setObject(2, hoaDon.getIdKhachHang());
@@ -41,16 +41,15 @@ public class HoaDonRepository {
         }
     }
 
-    public HoaDon getHoaDonById(String  hoaDonId) {
+    public HoaDon getHoaDonById(String hoaDonId) {
         String query = "SELECT * FROM hoa_don WHERE id = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setObject(1, hoaDonId);
-
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    String  id =  resultSet.getString("id");
+                    String id = resultSet.getString("id");
                     String id_kh = resultSet.getString("id_kh");
-                    String id_Nv =  resultSet.getString("id_Nv");
+                    String id_Nv = resultSet.getString("id_Nv");
                     String ma = resultSet.getString("ma");
                     Date ngay_mua = resultSet.getDate("ngay_mua");
                     Double tong_tien = resultSet.getDouble("tong_tien");
@@ -69,8 +68,8 @@ public class HoaDonRepository {
 
     public void updateHoaDon(HoaDon hoaDon) {
         try {
-            String query = "UPDATE hoa_don SET id_kh = ?, id_Nv =?, ma = ?, ngay_mua = ?, " +
-                    "tong_tien = ?, trang_thai = ?, ngay_sua = ? WHERE id = ?";
+            String query = "UPDATE hoa_don SET id_kh = ?, id_Nv =?, ma = ?, ngay_mua = ?, "
+                    + "tong_tien = ?, trang_thai = ?, ngay_sua = ? WHERE id = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setObject(1, hoaDon.getIdKhachHang());
                 preparedStatement.setObject(2, hoaDon.getIdNv());
@@ -88,7 +87,7 @@ public class HoaDonRepository {
         }
     }
 
-    public void deleteHoaDon(String  hoaDonId) {
+    public void deleteHoaDon(String hoaDonId) {
         try {
             String query = "DELETE FROM hoa_don WHERE id = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -103,20 +102,18 @@ public class HoaDonRepository {
     public List<HoaDon> getAllHoaDon() {
         List<HoaDon> hoaDons = new ArrayList<>();
         String query = "SELECT * FROM hoa_don";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query);
-             ResultSet resultSet = preparedStatement.executeQuery()) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query); ResultSet resultSet = preparedStatement.executeQuery()) {
 
             while (resultSet.next()) {
-                   String  id =  resultSet.getString("id");
-                    String id_kh = resultSet.getString("id_kh");
-                    String id_Nv =  resultSet.getString("id_Nv");
-                    String ma = resultSet.getString("ma");
-                    Date ngay_mua = resultSet.getDate("ngay_mua");
-                    Double tong_tien = resultSet.getDouble("tong_tien");
-                    Boolean trang_thai = resultSet.getBoolean("trang_thai");
-                    Date ngay_tao = resultSet.getDate("ngay_tao");
-                    Date ngay_sua = resultSet.getDate("ngay_sua");
-
+                String id = resultSet.getString("id");
+                String id_kh = resultSet.getString("id_kh");
+                String id_Nv = resultSet.getString("id_Nv");
+                String ma = resultSet.getString("ma");
+                Date ngay_mua = resultSet.getDate("ngay_mua");
+                Double tong_tien = resultSet.getDouble("tong_tien");
+                Boolean trang_thai = resultSet.getBoolean("trang_thai");
+                Date ngay_tao = resultSet.getDate("ngay_tao");
+                Date ngay_sua = resultSet.getDate("ngay_sua");
 
                 HoaDon hoaDon = new HoaDon(id, id_kh, id_Nv, ma, ngay_mua, tong_tien, trang_thai, ngay_tao, ngay_sua);
                 hoaDons.add(hoaDon);
@@ -126,7 +123,42 @@ public class HoaDonRepository {
         }
         return hoaDons;
     }
+
+    public List<HoaDon> timKhachTheoHD(String maKhach) {
+        String sql = """
+        DECLARE @maKhach NVARCHAR(255)
+         SET @maKhach =?
+        select Hoa_Don.ma,Hoa_Don.ngay_mua,Hoa_Don.tong_tien,Hoa_Don.ngay_tao,Hoa_Don.trang_thai
+         from Hoa_Don join Khach_Hang on Hoa_Don.id_kh= Khach_Hang.id
+        WHERE (Khach_Hang.ma LIKE '%' + @maKhach + '%' OR @maKhach IS NULL);
+        """;
+
+        try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+            // Set parameters
+            ps.setString(1, maKhach);
+            // Execute query
+            try (ResultSet rs = ps.executeQuery()) {
+                List<HoaDon> hoadonList = new ArrayList<>();
+                while (rs.next()) {
+                    HoaDon hoaDon = new HoaDon();
+                    hoaDon.setId(rs.getString("id"));
+                    hoaDon.setIdKhachHang(rs.getString("id_kh"));
+                    hoaDon.setMa(rs.getString("ma"));
+                    hoaDon.setIdNv(rs.getString("id_nv"));
+                    hoaDon.setNgayMua(rs.getDate("ngay_mua"));
+                    hoaDon.setTongTien(rs.getDouble("tong_tien"));
+                    hoaDon.setNgayTao(rs.getDate("ngay_tao"));
+                    hoaDon.setNgaySua(rs.getDate("ngay_sua"));
+                    hoaDon.setTrangThai(rs.getBoolean("trang_thai"));
+                    hoadonList.add(hoaDon);
+                }
+                return hoadonList;
+            }
+
+        } catch (Exception e) {
+            // Handle the exception more gracefully, log it or throw a custom exception
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
-
-    
-

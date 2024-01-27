@@ -49,43 +49,37 @@ public class HoaDonService implements IService<HoaDonDto>{
         return TranferData.convertToDto(repo.getHoaDonById(id));
     }
 
-   public List<HoaDon> timKiemKhachTheoHoaDon(String ma) {
+   public List<HoaDon> searhListNhanVien(String maKhach) {
         String sql = """
-                 DECLARE @ma NVARCHAR(255)
-                 SET @ma =?
-                 select Hoa_Don.ma,Hoa_Don.ngay_mua,Hoa_Don.tong_tien,Hoa_Don.trang_thai
-                 from Khach_Hang join Hoa_Don on Hoa_Don.id_kh=Khach_Hang.id
-                 WHERE (Khach_Hang.ma LIKE '%' + @ma + '%' OR @ma IS NULL); 
-               
-                 """;
-
+            DECLARE @maKhach NVARCHAR(255)
+                   SET @maKhach =?
+                  select Hoa_Don.ma,Hoa_Don.ngay_mua,Hoa_Don.tong_tien,Hoa_Don.ngay_tao,Hoa_Don.trang_thai
+                   from Hoa_Don join Khach_Hang on Hoa_Don.id_kh= Khach_Hang.id
+                  WHERE (Khach_Hang.ma LIKE '%' + @maKhach + '%' OR @maKhach IS NULL);
+            """;
         try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
-
-            ps.setObject(1, ma);
-
-            try (ResultSet rs = ps.executeQuery()) {
-                List<HoaDon> list = new ArrayList<>();
-                while (rs.next()) {
-                    HoaDon hd = new HoaDon();
-                    hd.setId(rs.getString(1));
-                    hd.setIdKhachHang(rs.getString(2));
-                    hd.setIdNv(rs.getString(3));
-                    hd.setMa(rs.getString(4));
-//                    hd.setNgayMua(rs.getDate(5));
-                    hd.setTongTien(rs.getDouble(5));
-                    hd.setTrangThai(rs.getBoolean(6));
-                    hd.setNgayTao(rs.getDate(7));
-                    hd.setNgaySua(rs.getDate(8));
-                    list.add(hd);
-                }
-                return list;
+              ps.setString(1, maKhach);
+            ResultSet rs = ps.executeQuery();
+            List<HoaDon> hoadon = new ArrayList<>();
+            while (rs.next()) {
+                HoaDon hd = new HoaDon();
+                hd.setId(rs.getString(1));
+                hd.setIdKhachHang(rs.getString(2));
+                hd.setMa(rs.getString(3));
+                hd.setIdNv(rs.getString(4));
+                 hd.setNgayMua(rs.getDate(5));
+                hd.setTongTien(rs.getDouble(6));
+               hd.setNgayTao(rs.getDate(7));
+               hd.setNgaySua(rs.getDate(8));
+                hd.setTrangThai(rs.getBoolean(9));
+                hoadon.add(hd);
             }
-
+            return hoadon;
         } catch (Exception e) {
-            // Log the exception using a logging framework like log4j or slf4j
             e.printStackTrace();
         }
         return null;
+
     }
   
 
