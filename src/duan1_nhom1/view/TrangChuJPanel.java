@@ -1,7 +1,6 @@
 package duan1_nhom1.view;
 
 import duan1_nhom1.dto.ChiTietSanPhamDto;
-import duan1_nhom1.dto.ChiTietSanPhamDto;
 import duan1_nhom1.dto.HoaDonDto;
 import duan1_nhom1.model.ChiTietSanPham;
 import duan1_nhom1.model.HoaDon;
@@ -48,7 +47,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         initComponents();
 
         showDateHoaDon();
-//        loadBanHangGH(sPChiTietService.getAll());
+        loadBanHangGH(sPChiTietService.getAll());
         loadBanHangSp(sPChiTietService.getAll());
     }
 
@@ -66,33 +65,33 @@ public class TrangChuJPanel extends javax.swing.JPanel {
 
         }
     }
-  public void loadBanHangGH(List<ChiTietSanPham> list) {
+  public void loadBanHangGH(List<ChiTietSanPhamDto> list) {
         defaultTableModel = (DefaultTableModel) tbl_banhanggh.getModel();
         defaultTableModel.setRowCount(0);
         int count = 1;
-        for (ChiTietSanPham chiTietSanPham : list) {
+        for (ChiTietSanPhamDto chiTietSanPham : list) {
             defaultTableModel.addRow(new Object[]{
                 count++,
-                this.sanPhamService.getTenById(chiTietSanPham.getIdSanPham().toString()),
-                this.hangService.getTenById(chiTietSanPham.getIdThuongHieu().toString()),
-                this.kichCoService.getTenById(chiTietSanPham.getIdKichThuoc().toString()),
-                this.mauSacService.getTenById(chiTietSanPham.getIdMauSac().toString()),
+                this.sanPhamService.getTenById(chiTietSanPham.getIdSanPham()),
+                this.hangService.getTenById(chiTietSanPham.getIdThuongHieu()),
+                this.kichCoService.getTenById(chiTietSanPham.getIdKichThuoc()),
+                this.mauSacService.getTenById(chiTietSanPham.getIdMauSac()),
                 chiTietSanPham.getGiaBan(),});
         }
     }
     
-       public void loadBanHangSp(List<ChiTietSanPham> list) {
+       public void loadBanHangSp(List<ChiTietSanPhamDto> list) {
         defaultTableModel = (DefaultTableModel) tbl_banhangsp.getModel();
         defaultTableModel.setRowCount(0);
         int count = 1;
-        for (ChiTietSanPham chiTietSanPham : list) {
+        for (ChiTietSanPhamDto chiTietSanPham : list) {
             defaultTableModel.addRow(new Object[]{
                 count++,
-                this.sanPhamService.getTenById(chiTietSanPham.getIdSanPham().toString()),
-                this.hangService.getTenById(chiTietSanPham.getIdThuongHieu().toString()),
-                this.kichCoService.getTenById(chiTietSanPham.getIdKichThuoc().toString()),
-                this.mauSacService.getTenById(chiTietSanPham.getIdMauSac().toString()),
-                this.danhMucService.getTenById(chiTietSanPham.getIdDanhMuc().toString()),
+                this.sanPhamService.getTenById(chiTietSanPham.getIdSanPham()),
+                this.hangService.getTenById(chiTietSanPham.getIdThuongHieu()),
+                this.kichCoService.getTenById(chiTietSanPham.getIdKichThuoc()),
+                this.mauSacService.getTenById(chiTietSanPham.getIdMauSac()),
+                this.danhMucService.getTenById(chiTietSanPham.getIdDanhMuc()),
                 chiTietSanPham.getGiaBan(),});
         }
     }
@@ -145,10 +144,8 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jButton12 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         jPanel2.setBackground(new java.awt.Color(203, 233, 162));
 
@@ -197,7 +194,6 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         jLabel4.setText("Sản phẩm");
 
         tbl_banhanggh.setModel(new javax.swing.table.DefaultTableModel(
-        tbl_banhanggh.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -208,7 +204,6 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                 "STT", "Tên sản phẩm", "Hãng", "Kích cỡ", "Màu sắc", "Số lượng", "Đơn giá"
             }
         ));
-        jScrollPane3.setViewportView(tbl_banhanggh);
         jScrollPane3.setViewportView(tbl_banhanggh);
 
         jButton8.setText("Tìm kiếm");
@@ -386,9 +381,9 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                 .addGap(75, 75, 75))
         );
 
-        jButton1.setText("Update");
+        jButton4.setText("Update");
 
-        jButton2.setText("Xóa");
+        jButton5.setText("Xóa");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -422,8 +417,8 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jButton1)
-                                            .addComponent(jButton2))))))))
+                                            .addComponent(jButton4)
+                                            .addComponent(jButton5))))))))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(15, Short.MAX_VALUE))
@@ -447,9 +442,9 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(29, 29, 29)
-                                .addComponent(jButton1)
+                                .addComponent(jButton4)
                                 .addGap(49, 49, 49)
-                                .addComponent(jButton2)))
+                                .addComponent(jButton5)))
                         .addGap(14, 14, 14)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
@@ -505,11 +500,11 @@ public class TrangChuJPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JComboBox<String> jComboBox1;
