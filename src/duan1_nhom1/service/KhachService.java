@@ -5,6 +5,7 @@ import duan1_nhom1.model.Khach;
 import duan1_nhom1.repository.KhachRepo;
 import duan1_nhom1.utils.JdbcHelper;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -112,6 +113,26 @@ public class KhachService implements IService<Khach> {
         }
         return null;
     }
-
+public Khach getHoaDonById(String idKhach) {
+        String sql = "SELECT * FROM Khach_Hang WHERE ma =?";
+        try (Connection con = JdbcHelper.getConnection(); PreparedStatement stm = con.prepareStatement(sql)) {
+            stm.setObject(1, idKhach);
+            try (ResultSet resultSet = stm.executeQuery()) {
+                if (resultSet.next()) {
+                    String id = resultSet.getString("id");
+                    String ma = resultSet.getString("ma");
+                    String ten = resultSet.getString("ten");
+                    String sdt = resultSet.getString("sdt");
+                    Date ngay_tao = resultSet.getDate("ngay_tao");
+                    Date ngay_sua = resultSet.getDate("ngay_sua");
+                    Boolean trang_thai = resultSet.getBoolean("trang_thai");
+                    return new Khach(id, ma, ten, sdt, ngay_tao, ngay_sua, trang_thai);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
   
 }

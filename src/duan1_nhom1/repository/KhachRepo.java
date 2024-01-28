@@ -56,7 +56,7 @@ public class KhachRepo {
     }
 
     public Khach getHoaDonById(String idKhach) {
-        String sql = "SELECT * FROM hoa_don WHERE id = ?";
+        String sql = "SELECT * FROM Khach_Hang WHERE ma =?";
         try (Connection con = JdbcHelper.getConnection(); PreparedStatement stm = con.prepareStatement(sql)) {
             stm.setObject(1, idKhach);
             try (ResultSet resultSet = stm.executeQuery()) {
@@ -233,7 +233,7 @@ public class KhachRepo {
     }
     
     public Khach findById(String id ){
-        String sql = "Select * from [dbo].[Khach_hang] where id = ?";
+        String sql = "Select * from [dbo].[Khach_hang] where ma = ?";
         try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, id);
             ResultSet rs = ps.executeQuery();
