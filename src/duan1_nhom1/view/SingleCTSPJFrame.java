@@ -11,6 +11,7 @@ import duan1_nhom1.service.HangService;
 import duan1_nhom1.service.KichCoService;
 import duan1_nhom1.service.MauSacService;
 import duan1_nhom1.service.SPChiTietService;
+import duan1_nhom1.service.SanPhamService;
 import javax.swing.WindowConstants;
 
 /**
@@ -25,6 +26,7 @@ public class SingleCTSPJFrame extends javax.swing.JFrame {
     private KichCoService kcService = new KichCoService();
     private MauSacService msService = new MauSacService();
     private DanhMucService dmService = new DanhMucService();
+    private SanPhamService spService = new SanPhamService();
 
     /**
      * Creates new form SingleCTSPJFrame
@@ -39,11 +41,11 @@ public class SingleCTSPJFrame extends javax.swing.JFrame {
 
     public void loadForm(ChiTietSanPhamDto ctsp) {
         ctsp = this.service.findByMa(ctsp.getMa());
-        this.txtDm.setText(dmService.getTenById(ctsp.getIdChatLieu()));
-        this.txtHang.setText(hService.getTenById(ctsp.getIdChatLieu()));
-        this.txtMs.setText(msService.getTenById(ctsp.getIdChatLieu()));
-        this.txtSize.setText(kcService.getTenById(ctsp.getIdChatLieu()));
-        this.txtTenSP.setText(clService.findById(ctsp.getIdChatLieu()).getTen());
+        this.txtDm.setText(dmService.getTenById(ctsp.getIdDanhMuc()));
+        this.txtHang.setText(hService.getTenById(ctsp.getIdThuongHieu()));
+        this.txtMs.setText(msService.getTenById(ctsp.getIdMauSac()));
+        this.txtSize.setText(kcService.getTenById(ctsp.getIdKichThuoc()));
+        this.txtTenSP.setText(spService.findById(ctsp.getIdSanPham()).getTen());
         this.txt_giaban.setText(ctsp.getGiaBan().toString());
         this.txt_gianhap.setText(ctsp.getGiaNhap().toString());
         this.txt_masp.setText(ctsp.getMa());
@@ -203,7 +205,9 @@ public class SingleCTSPJFrame extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(188, 188, 188)
-                .addComponent(jLabel9)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel8))
                 .addGap(44, 44, 44)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txt_trangthai, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -243,8 +247,7 @@ public class SingleCTSPJFrame extends javax.swing.JFrame {
                         .addComponent(jLabel4)
                         .addComponent(jLabel5)
                         .addComponent(jLabel6)
-                        .addComponent(jLabel10)
-                        .addComponent(jLabel8))
+                        .addComponent(jLabel10))
                     .addGap(201, 201, 201)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(btn_them1)
@@ -294,7 +297,9 @@ public class SingleCTSPJFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtMs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
                         .addGap(18, 18, 18)
                         .addComponent(txt_trangthai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(147, Short.MAX_VALUE))
@@ -330,8 +335,7 @@ public class SingleCTSPJFrame extends javax.swing.JFrame {
                                             .addGap(17, 17, 17)
                                             .addComponent(jLabel10))
                                         .addComponent(btn_them5))
-                                    .addGap(17, 17, 17)
-                                    .addComponent(jLabel8))
+                                    .addGap(34, 34, 34))
                                 .addComponent(btn_them6, javax.swing.GroupLayout.Alignment.TRAILING))))
                     .addContainerGap(193, Short.MAX_VALUE)))
         );

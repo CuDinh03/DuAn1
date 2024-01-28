@@ -1,7 +1,6 @@
 package duan1_nhom1.view;
 
 import duan1_nhom1.dto.ChiTietSanPhamDto;
-import duan1_nhom1.dto.ChiTietSanPhamDto;
 import duan1_nhom1.dto.HoaDonDto;
 import duan1_nhom1.model.ChiTietSanPham;
 import duan1_nhom1.model.HoaDon;
@@ -48,8 +47,8 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         initComponents();
 
         showDateHoaDon();
-//        loadBanHangGH(sPChiTietService.getAll());
-//        loadBanHangSp(sPChiTietService.getAll();
+        loadBanHangGH(sPChiTietService.getAll());
+        loadBanHangSp(sPChiTietService.getAll());
     }
 
     public void showDateHoaDon() {
@@ -66,11 +65,11 @@ public class TrangChuJPanel extends javax.swing.JPanel {
 
         }
     }
-  public void loadBanHangGH(List<ChiTietSanPham> list) {
+  public void loadBanHangGH(List<ChiTietSanPhamDto> list) {
         defaultTableModel = (DefaultTableModel) tbl_banhanggh.getModel();
         defaultTableModel.setRowCount(0);
         int count = 1;
-        for (ChiTietSanPham chiTietSanPham : list) {
+        for (ChiTietSanPhamDto chiTietSanPham : list) {
             defaultTableModel.addRow(new Object[]{
                 count++,
                 this.sanPhamService.getTenById(chiTietSanPham.getIdSanPham()),
@@ -81,11 +80,11 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         }
     }
     
-       public void loadBanHangSp(List<ChiTietSanPham> list) {
+       public void loadBanHangSp(List<ChiTietSanPhamDto> list) {
         defaultTableModel = (DefaultTableModel) tbl_banhangsp.getModel();
         defaultTableModel.setRowCount(0);
         int count = 1;
-        for (ChiTietSanPham chiTietSanPham : list) {
+        for (ChiTietSanPhamDto chiTietSanPham : list) {
             defaultTableModel.addRow(new Object[]{
                 count++,
                 this.sanPhamService.getTenById(chiTietSanPham.getIdSanPham()),
@@ -145,6 +144,8 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jButton12 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         jPanel2.setBackground(new java.awt.Color(203, 233, 162));
 
@@ -380,6 +381,10 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                 .addGap(75, 75, 75))
         );
 
+        jButton4.setText("Update");
+
+        jButton5.setText("Xóa");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -408,7 +413,12 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                                         .addGap(68, 68, 68)
                                         .addComponent(jButton8))
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 646, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jButton4)
+                                            .addComponent(jButton5))))))))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(15, Short.MAX_VALUE))
@@ -428,7 +438,13 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addComponent(jButton4)
+                                .addGap(49, 49, 49)
+                                .addComponent(jButton5)))
                         .addGap(14, 14, 14)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
@@ -487,6 +503,8 @@ public class TrangChuJPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JComboBox<String> jComboBox1;
