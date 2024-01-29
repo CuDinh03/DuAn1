@@ -5,7 +5,8 @@
 package duan1_nhom1.repository;
 
 /**
- *1
+ * 1
+ *
  * @author maccuacu
  */
 import duan1_nhom1.model.HoaDon;
@@ -21,18 +22,17 @@ public class HoaDonRepository {
 
     public void createHoaDon(HoaDon hoaDon) {
         try {
-            String query = "INSERT INTO hoa_don (id, id_kh, id_nv, ma, ngay_mua, tong_tien, trang_thai, ngay_tao, ngay_sua) "
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO hoa_don ( id_kh, id_nv, ma, ngay_mua, tong_tien, trang_thai, ngay_tao, ngay_sua) "
+                    + "VALUES ( ?, ?, ?, ?,?, ?, ?, ?)";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-                preparedStatement.setObject(1, hoaDon.getId());
-                preparedStatement.setObject(2, hoaDon.getIdKhachHang());
-                preparedStatement.setObject(3, hoaDon.getIdNv());
-                preparedStatement.setString(4, hoaDon.getMa());
-                preparedStatement.setDate(5, new java.sql.Date(hoaDon.getNgayMua().getTime()));
-                preparedStatement.setDouble(6, hoaDon.getTongTien());
-                preparedStatement.setBoolean(7, hoaDon.getTrangThai());
-                preparedStatement.setDate(8, new java.sql.Date(hoaDon.getNgayTao().getTime()));
-                preparedStatement.setDate(9, new java.sql.Date(hoaDon.getNgaySua().getTime()));
+                preparedStatement.setObject(1, hoaDon.getIdKhachHang());
+                preparedStatement.setObject(2, hoaDon.getIdNv());
+                preparedStatement.setString(3, hoaDon.getMa());
+                preparedStatement.setDate(4, new java.sql.Date(hoaDon.getNgayMua().getTime()));
+                preparedStatement.setDouble(5, hoaDon.getTongTien());
+                preparedStatement.setBoolean(6, hoaDon.getTrangThai());
+                preparedStatement.setDate(7, new java.sql.Date(hoaDon.getNgayTao().getTime()));
+                preparedStatement.setDate(8, new java.sql.Date(hoaDon.getNgaySua().getTime()));
 
                 preparedStatement.executeUpdate();
             }
@@ -157,6 +157,56 @@ public class HoaDonRepository {
 
         } catch (Exception e) {
             // Handle the exception more gracefully, log it or throw a custom exception
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<HoaDon> getAllHoaDonStatus() {
+        List<HoaDon> hoaDons = new ArrayList<>();
+        String query = "SELECT * FROM hoa_don where trang_thai = 0";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query); ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
+                String id = resultSet.getString("id");
+                String id_kh = resultSet.getString("id_kh");
+                String id_Nv = resultSet.getString("id_Nv");
+                String ma = resultSet.getString("ma");
+                Date ngay_mua = resultSet.getDate("ngay_mua");
+                Double tong_tien = resultSet.getDouble("tong_tien");
+                Boolean trang_thai = resultSet.getBoolean("trang_thai");
+                Date ngay_tao = resultSet.getDate("ngay_tao");
+                Date ngay_sua = resultSet.getDate("ngay_sua");
+
+                HoaDon hoaDon = new HoaDon(id, id_kh, id_Nv, ma, ngay_mua, tong_tien, trang_thai, ngay_tao, ngay_sua);
+                hoaDons.add(hoaDon);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return hoaDons;
+    }
+
+    public HoaDon getHoaDonByMa(String mahd) {
+        String query = "SELECT * FROM hoa_don WHERE ma = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setObject(1, mahd);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    String id = resultSet.getString("id");
+                    String id_kh = resultSet.getString("id_kh");
+                    String id_Nv = resultSet.getString("id_Nv");
+                    String ma = resultSet.getString("ma");
+                    Date ngay_mua = resultSet.getDate("ngay_mua");
+                    Double tong_tien = resultSet.getDouble("tong_tien");
+                    Boolean trang_thai = resultSet.getBoolean("trang_thai");
+                    Date ngay_tao = resultSet.getDate("ngay_tao");
+                    Date ngay_sua = resultSet.getDate("ngay_sua");
+
+                    return new HoaDon(id, id_kh, id_Nv, ma, ngay_mua, tong_tien, trang_thai, ngay_tao, ngay_sua);
+                }
+            }
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;

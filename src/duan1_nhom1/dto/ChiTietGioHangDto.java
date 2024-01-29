@@ -5,15 +5,15 @@
 package duan1_nhom1.dto;
 
 import java.util.Date;
-import java.util.UUID;
 
 /**
  *
  * @author maccuacu
  */
 public class ChiTietGioHangDto {
-    private UUID idGH;
-    private UUID idSP;
+    private String id;
+    private String idGH;
+    private String idSP;
     private Integer soLuong;
     private Date ngayTao;
     private Date ngaySua;
@@ -22,7 +22,8 @@ public class ChiTietGioHangDto {
     public ChiTietGioHangDto() {
     }
 
-    public ChiTietGioHangDto(UUID idGH, UUID idSP, Integer soLuong, Date ngayTao, Date ngaySua, Boolean trangThai) {
+    public ChiTietGioHangDto(String id, String idGH, String idSP, Integer soLuong, Date ngayTao, Date ngaySua, Boolean trangThai) {
+        this.id = id;
         this.idGH = idGH;
         this.idSP = idSP;
         this.soLuong = soLuong;
@@ -31,19 +32,28 @@ public class ChiTietGioHangDto {
         this.trangThai = trangThai;
     }
 
-    public UUID getIdGH() {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+    
+
+    public String getIdGH() {
         return idGH;
     }
 
-    public void setIdGH(UUID idGH) {
+    public void setIdGH(String idGH) {
         this.idGH = idGH;
     }
 
-    public UUID getIdSP() {
+    public String getIdSP() {
         return idSP;
     }
 
-    public void setIdSP(UUID idSP) {
+    public void setIdSP(String idSP) {
         this.idSP = idSP;
     }
 
@@ -78,6 +88,5 @@ public class ChiTietGioHangDto {
     public void setTrangThai(Boolean trangThai) {
         this.trangThai = trangThai;
     }
-    
     
 }
