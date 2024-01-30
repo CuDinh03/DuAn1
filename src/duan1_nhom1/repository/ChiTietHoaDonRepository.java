@@ -17,17 +17,16 @@ public class ChiTietHoaDonRepository {
 
     public void createChiTietHoaDon(ChiTietHoaDon chiTietHoaDon) {
         try {
-            String query = "INSERT INTO Hoa_Don_Chi_Tiet (id, id_hd, id_sp, so_luong, gia_ban, ngay_tao, ngay_sua, trang_thai) "
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO Hoa_Don_Chi_Tiet ( id_hd, id_sp, so_luong, gia_ban, ngay_tao, ngay_sua, trang_thai) "
+                    + "VALUES ( ?, ?, ?, ?, ?, ?, ?)";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-                preparedStatement.setObject(1, chiTietHoaDon.getId());
-                preparedStatement.setObject(2, chiTietHoaDon.getIdHoaDon());
-                preparedStatement.setObject(3, chiTietHoaDon.getIdSanPham());
-                preparedStatement.setInt(4, chiTietHoaDon.getSoLuong());
-                preparedStatement.setDouble(5, chiTietHoaDon.getGiaBan());
-                preparedStatement.setDate(6, new java.sql.Date(chiTietHoaDon.getNgayTao().getTime()));
-                preparedStatement.setDate(7, new java.sql.Date(chiTietHoaDon.getNgaySua().getTime()));
-                preparedStatement.setBoolean(8, chiTietHoaDon.getTrangThai());
+                preparedStatement.setObject(1, chiTietHoaDon.getIdHoaDon());
+                preparedStatement.setObject(2, chiTietHoaDon.getIdSanPham());
+                preparedStatement.setInt(3, chiTietHoaDon.getSoLuong());
+                preparedStatement.setDouble(4, chiTietHoaDon.getGiaBan());
+                preparedStatement.setDate(5, new java.sql.Date(chiTietHoaDon.getNgayTao().getTime()));
+                preparedStatement.setDate(6, new java.sql.Date(chiTietHoaDon.getNgaySua().getTime()));
+                preparedStatement.setBoolean(7, chiTietHoaDon.getTrangThai());
 
                 preparedStatement.executeUpdate();
             }

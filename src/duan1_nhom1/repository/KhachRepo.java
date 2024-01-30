@@ -1,5 +1,6 @@
 package duan1_nhom1.repository;
 
+import duan1_nhom1.model.HoaDon;
 import duan1_nhom1.model.Khach;
 import duan1_nhom1.utils.JdbcHelper;
 import java.sql.Connection;
@@ -9,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 public class KhachRepo {
 
     private List<Khach> listKhach = new ArrayList<>();
@@ -51,11 +53,33 @@ public class KhachRepo {
                 System.out.println("Thêm thất bại ");
             }
         } catch (Exception e) {
-           throw new RuntimeException(e);
+            throw new RuntimeException(e);
         }
     }
 
-    public void updateKhachHang(Khach kh,String id ) {
+    public Khach getHoaDonById(String idKhach) {
+        String sql = "SELECT * FROM hoa_don WHERE id = ?";
+        try (Connection con = JdbcHelper.getConnection(); PreparedStatement stm = con.prepareStatement(sql)) {
+            stm.setObject(1, idKhach);
+            try (ResultSet resultSet = stm.executeQuery()) {
+                if (resultSet.next()) {
+                    String id = resultSet.getString("id");
+                    String ma = resultSet.getString("ma");
+                    String ten = resultSet.getString("ten");
+                    String sdt = resultSet.getString("sdt");
+                    Date ngay_tao = resultSet.getDate("ngay_tao");
+                    Date ngay_sua = resultSet.getDate("ngay_sua");
+                    Boolean trang_thai = resultSet.getBoolean("trang_thai");
+                    return new Khach(id, ma, ten, sdt, ngay_tao, ngay_sua, trang_thai);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void updateKhachHang(Khach kh, String id) {
 
         String sql = """
                 UPDATE [dbo].[Khach_Hang]
@@ -68,8 +92,7 @@ public class KhachRepo {
                 WHERE id = ?;
                 """;
 
-        try (Connection con = JdbcHelper.getConnection();
-             PreparedStatement ps = con.prepareStatement(sql)) {
+        try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 
             // Set parameters
             ps.setObject(1, kh.getMaKhachHang());
@@ -87,15 +110,15 @@ public class KhachRepo {
             if (chek > 0) {
                 System.out.println("update   thành công ");
             } else {
-               System.out.println("update thất bại  ");
+                System.out.println("update thất bại  ");
             }
         } catch (Exception e) {
             throw new RuntimeException("Error updating KhachHang.", e);
         }
-    
+
     }
 
-    public void deleteKhach(String  id) {
+    public void deleteKhach(String id) {
         String sql = """
          DELETE FROM [dbo].[Khach_Hang]
                     WHERE id=?;
@@ -111,7 +134,7 @@ public class KhachRepo {
                 System.out.println("Xóa  thất bại ");
             }
         } catch (Exception e) {
-           throw new RuntimeException(e);
+            throw new RuntimeException(e);
         }
     }
 
@@ -146,6 +169,7 @@ public class KhachRepo {
         }
         return null;
     }
+
     public List<Khach> timKiem(String ma) {
         String sql = """
                     SELECT [ma]
@@ -177,6 +201,7 @@ public class KhachRepo {
         }
         return null;
     }
+
     public List<Khach> locKhach(Boolean trangThai) {
         String sql = """
                     SELECT [ma]
@@ -208,8 +233,8 @@ public class KhachRepo {
         }
         return null;
     }
-    
-    public Khach findById(String id ){
+
+    public Khach findById(String id) {
         String sql = "Select * from [dbo].[Khach_hang] where id = ?";
         try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, id);
@@ -224,12 +249,12 @@ public class KhachRepo {
                 kh.setTrangThai(rs.getBoolean(7));
                 return kh;
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
-    
+
 //    public static void main(String[] args) {
 //        Khach k = new Khach();
 //        KhachRepo repo = new KhachRepo();
@@ -237,5 +262,24 @@ public class KhachRepo {
 //        k = repo.findById("5291043a-e9b3-46d8-8545-84f02050fda1");
 //        System.out.println(k);
 //    }
+    public Khach finBySdt(String sdtk) {
+        String sql = "Select * from [dbo].[Khach_hang] where sdt = ?";
+        try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, sdtk);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String id = rs.getString("id");
+                String ma = rs.getString("ma");
+                String ten = rs.getString("ten");
+                String sdt = rs.getString("sdt");
+                Date ngay_tao = rs.getDate("ngay_tao");
+                Date ngay_sua = rs.getDate("ngay_sua");
+                Boolean trang_thai = rs.getBoolean("trang_thai");
+                return new Khach(id, ma, ten, sdt, ngay_tao, ngay_sua, trang_thai);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
-
