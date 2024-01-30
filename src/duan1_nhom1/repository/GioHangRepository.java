@@ -107,13 +107,13 @@ public class GioHangRepository {
         return gioHangs;
     }
 
-    // Phương thức findById
-    public GioHang findById(String id) {
+    public GioHang findById(String idgh) {
         String query = "SELECT * FROM gio_hang WHERE id = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1, id);
+            preparedStatement.setString(1, idgh);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
+                    String id = resultSet.getString("id");
                     String ma = resultSet.getString("ma");
                     String idKH = resultSet.getString("id_kh");
                     Date ngayTao = resultSet.getDate("ngay_tao");
