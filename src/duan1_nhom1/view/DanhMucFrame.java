@@ -42,7 +42,7 @@ public class DanhMucFrame extends javax.swing.JFrame {
         int count = 1;
         for (DanhMuc danhMuc : danhMucService.getAll()) {
             String status;
-            if (danhMuc.isTrangThai()) {
+            if (danhMuc.getTrangThai()) {
                 status = "Còn";
             }else {
                 status = "Hết";

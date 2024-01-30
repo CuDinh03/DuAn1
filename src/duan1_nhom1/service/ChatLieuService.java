@@ -4,25 +4,28 @@
  */
 package duan1_nhom1.service;
 
+import duan1_nhom1.dto.ChatLieuDto;
 import duan1_nhom1.model.ChatLieu;
 import duan1_nhom1.repository.ChatLieuRepository;
+import duan1_nhom1.tranf.TranferData;
 import java.util.List;
 
 /**
+ * 1
  *
  * @author anhtuanle
  */
-public class ChatLieuService implements IService<ChatLieu>{
-    
+public class ChatLieuService implements IService<ChatLieuDto> {
+
     private ChatLieuRepository chatLieuRepository = new ChatLieuRepository();
 
     @Override
-    public void add(ChatLieu t) {
+    public void add(ChatLieuDto t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void update(ChatLieu t, String id) {
+    public void update(ChatLieuDto t, String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -32,15 +35,15 @@ public class ChatLieuService implements IService<ChatLieu>{
     }
 
     @Override
-    public List<ChatLieu> getAll() {
-       return chatLieuRepository.getAll();
+    public List<ChatLieuDto> getAll() {
+        return TranferData.convertListChatLieuToDto(chatLieuRepository.getAll());
     }
 
     @Override
-    public ChatLieu findById(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public ChatLieuDto findById(String id) {
+        return TranferData.convertToDto(this.chatLieuRepository.findByid(id));
     }
-    
+
     public String getTenById(String id) {
         return chatLieuRepository.getTenById(id);
     }
@@ -52,5 +55,5 @@ public class ChatLieuService implements IService<ChatLieu>{
     public List<String> getAllId() {
         return chatLieuRepository.getAllId();
     }
-    
+
 }

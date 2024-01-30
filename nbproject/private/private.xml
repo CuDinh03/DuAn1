@@ -5,7 +5,7 @@
         <group>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/repository/ChiTietHoaDonRepository.java</file>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/MauSacFrame.java</file>
-            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/ViewQuanLyBaoCao.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/HangFrame.java</file>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/service/DanhMucService.java</file>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/service/SPChiTietService.java</file>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/SanPhamFrame.java</file>
@@ -13,27 +13,31 @@
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/dto/ChiTietSanPhamDto.java</file>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/repository/MauSacRepository.java</file>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/repository/KhachRepo.java</file>
-            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/service/KhachService.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/KhachHangJPanel.java</file>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/KichThuocFrame.java</file>
-            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/SanPhamJPanel.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/dto/ChiTietGioHangDto.java</file>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/repository/SanPhamRepository.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/repository/SanPhamRepo.java</file>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/model/ChiTietSanPham.java</file>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/SPChiTietFrame.java</file>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/repository/SPChiTietRepository.java</file>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/service/SanPhamService.java</file>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/repository/HoaDonRepository.java</file>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/ViewSanPham.java</file>
-            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/service/HoaDonService.java</file>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/tranf/TranferData.java</file>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/MainJFrame.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/service/IService.java</file>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/TrangChuJPanel.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/ChiTietHoaDonJFrame.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/dto/ChiTietHoaDonDto.java</file>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/service/MauSacService.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/TaoHoaDon.java</file>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/DanhMucFrame.java</file>
-            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/HoaDonJPanel.java</file>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/dto/KichThuocDto.java</file>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/model/HoaDon.java</file>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/dto/KhachDto.java</file>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/BanHangFrame.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/model/GioHang.java</file>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/model/Khach.java</file>
         </group>
     </open-files>

@@ -1,10 +1,9 @@
 package duan1_nhom1.model;
 
-import java.util.UUID;
-import java.sql.Date;
+import java.util.Date;
 
 public class Khach {
-private String id;
+     private String id;
     private String maKhachHang;
     private String tenKhachHang;
     private String sdt;
@@ -12,7 +11,7 @@ private String id;
     private Date ngaySua;
     private Boolean trangThai;
 
-    public Khach() {
+    public Khach() { 
     }
 
     public Khach(String id, String maKhachHang, String tenKhachHang, String sdt, Date ngayTao, Date ngaySua, Boolean trangThai) {

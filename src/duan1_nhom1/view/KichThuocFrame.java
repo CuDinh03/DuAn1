@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ *1
  * @author anhtuanle
  */
 public class KichThuocFrame extends javax.swing.JFrame {

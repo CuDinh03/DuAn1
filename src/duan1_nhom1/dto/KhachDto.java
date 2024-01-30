@@ -1,16 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package duan1_nhom1.dto;
 
 import java.sql.Date;
-import java.util.UUID;
 
-/**
- *
- * @author maccuacu
- */
 public class KhachDto {
     private String id;
     private String maKhachHang;
@@ -40,7 +31,7 @@ public class KhachDto {
     public void setId(String id) {
         this.id = id;
     }
-
+    
     public String getMaKhachHang() {
         return maKhachHang;
     }

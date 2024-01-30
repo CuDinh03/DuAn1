@@ -1,10 +1,9 @@
-
 package duan1_nhom1.model;
 
 import java.util.Date;
-import java.util.UUID;
 
 public class HoaDon {
+
     private String id;
     private String idKhachHang;
     private String idNv;
@@ -102,5 +101,4 @@ public class HoaDon {
         this.ngaySua = ngaySua;
     }
 
-  
 }

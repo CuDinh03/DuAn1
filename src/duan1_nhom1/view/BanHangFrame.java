@@ -4,7 +4,7 @@
  */
 package duan1_nhom1.view;
 
-import duan1_nhom1.model.ChiTietSanPham;
+import duan1_nhom1.dto.ChiTietSanPhamDto;
 import duan1_nhom1.service.ChatLieuService;
 import duan1_nhom1.service.DanhMucService;
 import duan1_nhom1.service.HangService;
@@ -40,33 +40,33 @@ public class BanHangFrame extends javax.swing.JFrame {
         loadBanHangSp(sPChiTietService.getAll());
     }
 
-    public void loadBanHangGH(List<ChiTietSanPham> list) {
+    public void loadBanHangGH(List<ChiTietSanPhamDto> list) {
         defaultTableModel = (DefaultTableModel) tbl_banhanggh.getModel();
         defaultTableModel.setRowCount(0);
         int count = 1;
-        for (ChiTietSanPham chiTietSanPham : list) {
+        for (ChiTietSanPhamDto chiTietSanPham : list) {
             defaultTableModel.addRow(new Object[]{
                 count++,
-                this.sanPhamService.getTenById(chiTietSanPham.getIdSanPham().toString()),
-                this.hangService.getTenById(chiTietSanPham.getIdThuongHieu().toString()),
-                this.kichCoService.getTenById(chiTietSanPham.getIdKichThuoc().toString()),
-                this.mauSacService.getTenById(chiTietSanPham.getIdMauSac().toString()),
+                this.sanPhamService.getTenById(chiTietSanPham.getIdSanPham()),
+                this.hangService.getTenById(chiTietSanPham.getIdThuongHieu()),
+                this.kichCoService.getTenById(chiTietSanPham.getIdKichThuoc()),
+                this.mauSacService.getTenById(chiTietSanPham.getIdMauSac()),
                 chiTietSanPham.getGiaBan(),});
         }
     }
     
-       public void loadBanHangSp(List<ChiTietSanPham> list) {
+       public void loadBanHangSp(List<ChiTietSanPhamDto> list) {
         defaultTableModel = (DefaultTableModel) tbl_banhangsp.getModel();
         defaultTableModel.setRowCount(0);
         int count = 1;
-        for (ChiTietSanPham chiTietSanPham : list) {
+        for (ChiTietSanPhamDto chiTietSanPham : list) {
             defaultTableModel.addRow(new Object[]{
                 count++,
-                this.sanPhamService.getTenById(chiTietSanPham.getIdSanPham().toString()),
-                this.hangService.getTenById(chiTietSanPham.getIdThuongHieu().toString()),
-                this.kichCoService.getTenById(chiTietSanPham.getIdKichThuoc().toString()),
-                this.mauSacService.getTenById(chiTietSanPham.getIdMauSac().toString()),
-                this.danhMucService.getTenById(chiTietSanPham.getIdDanhMuc().toString()),
+                this.sanPhamService.getTenById(chiTietSanPham.getIdSanPham()),
+                this.hangService.getTenById(chiTietSanPham.getIdThuongHieu()),
+                this.kichCoService.getTenById(chiTietSanPham.getIdKichThuoc()),
+                this.mauSacService.getTenById(chiTietSanPham.getIdMauSac()),
+                this.danhMucService.getTenById(chiTietSanPham.getIdDanhMuc()),
                 chiTietSanPham.getGiaBan(),});
         }
     }

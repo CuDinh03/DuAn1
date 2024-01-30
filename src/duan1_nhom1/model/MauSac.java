@@ -9,7 +9,7 @@ public class MauSac {
     private String ten;
     private String moTa;
     private Date ngayTao;
-    private Date ngaySua;
+    private Date ngaySua; 
     private boolean trangThai;
 
     public MauSac() {

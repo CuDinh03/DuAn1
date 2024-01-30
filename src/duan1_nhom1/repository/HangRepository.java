@@ -1,11 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package duan1_nhom1.repository;
 
 import duan1_nhom1.model.Hang;
-import duan1_nhom1.model.MauSac;
 import duan1_nhom1.utils.JdbcHelper;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,13 +10,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
+/** 
  *
  * @author anhtuanle
  */
 public class HangRepository {
 
-    private JdbcHelper jdbcHelper;
     List<Hang> listHang = new ArrayList();
     Connection conn = JdbcHelper.getConnection();
 

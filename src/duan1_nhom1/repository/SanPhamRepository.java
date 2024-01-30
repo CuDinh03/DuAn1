@@ -4,10 +4,8 @@
  */
 package duan1_nhom1.repository;
 
-import duan1_nhom1.model.MauSac;
 import duan1_nhom1.model.SanPham;
 import duan1_nhom1.utils.JdbcHelper;
-import duan1_nhom1.viewModel.QLSanPhamViewModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -40,7 +38,7 @@ public class SanPhamRepository {
                 String moTa = rs.getString("mo_ta");
                 Date ngayTao = rs.getDate("ngay_tao");
                 Date ngaySua = rs.getDate("ngay_tao");
-                boolean trangThai = rs.getBoolean("trang_thai");
+                Boolean trangThai = rs.getBoolean("trang_thai");
                 SanPham sanPham = new SanPham(id, ma, ten, moTa, ngayTao, ngaySua, trangThai);
                 listSanPham.add(sanPham);
             }
@@ -99,4 +97,26 @@ public class SanPhamRepository {
         return listId;
     }
 
+    public SanPham findById(String sanPhamId) {
+        String query = "SELECT * FROM San_Pham WHERE id = ?";
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setString(1, sanPhamId);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                String id = rs.getString("id");
+                String ma = rs.getString("ma");
+                String ten = rs.getString("ten");
+                String moTa = rs.getString("mo_ta");
+                Date ngayTao = rs.getDate("ngay_tao");
+                Date ngaySua = rs.getDate("ngay_tao");
+                Boolean trangThai = rs.getBoolean("trang_thai");
+
+                return new SanPham(id, ma, ten, moTa, ngayTao, ngaySua, trangThai);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

@@ -39,7 +39,7 @@ public class HangFrame extends javax.swing.JFrame {
         int count = 1;
         for (Hang hang : hangService.getAll()) {
             String status;
-            if (hang.isTrangThai()) {
+            if (hang.getTrangThai()) {
                 status = "Còn";
             }else {
                 status = "Hết";

@@ -4,9 +4,7 @@
  */
 package duan1_nhom1.view;
 
-import duan1_nhom1.model.Hang;
-import duan1_nhom1.model.SanPham;
-import duan1_nhom1.service.HangService;
+import duan1_nhom1.dto.SanPhamDto;
 import duan1_nhom1.service.SanPhamService;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -37,9 +35,9 @@ public class SanPhamFrame extends javax.swing.JFrame {
          defaultTableModel = (DefaultTableModel) tbl_sanpham.getModel();
         defaultTableModel.setRowCount(0);
         int count = 1;
-        for (SanPham sanPham : sanPhamService.getAll()) {
+        for (SanPhamDto sanPham : sanPhamService.getAll()) {
             String status;
-            if (sanPham.isTrangThai()) {
+            if (sanPham.getTrangThai()) {
                 status = "Còn";
             }else {
                 status = "Hết";
@@ -68,8 +66,8 @@ public class SanPhamFrame extends javax.swing.JFrame {
         
     }
 
-    private SanPham getSanPham() {
-        SanPham sanPham = new SanPham();
+    private SanPhamDto getSanPhamDto() {
+        SanPhamDto sanPham = new SanPhamDto();
         sanPham.setMa(txt_ma.getText());
         sanPham.setTen(txt_ten.getText());
         sanPham.setMoTa(txt_mota.getText());
@@ -89,7 +87,7 @@ public class SanPhamFrame extends javax.swing.JFrame {
             if (check != JOptionPane.YES_OPTION) {
                 return;
             }
-            SanPham sp = getSanPham();
+            SanPhamDto sp = getSanPhamDto();
             sanPhamService.add(sp);           
             
 
@@ -108,7 +106,7 @@ public class SanPhamFrame extends javax.swing.JFrame {
             if (check != JOptionPane.YES_OPTION) {
                 return;
             }
-            SanPham sanPham = getSanPham();
+            SanPhamDto sanPham = getSanPhamDto();
             int row = tbl_sanpham.getSelectedRow();
             String id = sanPhamService.getAll().get(row).getId();
             sanPhamService.update(sanPham, id);
@@ -229,6 +227,9 @@ public class SanPhamFrame extends javax.swing.JFrame {
             }
         });
         tbl_sanpham.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_sanphamMouseClicked(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tbl_sanphamMousePressed(evt);
             }
@@ -416,6 +417,10 @@ public class SanPhamFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         clearFormSanPham();
     }//GEN-LAST:event_btn_clearActionPerformed
+
+    private void tbl_sanphamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_sanphamMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbl_sanphamMouseClicked
 
     /**
      * @param args the command line arguments

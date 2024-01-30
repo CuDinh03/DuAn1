@@ -2,22 +2,21 @@
 package duan1_nhom1.model;
 
 import java.util.Date;
-import java.util.UUID;
 
 public class ChiTietHoaDon {
-    private UUID id;
-    private UUID idHoaDon;
-    private UUID idSanPham;
+    private String id;
+    private String idHoaDon;
+    private String idSanPham;
     private Integer soLuong;
     private Double giaBan;
     private Date ngayTao;
     private Date ngaySua;
     private Boolean trangThai;
 
-    public ChiTietHoaDon() {
+    public ChiTietHoaDon() { 
     }
 
-    public ChiTietHoaDon(UUID id, UUID idHoaDon, UUID idSanPham, Integer soLuong, Double giaBan, Date ngayTao, Date ngaySua, Boolean trangThai) {
+    public ChiTietHoaDon(String id, String idHoaDon, String idSanPham, Integer soLuong, Double giaBan, Date ngayTao, Date ngaySua, Boolean trangThai) {
         this.id = id;
         this.idHoaDon = idHoaDon;
         this.idSanPham = idSanPham;
@@ -28,28 +27,28 @@ public class ChiTietHoaDon {
         this.trangThai = trangThai;
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
 
-    public UUID getIdHoaDon() {
+    public String getIdHoaDon() {
         return idHoaDon;
     }
 
-    public void setIdHoaDon(UUID idHoaDon) {
+    public void setIdHoaDon(String idHoaDon) {
         this.idHoaDon = idHoaDon;
     }
 
-    public UUID getIdSanPham() {
+    public String getIdSanPham() {
         return idSanPham;
     }
 
-    public void setIdSanPham(UUID idSanPham) {
+    public void setIdSanPham(String idSanPham) {
         this.idSanPham = idSanPham;
     }
 

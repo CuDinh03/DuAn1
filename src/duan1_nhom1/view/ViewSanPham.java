@@ -4,6 +4,7 @@
  */
 package duan1_nhom1.view;
 
+import duan1_nhom1.dto.ChiTietSanPhamDto;
 import duan1_nhom1.model.ChiTietSanPham;
 import duan1_nhom1.service.ChatLieuService;
 import duan1_nhom1.service.DanhMucService;
@@ -45,18 +46,18 @@ public class ViewSanPham extends javax.swing.JFrame {
         loadViewSanPham(sPChiTietService.getAll());
     }
 
-    public void loadViewSanPham(List<ChiTietSanPham> list) {
+    public void loadViewSanPham(List<ChiTietSanPhamDto> list) {
         defaultTableModel = (DefaultTableModel) tbl_viewsp.getModel();
         defaultTableModel.setRowCount(0);
 
-        for (ChiTietSanPham chiTietSanPham : list) {
+        for (ChiTietSanPhamDto chiTietSanPham : list) {
             defaultTableModel.addRow(new Object[]{
                 chiTietSanPham.getMa(),
-                this.sanPhamService.getTenById(chiTietSanPham.getIdSanPham().toString()),
-                this.hangService.getTenById(chiTietSanPham.getIdThuongHieu().toString()),
-                this.mauSacService.getTenById(chiTietSanPham.getIdMauSac().toString()),
-                this.danhMucService.getTenById(chiTietSanPham.getIdDanhMuc().toString()),
-                this.kichCoService.getTenById(chiTietSanPham.getIdKichThuoc().toString()),
+                this.sanPhamService.getTenById(chiTietSanPham.getIdSanPham()),
+                this.hangService.getTenById(chiTietSanPham.getIdThuongHieu()),
+                this.mauSacService.getTenById(chiTietSanPham.getIdMauSac()),
+                this.danhMucService.getTenById(chiTietSanPham.getIdDanhMuc()),
+                this.kichCoService.getTenById(chiTietSanPham.getIdKichThuoc()),
                 chiTietSanPham.getSoLuong(),
                 chiTietSanPham.getGiaBan(),});
         }
@@ -283,13 +284,13 @@ public class ViewSanPham extends javax.swing.JFrame {
         index = tbl_viewsp.getSelectedRow();
 
 //        _index = tbl_sanpham.getSelectedRow();
-        ChiTietSanPham ctsp = this.sPChiTietService.getAll().get(index);
+        ChiTietSanPhamDto ctsp = this.sPChiTietService.getAll().get(index);
 
-        String idSanPhamString = ctsp.getIdSanPham().toString();
-        String idThuongHieu = ctsp.getIdThuongHieu().toString();
-        String idMauSac = ctsp.getIdMauSac().toString();
-        String idDanhMuc = ctsp.getIdDanhMuc().toString();
-        String idKichCo = ctsp.getIdKichThuoc().toString();
+        String idSanPhamString = ctsp.getIdSanPham();
+        String idThuongHieu = ctsp.getIdThuongHieu();
+        String idMauSac = ctsp.getIdMauSac();
+        String idDanhMuc = ctsp.getIdDanhMuc();
+        String idKichCo = ctsp.getIdKichThuoc();
 
         // Hiển thị thông tin lên JTextField
         txt_ma.setText(ctsp.getMa());
