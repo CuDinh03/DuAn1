@@ -90,12 +90,6 @@ public class SingleCTSPJFrame extends javax.swing.JFrame {
         date_ngaynhap = new com.toedter.calendar.JDateChooser();
         txt_trangthai = new javax.swing.JTextField();
         txt_masp = new javax.swing.JTextField();
-        btn_them1 = new javax.swing.JButton();
-        btn_them2 = new javax.swing.JButton();
-        btn_them3 = new javax.swing.JButton();
-        btn_them4 = new javax.swing.JButton();
-        btn_them5 = new javax.swing.JButton();
-        btn_them6 = new javax.swing.JButton();
         txtTenSP = new javax.swing.JTextField();
         txtHang = new javax.swing.JTextField();
         txtCl = new javax.swing.JTextField();
@@ -132,72 +126,6 @@ public class SingleCTSPJFrame extends javax.swing.JFrame {
         jLabel14.setText("Số lượng:");
 
         jLabel15.setText("Ngày nhập:");
-
-        btn_them1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/duan1_nhom1/Icon/edit_property_24px.png"))); // NOI18N
-        btn_them1.setBorder(null);
-        btn_them1.setBorderPainted(false);
-        btn_them1.setContentAreaFilled(false);
-        btn_them1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btn_them1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_them1ActionPerformed(evt);
-            }
-        });
-
-        btn_them2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/duan1_nhom1/Icon/edit_property_24px.png"))); // NOI18N
-        btn_them2.setBorder(null);
-        btn_them2.setBorderPainted(false);
-        btn_them2.setContentAreaFilled(false);
-        btn_them2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btn_them2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_them2ActionPerformed(evt);
-            }
-        });
-
-        btn_them3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/duan1_nhom1/Icon/edit_property_24px.png"))); // NOI18N
-        btn_them3.setBorder(null);
-        btn_them3.setBorderPainted(false);
-        btn_them3.setContentAreaFilled(false);
-        btn_them3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btn_them3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_them3ActionPerformed(evt);
-            }
-        });
-
-        btn_them4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/duan1_nhom1/Icon/edit_property_24px.png"))); // NOI18N
-        btn_them4.setBorder(null);
-        btn_them4.setBorderPainted(false);
-        btn_them4.setContentAreaFilled(false);
-        btn_them4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btn_them4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_them4ActionPerformed(evt);
-            }
-        });
-
-        btn_them5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/duan1_nhom1/Icon/edit_property_24px.png"))); // NOI18N
-        btn_them5.setBorder(null);
-        btn_them5.setBorderPainted(false);
-        btn_them5.setContentAreaFilled(false);
-        btn_them5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btn_them5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_them5ActionPerformed(evt);
-            }
-        });
-
-        btn_them6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/duan1_nhom1/Icon/edit_property_24px.png"))); // NOI18N
-        btn_them6.setBorder(null);
-        btn_them6.setBorderPainted(false);
-        btn_them6.setContentAreaFilled(false);
-        btn_them6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btn_them6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_them6ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -248,15 +176,7 @@ public class SingleCTSPJFrame extends javax.swing.JFrame {
                         .addComponent(jLabel5)
                         .addComponent(jLabel6)
                         .addComponent(jLabel10))
-                    .addGap(201, 201, 201)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btn_them1)
-                        .addComponent(btn_them2)
-                        .addComponent(btn_them3)
-                        .addComponent(btn_them4)
-                        .addComponent(btn_them5)
-                        .addComponent(btn_them6))
-                    .addContainerGap(532, Short.MAX_VALUE)))
+                    .addContainerGap(757, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -305,38 +225,20 @@ public class SingleCTSPJFrame extends javax.swing.JFrame {
                 .addContainerGap(147, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(204, 204, 204)
-                            .addComponent(jLabel2))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(101, 101, 101)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                                .addComponent(jLabel3)
-                                                                .addComponent(btn_them1))
-                                                            .addGap(17, 17, 17)
-                                                            .addComponent(jLabel4))
-                                                        .addComponent(btn_them4))
-                                                    .addGap(15, 15, 15)
-                                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
-                                                        .addComponent(btn_them2, javax.swing.GroupLayout.Alignment.TRAILING))
-                                                    .addGap(17, 17, 17)
-                                                    .addComponent(jLabel6))
-                                                .addComponent(btn_them3))
-                                            .addGap(17, 17, 17)
-                                            .addComponent(jLabel10))
-                                        .addComponent(btn_them5))
-                                    .addGap(34, 34, 34))
-                                .addComponent(btn_them6, javax.swing.GroupLayout.Alignment.TRAILING))))
+                    .addGap(108, 108, 108)
+                    .addComponent(jLabel3)
+                    .addGap(17, 17, 17)
+                    .addComponent(jLabel4)
+                    .addGap(22, 22, 22)
+                    .addComponent(jLabel5)
+                    .addGap(17, 17, 17)
+                    .addComponent(jLabel6)
+                    .addGap(17, 17, 17)
+                    .addComponent(jLabel10)
+                    .addContainerGap(227, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(204, 204, 204)
+                    .addComponent(jLabel2)
                     .addContainerGap(193, Short.MAX_VALUE)))
         );
 
@@ -358,52 +260,11 @@ public class SingleCTSPJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_them1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_them1ActionPerformed
-        // TODO add your handling code here:
-        new SanPhamFrame().setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btn_them1ActionPerformed
-
-    private void btn_them2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_them2ActionPerformed
-        // TODO add your handling code here:
-        new HangJPanel().setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btn_them2ActionPerformed
-
-    private void btn_them3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_them3ActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_btn_them3ActionPerformed
-
-    private void btn_them4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_them4ActionPerformed
-        // TODO add your handling code here:
-        new DanhMucJPanel().setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btn_them4ActionPerformed
-
-    private void btn_them5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_them5ActionPerformed
-        // TODO add your handling code here:
-        new MauSacFrame().setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btn_them5ActionPerformed
-
-    private void btn_them6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_them6ActionPerformed
-        // TODO add your handling code here:
-        new KichThuocFrame().setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btn_them6ActionPerformed
-
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_them1;
-    private javax.swing.JButton btn_them2;
-    private javax.swing.JButton btn_them3;
-    private javax.swing.JButton btn_them4;
-    private javax.swing.JButton btn_them5;
-    private javax.swing.JButton btn_them6;
     private com.toedter.calendar.JDateChooser date_ngaynhap;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

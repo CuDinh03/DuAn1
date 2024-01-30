@@ -1,8 +1,10 @@
 package duan1_nhom1.service;
 
+import duan1_nhom1.dto.KhachDto;
 import duan1_nhom1.model.HoaDon;
 import duan1_nhom1.model.Khach;
 import duan1_nhom1.repository.KhachRepo;
+import duan1_nhom1.tranf.TranferData;
 import duan1_nhom1.utils.JdbcHelper;
 import java.sql.Connection;
 import java.sql.Date;
@@ -39,6 +41,10 @@ public class KhachService implements IService<Khach> {
     @Override
     public List<Khach> getAll() {
         return khachHangRepo.getAll();
+    }
+    
+    public KhachDto findBySdt(String sdt){
+        return TranferData.convertToDto(this.khachHangRepo.finBySdt(sdt));
     }
 
     public List<Khach> timKiem(String ma, String ten, String sdt) {

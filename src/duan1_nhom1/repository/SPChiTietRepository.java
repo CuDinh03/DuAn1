@@ -15,6 +15,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -199,5 +201,97 @@ public class SPChiTietRepository {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public ChiTietSanPham findByMaCt(String madto) {
+        String query = "SElect * from san_pham_chi_tiet where ma = ? ";
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setString(1, madto);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                String idString = resultSet.getString("id");
+
+                String ma = resultSet.getString("ma");
+                String idSPString = resultSet.getString("id_sp");
+
+                String idHangString = resultSet.getString("id_hang");
+                String idClString = resultSet.getString("id_cl");
+
+                String idMsString = resultSet.getString("id_ms");
+
+                String idSizeString = resultSet.getString("id_size");
+
+                String idDmString = resultSet.getString("id_dm");
+
+                BigDecimal giaNhap = resultSet.getBigDecimal("gia_nhap");
+                BigDecimal giaBan = resultSet.getBigDecimal("gia_ban");
+                Integer soLuong = resultSet.getInt("so_luong");
+                System.out.println(soLuong);
+                Date ngayNhap = resultSet.getDate("ngay_nhap");
+                Date ngayTao = resultSet.getDate("ngay_tao");
+                Date ngaySua = resultSet.getDate("ngay_sua");
+                Boolean trangThai = resultSet.getBoolean("trang_thai");
+
+                ChiTietSanPham chiTietSanPham = new ChiTietSanPham(idString, ma, idSPString, idSizeString, idHangString, idMsString, idClString, idDmString, giaNhap, giaBan, soLuong, ngayTao, ngaySua, ngayNhap, trangThai);
+                return chiTietSanPham;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public ChiTietSanPham findByIDsp(String idsp) {
+        String query = "SELECT c.id, c.ma, s.id as id_sp, c.id_hang,c.id_cl,c.id_ms,c.id_size,c.id_dm,c.gia_nhap,c.gia_ban,c.so_luong,c.ngay_nhap,c.ngay_tao,c.ngay_sua, c.trang_thai from san_pham_chi_tiet c JOIN san_pham s ON c.id_sp = s.id WHERE s.id = ? ";
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setString(1, idsp);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                String idString = resultSet.getString("id");
+
+                String ma = resultSet.getString("ma");
+                String idSPString = resultSet.getString("id_sp");
+
+                String idHangString = resultSet.getString("id_hang");
+                String idClString = resultSet.getString("id_cl");
+
+                String idMsString = resultSet.getString("id_ms");
+
+                String idSizeString = resultSet.getString("id_size");
+
+                String idDmString = resultSet.getString("id_dm");
+
+                BigDecimal giaNhap = resultSet.getBigDecimal("gia_nhap");
+                BigDecimal giaBan = resultSet.getBigDecimal("gia_ban");
+                Integer soLuong = resultSet.getInt("so_luong");
+                System.out.println(soLuong);
+                Date ngayNhap = resultSet.getDate("ngay_nhap");
+                Date ngayTao = resultSet.getDate("ngay_tao");
+                Date ngaySua = resultSet.getDate("ngay_sua");
+                Boolean trangThai = resultSet.getBoolean("trang_thai");
+
+                ChiTietSanPham chiTietSanPham = new ChiTietSanPham(idString, ma, idSPString, idSizeString, idHangString, idMsString, idClString, idDmString, giaNhap, giaBan, soLuong, ngayTao, ngaySua, ngayNhap, trangThai);
+                return chiTietSanPham;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void changeQuantity(ChiTietSanPham ctsp) {
+        String query = "Update san_pham_chi_tiet set so_luong = ? where id = ? ";
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setInt(1, ctsp.getSoLuong());
+            preparedStatement.setString(2, ctsp.getId());
+            preparedStatement.execute();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(SPChiTietRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
