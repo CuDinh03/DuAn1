@@ -60,7 +60,7 @@ public class SPChiTietRepository {
                 ChiTietSanPham chiTietSanPham = new ChiTietSanPham(idString, ma, idSPString, idSizeString, idHangString, idMsString, idClString, idDmString, giaNhap, giaBan, soLuong, ngayTao, ngaySua, ngayNhap, trangThai);
                 listSanPham.add(chiTietSanPham);
             }
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             System.out.println("Lỗi kết nối");
             ex.printStackTrace();
         }
@@ -292,6 +292,14 @@ public class SPChiTietRepository {
             
         } catch (SQLException ex) {
             Logger.getLogger(SPChiTietRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public static void main(String[] args) {
+        SPChiTietRepository sp=new SPChiTietRepository();
+        List<ChiTietSanPham>list=new ArrayList<>();
+        list=sp.getAll();
+         for (ChiTietSanPham chiTietSanPham : list) {
+             System.out.println(chiTietSanPham.toString());
         }
     }
 }
