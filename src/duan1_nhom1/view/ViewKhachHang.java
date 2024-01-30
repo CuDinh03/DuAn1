@@ -227,8 +227,7 @@ public class ViewKhachHang extends javax.swing.JFrame {
             if (maKhach.trim().isEmpty()) {
                 maKhach = null;
             }
-              Khach list=  khachService.getHoaDonById(maKhach);
-            list = (Khach) hoaDon.timKhachTheoHD(maKhach);
+//             listHD= hoaDon.timKhachTheoHD(maKhach);
             showDataHoaDon();
 
         } catch (Exception e) {

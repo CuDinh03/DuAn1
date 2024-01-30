@@ -220,7 +220,7 @@ public class KhachHangJPanel extends javax.swing.JPanel {
                 maKhach = null;
             }
 
-            listHD = hoaDon.timKhachTheoHD(maKhach);
+//            listHD = hoaDon.timKhachTheoHD(maKhach);
             showDataHoaDon();
 
         } catch (Exception e) {
