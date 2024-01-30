@@ -22,6 +22,7 @@ import java.util.List;
 public class DanhMucRepository {
 
     Connection conn = JdbcHelper.getConnection();
+    List<DanhMuc> listDanhMuc = new ArrayList<>();
 
     public List<DanhMuc> getAll() {
         List<DanhMuc> listDanhMuc = new ArrayList<>();
@@ -49,7 +50,7 @@ public class DanhMucRepository {
                 Boolean trangThai = rs.getBoolean("trang_thai");
                 DanhMuc danhMuc = new DanhMuc(id, ma, ten, moTa, ngayTao, ngaySua, trangThai);
                 listDanhMuc.add(danhMuc);
-                
+
             }
             return listDanhMuc;
         } catch (SQLException ex) {
@@ -159,9 +160,7 @@ public class DanhMucRepository {
                     [trang_thai] = ?
                 WHERE id = ?;
                 """;
-
         try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
-
             // Set parameters
             ps.setObject(1, danhMuc.getId());
             ps.setObject(2, danhMuc.getMa());
@@ -170,9 +169,8 @@ public class DanhMucRepository {
             ps.setObject(5, danhMuc.getNgayTao());
             ps.setObject(6, danhMuc.getNgaySua());
             ps.setObject(7, danhMuc.getTrangThai());
-            
-//            ps.setObject(7, id);
-            // Execute the update
+            ps.setObject(8, id);
+//             Execute the update
             int chek = ps.executeUpdate();
 
             // Check the result
