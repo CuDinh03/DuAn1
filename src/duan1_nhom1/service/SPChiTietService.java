@@ -16,12 +16,12 @@ import java.util.UUID;
  * @author anhtuanle
  */
 public class SPChiTietService implements IService<ChiTietSanPhamDto> {
-
+    
     private SPChiTietRepository sPChiTietRepository = new SPChiTietRepository();
-
+    
     public String insert(ChiTietSanPhamDto t) {
         t.setMa(t.getMa());
-
+        
         t.setIdThuongHieu(t.getIdThuongHieu());
         t.setIdMauSac(t.getIdMauSac());
         t.setIdDanhMuc(t.getIdDanhMuc());
@@ -35,23 +35,23 @@ public class SPChiTietService implements IService<ChiTietSanPhamDto> {
         t.setNgaySua(t.getNgaySua());
         t.setNgayTao(t.getNgayTao());
         t.setTrangThai(t.getTrangThai());
-
+        
         if (this.sPChiTietRepository.insert(TranferData.convertToEntity(t))) {
             return "Thêm thành công !";
         } else {
             return "Thêm thất bại !";
         }
     }
-
+    
     @Override
     public void add(ChiTietSanPhamDto t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
     @Override
     public void update(ChiTietSanPhamDto t, String id) {
         t.setMa(t.getMa());
-
+        
         t.setIdThuongHieu(t.getIdThuongHieu());
         t.setIdMauSac(t.getIdMauSac());
         t.setIdDanhMuc(t.getIdDanhMuc());
@@ -65,40 +65,48 @@ public class SPChiTietService implements IService<ChiTietSanPhamDto> {
         t.setNgaySua(t.getNgaySua());
         t.setNgayTao(t.getNgayTao());
         t.setTrangThai(t.getTrangThai());
-
+        
         if (this.sPChiTietRepository.updateSP(TranferData.convertToEntity(t), id)) {
             System.out.println("Thêm thành công !");
         } else {
             System.out.println("Thêm thất bại !");
-
+            
         }
     }
-
+    
     @Override
     public void delete(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
 
     }
-
+    
     @Override
     public List<ChiTietSanPhamDto> getAll() {
         return TranferData.convertListToDtos(sPChiTietRepository.getAll());
     }
-
+    
     @Override
     public ChiTietSanPhamDto findById(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
     public void deleteSP(String id) {
         sPChiTietRepository.delete(id);
     }
-    public ChiTietSanPhamDto findByMa(String ma){
+
+    public ChiTietSanPhamDto findByMa(String ma) {
         return TranferData.convertToDto(this.sPChiTietRepository.findByMa(ma));
     }
-    
-    public List<ChiTietSanPhamDto> findSanPham(String ma, String ten, String mauSac, String danhMuc, String chatLieu,String kichThuoc, String thuongHieu){
-        return TranferData.convertListToDtos(sPChiTietRepository.findSanPham(ma,ten,mauSac,danhMuc,chatLieu,kichThuoc,thuongHieu));
-    }
 
+    public ChiTietSanPhamDto findByMaCt(String ma) {
+        return TranferData.convertToDto(this.sPChiTietRepository.findByMaCt(ma));
+    }
+    
+    public ChiTietSanPhamDto findByIdSP(String idSP) {
+        return TranferData.convertToDto(this.sPChiTietRepository.findByIDsp(idSP));
+    }
+    
+    public void changeSL (ChiTietSanPhamDto ctsp){
+this.sPChiTietRepository.changeQuantity(TranferData.convertToEntity(ctsp));    }
+    
 }

@@ -6,13 +6,13 @@ package duan1_nhom1.dto;
 
 import java.util.Date;
 
-
 /**
  *
  * @author maccuacu
  */
 public class HoaDonDto {
-     private String  id;
+
+    private String id;
     private String idKhachHang;
     private String idNv;
     private String ma;
@@ -109,6 +109,4 @@ public class HoaDonDto {
         this.ngaySua = ngaySua;
     }
 
-    
-    
 }

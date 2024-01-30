@@ -1,5 +1,5 @@
 package duan1_nhom1.repository;
-
+import duan1_nhom1.model.HoaDon;
 import duan1_nhom1.model.Khach;
 import duan1_nhom1.utils.JdbcHelper;
 import java.sql.Connection;
@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 public class KhachRepo {
 
     private List<Khach> listKhach = new ArrayList<>();
@@ -231,8 +232,8 @@ public class KhachRepo {
         }
         return null;
     }
-    
-    public Khach findById(String id ){
+
+    public Khach findById(String id) {
         String sql = "Select * from [dbo].[Khach_hang] where id = ?";
         try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, id);
@@ -247,12 +248,12 @@ public class KhachRepo {
                 kh.setTrangThai(rs.getBoolean(7));
                 return kh;
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
-    
+
 //    public static void main(String[] args) {
 //        Khach k = new Khach();
 //        KhachRepo repo = new KhachRepo();
@@ -260,4 +261,24 @@ public class KhachRepo {
 //        k = repo.findById("5291043a-e9b3-46d8-8545-84f02050fda1");
 //        System.out.println(k);
 //    }
+    public Khach finBySdt(String sdtk) {
+        String sql = "Select * from [dbo].[Khach_hang] where sdt = ?";
+        try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, sdtk);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String id = rs.getString("id");
+                String ma = rs.getString("ma");
+                String ten = rs.getString("ten");
+                String sdt = rs.getString("sdt");
+                Date ngay_tao = rs.getDate("ngay_tao");
+                Date ngay_sua = rs.getDate("ngay_sua");
+                Boolean trang_thai = rs.getBoolean("trang_thai");
+                return new Khach(id, ma, ten, sdt, ngay_tao, ngay_sua, trang_thai);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

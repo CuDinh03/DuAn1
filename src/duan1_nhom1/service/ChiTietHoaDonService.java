@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package duan1_nhom1.service;
 
 import duan1_nhom1.dto.ChiTietHoaDonDto;
@@ -13,37 +9,37 @@ import java.util.List;
  *
  * @author maccuacu
  */
-public class ChiTietHoaDonService implements IService<ChiTietHoaDonDto>{
-    
+public class ChiTietHoaDonService implements IService<ChiTietHoaDonDto> {
+
     private ChiTietHoaDonRepository repo = new ChiTietHoaDonRepository();
 
     @Override
     public void add(ChiTietHoaDonDto t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.repo.createChiTietHoaDon(TranferData.convertToEntity(t));
     }
 
     @Override
     public void update(ChiTietHoaDonDto t, String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.repo.updateChiTietHoaDon(TranferData.convertToEntity(t));
     }
 
     @Override
     public void delete(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.repo.deleteChiTietHoaDon(id);
     }
 
     @Override
     public List<ChiTietHoaDonDto> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return TranferData.convertListCTHDToDto(this.repo.getAllChiTietHoaDon());
     }
 
     @Override
     public ChiTietHoaDonDto findById(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return TranferData.convertToDto(this.repo.getChiTietHoaDonById(id));
     }
-    
-    public List<ChiTietHoaDonDto> getAllByIdHd(String id){
+
+    public List<ChiTietHoaDonDto> getAllByIdHd(String id) {
         return TranferData.convertListCTHDToDto(repo.getAllChiTietHoaDonByIDHd(id));
     }
-    
+
 }

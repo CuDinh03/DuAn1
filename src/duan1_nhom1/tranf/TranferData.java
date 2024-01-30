@@ -5,18 +5,22 @@
 package duan1_nhom1.tranf;
 
 import duan1_nhom1.dto.ChatLieuDto;
+import duan1_nhom1.dto.ChiTietGioHangDto;
 import duan1_nhom1.dto.ChiTietHoaDonDto;
 import duan1_nhom1.dto.DanhMucDto;
 import duan1_nhom1.dto.ChiTietSanPhamDto;
+import duan1_nhom1.dto.GioHangDto;
 import duan1_nhom1.dto.HangDto;
 import duan1_nhom1.dto.HoaDonDto;
 import duan1_nhom1.dto.KhachDto;
 import duan1_nhom1.dto.SanPhamDto;
 import duan1_nhom1.dto.VoucherDto;
 import duan1_nhom1.model.ChatLieu;
+import duan1_nhom1.model.ChiTietGioHang;
 import duan1_nhom1.model.ChiTietHoaDon;
 import duan1_nhom1.model.ChiTietSanPham;
 import duan1_nhom1.model.DanhMuc;
+import duan1_nhom1.model.GioHang;
 import duan1_nhom1.model.Hang;
 import duan1_nhom1.model.HoaDon;
 import duan1_nhom1.model.Khach;
@@ -25,7 +29,6 @@ import duan1_nhom1.model.Voucher;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * 1
@@ -387,7 +390,7 @@ public class TranferData {
         if (dto.getGiaBan() != null) {
             model.setGiaBan(dto.getGiaBan());
         }
-                if (dto.getSoLuong() != null) {
+        if (dto.getSoLuong() != null) {
             model.setSoLuong(dto.getSoLuong());
         }
         if (dto.getNgayTao() != null) {
@@ -629,6 +632,139 @@ public class TranferData {
     public static List<HangDto> convertListHangToDto(List<Hang> entityList) {
         List<HangDto> dtoList = new ArrayList<>();
         for (Hang entity : entityList) {
+            dtoList.add(convertToDto(entity));
+        }
+        return dtoList;
+    }
+
+    public static GioHangDto convertToDto(GioHang model) {
+        GioHangDto dto = new GioHangDto();
+
+        if (model.getId() != null) {
+            dto.setId(model.getId());
+        }
+        if (model.getMa() != null) {
+            dto.setMa(model.getMa());
+        }
+        if (model.getIdKH() != null) {
+            dto.setIdKH(model.getIdKH());
+        }
+        if (model.getNgayTao() != null) {
+            dto.setNgayTao(model.getNgayTao());
+        }
+        if (model.getNgaySua() != null) {
+            dto.setNgaySua(model.getNgaySua());
+        }
+        if (model.getTrangThai() != null) {
+            dto.setTrangThai(model.getTrangThai());
+
+        }
+        return dto;
+    }
+
+    public static GioHang convertToEntity(GioHangDto dto) {
+        GioHang model = new GioHang();
+        if (dto.getId() != null) {
+            model.setId(dto.getId());
+        }
+        if (dto.getMa() != null) {
+            model.setMa(dto.getMa());
+        }
+        if (dto.getIdKH() != null) {
+            model.setIdKH(dto.getIdKH());
+        }
+        if (dto.getNgayTao() != null) {
+            model.setNgayTao(dto.getNgayTao());
+        }
+        if (dto.getNgaySua() != null) {
+            model.setNgaySua(dto.getNgaySua());
+        }
+        if (dto.getTrangThai() != null) {
+            model.setTrangThai(dto.getTrangThai());
+        }
+
+        return model;
+    }
+
+    public static List<GioHangDto> convertListGioHangToDto(List<GioHang> entityList) {
+        List<GioHangDto> dtoList = new ArrayList<>();
+        for (GioHang entity : entityList) {
+            dtoList.add(convertToDto(entity));
+        }
+        return dtoList;
+    }
+
+    public static ChiTietGioHangDto convertToDto(ChiTietGioHang chiTietGioHang) {
+        ChiTietGioHangDto dto = new ChiTietGioHangDto();
+
+        if (chiTietGioHang.getId() != null) {
+            dto.setId(chiTietGioHang.getId());
+        }
+
+        if (chiTietGioHang.getIdGH() != null) {
+            dto.setIdGH(chiTietGioHang.getIdGH());
+        }
+
+        if (chiTietGioHang.getIdSP() != null) {
+            dto.setIdSP(chiTietGioHang.getIdSP());
+        }
+
+        if (chiTietGioHang.getSoLuong() != null) {
+            dto.setSoLuong(chiTietGioHang.getSoLuong());
+        }
+
+        if (chiTietGioHang.getNgayTao() != null) {
+            dto.setNgayTao(chiTietGioHang.getNgayTao());
+        }
+
+        if (chiTietGioHang.getNgaySua() != null) {
+            dto.setNgaySua(chiTietGioHang.getNgaySua());
+        }
+
+        if (chiTietGioHang.getTrangThai() != null) {
+            dto.setTrangThai(chiTietGioHang.getTrangThai());
+        }
+
+        return dto;
+    }
+
+    public static ChiTietGioHang convertToEntity(ChiTietGioHangDto dto) {
+        ChiTietGioHang entity = new ChiTietGioHang();
+
+        if (dto.getId() != null) {
+            entity.setId(dto.getId());
+        }
+
+        if (dto.getIdGH() != null) {
+            entity.setIdGH(dto.getIdGH());
+        }
+
+        if (dto.getIdSP() != null) {
+            entity.setIdSP(dto.getIdSP());
+        }
+
+        if (dto.getSoLuong() != null) {
+            entity.setSoLuong(dto.getSoLuong());
+        }
+
+        if (dto.getNgayTao() != null) {
+            entity.setNgayTao(dto.getNgayTao());
+        }
+
+        if (dto.getNgaySua() != null) {
+            entity.setNgaySua(dto.getNgaySua());
+        }
+
+        if (dto.getTrangThai() != null) {
+            entity.setTrangThai(dto.getTrangThai());
+        }
+
+        return entity;
+    }
+    
+     public static List<ChiTietGioHangDto> convertListToDto(List<ChiTietGioHang> entityList) {
+        List<ChiTietGioHangDto> dtoList = new ArrayList<>();
+        for (ChiTietGioHang entity : entityList) {
             dtoList.add(convertToDto(entity));
         }
         return dtoList;

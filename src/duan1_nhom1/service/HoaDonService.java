@@ -15,12 +15,13 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-/**1
+/**
+ * 1
  *
  * @author maccuacu
  */
-public class HoaDonService implements IService<HoaDonDto>{
-    
+public class HoaDonService implements IService<HoaDonDto> {
+
     HoaDonRepository repo = new HoaDonRepository();
 
     @Override
@@ -28,9 +29,13 @@ public class HoaDonService implements IService<HoaDonDto>{
         this.repo.createHoaDon(TranferData.convertToEntity(t));
     }
 
+    public List<HoaDonDto> getAllHD() {
+        return TranferData.convertListHoaDonToDto(this.repo.getAllHoaDonStatus());
+    }
+
     @Override
     public List<HoaDonDto> getAll() {
-        
+
         return TranferData.convertListHoaDonToDto(this.repo.getAllHoaDon());
     }
 
@@ -49,7 +54,7 @@ public class HoaDonService implements IService<HoaDonDto>{
         return TranferData.convertToDto(repo.getHoaDonById(id));
     }
 
-   public List<HoaDon> searhListNhanVien(String maKhach) {
+    public List<HoaDon> searhListNhanVien(String maKhach) {
         String sql = """
             DECLARE @maKhach NVARCHAR(255)
                    SET @maKhach =?
@@ -58,7 +63,7 @@ public class HoaDonService implements IService<HoaDonDto>{
                   WHERE (Khach_Hang.ma LIKE '%' + @maKhach + '%' OR @maKhach IS NULL);
             """;
         try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
-              ps.setString(1, maKhach);
+            ps.setString(1, maKhach);
             ResultSet rs = ps.executeQuery();
             List<HoaDon> hoadon = new ArrayList<>();
             while (rs.next()) {
@@ -67,10 +72,10 @@ public class HoaDonService implements IService<HoaDonDto>{
                 hd.setIdKhachHang(rs.getString(2));
                 hd.setMa(rs.getString(3));
                 hd.setIdNv(rs.getString(4));
-                 hd.setNgayMua(rs.getDate(5));
+                hd.setNgayMua(rs.getDate(5));
                 hd.setTongTien(rs.getDouble(6));
-               hd.setNgayTao(rs.getDate(7));
-               hd.setNgaySua(rs.getDate(8));
+                hd.setNgayTao(rs.getDate(7));
+                hd.setNgaySua(rs.getDate(8));
                 hd.setTrangThai(rs.getBoolean(9));
                 hoadon.add(hd);
             }
@@ -81,8 +86,9 @@ public class HoaDonService implements IService<HoaDonDto>{
         return null;
 
     }
-  
 
-    
-    
+    public HoaDonDto findByMa(String ma) {
+        return TranferData.convertToDto(repo.getHoaDonByMa(ma));
+    }
+
 }
