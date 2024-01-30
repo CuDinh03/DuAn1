@@ -10,6 +10,7 @@ import duan1_nhom1.view.HoaDonJPanel;
 import duan1_nhom1.view.KhachHangJPanel;
 import duan1_nhom1.view.SanPhamJPanel;
 import duan1_nhom1.view.TrangChuJPanel;
+import duan1_nhom1.view.VoucherJPanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
@@ -72,6 +73,7 @@ public class ChuyenManHinhController {
                 case "BaoCao" -> node = new BaoCaoJPanel();
                 case "HoaDon" -> node = new HoaDonJPanel();
                 case "KhachHang" -> node = new KhachHangJPanel();
+                case"Voucher" -> node = new VoucherJPanel();
                 default -> {
                 }
             }

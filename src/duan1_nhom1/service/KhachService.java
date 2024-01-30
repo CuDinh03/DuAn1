@@ -1,13 +1,17 @@
 package duan1_nhom1.service;
 
+import duan1_nhom1.dto.KhachDto;
+import duan1_nhom1.model.HoaDon;
 import duan1_nhom1.model.Khach;
 import duan1_nhom1.repository.KhachRepo;
+import duan1_nhom1.tranf.TranferData;
 import duan1_nhom1.utils.JdbcHelper;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+
 public class KhachService implements IService<Khach> {
 
     private List<Khach> listKhach = new ArrayList<>();
@@ -36,6 +40,10 @@ public class KhachService implements IService<Khach> {
     @Override
     public List<Khach> getAll() {
         return khachHangRepo.getAll();
+    }
+    
+    public KhachDto findBySdt(String sdt){
+        return TranferData.convertToDto(this.khachHangRepo.finBySdt(sdt));
     }
 
     public List<Khach> timKiem(String ma, String ten, String sdt) {
@@ -79,37 +87,37 @@ public class KhachService implements IService<Khach> {
     }
 
     public List<Khach> locKhach(Boolean trangThai) {
-    String sql = """
+        String sql = """
                  SELECT *
                  FROM Khach_Hang
                  WHERE (trang_thai = ? OR ? IS NULL);
                  """;
 
-    try (Connection con = JdbcHelper.getConnection(); 
-         PreparedStatement ps = con.prepareStatement(sql)) {
+        try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 
-        ps.setObject(1, trangThai);
-        ps.setObject(2, trangThai);
-        try (ResultSet rs = ps.executeQuery()) {
-            List<Khach> list = new ArrayList<>();
-            while (rs.next()) {
-                Khach kh = new Khach();
-                kh.setId(rs.getString(1));
-                kh.setMaKhachHang(rs.getString(2));
-                kh.setTenKhachHang(rs.getString(3));
-                kh.setSdt(rs.getString(4));
-                kh.setNgayTao(rs.getDate(5));
-                kh.setNgaySua(rs.getDate(6));
-                kh.setTrangThai(rs.getBoolean(7));
-                list.add(kh);
+            ps.setObject(1, trangThai);
+            ps.setObject(2, trangThai);
+            try (ResultSet rs = ps.executeQuery()) {
+                List<Khach> list = new ArrayList<>();
+                while (rs.next()) {
+                    Khach kh = new Khach();
+                    kh.setId(rs.getString(1));
+                    kh.setMaKhachHang(rs.getString(2));
+                    kh.setTenKhachHang(rs.getString(3));
+                    kh.setSdt(rs.getString(4));
+                    kh.setNgayTao(rs.getDate(5));
+                    kh.setNgaySua(rs.getDate(6));
+                    kh.setTrangThai(rs.getBoolean(7));
+                    list.add(kh);
+                }
+                return list;
             }
-            return list;
+        } catch (Exception e) {
+            // Log the exception using a logging framework like log4j or slf4j
+            e.printStackTrace();
         }
-    } catch (Exception e) {
-        // Log the exception using a logging framework like log4j or slf4j
-        e.printStackTrace();
+        return null;
     }
-    return null;
-}
 
+  
 }

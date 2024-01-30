@@ -20,7 +20,7 @@ public class ThongKeRepository {
     public List<HoaDonBean> getList() {
         try {
             Connection conn = JdbcHelper.getConnection();
-            String sql = "  SELECT ngay_mua, COUNT(*) as so_luong FROM Hoa_Don GROUP BY ngay_mua ORDER BY ngay_mua";
+            String sql = "  SELECT ngay_mua, COUNT(*) as so_luong FROM Hoa_Don where trang_thai = 1 GROUP BY ngay_mua ORDER BY ngay_mua ";
             List<HoaDonBean> list = new ArrayList<>();
             PreparedStatement ps = conn.prepareCall(sql);
             ResultSet rs = ps.executeQuery();

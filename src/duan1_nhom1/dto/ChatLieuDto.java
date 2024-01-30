@@ -1,18 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package duan1_nhom1.dto;
 
 import java.util.Date;
-import java.util.UUID;
 
-/**
- *
- * @author maccuacu
- */
+
 public class ChatLieuDto {
-    private UUID id;
+    private String id;
     private String ma;
     private String ten;
     private String moTa;
@@ -23,7 +16,7 @@ public class ChatLieuDto {
     public ChatLieuDto() {
     }
 
-    public ChatLieuDto(UUID id, String ma, String ten, String moTa, Date ngayTao, Date ngaySua, Boolean trangThai) {
+    public ChatLieuDto(String id, String ma, String ten, String moTa, Date ngayTao, Date ngaySua, Boolean trangThai) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
@@ -33,11 +26,11 @@ public class ChatLieuDto {
         this.trangThai = trangThai;
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
