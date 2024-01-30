@@ -483,6 +483,11 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         );
 
         jButton4.setText("Update");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Xóa");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -861,8 +866,12 @@ public class TrangChuJPanel extends javax.swing.JPanel {
 
         this.loadBanHangGH();
         this.loadBanHangSp(sPChiTietService.getAll());
-        this.showDateHoaDon();
+//        this.showDateHoaDon();
     }//GEN-LAST:event_tbl_banhanghdMouseClicked
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
