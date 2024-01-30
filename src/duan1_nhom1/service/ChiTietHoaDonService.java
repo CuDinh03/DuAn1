@@ -23,6 +23,10 @@ public class ChiTietHoaDonService implements IService<ChiTietHoaDonDto> {
         this.repo.updateChiTietHoaDon(TranferData.convertToEntity(t));
     }
 
+    public void update2(ChiTietHoaDonDto t) {
+        this.repo.updateChiTietHoaDon(TranferData.convertToEntity(t));
+    }
+
     @Override
     public void delete(String id) {
         this.repo.deleteChiTietHoaDon(id);

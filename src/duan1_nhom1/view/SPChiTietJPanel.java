@@ -49,8 +49,6 @@ public class SPChiTietJPanel extends javax.swing.JPanel {
     
     public SPChiTietJPanel(ChiTietSanPhamDto sp) {
         initComponents();
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     
