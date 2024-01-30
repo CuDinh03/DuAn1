@@ -38,8 +38,8 @@ public class GioHangService implements IService<GioHangDto> {
     }
 
     @Override
-    public GioHangDto findById(String id) {
-        return TranferData.convertToDto(this.repo.findById(id));
+    public GioHangDto findById(String idgh) {
+        return TranferData.convertToDto(this.repo.findById(idgh));
     }
 
     public GioHangDto findByMa(String ma) {
