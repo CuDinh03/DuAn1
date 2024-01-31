@@ -9,7 +9,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
     public MainJFrame() {
         initComponents();
-//        init();
+
         setLocationRelativeTo(null);
         setTitle("CỬA HÀNG ÁO NAM MT-SHIRT");
         ChuyenManHinhController controller = new ChuyenManHinhController(jpnView);
@@ -27,18 +27,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         controller.setEvent(listItem);
     }
-private void init() {
-        setLocationRelativeTo(null);
-        this.OpenChao();
-        this.OpenDangNhap();
-    }
-  void OpenChao() {
-        new chaoJDialog(this, true).setVisible(true);
-    }
 
-    void OpenDangNhap() {
-        new DangNhapJDialog(this, true).setVisible(true);
-    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

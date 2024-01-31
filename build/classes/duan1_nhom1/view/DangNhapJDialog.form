@@ -76,7 +76,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="btndangnhap" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="btnketthuc" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -161,6 +161,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="K&#x1ebf;t th&#xfa;c "/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnketthucActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

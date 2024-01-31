@@ -87,7 +87,6 @@ public class chaoJDialog extends javax.swing.JDialog {
             java.util.logging.Logger.getLogger(chaoJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -118,6 +117,9 @@ public class chaoJDialog extends javax.swing.JDialog {
             }
 
         }).start();
+         java.awt.Frame parent = null;
+        new DangNhapJDialog(parent, true).setVisible(true);
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
