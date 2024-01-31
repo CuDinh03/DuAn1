@@ -140,5 +140,36 @@ public Khach getHoaDonById(String idKhach) {
         }
         return null;
     }
+public List<Khach> timKiemTenKhach(String sdt) {
+        String sql = """
+                    SELECT [ma]
+                           ,[ten]
+                           ,[sdt]
+                           ,[ngay_tao]
+                           ,[ngay_sua]
+                           ,[trang_thai]
+                       FROM [dbo].[Khach_Hang]
+                       where [sdt]=? ;
+                     """;
+        try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setObject(1, sdt);
+            ResultSet rs = ps.executeQuery();
+            List<Khach> list = new ArrayList<>();
+            while (rs.next()) {
+                Khach kh = new Khach();
+                kh.setMaKhachHang(rs.getString(1));
+                kh.setTenKhachHang(rs.getString(2));
+                kh.setSdt(rs.getString(3));
+                kh.setNgayTao(rs.getDate(4));
+                kh.setNgaySua(rs.getDate(5));
+                kh.setTrangThai(rs.getBoolean(6));
+                list.add(kh);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
   
 }

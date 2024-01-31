@@ -9,7 +9,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
     public MainJFrame() {
         initComponents();
-        init();
+//        init();
         setLocationRelativeTo(null);
         setTitle("CỬA HÀNG ÁO NAM MT-SHIRT");
         ChuyenManHinhController controller = new ChuyenManHinhController(jpnView);
