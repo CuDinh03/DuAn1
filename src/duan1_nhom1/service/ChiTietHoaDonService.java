@@ -18,11 +18,7 @@ public class ChiTietHoaDonService implements IService<ChiTietHoaDonDto> {
         this.repo.createChiTietHoaDon(TranferData.convertToEntity(t));
     }
 
-    @Override
-    public void update(ChiTietHoaDonDto t, String id) {
-        this.repo.updateChiTietHoaDon(TranferData.convertToEntity(t));
-    }
-
+    
     public void update2(ChiTietHoaDonDto t) {
         this.repo.updateChiTietHoaDon(TranferData.convertToEntity(t));
     }
@@ -44,6 +40,11 @@ public class ChiTietHoaDonService implements IService<ChiTietHoaDonDto> {
 
     public List<ChiTietHoaDonDto> getAllByIdHd(String id) {
         return TranferData.convertListCTHDToDto(repo.getAllChiTietHoaDonByIDHd(id));
+    }
+
+    @Override
+    public void update(ChiTietHoaDonDto t, String id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

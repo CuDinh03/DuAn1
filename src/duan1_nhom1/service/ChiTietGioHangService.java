@@ -15,13 +15,8 @@ import java.util.List;
  */
 public class ChiTietGioHangService implements IService<ChiTietGioHangDto> {
 
-    
-
     ChiTietGioHangRepository repo = new ChiTietGioHangRepository();
 
-    public void changeSL(ChiTietGioHangDto ctghView) {
-       this.repo.changeQuantity(TranferData.convertToEntity(ctghView));  }
-    
     @Override
     public void add(ChiTietGioHangDto t) {
         this.repo.createChiTietGioHang(TranferData.convertToEntity(t));
@@ -47,6 +42,9 @@ public class ChiTietGioHangService implements IService<ChiTietGioHangDto> {
     public ChiTietGioHangDto findById(String id) {
         return TranferData.convertToDto(this.repo.findById(id));
     }
-    
+
+    public void changeSL(ChiTietGioHangDto ctghView) {
+        this.repo.changeQuantity(TranferData.convertToEntity(ctghView)); 
+    }
 
 }

@@ -79,7 +79,7 @@ public class KhachDto {
     public void setTrangThai(Boolean trangThai) {
         this.trangThai = trangThai;
     }
-
+    
 
     
 }

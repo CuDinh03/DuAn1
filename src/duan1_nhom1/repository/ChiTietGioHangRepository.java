@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 public class ChiTietGioHangRepository {
 
     private final Connection connection = JdbcHelper.getConnection();
@@ -133,7 +134,7 @@ public class ChiTietGioHangRepository {
     }
 
     public void changeQuantity(ChiTietGioHang ctgh) {
-       String query = "Update Gio_Hang_Chi_tiet set so_luong = ? where id = ? ";
+        String query = "Update Gio_Hang_Chi_Tiet set so_luong = ? where id = ? ";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, ctgh.getSoLuong());
             preparedStatement.setString(2, ctgh.getId());
@@ -141,6 +142,7 @@ public class ChiTietGioHangRepository {
             
         } catch (SQLException ex) {
             Logger.getLogger(SPChiTietRepository.class.getName()).log(Level.SEVERE, null, ex);
-        } }
+        }
+    }
 
 }

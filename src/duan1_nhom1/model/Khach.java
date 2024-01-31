@@ -1,16 +1,9 @@
 package duan1_nhom1.model;
 
-
 import java.util.Date;
-import java.util.UUID;
 
-
-/**
- *
- * @author maccuacu
- */
 public class Khach {
-    private String id;
+     private String id;
     private String maKhachHang;
     private String tenKhachHang;
     private String sdt;
@@ -18,7 +11,7 @@ public class Khach {
     private Date ngaySua;
     private Boolean trangThai;
 
-    public Khach() {
+    public Khach() { 
     }
 
     public Khach(String id, String maKhachHang, String tenKhachHang, String sdt, Date ngayTao, Date ngaySua, Boolean trangThai) {
@@ -30,7 +23,6 @@ public class Khach {
         this.ngaySua = ngaySua;
         this.trangThai = trangThai;
     }
-
     public String getId() {
         return id;
     }
@@ -86,8 +78,5 @@ public class Khach {
     public void setTrangThai(Boolean trangThai) {
         this.trangThai = trangThai;
     }
-
-
-
-   
+    
 }

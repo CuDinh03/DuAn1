@@ -4,7 +4,6 @@
  */
 package duan1_nhom1.repository;
 
-import duan1_nhom1.dto.ChiTietSanPhamDto;
 import duan1_nhom1.model.ChiTietSanPham;
 import duan1_nhom1.model.MauSac;
 import duan1_nhom1.utils.JdbcHelper;

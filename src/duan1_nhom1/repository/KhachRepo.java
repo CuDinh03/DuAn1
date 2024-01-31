@@ -1,4 +1,5 @@
 package duan1_nhom1.repository;
+
 import duan1_nhom1.model.HoaDon;
 import duan1_nhom1.model.Khach;
 import duan1_nhom1.utils.JdbcHelper;
@@ -69,7 +70,7 @@ public class KhachRepo {
                     Date ngay_tao = resultSet.getDate("ngay_tao");
                     Date ngay_sua = resultSet.getDate("ngay_sua");
                     Boolean trang_thai = resultSet.getBoolean("trang_thai");
-                    return new Khach(id, idKhach, idKhach, sdt, ngay_tao, ngay_sua, trang_thai);
+                    return new Khach(id, ma, ten, sdt, ngay_tao, ngay_sua, trang_thai);
                 }
             }
         } catch (Exception e) {
