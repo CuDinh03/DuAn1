@@ -244,7 +244,6 @@ public class ViewKhachHang extends javax.swing.JFrame {
         initComponents();
 >>>>>>> 9b6b4c2 (upadate khach hàng,thanh toán)
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

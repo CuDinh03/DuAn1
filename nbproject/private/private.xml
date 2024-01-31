@@ -21,8 +21,15 @@
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/SPChiTietFrame.java</file>
 =======
             <file>file:/C:/Users/WEB/DuAn1/src/duan1_nhom1/model/Khach.java</file>
+            <file>file:/C:/Users/WEB/DuAn1/src/duan1_nhom1/utils/DBconnect.java</file>
+            <file>file:/C:/Users/WEB/DuAn1/src/duan1_nhom1/view/ViewQLBaoCao.java</file>
+            <file>file:/C:/Users/WEB/DuAn1/src/duan1_nhom1/service/IService.java</file>
             <file>file:/C:/Users/WEB/DuAn1/src/duan1_nhom1/model/ThanhToan.java</file>
+<<<<<<< HEAD
 >>>>>>> 9b6b4c2 (upadate khach hàng,thanh toán)
+=======
+            <file>file:/C:/Users/WEB/DuAn1/src/duan1_nhom1/utils/JdbcHelper.java</file>
+>>>>>>> ba6be25 (update khách hàng)
         </group>
     </open-files>
 </project-private>

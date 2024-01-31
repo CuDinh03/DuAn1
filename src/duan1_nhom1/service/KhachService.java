@@ -128,6 +128,16 @@ public class KhachService implements IService<Khach> {
  */
 package duan1_nhom1.service;
 
+import duan1_nhom1.model.Khach;
+import duan1_nhom1.repository.KhachRepo;
+import duan1_nhom1.utils.DBconnect;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
  *
  * @author WEB
