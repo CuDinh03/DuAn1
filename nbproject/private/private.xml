@@ -4,9 +4,17 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/DuAn1_nhom1.java</file>
+            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/controller/QuanLyThongKeController.java</file>
+            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/view/HoaDonJPanel.java</file>
+            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/service/ThongKeImp.java</file>
+            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/view/KhachHangJPanel.java</file>
+            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/view/BaoCaoJPanel.java</file>
+            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/bean/HoaDonBean.java</file>
+            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/repository/ThongKeRepository.java</file>
+            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/tranf/TranferData.java</file>
             <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/view/TrangChuJPanel.java</file>
-            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/repository/HoaDonRepository.java</file>
-            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/view/BanHangFrame.java</file>
+            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/repository/ChiTietHoaDonRepository.java</file>
+            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/bean/DanhMucBean.java</file>
         </group>
     </open-files>
 </project-private>
