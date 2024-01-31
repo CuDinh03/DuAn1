@@ -51,12 +51,13 @@ public class HoaDonJPanel  extends javax.swing.JPanel {
             } else {
                 status = "Chưa thanh toán";
             }
-            Khach k = ks.findById(hd.getIdKhachHang());
+//            Khach k = ks.findById(hd.getIdKhachHang());
+            
             Object[] rowData = {
                 ++count,
                 hd.getId(),
-                k.getTenKhachHang(),
-                k.getSdt(),
+                "",
+                "",
                 hd.getIdNv(),
                 hd.getMa(),
                 hd.getTongTien(),
