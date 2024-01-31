@@ -805,6 +805,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         Double tienThua = tienkh - calculateTotalPrice().doubleValue();
         Double tongTien = Double.valueOf(this.txtTongTien.getText().trim());
         txtTienThua.setText(tienThua.toString());
+
         try {
             if (txtMahdTT.getText().equals("")) {
                 MsgBox.alert(this, "Vui lòng chọn hóa đơn trước khi nhấn thanh toán");
@@ -815,25 +816,53 @@ public class TrangChuJPanel extends javax.swing.JPanel {
             } else {
 
                 if (MsgBox.confirm(this, "Bạn chắc chắn muốn thanh toán hóa đơn này chứ?")) {
-                    if (tienkh < tongTien) {
+                    if (tienkh <= tongTien) {
                         MsgBox.alert(this, "Số tiền khách đưa không đủ để thanh toán");
                         txtTienKhachDua.setBackground(Color.red);
                         return;
                     } else {
                         txtTienKhachDua.setBackground(Color.white);
                         this.hds.update(hoaDonDto, hoaDonDto.getId());
+                        this.jlbTienThua.setText(tienThua.toString());
+                        List<ChiTietHoaDonDto> listCthd = this.cthdService.getAllByIdHd(hoaDonDto.getId());
+                        for (ChiTietHoaDonDto chiTietHoaDonDto : listCthd) {
+                            chiTietHoaDonDto.setTrangThai(Boolean.TRUE);
+                            this.cthdService.update2(chiTietHoaDonDto);
+                        }
+                        GioHangDto ghd = new GioHangDto();
+                        ghd.setIdKH(txtTenKhach.getText());
+
+                        ghd.setMa(generateGHCode());
+                        String magh = ghd.getMa();
+                        ghd.setNgaySua(new Date());
+                        ghd.setNgayTao(new Date());
+                        ghd.setTrangThai(Boolean.FALSE);
+                        this.ghService.add(ghd);
+                        this.saveCT(this.ghService.findByMa(magh).getId(), hoaDonDto.getId());
+                        GioHangHoaDonRepository repo = new GioHangHoaDonRepository();
+                        repo.createGioHangHoaDon(new GioHangHoaDon("", this.ghService.findByMa(magh).getId(), hoaDonDto.getId(), new Date(), new Date(), Boolean.TRUE));
+
+                        String id = repo.getGioHangHoaDonById(hoaDonDto.getId()).getIdGioHang();
+                        System.out.println(id);
+
+                        ghd.setTrangThai(Boolean.TRUE);
+                        this.ghService.update(ghd, id);
+                        for (ChiTietGioHangDto ctgh : cTgioHangList) {
+                            ctgh.setTrangThai(Boolean.TRUE);
+                            this.ctghService.update(ctgh, ctgh.getId());
 //                        if (Msgbox.confirm(this, "Bạn muốn in hóa đơn này không ??")) {
 //                            xuatHoaDon();
 //                        }
-                        cTgioHangList.clear();
-                        this.txtMahdTT.setText("");
-                        this.txtTongTien.setText("");
-                        this.txtTienKhachDua.setText("");
-                        this.txtSdt.setText("");
-                        this.loadBanHangGH();
-                        this.loadBanHangSp(sPChiTietService.getAll());
-                        this.showDateHoaDon();
-                        MsgBox.alert(this, "Thanh toán thành công!");
+                            cTgioHangList.clear();
+                            this.txtMahdTT.setText("");
+                            this.txtTongTien.setText("");
+                            this.txtTienKhachDua.setText("");
+                            this.txtSdt.setText("");
+                            this.loadBanHangGH();
+                            this.loadBanHangSp(sPChiTietService.getAll());
+                            this.showDateHoaDon();
+                            MsgBox.alert(this, "Thanh toán thành công!");
+                        }
                     }
                 }
             }
@@ -841,13 +870,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
             e.printStackTrace();
             MsgBox.alert(this, "Thanh toán thất bại");
         }
-//        if (tienThua >= 0) {
-//            this.jlbTienThua.setText(tienThua.toString());
-//            List<ChiTietHoaDonDto> listCthd = this.cthdService.getAllByIdHd(hoaDonDto.getId());
-//            for (ChiTietHoaDonDto chiTietHoaDonDto : listCthd) {
-//                chiTietHoaDonDto.setTrangThai(Boolean.TRUE);
-//                this.cthdService.update2(chiTietHoaDonDto);
-//            }
+
 //            
 //            GioHangDto ghd = new GioHangDto();
 //            ghd.setIdKH(txtTenKhach.getText());
