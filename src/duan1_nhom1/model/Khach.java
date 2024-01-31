@@ -1,9 +1,21 @@
 package duan1_nhom1.model;
 
+<<<<<<< HEAD
 import java.util.Date;
 
 public class Khach {
      private String id;
+=======
+import java.util.UUID;
+import java.sql.Date;
+
+/**
+ *
+ * @author maccuacu
+ */
+public class Khach {
+    private UUID id;
+>>>>>>> 5e7e693 (prive khách hàng)
     private String maKhachHang;
     private String tenKhachHang;
     private String sdt;
@@ -11,10 +23,17 @@ public class Khach {
     private Date ngaySua;
     private Boolean trangThai;
 
+<<<<<<< HEAD
     public Khach() { 
     }
 
     public Khach(String id, String maKhachHang, String tenKhachHang, String sdt, Date ngayTao, Date ngaySua, Boolean trangThai) {
+=======
+    public Khach() {
+    }
+
+    public Khach(UUID id, String maKhachHang, String tenKhachHang, String sdt, Date ngayTao, Date ngaySua, Boolean trangThai) {
+>>>>>>> 5e7e693 (prive khách hàng)
         this.id = id;
         this.maKhachHang = maKhachHang;
         this.tenKhachHang = tenKhachHang;
@@ -23,11 +42,20 @@ public class Khach {
         this.ngaySua = ngaySua;
         this.trangThai = trangThai;
     }
+<<<<<<< HEAD
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
+=======
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+>>>>>>> 5e7e693 (prive khách hàng)
         this.id = id;
     }
 
@@ -78,5 +106,10 @@ public class Khach {
     public void setTrangThai(Boolean trangThai) {
         this.trangThai = trangThai;
     }
+<<<<<<< HEAD
+=======
+    
+    
+>>>>>>> 5e7e693 (prive khách hàng)
     
 }
