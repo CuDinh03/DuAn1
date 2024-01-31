@@ -3,10 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/DuAn1_nhom1.java</file>
-            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/view/TrangChuJPanel.java</file>
-            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/repository/HoaDonRepository.java</file>
-            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/view/BanHangFrame.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/repository/SPChiTietRepository.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/service/ChiTietGioHangService.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/ThemSoLuongJFrame.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/service/SPChiTietService.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/TrangChuJPanel.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/utils/JdbcHelper.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/dto/ChiTietSanPhamDto.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/DuAn1_nhom1.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/MauSacJPanel.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/HoaDonJPanel.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/repository/ChiTietGioHangRepository.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/dto/ChiTietGioHangDto.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/model/Khach.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/ViewKhachHang.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/SPChiTietFrame.java</file>
         </group>
     </open-files>
 </project-private>
