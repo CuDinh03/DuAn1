@@ -56,7 +56,9 @@ public class TrangChuJPanel extends javax.swing.JPanel {
     private SanPhamService sanPhamService = new SanPhamService();
     private DanhMucService danhMucService = new DanhMucService();
     private ChatLieuService chatLieuService = new ChatLieuService();
+    private ChiTietGioHangService chiTietGioHangService  = new ChiTietGioHangService();
     List<ChiTietGioHangDto> cTgioHangList = new ArrayList<>();
+    List<ChiTietSanPhamDto> cTSanPhamDtos = new ArrayList<>();
     ChiTietSanPhamDto ctspView = new ChiTietSanPhamDto();
     ChiTietGioHangDto ctghView = new ChiTietGioHangDto();
     KhachService khachS = new KhachService();
@@ -64,6 +66,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
     ChiTietHoaDonService cthdService = new ChiTietHoaDonService();
     GioHangService ghService = new GioHangService();
     int _index = -1;
+    
 
     public TrangChuJPanel() {
         initComponents();
@@ -130,6 +133,15 @@ public class TrangChuJPanel extends javax.swing.JPanel {
     private ChiTietGioHangDto findItemByProductId(String idSp) {
         for (ChiTietGioHangDto item : cTgioHangList) {
             if (item.getIdSP().equals(idSp)) {
+                return item;
+            }
+        }
+        return null;
+    }
+    
+    private ChiTietSanPhamDto findItemByProductId1(String idSp) {
+        for (ChiTietSanPhamDto item : cTSanPhamDtos) {
+            if (item.getIdSanPham().equals(idSp)) {
                 return item;
             }
         }
@@ -244,7 +256,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         jLabel21 = new javax.swing.JLabel();
         jButton12 = new javax.swing.JButton();
         txtTenKhach = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        btn_updategh = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         btnThemVaoGH = new javax.swing.JButton();
         btnDeleteAll = new javax.swing.JButton();
@@ -482,7 +494,12 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                 .addGap(75, 75, 75))
         );
 
-        jButton4.setText("Update");
+        btn_updategh.setText("Update");
+        btn_updategh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_updateghActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Xóa");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -540,7 +557,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                                                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(jButton4)
+                                                        .addComponent(btn_updategh)
                                                         .addComponent(jButton5)
                                                         .addComponent(btnDeleteAll)))))))))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
@@ -570,7 +587,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(29, 29, 29)
-                                .addComponent(jButton4)
+                                .addComponent(btn_updategh)
                                 .addGap(49, 49, 49)
                                 .addComponent(jButton5)
                                 .addGap(18, 18, 18)
@@ -864,14 +881,42 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         this.showDateHoaDon();
     }//GEN-LAST:event_tbl_banhanghdMouseClicked
 
+    private void btn_updateghActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateghActionPerformed
+        _index = tbl_banhanggh.getSelectedRow();
+
+        if (_index == -1) {
+            JOptionPane.showMessageDialog(this, "Bạn vui lòng chọn sản phẩm cần sửa !");
+            return;
+        }
+         String userInput = JOptionPane.showInputDialog(null, "Nhập số lượng sản phẩm:", "Nhập số lượng", JOptionPane.QUESTION_MESSAGE);
+        if (userInput != null && !userInput.isEmpty()) {
+            Integer quantity = Integer.valueOf(userInput);
+            ChiTietSanPhamDto chiTietSanPhamDto = this.findItemByProductId1(ctghView.getIdSP());
+            if (chiTietSanPhamDto != null) {
+                chiTietSanPhamDto.setSoLuong(chiTietSanPhamDto.getSoLuong() + quantity);
+            } else {
+                ChiTietSanPhamDto item = new ChiTietSanPhamDto("", "", "", "", "", "", "", "", BigDecimal.ONE, BigDecimal.TEN, SOMEBITS, new Date(), new Date(), new Date(), Boolean.TRUE);
+                
+                ctghView.setSoLuong(ctghView.getSoLuong() - quantity);
+                chiTietGioHangService.changeSL(ctghView);
+                cTSanPhamDtos.add(item);
+                
+            }
+        }
+        this.txtTongTien.setText(calculateTotalPrice().toString());
+        this.loadBanHangGH();
+        this.loadBanHangSp(sPChiTietService.getAll());
+        
+    }//GEN-LAST:event_btn_updateghActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDeleteAll;
     private javax.swing.JButton btnThemVaoGH;
+    private javax.swing.JButton btn_updategh;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
