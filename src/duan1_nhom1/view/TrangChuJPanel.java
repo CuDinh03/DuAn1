@@ -43,7 +43,6 @@ public class TrangChuJPanel extends javax.swing.JPanel {
     int row2 = -1;
     int row3 = -1;
     private ChiTietHoaDonService hdctService = new ChiTietHoaDonService();
-    private List<Khach> listKhach = new ArrayList<>();
     private ThanhToanService thanhToanService = new ThanhToanService();
     private List<HoaDon> listHD = new ArrayList<>();
     private HoaDonService hds = new HoaDonService();
@@ -205,14 +204,10 @@ public class TrangChuJPanel extends javax.swing.JPanel {
     public void searchKhach() {
         try {
             String sdt = txtSdt.getText().trim();
-            this.khachS.timKiemTenKhach(sdt);
-            listKhach = khachS.timKiemTenKhach(sdt);
-            if (!listKhach.isEmpty()) {
-
-                Khach khachHang = listKhach.get(0);
-                txtTenKhach.setText(khachHang.getTenKhachHang());
-            } else {
-                txtTenKhach.setText("Không tìm thấy khách hàng");
+            KhachDto khachDto = this.khachS.findBySdt(sdt);
+            if (khachDto != null) {
+                khachView = khachDto;
+                this.txtTenKhach.setText(khachView.getTenKhachHang());
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -258,7 +253,6 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         txtTienKhachDua = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         jlbTienThua = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
         btnThanhToan = new javax.swing.JButton();
         txtTenKhach = new javax.swing.JTextField();
         jRadioButton1 = new javax.swing.JRadioButton();
@@ -382,8 +376,6 @@ public class TrangChuJPanel extends javax.swing.JPanel {
 
         jlbTienThua.setText("-");
 
-        jLabel21.setText("Thời gian:");
-
         btnThanhToan.setText("Thanh Toán");
         btnThanhToan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -420,19 +412,15 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                                     .addComponent(jlbTongTienSauGiam))
                                 .addGroup(tienTraLaiLayout.createSequentialGroup()
                                     .addGroup(tienTraLaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(tienTraLaiLayout.createSequentialGroup()
-                                            .addComponent(jLabel8)
-                                            .addGap(58, 58, 58))
-                                        .addGroup(tienTraLaiLayout.createSequentialGroup()
-                                            .addComponent(jLabel5)
-                                            .addGap(16, 16, 16)))
+                                        .addComponent(jLabel8)
+                                        .addComponent(jLabel5))
+                                    .addGap(38, 38, 38)
                                     .addGroup(tienTraLaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(txtMahdTT)
                                         .addComponent(jComboBox1, 0, 171, Short.MAX_VALUE))))
                             .addGroup(tienTraLaiLayout.createSequentialGroup()
                                 .addGroup(tienTraLaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel18)
-                                    .addComponent(jLabel21)
                                     .addGroup(tienTraLaiLayout.createSequentialGroup()
                                         .addComponent(jLabel19)
                                         .addGap(18, 18, 18)
@@ -504,8 +492,6 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel19)
                     .addComponent(jlbTienThua)
                     .addComponent(txtTienThua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel21)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnThanhToan)
                 .addGap(75, 75, 75))
@@ -765,7 +751,6 @@ public class TrangChuJPanel extends javax.swing.JPanel {
 //                    System.out.println(idKhach);
 //                    if (idKhach != null) {
         HoaDonDto hd = new HoaDonDto();
-//                        hd.setIdKhachHang(idKhach);
         hd.setIdNv("497bc77a-ae69-4f07-9436-72f37de7652f");
         hd.setMa(generateInvoiceCode());
         hd.setNgayMua(new Date());
@@ -804,7 +789,10 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         HoaDonDto hoaDonDto = this.hds.findByMa(this.txtMahdTT.getText().trim());
         hoaDonDto.setTrangThai(Boolean.TRUE);
         hoaDonDto.setTongTien(calculateTotalPrice().doubleValue());
-        hoaDonDto.setIdKhachHang(txtTenKhach.getText());
+        if (this.khachView != null) {
+            hoaDonDto.setIdKhachHang(khachView.getId());
+        }
+
         System.out.println(hoaDonDto.getId());
         Double tienkh = Double.valueOf(this.txtTienKhachDua.getText().trim());
         Double tienThua = tienkh - calculateTotalPrice().doubleValue();
@@ -835,8 +823,9 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                             this.cthdService.update2(chiTietHoaDonDto);
                         }
                         GioHangDto ghd = new GioHangDto();
-                        ghd.setIdKH(txtTenKhach.getText());
-
+                        if (this.khachView != null) {
+                            ghd.setIdKH(khachView.getId());
+                        }
                         ghd.setMa(generateGHCode());
                         String magh = ghd.getMa();
                         ghd.setNgaySua(new Date());
@@ -858,7 +847,8 @@ public class TrangChuJPanel extends javax.swing.JPanel {
 //                        if (Msgbox.confirm(this, "Bạn muốn in hóa đơn này không ??")) {
 //                            xuatHoaDon();
 //                        }
-                            cTgioHangList.clear();
+                        }
+                         cTgioHangList.clear();
                             this.txtMahdTT.setText("");
                             this.txtTongTien.setText("");
                             this.txtTienKhachDua.setText("");
@@ -867,7 +857,6 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                             this.loadBanHangSp(sPChiTietService.getAll());
                             this.showDateHoaDon();
                             MsgBox.alert(this, "Thanh toán thành công!");
-                        }
                     }
                 }
             }
@@ -875,47 +864,6 @@ public class TrangChuJPanel extends javax.swing.JPanel {
             e.printStackTrace();
             MsgBox.alert(this, "Thanh toán thất bại");
         }
-
-//            
-//            GioHangDto ghd = new GioHangDto();
-//            ghd.setIdKH(txtTenKhach.getText());
-//            
-//            ghd.setMa(generateGHCode());
-//            String magh = ghd.getMa();
-//            ghd.setNgaySua(new Date());
-//            ghd.setNgayTao(new Date());
-//            ghd.setTrangThai(Boolean.FALSE);
-//            this.ghService.add(ghd);
-//            this.saveCT(this.ghService.findByMa(magh).getId(), hoaDonDto.getId());
-//            GioHangHoaDonRepository repo = new GioHangHoaDonRepository();
-//            repo.createGioHangHoaDon(new GioHangHoaDon("", this.ghService.findByMa(magh).getId(), hoaDonDto.getId(), new Date(), new Date(), Boolean.TRUE));
-//            
-//            String id = repo.getGioHangHoaDonById(hoaDonDto.getId()).getIdGioHang();
-//            System.out.println(id);
-////            GioHangDto ghd = this.ghService.findById(id);
-//
-//            ghd.setTrangThai(Boolean.TRUE);
-//            this.ghService.update(ghd, id);
-//            for (ChiTietGioHangDto ctgh : cTgioHangList) {
-//                ctgh.setTrangThai(Boolean.TRUE);
-//                this.ctghService.update(ctgh, ctgh.getId());
-//                
-//            }
-//            
-//            if (hoaDonDto.getTrangThai() && ghd.getTrangThai()) {
-//                JOptionPane.showMessageDialog(null, "Thanh toán thành công", "Thành công", JOptionPane.ERROR_MESSAGE);
-//            } else {
-//                JOptionPane.showMessageDialog(null, "Thanh toán Không thành công", "Lỗi ", JOptionPane.ERROR_MESSAGE);
-//                
-//            }
-//            
-//            
-//        } else {
-//            JOptionPane.showMessageDialog(null, "Thanh toán Không thành công", "Lỗi ", JOptionPane.ERROR_MESSAGE);
-//            
-//        }
-//        
-
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void tbl_banhanghdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_banhanghdMouseClicked
@@ -971,7 +919,6 @@ public class TrangChuJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
