@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/repository/SPChiTietRepository.java</file>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/service/ChiTietGioHangService.java</file>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/ThemSoLuongJFrame.java</file>
@@ -18,6 +19,10 @@
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/model/Khach.java</file>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/ViewKhachHang.java</file>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/SPChiTietFrame.java</file>
+=======
+            <file>file:/C:/Users/WEB/DuAn1/src/duan1_nhom1/model/Khach.java</file>
+            <file>file:/C:/Users/WEB/DuAn1/src/duan1_nhom1/model/ThanhToan.java</file>
+>>>>>>> 9b6b4c2 (upadate khach hàng,thanh toán)
         </group>
     </open-files>
 </project-private>

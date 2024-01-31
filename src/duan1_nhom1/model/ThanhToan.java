@@ -10,7 +10,11 @@ import java.util.Date;
 public class ThanhToan {
     private String id;
     private String maThanhToan;
+<<<<<<< HEAD
     private String id_hd;
+=======
+    private UUID id_hd;
+>>>>>>> 9b6b4c2 (upadate khach hàng,thanh toán)
     private String phuongThucTT;
     private BigDecimal soTien;
     private Date ngayTT;
@@ -21,7 +25,11 @@ public class ThanhToan {
     public ThanhToan() {
     }
 
+<<<<<<< HEAD
     public ThanhToan(String id, String maThanhToan, String id_hd, String phuongThucTT, BigDecimal soTien, Date ngayTT, Date ngayTao, Date ngaySua, Boolean trangThai) {
+=======
+    public ThanhToan(UUID id, String maThanhToan, UUID id_hd, String phuongThucTT, BigDecimal soTien, Date ngayTT, Date ngayTao, Date ngaySua, Boolean trangThai) {
+>>>>>>> 9b6b4c2 (upadate khach hàng,thanh toán)
         this.id = id;
         this.maThanhToan = maThanhToan;
         this.id_hd = id_hd;
@@ -49,11 +57,19 @@ public class ThanhToan {
         this.maThanhToan = maThanhToan;
     }
 
+<<<<<<< HEAD
     public String getId_hd() {
         return id_hd;
     }
 
     public void setId_hd(String id_hd) {
+=======
+    public UUID getId_hd() {
+        return id_hd;
+    }
+
+    public void setId_hd(UUID id_hd) {
+>>>>>>> 9b6b4c2 (upadate khach hàng,thanh toán)
         this.id_hd = id_hd;
     }
 
@@ -105,4 +121,13 @@ public class ThanhToan {
         this.trangThai = trangThai;
     }
 
+<<<<<<< HEAD
+=======
+    @Override
+    public String toString() {
+        return "ThanhToan{" + "id=" + id + ", maThanhToan=" + maThanhToan + ", id_hd=" + id_hd + ", phuongThucTT=" + phuongThucTT + ", soTien=" + soTien + ", ngayTT=" + ngayTT + ", ngayTao=" + ngayTao + ", ngaySua=" + ngaySua + ", trangThai=" + trangThai + '}';
+    }
+
+   
+>>>>>>> 9b6b4c2 (upadate khach hàng,thanh toán)
 }

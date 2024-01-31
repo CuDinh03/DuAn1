@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package duan1_nhom1.service;
 
 import duan1_nhom1.dto.KhachDto;
@@ -120,4 +121,19 @@ public class KhachService implements IService<Khach> {
     }
 
   
+=======
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package duan1_nhom1.service;
+
+/**
+ *
+ * @author WEB
+ */
+public class KhachService  {
+     
+    
+>>>>>>> 9b6b4c2 (upadate khach hàng,thanh toán)
 }

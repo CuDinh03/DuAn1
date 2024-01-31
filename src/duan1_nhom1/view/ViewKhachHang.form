@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
+<<<<<<< HEAD
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
     <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
@@ -7,6 +8,9 @@
     <Component class="javax.swing.ButtonGroup" name="buttonGroup2">
     </Component>
   </NonVisualComponents>
+=======
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+>>>>>>> 9b6b4c2 (upadate khach hàng,thanh toán)
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -29,18 +33,37 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
           <Group type="102" alignment="0" attributes="0">
               <Component id="ViewKhachHang" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="18" max="32767" attributes="0"/>
+=======
+          <EmptySpace min="0" pref="1061" max="32767" attributes="0"/>
+          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <Component id="ViewKhachHang" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
+>>>>>>> 9b6b4c2 (upadate khach hàng,thanh toán)
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace pref="11" max="32767" attributes="0"/>
               <Component id="ViewKhachHang" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="11" max="32767" attributes="0"/>
+=======
+          <EmptySpace min="0" pref="759" max="32767" attributes="0"/>
+          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="ViewKhachHang" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+>>>>>>> 9b6b4c2 (upadate khach hàng,thanh toán)
           </Group>
       </Group>
     </DimensionLayout>
@@ -129,11 +152,16 @@
                               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                               <Component id="txtTimKiem" min="-2" pref="374" max="-2" attributes="0"/>
                               <EmptySpace pref="71" max="32767" attributes="0"/>
+<<<<<<< HEAD
                               <Component id="tbntim" min="-2" max="-2" attributes="0"/>
+=======
+                              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+>>>>>>> 9b6b4c2 (upadate khach hàng,thanh toán)
                               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
+<<<<<<< HEAD
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
@@ -149,6 +177,11 @@
                       </Group>
                       <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                       <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+=======
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="178" max="-2" attributes="0"/>
+                      <Component id="jLabel31" min="-2" pref="154" max="-2" attributes="0"/>
+>>>>>>> 9b6b4c2 (upadate khach hàng,thanh toán)
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -161,6 +194,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txtTimKiem" alignment="3" min="-2" max="-2" attributes="0"/>
+<<<<<<< HEAD
                           <Component id="tbntim" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -175,6 +209,16 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jScrollPane11" min="-2" pref="178" max="-2" attributes="0"/>
+=======
+                          <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jScrollPane12" min="-2" pref="347" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jLabel31" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jScrollPane11" min="-2" pref="199" max="-2" attributes="0"/>
+>>>>>>> 9b6b4c2 (upadate khach hàng,thanh toán)
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -193,6 +237,7 @@
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="4" rowCount="4">
                         <Column editable="true" title="M&#xe3; h&#xf3;a &#x111;&#x1a1;n" type="java.lang.Object"/>
+<<<<<<< HEAD
                         <Column editable="true" title="Ng&#xe0;y mua" type="java.lang.Object"/>
                         <Column editable="true" title="T&#x1ed5;ng ti&#x1ec1;n" type="java.lang.Object"/>
                         <Column editable="true" title="Tr&#x1ea1;ng th&#xe1;i" type="java.lang.Object"/>
@@ -222,6 +267,13 @@
                         </Column>
                       </TableColumnModel>
                     </Property>
+=======
+                        <Column editable="true" title="M&#xe3; kh&#xe1;ch h&#xe0;ng" type="java.lang.Object"/>
+                        <Column editable="true" title="Ng&#xe0;y mua" type="java.lang.Object"/>
+                        <Column editable="true" title="T&#x1ed5;ng ti&#x1ec1;n" type="java.lang.Object"/>
+                      </Table>
+                    </Property>
+>>>>>>> 9b6b4c2 (upadate khach hàng,thanh toán)
                     <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
@@ -242,15 +294,24 @@
                 <Component class="javax.swing.JTable" name="tblKhachHang">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+<<<<<<< HEAD
                       <Table columnCount="6" rowCount="0">
                         <Column editable="false" title="M&#xe3; kh&#xe1;ch h&#xe0;ng " type="java.lang.Object"/>
                         <Column editable="false" title="T&#xea;n kh&#xe1;ch h&#xe0;ng " type="java.lang.Object"/>
+=======
+                      <Table columnCount="8" rowCount="0">
+                        <Column editable="false" title="ID" type="java.lang.Object"/>
+                        <Column editable="false" title="M&#xe3; kh&#xe1;ch h&#xe0;ng " type="java.lang.Object"/>
+                        <Column editable="false" title="T&#xea;n kh&#xe1;ch h&#xe0;ng " type="java.lang.Object"/>
+                        <Column editable="false" title="&#x110;&#x1ecb;a Ch&#x1ec9;" type="java.lang.Object"/>
+>>>>>>> 9b6b4c2 (upadate khach hàng,thanh toán)
                         <Column editable="false" title="S&#x1ed1; &#x111;i&#x1ec7;n tho&#x1ea1;i " type="java.lang.Object"/>
                         <Column editable="false" title="Ng&#xe0;y t&#x1ea1;o " type="java.lang.Object"/>
                         <Column editable="true" title="Ng&#xe0;y s&#x1eed;a" type="java.lang.Object"/>
                         <Column editable="true" title="Tr&#x1ea1;ng th&#xe1;i " type="java.lang.Object"/>
                       </Table>
                     </Property>
+<<<<<<< HEAD
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
@@ -285,6 +346,8 @@
                         </Column>
                       </TableColumnModel>
                     </Property>
+=======
+>>>>>>> 9b6b4c2 (upadate khach hàng,thanh toán)
                     <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
@@ -311,11 +374,16 @@
                 <Property name="text" type="java.lang.String" value="Danh s&#xe1;ch h&#xf3;a &#x111;&#x1a1;n &#x111;&#xe3; mua"/>
               </Properties>
             </Component>
+<<<<<<< HEAD
             <Component class="javax.swing.JButton" name="tbntim">
+=======
+            <Component class="javax.swing.JButton" name="jButton2">
+>>>>>>> 9b6b4c2 (upadate khach hàng,thanh toán)
               <Properties>
                 <Property name="text" type="java.lang.String" value="Find"/>
               </Properties>
               <Events>
+<<<<<<< HEAD
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tbntimActionPerformed"/>
               </Events>
             </Component>
@@ -334,6 +402,11 @@
             </Component>
             <Component class="javax.swing.JTextField" name="txtTimKiemTheoHoaDon">
             </Component>
+=======
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+              </Events>
+            </Component>
+>>>>>>> 9b6b4c2 (upadate khach hàng,thanh toán)
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel13">
@@ -354,6 +427,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
+<<<<<<< HEAD
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jPanel20" min="-2" max="-2" attributes="0"/>
                               <Component id="jPanel19" min="-2" max="-2" attributes="0"/>
@@ -365,6 +439,19 @@
                               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                               <Component id="btnDelete" min="-2" pref="89" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+=======
+                          <Group type="102" attributes="0">
+                              <Component id="btnDeleteKH" min="-2" pref="89" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                              <Component id="btnUpdateKH" min="-2" pref="91" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                              <Component id="btnDeleteKH1" min="-2" pref="89" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                              <Component id="jPanel20" min="-2" max="-2" attributes="0"/>
+                              <Component id="jPanel19" min="-2" pref="441" max="-2" attributes="0"/>
+>>>>>>> 9b6b4c2 (upadate khach hàng,thanh toán)
                           </Group>
                       </Group>
                       <EmptySpace pref="27" max="32767" attributes="0"/>
@@ -377,12 +464,21 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel20" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+<<<<<<< HEAD
                       <Component id="jPanel19" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnUpdateKH" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                           <Component id="btnAdd" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                           <Component id="btnDelete" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+=======
+                      <Component id="jPanel19" min="-2" pref="343" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnUpdateKH" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                          <Component id="btnDeleteKH" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                          <Component id="btnDeleteKH1" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+>>>>>>> 9b6b4c2 (upadate khach hàng,thanh toán)
                       </Group>
                       <EmptySpace pref="125" max="32767" attributes="0"/>
                   </Group>
@@ -402,6 +498,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
@@ -436,12 +533,57 @@
                               </Group>
                           </Group>
                           <EmptySpace min="24" max="32767" attributes="0"/>
+=======
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="jLabel33" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jLabel39" alignment="0" min="-2" pref="37" max="-2" attributes="0"/>
+                                      <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jLabel34" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="txtTen" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txtSDT" alignment="0" pref="270" max="32767" attributes="0"/>
+                                      <Component id="txtIDKH" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txtSDT1" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jLabel36" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jLabel37" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jLabel38" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="jLabel43" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="txtDiaChi3" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txtDiaChi1" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txtDiaChi2" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txtDiaChi" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="178" max="-2" attributes="0"/>
+                          <Component id="jLabel32" min="-2" pref="47" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+>>>>>>> 9b6b4c2 (upadate khach hàng,thanh toán)
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
+<<<<<<< HEAD
                           <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                           <Component id="jLabel32" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
@@ -478,6 +620,53 @@
                               </Group>
                               <Group type="102" attributes="0">
                                   <Component id="txtNgaytao" min="-2" max="-2" attributes="0"/>
+=======
+                          <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                          <Component id="jLabel32" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel39" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtIDKH" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel33" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtTen" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="txtSDT" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel34" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtSDT1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel36" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtDiaChi1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel37" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtDiaChi" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="jLabel43" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="jLabel38" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                                  <Component id="txtDiaChi3" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="txtDiaChi2" min="-2" max="-2" attributes="0"/>
+>>>>>>> 9b6b4c2 (upadate khach hàng,thanh toán)
                                   <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -488,7 +677,11 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="jLabel32">
                   <Properties>
+<<<<<<< HEAD
                     <Property name="text" type="java.lang.String" value="TH&#xca;M KH&#xc1;CH H&#xc0;NG M&#x1eda;I"/>
+=======
+                    <Property name="text" type="java.lang.String" value="Chi ti&#x1ebf;t"/>
+>>>>>>> 9b6b4c2 (upadate khach hàng,thanh toán)
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel33">
@@ -496,10 +689,22 @@
                     <Property name="text" type="java.lang.String" value="M&#xe3; kh&#xe1;ch h&#xe0;ng "/>
                   </Properties>
                 </Component>
+<<<<<<< HEAD
                 <Component class="javax.swing.JTextField" name="txtMa">
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtTen">
                 </Component>
+=======
+                <Component class="javax.swing.JLabel" name="jLabel34">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="&#x110;&#x1ecb;a ch&#x1ec9; "/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtTen">
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtSDT">
+                </Component>
+>>>>>>> 9b6b4c2 (upadate khach hàng,thanh toán)
                 <Component class="javax.swing.JLabel" name="jLabel36">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="S&#x1ed1;  &#x111;i&#x1ec7;n tho&#x1ea1;i "/>
@@ -510,25 +715,46 @@
                     <Property name="text" type="java.lang.String" value="Ng&#xe0;y t&#x1ea1;o "/>
                   </Properties>
                 </Component>
+<<<<<<< HEAD
                 <Component class="javax.swing.JTextField" name="txtNgaytao">
+=======
+                <Component class="javax.swing.JTextField" name="txtDiaChi">
+>>>>>>> 9b6b4c2 (upadate khach hàng,thanh toán)
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel38">
                   <Properties>
                     <Property name="text" type="java.lang.String" value=" Tr&#x1ea1;ng th&#xe1;i "/>
                   </Properties>
                 </Component>
+<<<<<<< HEAD
+=======
+                <Component class="javax.swing.JLabel" name="jLabel39">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="ID"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtIDKH">
+                </Component>
+>>>>>>> 9b6b4c2 (upadate khach hàng,thanh toán)
                 <Component class="javax.swing.JLabel" name="jLabel1">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="T&#xea;n kh&#xe1;ch h&#xe0;ng "/>
                   </Properties>
                 </Component>
+<<<<<<< HEAD
                 <Component class="javax.swing.JTextField" name="txtSdt">
+=======
+                <Component class="javax.swing.JTextField" name="txtSDT1">
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtDiaChi1">
+>>>>>>> 9b6b4c2 (upadate khach hàng,thanh toán)
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel43">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Ng&#xe0;y s&#x1eed;a "/>
                   </Properties>
                 </Component>
+<<<<<<< HEAD
                 <Component class="javax.swing.JTextField" name="txtNgaysua">
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="rioHoatdong">
@@ -546,6 +772,11 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Kh&#xf4;ng ho&#x1ea1;t &#x111;&#x1ed9;ng"/>
                   </Properties>
+=======
+                <Component class="javax.swing.JTextField" name="txtDiaChi2">
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtDiaChi3">
+>>>>>>> 9b6b4c2 (upadate khach hàng,thanh toán)
                 </Component>
               </SubComponents>
             </Container>
@@ -567,6 +798,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="hoatDong" min="-2" max="-2" attributes="0"/>
@@ -579,6 +811,9 @@
                           <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
+=======
+                      <Group type="102" alignment="1" attributes="0">
+>>>>>>> 9b6b4c2 (upadate khach hàng,thanh toán)
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
@@ -586,10 +821,26 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+<<<<<<< HEAD
                                   <Component id="jLabel41" min="-2" pref="65" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
+=======
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="cboLocLoaiKH" min="-2" pref="86" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                                          <Component id="btnNewKH" min="-2" pref="66" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="jLabel41" alignment="0" min="-2" pref="65" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <EmptySpace pref="58" max="32767" attributes="0"/>
+>>>>>>> 9b6b4c2 (upadate khach hàng,thanh toán)
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -602,12 +853,20 @@
                           <Component id="jLabel41" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
+<<<<<<< HEAD
                               <Component id="btnLocKhach" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnNewKH" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="hoatDong" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="khongHoatDong" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="34" max="32767" attributes="0"/>
+=======
+                              <Component id="cboLocLoaiKH" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnNewKH" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="30" max="32767" attributes="0"/>
+>>>>>>> 9b6b4c2 (upadate khach hàng,thanh toán)
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -623,12 +882,34 @@
                     <Property name="text" type="java.lang.String" value="Tr&#x1ea1;ng th&#xe1;i "/>
                   </Properties>
                 </Component>
+<<<<<<< HEAD
                 <Component class="javax.swing.JButton" name="btnLocKhach">
+=======
+                <Component class="javax.swing.JComboBox" name="cboLocLoaiKH">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="3">
+                        <StringItem index="0" value=" "/>
+                        <StringItem index="1" value="VIP"/>
+                        <StringItem index="2" value="Th&#x1b0;&#x1edd;ng"/>
+                      </StringArray>
+                    </Property>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                  </AuxValues>
+                </Component>
+                <Component class="javax.swing.JButton" name="jButton1">
+>>>>>>> 9b6b4c2 (upadate khach hàng,thanh toán)
                   <Properties>
                     <Property name="text" type="java.lang.String" value="L&#x1ecd;c"/>
                   </Properties>
                   <Events>
+<<<<<<< HEAD
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLocKhachActionPerformed"/>
+=======
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+>>>>>>> 9b6b4c2 (upadate khach hàng,thanh toán)
                   </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnNewKH">
@@ -639,6 +920,7 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNewKHActionPerformed"/>
                   </Events>
                 </Component>
+<<<<<<< HEAD
                 <Component class="javax.swing.JRadioButton" name="hoatDong">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
@@ -658,6 +940,11 @@
               </SubComponents>
             </Container>
             <Component class="javax.swing.JButton" name="btnAdd">
+=======
+              </SubComponents>
+            </Container>
+            <Component class="javax.swing.JButton" name="btnDeleteKH">
+>>>>>>> 9b6b4c2 (upadate khach hàng,thanh toán)
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="66" green="ff" red="cc" type="rgb"/>
@@ -665,7 +952,11 @@
                 <Property name="text" type="java.lang.String" value="Add"/>
               </Properties>
               <Events>
+<<<<<<< HEAD
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddActionPerformed"/>
+=======
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeleteKHActionPerformed"/>
+>>>>>>> 9b6b4c2 (upadate khach hàng,thanh toán)
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnUpdateKH">
@@ -679,7 +970,11 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdateKHActionPerformed"/>
               </Events>
             </Component>
+<<<<<<< HEAD
             <Component class="javax.swing.JButton" name="btnDelete">
+=======
+            <Component class="javax.swing.JButton" name="btnDeleteKH1">
+>>>>>>> 9b6b4c2 (upadate khach hàng,thanh toán)
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="66" green="ff" red="cc" type="rgb"/>
@@ -687,7 +982,11 @@
                 <Property name="text" type="java.lang.String" value="Delete"/>
               </Properties>
               <Events>
+<<<<<<< HEAD
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeleteActionPerformed"/>
+=======
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeleteKH1ActionPerformed"/>
+>>>>>>> 9b6b4c2 (upadate khach hàng,thanh toán)
               </Events>
             </Component>
           </SubComponents>
