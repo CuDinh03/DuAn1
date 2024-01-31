@@ -120,7 +120,7 @@ public class VoucherFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Update thành công");
             clearFormVoucher();
         } catch (Exception e) {
-//            JOptionPane.showMessageDialog(this, "Update thất bại");
+            JOptionPane.showMessageDialog(this, "Update thất bại");
             throw new RuntimeException(e);
         }
 

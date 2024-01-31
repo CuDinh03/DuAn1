@@ -24,7 +24,7 @@ import java.util.List;
 public class VoucherRepo {
 
     Connection conn = JdbcHelper.getConnection();
-
+    List<Voucher> listVouchers = new ArrayList();
     public List<Voucher> getAll() {
         List<Voucher> listVouchers = new ArrayList();
         String sql = """
@@ -143,14 +143,14 @@ public class VoucherRepo {
             // Execute the update
             preparedStatement.executeUpdate();
 
-//            int chek = preparedStatement.executeUpdate();
-//
-//            // Check the result
-//            if (chek > 0) {
-//                System.out.println("update   thành công ");
-//            } else {
-//               System.out.println("update thất bại  ");
-//            }
+            int chek = preparedStatement.executeUpdate();
+
+            // Check the result
+            if (chek > 0) {
+                System.out.println("update   thành công ");
+            } else {
+               System.out.println("update thất bại  ");
+            }
         } catch (Exception e) {
             throw new RuntimeException("Error updating", e);
         }

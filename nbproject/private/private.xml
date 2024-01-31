@@ -2,6 +2,11 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/bachh/DuAn1/src/duan1_nhom1/view/ViewDanhMuc.java</file>
+            <file>file:/C:/Users/bachh/DuAn1/src/duan1_nhom1/view/VoucherFrame.java</file>
+            <file>file:/C:/Users/bachh/DuAn1/src/duan1_nhom1/repository/DanhMucRepository.java</file>
+            <file>file:/C:/Users/bachh/DuAn1/src/duan1_nhom1/repository/VoucherRepo.java</file>
+        </group>
     </open-files>
 </project-private>

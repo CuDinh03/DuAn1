@@ -113,7 +113,7 @@ public class ViewDanhMuc extends javax.swing.JFrame {
             clearForm();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Update thất bại");
-//            throw new RuntimeException(e);
+            throw new RuntimeException(e);
         }
 
     }

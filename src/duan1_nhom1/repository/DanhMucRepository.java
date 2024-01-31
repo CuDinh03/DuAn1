@@ -22,7 +22,7 @@ import java.util.List;
 public class DanhMucRepository {
 
     Connection conn = JdbcHelper.getConnection();
-    List<DanhMuc> listDanhMuc = new ArrayList<>();
+//    List<DanhMuc> listDanhMuc = new ArrayList<>();
 
     public List<DanhMuc> getAll() {
         List<DanhMuc> listDanhMuc = new ArrayList<>();
@@ -151,7 +151,7 @@ public class DanhMucRepository {
     public void update(DanhMuc danhMuc, String id) {
         String sql = """
                 UPDATE [dbo].[danh_muc_san_pham]
-                SET [id] = ?,
+                SET 
                     [ma] = ?,
                     [ten] = ?,
                     [mo_ta] = ?,
@@ -162,13 +162,13 @@ public class DanhMucRepository {
                 """;
         try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
             // Set parameters
-            ps.setObject(1, danhMuc.getId());
-            ps.setObject(2, danhMuc.getMa());
-            ps.setObject(3, danhMuc.getTen());
-            ps.setObject(4, danhMuc.getMoTa());
-            ps.setObject(5, danhMuc.getNgayTao());
-            ps.setObject(6, danhMuc.getNgaySua());
-            ps.setObject(7, danhMuc.getTrangThai());
+            ps.setObject(7, danhMuc.getId());
+            ps.setObject(1, danhMuc.getMa());
+            ps.setObject(2, danhMuc.getTen());
+            ps.setObject(3, danhMuc.getMoTa());
+            ps.setObject(4, danhMuc.getNgayTao());
+            ps.setObject(5, danhMuc.getNgaySua());
+            ps.setObject(6, danhMuc.getTrangThai());
             ps.setObject(8, id);
 //             Execute the update
             int chek = ps.executeUpdate();
