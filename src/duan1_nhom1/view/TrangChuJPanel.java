@@ -6,6 +6,7 @@ import duan1_nhom1.dto.ChiTietSanPhamDto;
 import duan1_nhom1.dto.GioHangDto;
 import duan1_nhom1.dto.HoaDonDto;
 import duan1_nhom1.dto.KhachDto;
+import duan1_nhom1.model.ChiTietGioHang;
 import duan1_nhom1.model.ChiTietSanPham;
 import duan1_nhom1.model.GioHangHoaDon;
 import duan1_nhom1.model.HoaDon;
@@ -53,7 +54,9 @@ public class TrangChuJPanel extends javax.swing.JPanel {
     private SanPhamService sanPhamService = new SanPhamService();
     private DanhMucService danhMucService = new DanhMucService();
     private ChatLieuService chatLieuService = new ChatLieuService();
+    private ChiTietGioHangService chiTietGioHangService = new ChiTietGioHangService();
     List<ChiTietGioHangDto> cTgioHangList = new ArrayList<>();
+    List<ChiTietSanPhamDto> ctspList = new ArrayList<>();
     ChiTietSanPhamDto ctspView = new ChiTietSanPhamDto();
     ChiTietGioHangDto ctghView = new ChiTietGioHangDto();
     KhachDto khachView = new KhachDto();
@@ -85,6 +88,37 @@ public class TrangChuJPanel extends javax.swing.JPanel {
             defaultTableModel.addRow(rowData);
 
         }
+    }
+
+    public void deleteSPGH() {
+        // TODO add your handling code here:
+        int option = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn xoá không?", "Confirmation", JOptionPane.YES_NO_OPTION);
+        switch (option) {
+            case JOptionPane.YES_OPTION -> {
+
+                String ma = ctghView.getIdSP();
+                System.out.println(ma);
+
+                for (ChiTietGioHangDto items : cTgioHangList) {
+                    if (items.getIdSP().equals(ma)) {
+                        ctspView.setSoLuong(ctspView.getSoLuong() + items.getSoLuong());
+                        sPChiTietService.changeSL(ctspView);
+                        cTgioHangList.remove(items);
+                        JOptionPane.showMessageDialog(this, "Xoá thành công");
+                        break;
+                    }
+                }
+                this.loadBanHangGH();
+                this.loadBanHangSp(sPChiTietService.getAll());
+            }
+            case JOptionPane.NO_OPTION -> {
+            }
+            case JOptionPane.CANCEL_OPTION, JOptionPane.CLOSED_OPTION -> {
+            }
+            default -> {
+            }
+        }
+
     }
 
     public void loadBanHangGH() {
@@ -680,35 +714,9 @@ public class TrangChuJPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_tbl_banhangghMouseClicked
 
+
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-        int option = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn xoá không?", "Confirmation", JOptionPane.YES_NO_OPTION);
-        switch (option) {
-            case JOptionPane.YES_OPTION -> {
-
-                String ma = ctghView.getIdSP();
-                System.out.println(ma);
-
-                for (ChiTietGioHangDto items : cTgioHangList) {
-                    if (items.getIdSP().equals(ma)) {
-                        ctspView.setSoLuong(ctspView.getSoLuong() + items.getSoLuong());
-                        sPChiTietService.changeSL(ctspView);
-                        cTgioHangList.remove(items);
-                        JOptionPane.showMessageDialog(this, "Xoá thành công");
-                        break;
-                    }
-                }
-                this.loadBanHangGH();
-                this.loadBanHangSp(sPChiTietService.getAll());
-            }
-            case JOptionPane.NO_OPTION -> {
-            }
-            case JOptionPane.CANCEL_OPTION, JOptionPane.CLOSED_OPTION -> {
-            }
-            default -> {
-            }
-        }
-
+        deleteSPGH();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void btnDeleteAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteAllActionPerformed
@@ -889,7 +897,49 @@ public class TrangChuJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_tbl_banhanghdMouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+
+        String userInput = JOptionPane.showInputDialog(null, "Nhập số lượng sản phẩm:", "Nhập số lượng", JOptionPane.QUESTION_MESSAGE);
+
+        if (userInput != null && !userInput.isEmpty()) {
+            try {
+                Integer quantity = Integer.valueOf(userInput);
+
+                if (quantity < 0) {
+                    JOptionPane.showMessageDialog(this, "Số lượng không được âm!");
+                    return;
+                } else if (quantity == 0) {
+                    deleteSPGH();
+                }
+
+                ChiTietGioHangDto chiTietGioHang = this.findItemByProductId(ctspView.getIdSanPham());
+
+                if (chiTietGioHang != null) {
+                    int chenhLech = quantity - chiTietGioHang.getSoLuong();
+
+                    if (chenhLech > 0) {
+                        if (chenhLech <= ctspView.getSoLuong()) {
+                            chiTietGioHang.setSoLuong(quantity);
+                            ctspView.setSoLuong(ctspView.getSoLuong() - chenhLech);
+                            sPChiTietService.changeSL(ctspView);
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Số lượng tồn kho không đủ!");
+                        }
+                    } else if (chenhLech < 0) {
+
+                        chiTietGioHang.setSoLuong(quantity);
+                        ctspView.setSoLuong(ctspView.getSoLuong() - chenhLech);
+                        sPChiTietService.changeSL(ctspView);
+                    }
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập số nguyên hợp lệ!");
+                return;
+            }
+        }
+
+        this.txtTongTien.setText(calculateTotalPrice().toString());
+        this.loadBanHangGH();
+        this.loadBanHangSp(sPChiTietService.getAll());
     }//GEN-LAST:event_jButton4ActionPerformed
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         searchKhach();

@@ -43,4 +43,8 @@ public class ChiTietGioHangService implements IService<ChiTietGioHangDto> {
         return TranferData.convertToDto(this.repo.findById(id));
     }
 
+    public void changeSL(ChiTietGioHangDto ctghView) {
+        this.repo.changeQuantity(TranferData.convertToEntity(ctghView)); 
+    }
+
 }

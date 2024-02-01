@@ -9,6 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 public class ChiTietGioHangRepository {
 
@@ -128,6 +131,18 @@ public class ChiTietGioHangRepository {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void changeQuantity(ChiTietGioHang ctgh) {
+        String query = "Update Gio_Hang_Chi_Tiet set so_luong = ? where id = ? ";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, ctgh.getSoLuong());
+            preparedStatement.setString(2, ctgh.getId());
+            preparedStatement.execute();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(SPChiTietRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }
