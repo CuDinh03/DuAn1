@@ -809,7 +809,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
             } else {
 
                 if (MsgBox.confirm(this, "Bạn chắc chắn muốn thanh toán hóa đơn này chứ?")) {
-                    if (tienkh <= tongTien) {
+                    if (tienkh == tongTien || tienkh > tongTien) {
                         MsgBox.alert(this, "Số tiền khách đưa không đủ để thanh toán");
                         txtTienKhachDua.setBackground(Color.red);
                         return;
@@ -848,15 +848,15 @@ public class TrangChuJPanel extends javax.swing.JPanel {
 //                            xuatHoaDon();
 //                        }
                         }
-                         cTgioHangList.clear();
-                            this.txtMahdTT.setText("");
-                            this.txtTongTien.setText("");
-                            this.txtTienKhachDua.setText("");
-                            this.txtSdt.setText("");
-                            this.loadBanHangGH();
-                            this.loadBanHangSp(sPChiTietService.getAll());
-                            this.showDateHoaDon();
-                            MsgBox.alert(this, "Thanh toán thành công!");
+                        cTgioHangList.clear();
+                        this.txtMahdTT.setText("");
+                        this.txtTongTien.setText("");
+                        this.txtTienKhachDua.setText("");
+                        this.txtSdt.setText("");
+                        this.loadBanHangGH();
+                        this.loadBanHangSp(sPChiTietService.getAll());
+                        this.showDateHoaDon();
+                        MsgBox.alert(this, "Thanh toán thành công!");
                     }
                 }
             }

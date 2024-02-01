@@ -4,10 +4,14 @@
  */
 package duan1_nhom1.view;
 
+import duan1_nhom1.dto.TaiKhoanDto;
+import duan1_nhom1.model.ChucVu;
 import duan1_nhom1.model.TaiKhoan;
 import duan1_nhom1.service.TaiKhoanService;
 import duan1_nhom1.utils.Auth;
 import duan1_nhom1.utils.MsgBox;
+import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
@@ -26,6 +30,7 @@ public class DangNhapJDialog extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
 
     }
+    
 
     void DangNhap() {
         try {
@@ -41,6 +46,18 @@ public class DangNhapJDialog extends javax.swing.JDialog {
             } else if (!pass.equals(tk.getMatKhau())) {
                 MsgBox.alert(this, "Sai mật khẩu!");
             } else {
+//                String idRole = "";
+//                TaiKhoanService taiK = new TaiKhoanService();
+//            List<TaiKhoan> account1 = taiK.getAll();
+//
+//            List<ChucVu> listRole = AccountRoleDAO.getAll();
+//            for (AccountRole accountRole : listRole) {
+//                if (taiK.getAccountByUsername(getAccount().getUsername()).getId().equals(accountRole.getIdAccount())) {
+//                    idRole = accountRole.getIdRole();
+//                    break;
+//                }
+//
+//            }
                 MsgBox.alert(this, "Đăng nhập thành công!");
                 Auth.user = tk;
                 this.dispose();

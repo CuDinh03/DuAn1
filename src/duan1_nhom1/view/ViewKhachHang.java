@@ -42,7 +42,7 @@ public class ViewKhachHang extends javax.swing.JFrame {
         comboxKhach.addItem("Tất cả");
         List<Khach> list = khachService.getAll();
         for (Khach khach : list) {
-            comboxKhach.addItem(khach.getMaKhachHang());
+            comboxKhach.addItem(khach.getId());
         }
     }
     public void showDataKhach() {
@@ -227,7 +227,7 @@ public class ViewKhachHang extends javax.swing.JFrame {
             if (maKhach.trim().isEmpty()) {
                 maKhach = null;
             }
-//             listHD= hoaDon.timKhachTheoHD(maKhach);
+             listHD= (List<HoaDon>) hoaDon.getHoaDonById(maKhach);
             showDataHoaDon();
 
         } catch (Exception e) {
