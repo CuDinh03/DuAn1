@@ -9,7 +9,6 @@ import duan1_nhom1.dto.KhachDto;
 import duan1_nhom1.model.ChiTietSanPham;
 import duan1_nhom1.model.GioHangHoaDon;
 import duan1_nhom1.model.HoaDon;
-import duan1_nhom1.model.Khach;
 import duan1_nhom1.repository.GioHangHoaDonRepository;
 import duan1_nhom1.service.ChatLieuService;
 import duan1_nhom1.service.ChiTietGioHangService;
@@ -42,15 +41,11 @@ public class TrangChuJPanel extends javax.swing.JPanel {
     int row1 = -1;
     int row2 = -1;
     int row3 = -1;
-    private ChiTietHoaDonService hdctService = new ChiTietHoaDonService();
-    private ThanhToanService thanhToanService = new ThanhToanService();
-    private List<HoaDon> listHD = new ArrayList<>();
     private HoaDonService hds = new HoaDonService();
     private List<ChiTietSanPham> listCTSP = new ArrayList<>();
     private SPChiTietService CTSP = new SPChiTietService();
     private IService iService = new SanPhamService();
     private SPChiTietService sPChiTietService = new SPChiTietService();
-    private DefaultComboBoxModel defaultComboBoxModel;
     private DefaultTableModel defaultTableModel;
     private MauSacService mauSacService = new MauSacService();
     private HangService hangService = new HangService();
@@ -809,7 +804,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
             } else {
 
                 if (MsgBox.confirm(this, "Bạn chắc chắn muốn thanh toán hóa đơn này chứ?")) {
-                    if (tienkh <= tongTien) {
+                    if (tienkh < tongTien) {
                         MsgBox.alert(this, "Số tiền khách đưa không đủ để thanh toán");
                         txtTienKhachDua.setBackground(Color.red);
                         return;
