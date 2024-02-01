@@ -6,10 +6,8 @@ import duan1_nhom1.dto.ChiTietSanPhamDto;
 import duan1_nhom1.dto.GioHangDto;
 import duan1_nhom1.dto.HoaDonDto;
 import duan1_nhom1.dto.KhachDto;
-import duan1_nhom1.model.ChiTietGioHang;
 import duan1_nhom1.model.ChiTietSanPham;
 import duan1_nhom1.model.GioHangHoaDon;
-import duan1_nhom1.model.HoaDon;
 import duan1_nhom1.repository.GioHangHoaDonRepository;
 import duan1_nhom1.service.ChatLieuService;
 import duan1_nhom1.service.ChiTietGioHangService;
@@ -24,7 +22,6 @@ import duan1_nhom1.service.KichCoService;
 import duan1_nhom1.service.MauSacService;
 import duan1_nhom1.service.SPChiTietService;
 import duan1_nhom1.service.SanPhamService;
-import duan1_nhom1.service.ThanhToanService;
 import duan1_nhom1.utils.MsgBox;
 import java.awt.Color;
 import java.math.BigDecimal;
@@ -32,7 +29,6 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.util.regex.*;
@@ -214,7 +210,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         for (ChiTietGioHangDto gh : cTgioHangList) {
             gh.setIdGH(idgh);
             this.ctghService.add(gh);
-            ChiTietHoaDonDto cthd = new ChiTietHoaDonDto("", idHd, gh.getIdSP(), "", gh.getSoLuong(), this.CTSP.findByIdSP(gh.getIdSP()).getGiaBan().doubleValue(), new Date(), new Date(), Boolean.FALSE);
+            ChiTietHoaDonDto cthd = new ChiTietHoaDonDto("", idHd, gh.getIdSP(), "", gh.getSoLuong(), this.CTSP.findByIdSP(gh.getIdSP()).getGiaBan().doubleValue(), new Date(), new Date(), Boolean.TRUE);
             this.cthdService.add(cthd);
         }
     }
@@ -371,6 +367,11 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         });
 
         jButton10.setText("Hủy");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
 
         tienTraLai.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -672,29 +673,57 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         if (index == -1) {
             return;
         }
+        try {
+            HoaDonDto donDto = this.hds.findByMa(this.txtMahdTT.getText());
+            if (donDto != null) {
+                ctspView = this.sPChiTietService.findByMaCt(this.tbl_banhangsp.getValueAt(index, 2).toString());
 
-        ctspView = this.sPChiTietService.findByMaCt(this.tbl_banhangsp.getValueAt(index, 2).toString());
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Chưa có hoá đơn!");
+
+        }
+
 
     }//GEN-LAST:event_tbl_banhangspMouseClicked
 
     private void btnThemVaoGHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemVaoGHActionPerformed
         // TODO add your handling code here:
+//        if (ctghView.getId().isEmpty()) {
+//            return;
+//
+//        }
+        int index = -1;
+        index = this.tbl_banhangsp.getSelectedRow();
+        if (index == -1) {
+            JOptionPane.showMessageDialog(this, "Hãy chọn sản phẩm");
 
+            return;
+        }
         String userInput = JOptionPane.showInputDialog(null, "Nhập số lượng sản phẩm:", "Nhập số lượng", JOptionPane.QUESTION_MESSAGE);
         if (userInput != null && !userInput.isEmpty()) {
             Integer quantity = Integer.valueOf(userInput);
-            ChiTietGioHangDto chiTietGioHang = this.findItemByProductId(ctspView.getIdSanPham());
-            if (chiTietGioHang != null) {
-                chiTietGioHang.setSoLuong(chiTietGioHang.getSoLuong() + quantity);
-            } else {
-                ChiTietGioHangDto item = new ChiTietGioHangDto("", "", ctspView.getIdSanPham(), quantity, new Date(), new Date(), Boolean.TRUE);
+            if (quantity < ctspView.getSoLuong()) {
+                ChiTietGioHangDto chiTietGioHang = this.findItemByProductId(ctspView.getIdSanPham());
+                if (chiTietGioHang != null) {
 
-                ctspView.setSoLuong(ctspView.getSoLuong() - quantity);
-                sPChiTietService.changeSL(ctspView);
-                cTgioHangList.add(item);
+                    chiTietGioHang.setSoLuong(chiTietGioHang.getSoLuong() + quantity);
+                } else {
+                    ChiTietGioHangDto item = new ChiTietGioHangDto("", "", ctspView.getIdSanPham(), quantity, new Date(), new Date(), Boolean.TRUE);
+
+                    ctspView.setSoLuong(ctspView.getSoLuong() - quantity);
+                    sPChiTietService.changeSL(ctspView);
+                    cTgioHangList.add(item);
+
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Nhập quá số lượng");
 
             }
+
         }
+
         this.txtTongTien.setText(calculateTotalPrice().toString());
         this.loadBanHangGH();
         this.loadBanHangSp(sPChiTietService.getAll());
@@ -844,22 +873,23 @@ public class TrangChuJPanel extends javax.swing.JPanel {
 
                         ghd.setTrangThai(Boolean.TRUE);
                         this.ghService.update(ghd, id);
-                        for (ChiTietGioHangDto ctgh : cTgioHangList) {
+                        List<ChiTietGioHangDto> listDto = chiTietGioHangService.getAllByIdGh(repo.getGioHangHoaDonById(hoaDonDto.getId()).getIdGioHang());
+                        for (ChiTietGioHangDto ctgh : listDto) {
                             ctgh.setTrangThai(Boolean.TRUE);
-                            this.ctghService.update(ctgh, ctgh.getId());
+                            this.ctghService.update(ctgh);
 //                        if (Msgbox.confirm(this, "Bạn muốn in hóa đơn này không ??")) {
 //                            xuatHoaDon();
 //                        }
                         }
-                         cTgioHangList.clear();
-                            this.txtMahdTT.setText("");
-                            this.txtTongTien.setText("");
-                            this.txtTienKhachDua.setText("");
-                            this.txtSdt.setText("");
-                            this.loadBanHangGH();
-                            this.loadBanHangSp(sPChiTietService.getAll());
-                            this.showDateHoaDon();
-                            MsgBox.alert(this, "Thanh toán thành công!");
+                        cTgioHangList.clear();
+                        this.txtMahdTT.setText("");
+                        this.txtTongTien.setText("");
+                        this.txtTienKhachDua.setText("");
+                        this.txtSdt.setText("");
+                        this.loadBanHangGH();
+                        this.loadBanHangSp(sPChiTietService.getAll());
+                        this.showDateHoaDon();
+                        MsgBox.alert(this, "Thanh toán thành công!");
                     }
                 }
             }
@@ -897,7 +927,13 @@ public class TrangChuJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_tbl_banhanghdMouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        int index = -1;
+        index = this.tbl_banhanggh.getSelectedRow();
+        if (index == -1) {
+            JOptionPane.showMessageDialog(this, "Hãy chọn sản phẩm");
 
+            return;
+        }
         String userInput = JOptionPane.showInputDialog(null, "Nhập số lượng sản phẩm:", "Nhập số lượng", JOptionPane.QUESTION_MESSAGE);
 
         if (userInput != null && !userInput.isEmpty()) {
@@ -944,6 +980,36 @@ public class TrangChuJPanel extends javax.swing.JPanel {
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         searchKhach();
     }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        // TODO add your handling code here:
+                int option = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn huỷ không?", "Confirmation", JOptionPane.YES_NO_OPTION);
+        switch (option) {
+            case JOptionPane.YES_OPTION -> {
+                        this.txtMahdTT.setText("");
+
+                for (ChiTietGioHangDto items : cTgioHangList) {
+                    ctspView.setSoLuong(ctspView.getSoLuong() + items.getSoLuong());
+                    sPChiTietService.changeSL(ctspView);
+                }
+                this.cTgioHangList.clear();
+                JOptionPane.showMessageDialog(this, "huỷ thành công");
+        this.loadBanHangGH();
+        this.loadBanHangSp(this.CTSP.getAll());
+        this.showDateHoaDon();
+            }
+
+            case JOptionPane.NO_OPTION -> {
+            }
+            case JOptionPane.CANCEL_OPTION, JOptionPane.CLOSED_OPTION -> {
+            }
+            default -> {
+            }
+        }
+
+        
+        
+    }//GEN-LAST:event_jButton10ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

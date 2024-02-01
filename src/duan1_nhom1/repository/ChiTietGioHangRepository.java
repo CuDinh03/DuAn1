@@ -145,4 +145,28 @@ public class ChiTietGioHangRepository {
         }
     }
 
+    public List<ChiTietGioHang> getAllChiTietGioHangByIdgh(String idGh) {
+    List<ChiTietGioHang> chiTietGioHangs = new ArrayList<>();
+        String query = "SELECT * FROM Gio_Hang_Chi_Tiet where id_gh = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setString(1, idGh);
+                ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String id = resultSet.getString("id");
+                String idGH = resultSet.getString("id_gh");
+                String idSP = resultSet.getString("id_sp");
+                Integer soLuong = resultSet.getInt("so_luong");
+                Date ngayTao = resultSet.getDate("ngay_tao");
+                Date ngaySua = resultSet.getDate("ngay_sua");
+                Boolean trangThai = resultSet.getBoolean("trang_thai");
+
+                ChiTietGioHang chiTietGioHang = new ChiTietGioHang(id,idGH, idSP, soLuong, ngayTao, ngaySua, trangThai);
+                chiTietGioHangs.add(chiTietGioHang);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return chiTietGioHangs;
+    }
+
 }

@@ -101,7 +101,7 @@ public class HoaDonRepository {
 
     public List<HoaDon> getAllHoaDon() {
         List<HoaDon> hoaDons = new ArrayList<>();
-        String query = "SELECT * FROM hoa_don";
+        String query = "SELECT * FROM hoa_don order by ngay_mua desc ";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query); ResultSet resultSet = preparedStatement.executeQuery()) {
 
             while (resultSet.next()) {

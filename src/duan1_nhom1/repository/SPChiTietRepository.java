@@ -284,7 +284,7 @@ public class SPChiTietRepository {
     }
 
     public void changeQuantity(ChiTietSanPham ctsp) {
-        String query = "Update san_pham_chi_tiet set so_luong = ? where id = ? ";
+        String query = "Update san_pham_chi_tiet set so_luong = ? where id = ?  ";
         try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
             preparedStatement.setInt(1, ctsp.getSoLuong());
             preparedStatement.setString(2, ctsp.getId());

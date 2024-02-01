@@ -4,7 +4,6 @@
  */
 package duan1_nhom1;
 
-
 import duan1_nhom1.view.MainJFrame;
 import duan1_nhom1.view.chaoJDialog;
 
@@ -14,12 +13,11 @@ import duan1_nhom1.view.chaoJDialog;
  */
 public class DuAn1_nhom1 {
 
-    public static void main(String args[]) {  
+    public static void main(String args[]) {
 //                java.awt.Frame parent = null;
 //                new chaoJDialog(parent, true).setVisible(true);
-new MainJFrame().setVisible(true);
-                
+        new MainJFrame().setVisible(true);
+
     }
 
-    
 }
