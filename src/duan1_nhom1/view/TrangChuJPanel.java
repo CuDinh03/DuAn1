@@ -877,7 +877,12 @@ public class TrangChuJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_tbl_banhanghdMouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        _index = tbl_banhanggh.getSelectedRow();
 
+        if (_index == -1) {
+            JOptionPane.showMessageDialog(this, "Bạn vui lòng chọn sản phẩm cần sửa !");
+            return;
+        }
         String userInput = JOptionPane.showInputDialog(null, "Nhập số lượng sản phẩm:", "Nhập số lượng", JOptionPane.QUESTION_MESSAGE);
 
         if (userInput != null && !userInput.isEmpty()) {
