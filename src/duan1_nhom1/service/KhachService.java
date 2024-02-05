@@ -167,6 +167,7 @@ public List<Khach> timKiemTenKhach(String sdt) {
             }
             return list;
         } catch (Exception e) {
+            // Log the exception using a logging framework like log4j or slf4j
             e.printStackTrace();
         }
         return null;

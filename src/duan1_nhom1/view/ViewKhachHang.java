@@ -45,10 +45,20 @@ public class ViewKhachHang extends javax.swing.JFrame {
             comboxKhach.addItem(khach.getMaKhachHang());
         }
     }
+
+    }
+    void fillcomboxKhach() {
+        comboxKhach.removeAllItems();
+        comboxKhach.addItem(" ");
+        comboxKhach.addItem("Tất cả");
+        List<Khach> list = khachService.getAll();
+        for (Khach khach : list) {
+            comboxKhach.addItem(khach.getMaKhachHang());
+        }
+    }
     public void showDataKhach() {
         tableModel = (DefaultTableModel) tblKhachHang.getModel();
-        tableModel.setRowCount(0);
-        listKH = khachService.getAll();
+        tableModel.setRowCount(0);   
         for (Khach khachHang : listKH) {
             tableModel.addRow(new Object[]{
                 khachHang.getMaKhachHang(),
@@ -235,6 +245,20 @@ public class ViewKhachHang extends javax.swing.JFrame {
         }
     }
 
+    private void locKH() {
+        Boolean trangThai = null;
+        boolean checkkh = hoatDong.isSelected();
+        if (checkkh == true) {
+            trangThai = true;
+        } else {
+            trangThai = false;
+        }
+
+        listKH = khachService.locKhach(trangThai);
+        showDataKhach();
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -300,10 +324,10 @@ public class ViewKhachHang extends javax.swing.JFrame {
 
         tblDanhSachMua.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
                 "Mã hóa đơn", "Ngày mua", "Tổng tiền", "Trạng thái"
@@ -832,6 +856,5 @@ public class ViewKhachHang extends javax.swing.JFrame {
     private javax.swing.JTextField txtSdt;
     private javax.swing.JTextField txtTen;
     private javax.swing.JTextField txtTimKiem;
-    private javax.swing.JTextField txtTrangthai;
     // End of variables declaration//GEN-END:variables
 }
