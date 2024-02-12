@@ -4,9 +4,6 @@
  */
 package duan1_nhom1.repository;
 
-import duan1_nhom1.model.DanhMuc;
-import duan1_nhom1.model.HoaDon;
-import duan1_nhom1.model.Khach;
 import duan1_nhom1.model.Voucher;
 import duan1_nhom1.utils.JdbcHelper;
 import java.sql.Connection;
@@ -24,7 +21,7 @@ import java.util.List;
 public class VoucherRepo {
 
     Connection conn = JdbcHelper.getConnection();
-    List<Voucher> listVouchers = new ArrayList();
+//    List<Voucher> listVouchers = new ArrayList();
     public List<Voucher> getAll() {
         List<Voucher> listVouchers = new ArrayList();
         String sql = """
@@ -170,5 +167,20 @@ public class VoucherRepo {
         } catch (Exception e) {
             e.printStackTrace(System.out);
         }
+    }
+    public float getGiamById(String id) {
+        String sql = "SELECT giam_gia FROM Voucher WHERE id = ?";
+
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getFloat("giam_gia");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

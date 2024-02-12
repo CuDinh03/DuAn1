@@ -4,10 +4,8 @@
  */
 package duan1_nhom1.service;
 
-import duan1_nhom1.dto.VoucherDto;
 import duan1_nhom1.model.Voucher;
 import duan1_nhom1.repository.VoucherRepo;
-import duan1_nhom1.tranf.TranferData;
 import java.util.List;
 
 /**
@@ -41,6 +39,5 @@ public class VoucherService implements IService<Voucher> {
     public Voucher findById(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
    
 }

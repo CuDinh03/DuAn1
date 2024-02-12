@@ -5,6 +5,7 @@
 package duan1_nhom1.view;
 
 import duan1_nhom1.dto.VoucherDto;
+import duan1_nhom1.model.Voucher;
 import duan1_nhom1.service.VoucherService;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class VoucherJPanel extends javax.swing.JPanel {
  private DefaultTableModel model = new DefaultTableModel();
-    private List<VoucherDto> vouchers = new ArrayList<>();
+    private List<Voucher> vouchers = new ArrayList<>();
     private VoucherService service = new VoucherService();
     
     public VoucherJPanel() {
@@ -28,7 +29,7 @@ public class VoucherJPanel extends javax.swing.JPanel {
     }
     private void showDataVoucher(){
         model.setRowCount(0);
-        for (VoucherDto vc : vouchers) {
+        for (Voucher vc : vouchers) {
             model.addRow(new Object[]{
                 vc.getId(),
                 vc.getMa(),
@@ -43,8 +44,8 @@ public class VoucherJPanel extends javax.swing.JPanel {
             });
         }
     }
-    private VoucherDto getDataVoucher() {
-        VoucherDto voucher = new VoucherDto();
+    private Voucher getDataVoucher() {
+        Voucher voucher = new Voucher();
         voucher.setMa(txtMa.getText());
         voucher.setTen(txtTen.getText());
         voucher.setGiamGia(Float.parseFloat(txtGiam.getText()));
@@ -73,7 +74,7 @@ public class VoucherJPanel extends javax.swing.JPanel {
             if (check != JOptionPane.YES_OPTION) {
                 return;
             }
-            VoucherDto vc = getDataVoucher();
+            Voucher vc = getDataVoucher();
             service.add(vc);
             vouchers = service.getAll();
             showDataVoucher();

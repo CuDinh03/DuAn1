@@ -9,7 +9,9 @@ import duan1_nhom1.dto.KhachDto;
 import duan1_nhom1.model.ChiTietSanPham;
 import duan1_nhom1.model.GioHangHoaDon;
 import duan1_nhom1.model.HoaDon;
+import duan1_nhom1.model.Voucher;
 import duan1_nhom1.repository.GioHangHoaDonRepository;
+import duan1_nhom1.repository.VoucherRepo;
 import duan1_nhom1.service.ChatLieuService;
 import duan1_nhom1.service.ChiTietGioHangService;
 import duan1_nhom1.service.ChiTietHoaDonService;
@@ -24,6 +26,7 @@ import duan1_nhom1.service.MauSacService;
 import duan1_nhom1.service.SPChiTietService;
 import duan1_nhom1.service.SanPhamService;
 import duan1_nhom1.service.ThanhToanService;
+import duan1_nhom1.service.VoucherService;
 import duan1_nhom1.utils.MsgBox;
 import java.math.BigDecimal;
 import java.security.SecureRandom;
@@ -56,6 +59,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
     private SanPhamService sanPhamService = new SanPhamService();
     private DanhMucService danhMucService = new DanhMucService();
     private ChatLieuService chatLieuService = new ChatLieuService();
+    private VoucherService voucherService = new VoucherService();
     List<ChiTietGioHangDto> cTgioHangList = new ArrayList<>();
     ChiTietSanPhamDto ctspView = new ChiTietSanPhamDto();
     ChiTietGioHangDto ctghView = new ChiTietGioHangDto();
@@ -89,6 +93,15 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         }
     }
 
+    public void loadCbbVoucher(){
+        try {
+            cbbVoucher.removeAllItems();
+//            cbbVoucher.addItem();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
     public void loadBanHangGH() {
         defaultTableModel = (DefaultTableModel) this.tbl_banhanggh.getModel();
         defaultTableModel.setRowCount(0);
@@ -224,7 +237,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         txtTongTien = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbbVoucher = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         jlbTongTienSauGiam = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -337,7 +350,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
 
         jLabel8.setText("Voucher:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbbVoucher.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel9.setText("Tổng tiền sau giảm:");
 
@@ -398,7 +411,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                         .addGap(16, 16, 16)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtMahdTT)
-                            .addComponent(jComboBox1, 0, 171, Short.MAX_VALUE)
+                            .addComponent(cbbVoucher, 0, 171, Short.MAX_VALUE)
                             .addComponent(txtTongTien)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -441,7 +454,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbbVoucher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
@@ -877,6 +890,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDeleteAll;
     private javax.swing.JButton btnThemVaoGH;
+    private javax.swing.JComboBox<String> cbbVoucher;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
@@ -884,7 +898,6 @@ public class TrangChuJPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;

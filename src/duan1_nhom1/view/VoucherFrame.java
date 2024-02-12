@@ -4,13 +4,8 @@
  */
 package duan1_nhom1.view;
 
-import duan1_nhom1.dto.VoucherDto;
-import duan1_nhom1.model.DanhMuc;
-import duan1_nhom1.model.Khach;
 import duan1_nhom1.model.Voucher;
-import duan1_nhom1.service.DanhMucService;
 import duan1_nhom1.service.VoucherService;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;

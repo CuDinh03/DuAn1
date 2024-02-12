@@ -13,6 +13,7 @@ import duan1_nhom1.service.KichCoService;
 import duan1_nhom1.service.MauSacService;
 import duan1_nhom1.service.SPChiTietService;
 import duan1_nhom1.service.SanPhamService;
+import duan1_nhom1.service.VoucherService;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
@@ -33,6 +34,7 @@ public class BanHangFrame extends javax.swing.JFrame {
     private SanPhamService sanPhamService = new SanPhamService();
     private DanhMucService danhMucService = new DanhMucService();
     private ChatLieuService chatLieuService = new ChatLieuService();
+    private VoucherService voucherService = new VoucherService();
 
     public BanHangFrame() {
         initComponents();
