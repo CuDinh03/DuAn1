@@ -18,7 +18,7 @@ public class JDBC {
      public static final String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
     public static final String dburl = "jdbc:sqlserver://localhost;database=PRO1041_Duan1" + ";encrypt=true;trustServerCertificate=true;";
     private static String user = "sa";
-    private static String password = "123456";
+    private static String password = "172354";
 
     static {
         try {

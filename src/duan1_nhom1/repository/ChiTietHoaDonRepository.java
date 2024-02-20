@@ -138,7 +138,6 @@ public class ChiTietHoaDonRepository {
                 Date ngay_tao = resultSet.getDate("ngay_tao");
                 Date ngay_sua = resultSet.getDate("ngay_sua");
                 Boolean trang_thai = resultSet.getBoolean("trang_thai");
-
                 ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon(id, id_hd, id_sp, so_luong, gia_ban, ngay_tao, ngay_sua, trang_thai);
                 chiTietHoaDons.add(chiTietHoaDon);
             }

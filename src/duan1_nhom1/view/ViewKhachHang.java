@@ -3,12 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package duan1_nhom1.view;
-
-import duan1_nhom1.dto.HoaDonDto;
 import duan1_nhom1.model.HoaDon;
 import duan1_nhom1.model.Khach;
 import duan1_nhom1.repository.HoaDonRepository;
-import duan1_nhom1.service.HoaDonService;
 import duan1_nhom1.service.KhachService;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -34,11 +31,20 @@ public class ViewKhachHang extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         listHD = hoaDon.getAllHoaDon();
+        fillcomboxKhach();
         showDataKhach();
         showDataHoaDon();
 
     }
-
+    void fillcomboxKhach() {
+        comboxKhach.removeAllItems();
+        comboxKhach.addItem(" ");
+        comboxKhach.addItem("Tất cả");
+        List<Khach> list = khachService.getAll();
+        for (Khach khach : list) {
+            comboxKhach.addItem(khach.getMaKhachHang());
+        }
+    }
     public void showDataKhach() {
         tableModel = (DefaultTableModel) tblKhachHang.getModel();
         tableModel.setRowCount(0);
@@ -217,12 +223,11 @@ public class ViewKhachHang extends javax.swing.JFrame {
 
     public void searchKhachTheoHoaDon() {
         try {
-            String maKhach = txtTimKiemTheoHoaDon.getText();
+            String maKhach = (String) comboxKhach.getSelectedItem();
             if (maKhach.trim().isEmpty()) {
                 maKhach = null;
             }
-
-            listHD = hoaDon.timKhachTheoHD(maKhach);
+//             listHD= hoaDon.timKhachTheoHD(maKhach);
             showDataHoaDon();
 
         } catch (Exception e) {
@@ -254,7 +259,7 @@ public class ViewKhachHang extends javax.swing.JFrame {
         tbntim = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        txtTimKiemTheoHoaDon = new javax.swing.JTextField();
+        comboxKhach = new javax.swing.JComboBox<>();
         jPanel13 = new javax.swing.JPanel();
         jPanel19 = new javax.swing.JPanel();
         jLabel32 = new javax.swing.JLabel();
@@ -365,6 +370,8 @@ public class ViewKhachHang extends javax.swing.JFrame {
             }
         });
 
+        comboxKhach.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
@@ -394,9 +401,9 @@ public class ViewKhachHang extends javax.swing.JFrame {
                         .addGap(50, 50, 50)
                         .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(txtTimKiemTheoHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(52, 52, 52)
+                        .addGap(26, 26, 26)
+                        .addComponent(comboxKhach, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(88, 88, 88)
                 .addComponent(jButton1)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -417,7 +424,7 @@ public class ViewKhachHang extends javax.swing.JFrame {
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jButton1)
-                    .addComponent(txtTimKiemTheoHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboxKhach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -791,6 +798,7 @@ public class ViewKhachHang extends javax.swing.JFrame {
     private javax.swing.JButton btnUpdateKH;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JComboBox<String> comboxKhach;
     private javax.swing.JRadioButton hoatDong;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -824,6 +832,5 @@ public class ViewKhachHang extends javax.swing.JFrame {
     private javax.swing.JTextField txtSdt;
     private javax.swing.JTextField txtTen;
     private javax.swing.JTextField txtTimKiem;
-    private javax.swing.JTextField txtTimKiemTheoHoaDon;
     // End of variables declaration//GEN-END:variables
 }

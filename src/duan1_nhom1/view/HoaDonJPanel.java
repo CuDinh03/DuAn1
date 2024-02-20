@@ -353,8 +353,7 @@ public class HoaDonJPanel  extends javax.swing.JPanel {
         }
         lbId.setText(this.tblHoaDon.getValueAt(index, 1).toString());
         
-        hd.setId(lbId.getText());
-        System.out.println(hd.getId().toString());
+        this.hd.setId(lbId.getText());
         
         
     }//GEN-LAST:event_tblHoaDonMouseClicked

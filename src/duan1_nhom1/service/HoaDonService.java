@@ -56,12 +56,13 @@ public class HoaDonService implements IService<HoaDonDto> {
 
     public List<HoaDon> searhListNhanVien(String maKhach) {
         String sql = """
-            DECLARE @maKhach NVARCHAR(255)
-                   SET @maKhach =?
-                  select Hoa_Don.ma,Hoa_Don.ngay_mua,Hoa_Don.tong_tien,Hoa_Don.ngay_tao,Hoa_Don.trang_thai
-                   from Hoa_Don join Khach_Hang on Hoa_Don.id_kh= Khach_Hang.id
-                  WHERE (Khach_Hang.ma LIKE '%' + @maKhach + '%' OR @maKhach IS NULL);
-            """;
+        DECLARE @maKhach NVARCHAR(255)
+         SET @maKhach =?
+        select Hoa_Don.ma,Hoa_Don.ngay_mua,Hoa_Don.tong_tien,Hoa_Don.ngay_tao,Hoa_Don.trang_thai
+         from Hoa_Don join Khach_Hang on Hoa_Don.id_kh= Khach_Hang.id
+        WHERE (Khach_Hang.ma LIKE '%' + @maKhach + '%' OR @maKhach IS NULL);
+        """;
+
         try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, maKhach);
             ResultSet rs = ps.executeQuery();
@@ -79,12 +80,43 @@ public class HoaDonService implements IService<HoaDonDto> {
                 hd.setTrangThai(rs.getBoolean(9));
                 hoadon.add(hd);
             }
-            return hoadon;
+
         } catch (Exception e) {
+            // Handle the exception more gracefully, log it or throw a custom exception
             e.printStackTrace();
         }
         return null;
-
+    }
+public List<HoaDon> timKhachTheoHD(String maKhach) {
+       String sql = """
+        DECLARE @maKhach NVARCHAR(255)
+         SET @maKhach =?
+        select Hoa_Don.ma,Hoa_Don.ngay_mua,Hoa_Don.tong_tien,Hoa_Don.ngay_tao,Hoa_Don.trang_thai
+         from Hoa_Don join Khach_Hang on Hoa_Don.id_kh= Khach_Hang.id
+        WHERE (Khach_Hang.ma LIKE '%' + @maKhach + '%' OR @maKhach IS NULL);
+        """;
+        List<HoaDon> list = new ArrayList<>();
+        try (Connection con = JdbcHelper.getConnection(); PreparedStatement stm = con.prepareStatement(sql)) {
+            stm.setString(1, maKhach);
+            ResultSet rs = stm.executeQuery();
+           List<HoaDon> hoadon = new ArrayList<>();
+            while (rs.next()) {
+                HoaDon hd = new HoaDon();
+                hd.setId(rs.getString(1));
+                hd.setIdKhachHang(rs.getString(2));
+                hd.setMa(rs.getString(3));
+                hd.setIdNv(rs.getString(4));
+                hd.setNgayMua(rs.getDate(5));
+                hd.setTongTien(rs.getDouble(6));
+                hd.setNgayTao(rs.getDate(7));
+                hd.setNgaySua(rs.getDate(8));
+                hd.setTrangThai(rs.getBoolean(9));
+                hoadon.add(hd);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return list;
     }
 
     public HoaDonDto findByMa(String ma) {

@@ -22,8 +22,7 @@ public class ChiTietGioHangService implements IService<ChiTietGioHangDto> {
         this.repo.createChiTietGioHang(TranferData.convertToEntity(t));
     }
 
-    @Override
-    public void update(ChiTietGioHangDto t, String id) {
+    public void update(ChiTietGioHangDto t) {
         this.repo.updateChiTietGioHang(TranferData.convertToEntity(t));
 
     }
@@ -41,6 +40,20 @@ public class ChiTietGioHangService implements IService<ChiTietGioHangDto> {
     @Override
     public ChiTietGioHangDto findById(String id) {
         return TranferData.convertToDto(this.repo.findById(id));
+    }
+
+    public void changeSL(ChiTietGioHangDto ctghView) {
+        this.repo.changeQuantity(TranferData.convertToEntity(ctghView)); 
+    }
+    
+    public List<ChiTietGioHangDto> getAllByIdGh(String idgh){
+                return TranferData.convertListToDto(this.repo.getAllChiTietGioHangByIdgh(idgh));
+
+    }
+
+    @Override
+    public void update(ChiTietGioHangDto t, String id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

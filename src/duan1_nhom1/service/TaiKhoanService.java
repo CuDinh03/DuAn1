@@ -45,30 +45,7 @@ public class TaiKhoanService implements IService<TaiKhoan>{
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     public TaiKhoan getTaiKhoan(String ma) {
-        String query = """
-                       select tai_khoan.ma,ten_dang_nhap,mat_khau,trang_thai
-                       from tai_khoan
-                       where tai_khoan.ma=?
-                       """;
-        TaiKhoan tk = new TaiKhoan();
-        try (Connection con = JdbcHelper.getConnection(); PreparedStatement stm = con.prepareStatement(query)) {
-            stm.setString(1, ma);
-            ResultSet rs = stm.executeQuery();
-            if (rs.next()) {
-                tk.setId(rs.getString(1));
-                tk.setId(rs.getString(1));
-                tk.setMa(rs.getString(2));
-                tk.setTenDangNhap(rs.getString(3));
-                tk.setMatKhau(rs.getString(4));
-                tk.setIdCV(rs.getString(5));
-                tk.setNgayTao(rs.getDate(6));
-                tk.setNgaySua(rs.getDate(7));
-                tk.setTrangThai(rs.getBoolean(8));
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return tk;
+        return taiKhoanRepo.getTaiKhoan(ma);
     }
     
 }

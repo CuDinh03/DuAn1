@@ -170,5 +170,10 @@ public class ChiTietSanPham {
         this.trangThai = trangThai;
     }
 
+    @Override
+    public String toString() {
+        return "ChiTietSanPham{" + "id=" + id + ", ma=" + ma + ", idSanPham=" + idSanPham + ", idKichThuoc=" + idKichThuoc + ", idThuongHieu=" + idThuongHieu + ", idMauSac=" + idMauSac + ", idChatLieu=" + idChatLieu + ", idDanhMuc=" + idDanhMuc + ", giaNhap=" + giaNhap + ", giaBan=" + giaBan + ", soLuong=" + soLuong + ", ngayTao=" + ngayTao + ", ngaySua=" + ngaySua + ", ngayNhap=" + ngayNhap + ", trangThai=" + trangThai + '}';
+    }
+
 
 }
