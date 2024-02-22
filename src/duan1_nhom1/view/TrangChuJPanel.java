@@ -22,6 +22,7 @@ import duan1_nhom1.service.KichCoService;
 import duan1_nhom1.service.MauSacService;
 import duan1_nhom1.service.SPChiTietService;
 import duan1_nhom1.service.SanPhamService;
+import duan1_nhom1.service.VoucherService;
 import duan1_nhom1.utils.MsgBox;
 import java.awt.Color;
 import java.math.BigDecimal;
@@ -32,6 +33,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.util.regex.*;
+import javax.swing.DefaultComboBoxModel;
 
 public class TrangChuJPanel extends javax.swing.JPanel {
 
@@ -50,6 +52,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
     private SanPhamService sanPhamService = new SanPhamService();
     private DanhMucService danhMucService = new DanhMucService();
     private ChatLieuService chatLieuService = new ChatLieuService();
+    private VoucherService voucherService = new VoucherService();
     private ChiTietGioHangService chiTietGioHangService = new ChiTietGioHangService();
     List<ChiTietGioHangDto> cTgioHangList = new ArrayList<>();
     List<ChiTietSanPhamDto> ctspList = new ArrayList<>();
@@ -214,7 +217,14 @@ public class TrangChuJPanel extends javax.swing.JPanel {
             this.cthdService.add(cthd);
         }
     }
-
+    
+    public void loadComboBox(){
+        
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+        cbbVoucher.setModel(model);
+        cbbVoucher.removeAllItems();
+    }
+    
     public BigDecimal calculateTotalPrice() {
         BigDecimal totalPrice = BigDecimal.ZERO;
         for (ChiTietGioHangDto item : cTgioHangList) {
@@ -266,7 +276,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         txtTongTien = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbbVoucher = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         jlbTongTienSauGiam = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -381,7 +391,12 @@ public class TrangChuJPanel extends javax.swing.JPanel {
 
         jLabel8.setText("Voucher:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbbVoucher.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbbVoucher.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbVoucherActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText("Tổng tiền sau giảm:");
 
@@ -447,7 +462,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                                     .addGap(38, 38, 38)
                                     .addGroup(tienTraLaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(txtMahdTT)
-                                        .addComponent(jComboBox1, 0, 171, Short.MAX_VALUE))))
+                                        .addComponent(cbbVoucher, 0, 171, Short.MAX_VALUE))))
                             .addGroup(tienTraLaiLayout.createSequentialGroup()
                                 .addGroup(tienTraLaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel18)
@@ -488,7 +503,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                 .addGap(58, 58, 58)
                 .addGroup(tienTraLaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbbVoucher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(tienTraLaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
@@ -1011,19 +1026,23 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_jButton10ActionPerformed
 
+    private void cbbVoucherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbVoucherActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbbVoucherActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDeleteAll;
     private javax.swing.JButton btnThanhToan;
     private javax.swing.JButton btnThemVaoGH;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> cbbVoucher;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;

@@ -6,6 +6,7 @@ package duan1_nhom1.repository;
 
 import duan1_nhom1.model.Voucher;
 import duan1_nhom1.utils.JdbcHelper;
+import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -13,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -22,6 +24,7 @@ public class VoucherRepo {
 
     Connection conn = JdbcHelper.getConnection();
 //    List<Voucher> listVouchers = new ArrayList();
+
     public List<Voucher> getAll() {
         List<Voucher> listVouchers = new ArrayList();
         String sql = """
@@ -146,12 +149,13 @@ public class VoucherRepo {
             if (chek > 0) {
                 System.out.println("update   thành công ");
             } else {
-               System.out.println("update thất bại  ");
+                System.out.println("update thất bại  ");
             }
         } catch (Exception e) {
             throw new RuntimeException("Error updating", e);
         }
     }
+
     public void delete(String id) {
         String sql = "DELETE FROM Voucher WHERE id = ?";
 
@@ -168,6 +172,7 @@ public class VoucherRepo {
             e.printStackTrace(System.out);
         }
     }
+
     public float getGiamById(String id) {
         String sql = "SELECT giam_gia FROM Voucher WHERE id = ?";
 
@@ -183,4 +188,39 @@ public class VoucherRepo {
         }
         return 0;
     }
+
+    public String getMaById(String id) {
+        String sql = "SELECT ma FROM Voucher WHERE id = ?";
+
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getString("ma");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public void loadComboBox() {
+        String sql = "SELECT ma FROM Voucher";
+    try {
+        
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery(sql);
+
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+        while (rs.next()) {
+            String ma = rs.getString("ma");
+            model.addElement(ma);
+        }
+    } catch (Exception ex) {
+        ex.printStackTrace();
+    }
+}
+
+
+    
 }
