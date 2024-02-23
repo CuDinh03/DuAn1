@@ -100,45 +100,32 @@ public class DanhMucRepository {
         return listId;
     }
     public void addDanhMuc(DanhMuc danhMuc) {
-//        if (danhMuc == null) {
-//            return;
-//        }
+ 
+        if (danhMuc == null) {
+            return;
+        }
 
-        String sql = """
-       INSERT INTO [dbo].[danh_muc_san_pham]
-                                ([ma]
-                                ,[ten]
-                                ,[mo_ta]
-                                ,[ngay_tao]
-                                ,[ngay_sua]
-                                ,[trang_thai])
-                          VALUES
-                                (?
-                                ,?
-                                ,?
-                                ,?
-                                ,?
-                                ,?);  
-                 """;
+        String sql = "INSERT INTO danh_muc_san_pham(ma,ten,mo_ta,ngay_tao,ngay_sua,trang_thai) VALUES(?,?,?,?,?,?)";
 
-        try (Connection conn = JdbcHelper.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, danhMuc.getMa());
             ps.setString(2, danhMuc.getTen());
             ps.setString(3, danhMuc.getMoTa());
-//            ps.setDate(4, danhMuc.getNgayTao().toString());
-//            ps.setDate(5, );
+            ps.setDate(4, new java.sql.Date(danhMuc.getNgayTao().getTime()));
+            ps.setDate(5, new java.sql.Date(danhMuc.getNgaySua().getTime()));
             ps.setBoolean(6, danhMuc.getTrangThai());
 
             int chek = ps.executeUpdate();
 
             if (chek > 0) {
-                System.out.println("Danh Mục Đã thêm thành công ");
+                System.out.println("San pham Đã thêm thành công ");
             } else {
                 System.out.println("Thêm thất bại ");
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            System.out.println("An error occurred: " + e.getMessage());
         }
+    
     }
     public void update(DanhMuc danhMuc, String id) {
         List<DanhMuc> listDanhMuc = new ArrayList();

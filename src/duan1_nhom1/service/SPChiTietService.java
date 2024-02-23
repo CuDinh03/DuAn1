@@ -5,8 +5,10 @@
 package duan1_nhom1.service;
 
 import duan1_nhom1.dto.ChiTietSanPhamDto;
+import duan1_nhom1.model.ChiTietSanPham;
 import duan1_nhom1.repository.SPChiTietRepository;
 import duan1_nhom1.tranf.TranferData;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -114,5 +116,63 @@ public class SPChiTietService implements IService<ChiTietSanPhamDto> {
         return TranferData.convertListToDtos(this.sPChiTietRepository.getAllChiTietGioHangByIdsp(id));
 
     }
+    
+ public ChiTietSanPhamDto findByMaCtLike(String ma) {
+        return TranferData.convertToDto(this.sPChiTietRepository.findByMaCtLike(ma));
+    }
+ 
+ public List<ChiTietSanPham> getAllSPHadDm() {
 
+        List<ChiTietSanPham> list = this.sPChiTietRepository.getAllSPHadDm();
+        List<ChiTietSanPham> listViewModel = new ArrayList<>();
+
+        for (ChiTietSanPham domainModel : list) {
+            ChiTietSanPham t = new ChiTietSanPham();
+            t.setMa(t.getMa());
+
+        t.setIdThuongHieu(t.getIdThuongHieu());
+        t.setIdMauSac(t.getIdMauSac());
+        t.setIdDanhMuc(t.getIdDanhMuc());
+        t.setIdChatLieu(t.getIdChatLieu());
+        t.setIdSanPham(t.getIdSanPham());
+        t.setIdKichThuoc(t.getIdKichThuoc());
+        t.setGiaNhap(t.getGiaNhap());
+        t.setGiaBan(t.getGiaBan());
+        t.setSoLuong(t.getSoLuong());
+        t.setNgayNhap(t.getNgayNhap());
+        t.setNgaySua(t.getNgaySua());
+        t.setNgayTao(t.getNgayTao());
+        t.setTrangThai(t.isTrangThai());
+
+            listViewModel.add(t);
+        }
+        return listViewModel;
+    }
+ 
+ public List<ChiTietSanPham> findByDm(String dm) {
+        List<ChiTietSanPham> list = sPChiTietRepository.findByDm(dm);
+        List<ChiTietSanPham> listViewModel = new ArrayList<>();
+
+        for (ChiTietSanPham domainModel : list) {
+            ChiTietSanPham t = new ChiTietSanPham();
+            t.setMa(t.getMa());
+
+        t.setIdThuongHieu(t.getIdThuongHieu());
+        t.setIdMauSac(t.getIdMauSac());
+        t.setIdDanhMuc(t.getIdDanhMuc());
+        t.setIdChatLieu(t.getIdChatLieu());
+        t.setIdSanPham(t.getIdSanPham());
+        t.setIdKichThuoc(t.getIdKichThuoc());
+        t.setGiaNhap(t.getGiaNhap());
+        t.setGiaBan(t.getGiaBan());
+        t.setSoLuong(t.getSoLuong());
+        t.setNgayNhap(t.getNgayNhap());
+        t.setNgaySua(t.getNgaySua());
+        t.setNgayTao(t.getNgayTao());
+        t.setTrangThai(t.isTrangThai());
+
+            listViewModel.add(t);
+        }
+        return listViewModel;
+    }
 }

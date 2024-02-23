@@ -224,9 +224,9 @@ public class DanhMucJFrame extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tbl_danhmuc);
 
-        jLabel1.setText("Mã màu sắc:");
+        jLabel1.setText("Mã DM:");
 
-        jLabel2.setText("Tên màu sắc:");
+        jLabel2.setText("Tên DM:");
 
         jLabel3.setText("Ngày tạo:");
 

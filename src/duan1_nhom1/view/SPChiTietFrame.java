@@ -5,6 +5,7 @@
 package duan1_nhom1.view;
 
 import duan1_nhom1.dto.ChiTietSanPhamDto;
+import duan1_nhom1.model.ChiTietSanPham;
 import duan1_nhom1.service.ChatLieuService;
 import duan1_nhom1.service.DanhMucService;
 import duan1_nhom1.service.HangService;
@@ -17,6 +18,7 @@ import duan1_nhom1.utils.Uhelper;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -43,14 +45,15 @@ public class SPChiTietFrame extends javax.swing.JFrame {
     private SanPhamService sanPhamService = new SanPhamService();
     private DanhMucService danhMucService = new DanhMucService();
     private ChatLieuService chatLieuService = new ChatLieuService();
+   ChiTietSanPhamDto singleItem = new ChiTietSanPhamDto();
+ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
     int _index;
     private int index = -1;
 
     /**
      * Creates new form SPChiTietFrame
      */
-    public SPChiTietFrame(ChiTietSanPhamDto sp) {
-
+    public SPChiTietFrame() {
         initComponents();
         loadHang();
         loadMauSac();
@@ -58,10 +61,9 @@ public class SPChiTietFrame extends javax.swing.JFrame {
         loadDanhMuc();
         loadSanPham();
         loadChatLieu();
+        loadDanhMucSearch();
         addTable(sPChiTietService.getAll());
-        loadTable(sp);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+//        loadDataQLSP(sPChiTietService.getAllSPHadDm());
 
     }
 
@@ -81,6 +83,9 @@ public class SPChiTietFrame extends javax.swing.JFrame {
         date_ngaysua.setDate(null);
 
     }
+    
+    
+    
 
     public void addTable(List<ChiTietSanPhamDto> list) {
         defaultTableModel = (DefaultTableModel) tbl_sanpham.getModel();
@@ -106,6 +111,56 @@ public class SPChiTietFrame extends javax.swing.JFrame {
                 chiTietSanPham.getTrangThai()
             });
         }
+    }
+    private void loadDataQLSP(List<ChiTietSanPham> listViewModel) {
+        DefaultTableModel model = (DefaultTableModel) tbl_sanpham.getModel();
+        model.setRowCount(0);
+        int count = 1;
+        for (int i = 0; i < listViewModel.size(); i++) {
+            ChiTietSanPham chiTietSanPham = listViewModel.get(i);
+            model.addRow(new Object[]{
+                count++,
+                chiTietSanPham.getMa(),
+                this.sanPhamService.getTenById(chiTietSanPham.getIdSanPham().toString()),
+                this.hangService.getTenById(chiTietSanPham.getIdThuongHieu().toString()),
+                this.chatLieuService.getTenById(chiTietSanPham.getIdChatLieu().toString()),
+                this.mauSacService.getTenById(chiTietSanPham.getIdMauSac().toString()),
+                this.kichCoService.getTenById(chiTietSanPham.getIdKichThuoc().toString()),
+                this.danhMucService.getTenById(chiTietSanPham.getIdDanhMuc().toString()),
+                chiTietSanPham.getGiaNhap(),
+                chiTietSanPham.getGiaBan(),
+                chiTietSanPham.getSoLuong(),
+                chiTietSanPham.getNgayNhap(),
+                chiTietSanPham.getNgaySua(),
+                chiTietSanPham.getNgayTao(),
+                chiTietSanPham.isTrangThai()
+
+        });
+    }
+    }
+    public void loadFindByMa(ChiTietSanPhamDto list) {
+        defaultTableModel = (DefaultTableModel) tbl_sanpham.getModel();
+        defaultTableModel.setRowCount(0);
+        int count = 1;
+
+            defaultTableModel.addRow(new Object[]{
+                count++,
+                list.getMa(),
+                this.sanPhamService.getTenById(list.getIdSanPham().toString()),
+                this.hangService.getTenById(list.getIdThuongHieu().toString()),
+                this.chatLieuService.getTenById(list.getIdChatLieu().toString()),
+                this.mauSacService.getTenById(list.getIdMauSac().toString()),
+                this.kichCoService.getTenById(list.getIdKichThuoc().toString()),
+                this.danhMucService.getTenById(list.getIdDanhMuc().toString()),
+                list.getGiaNhap(),
+                list.getGiaBan(),
+                list.getSoLuong(),
+                list.getNgayNhap(),
+                list.getNgaySua(),
+                list.getNgayTao(),
+                list.getTrangThai()
+            });
+        
     }
 
     public void loadTable(ChiTietSanPhamDto sp) {
@@ -146,7 +201,13 @@ public class SPChiTietFrame extends javax.swing.JFrame {
             model.addElement(danhMucService.getTenById(str));
         }
     }
-
+    public void loadDanhMucSearch() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cb_findhang.getModel();
+        List<String> list = danhMucService.getAllId();
+        for (String str : list) {
+            model.addElement(danhMucService.getTenById(str));
+        }
+    }
     public void loadChatLieu() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cb_chatlieu.getModel();
         List<String> list = chatLieuService.getAllId();
@@ -282,6 +343,7 @@ public class SPChiTietFrame extends javax.swing.JFrame {
         }
     }
 
+
     private void addSanPham() {
         if (Uhelper.checkNull(txt_giaban, "Không để trống giá bán")) {
             return;
@@ -351,7 +413,7 @@ public class SPChiTietFrame extends javax.swing.JFrame {
         sPChiTietService.insert(ctsp);
         addTable(sPChiTietService.getAll());
     }
-
+ 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -366,7 +428,7 @@ public class SPChiTietFrame extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         cb_findhang = new javax.swing.JComboBox<>();
-        txt_search = new javax.swing.JTextField();
+        txtTimKiem = new javax.swing.JTextField();
         btn_search = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_sanpham = new javax.swing.JTable();
@@ -420,7 +482,18 @@ public class SPChiTietFrame extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(203, 233, 162));
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        cb_findhang.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cb_findhangItemStateChanged(evt);
+            }
+        });
+
         btn_search.setText("Tìm kiếm");
+        btn_search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_searchActionPerformed(evt);
+            }
+        });
 
         tbl_sanpham.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
         tbl_sanpham.setModel(new javax.swing.table.DefaultTableModel(
@@ -456,7 +529,7 @@ public class SPChiTietFrame extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addComponent(cb_findhang, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(313, 313, 313)
-                .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_search)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 500, Short.MAX_VALUE)
@@ -473,7 +546,7 @@ public class SPChiTietFrame extends javax.swing.JFrame {
                 .addGap(17, 17, 17)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cb_findhang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_search)
                     .addComponent(Back))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -917,6 +990,31 @@ public class SPChiTietFrame extends javax.swing.JFrame {
         new KichThuocFrame().setVisible(true);
     }//GEN-LAST:event_btn_them6ActionPerformed
 
+    private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
+           String im = txtTimKiem.getText();
+        ChiTietSanPhamDto sp = sPChiTietService.findByMaCtLike(im);
+        if (sp != null) {
+            loadFindByMa(sp);
+        } else {
+            JOptionPane.showMessageDialog(this, "Không tìm thấy sản phẩm");
+            txtTimKiem.setText("");
+            addTable(sPChiTietService.getAll());
+            return;
+        }
+            
+    }//GEN-LAST:event_btn_searchActionPerformed
+
+    private void cb_findhangItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_findhangItemStateChanged
+        // TODO add your handling code here:
+         if (cb_findhang.getSelectedItem().equals("All")) {
+            loadDataQLSP(sPChiTietService.getAllSPHadDm());
+        } else {
+            String dm = (String) cb_findhang.getSelectedItem();
+            List<ChiTietSanPham> lst = sPChiTietService.findByDm(dm);
+//            loadDataSPByHang(lst);
+        }
+    }//GEN-LAST:event_cb_findhangItemStateChanged
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton Back;
     private javax.swing.JButton btn_clear;
@@ -961,10 +1059,10 @@ public class SPChiTietFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable tbl_sanpham;
+    private javax.swing.JTextField txtTimKiem;
     private javax.swing.JTextField txt_giaban;
     private javax.swing.JTextField txt_gianhap;
     private javax.swing.JTextField txt_masp;
-    private javax.swing.JTextField txt_search;
     private javax.swing.JTextField txt_soluong;
     private javax.swing.JTextField txt_trangthai;
     // End of variables declaration//GEN-END:variables

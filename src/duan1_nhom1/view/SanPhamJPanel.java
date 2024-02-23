@@ -292,7 +292,7 @@ public class SanPhamJPanel extends javax.swing.JPanel {
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
-        new SPChiTietFrame(sp).setVisible(true);
+        new SPChiTietFrame().setVisible(true);
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
 
