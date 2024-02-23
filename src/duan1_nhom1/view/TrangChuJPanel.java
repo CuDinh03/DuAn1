@@ -64,6 +64,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
     GioHangService ghService = new GioHangService();
     VoucherService voucherService = new VoucherService();
     int _index = -1;
+    String idGH = "";
 
     public TrangChuJPanel() {
         initComponents();
@@ -910,25 +911,30 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         if (index == -1) {
             return;
         }
-
-        String mahd = this.tbl_banhanghd.getValueAt(index, 1).toString();
-        this.txtMahdTT.setText(mahd);
-        this.txtTongTien.setText(calculateTotalPrice().toString());
-
+ 
 //        String idhd = this.hds.findByMa(this.tbl_banhanghd.getValueAt(index, 1).toString()).getId();
 //        List<ChiTietHoaDonDto> listCTHD = this.cthdService.getAllByIdHd(idhd);
 //        GioHangHoaDonRepository repo = new GioHangHoaDonRepository();
 //        String idgh = repo.getGioHangHoaDonById(idhd).getIdGioHang();
-//       
+//        cTgioHangList.clear();
 //        for (ChiTietGioHangDto item : this.ctghService.getAll()) {
 //            if (item.getIdGH().equals(idgh)) {
 //                cTgioHangList.add(item);
 //            }
 //        }
-//         cTgioHangList.clear();
+        String mahd = this.tbl_banhanghd.getValueAt(index, 1).toString();
+        HoaDonDto hddto = hds.findByMa(mahd);
+        GioHangHoaDonRepository repo = new GioHangHoaDonRepository();
+        GioHangHoaDon ghHd = repo.getGioHangHoaDonById(hddto.getId());
+        this.idGH = ghHd.getIdGioHang();
+        System.out.println(this.idGH);
+        cTgioHangList = ctghService.getAllByIdGh(this.idGH);
+        System.out.println(cTgioHangList);
+        this.txtMahdTT.setText(mahd);
+        this.txtTongTien.setText(calculateTotalPrice().toString());
         this.loadBanHangGH();
         this.loadBanHangSp(sPChiTietService.getAll());
-        this.showDateHoaDon();
+        
     }//GEN-LAST:event_tbl_banhanghdMouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
