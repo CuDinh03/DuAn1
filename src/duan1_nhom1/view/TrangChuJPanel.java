@@ -6,6 +6,7 @@ import duan1_nhom1.dto.ChiTietSanPhamDto;
 import duan1_nhom1.dto.GioHangDto;
 import duan1_nhom1.dto.HoaDonDto;
 import duan1_nhom1.dto.KhachDto;
+import duan1_nhom1.dto.VoucherDto;
 import duan1_nhom1.model.ChiTietSanPham;
 import duan1_nhom1.model.GioHangHoaDon;
 import duan1_nhom1.repository.GioHangHoaDonRepository;
@@ -22,6 +23,7 @@ import duan1_nhom1.service.KichCoService;
 import duan1_nhom1.service.MauSacService;
 import duan1_nhom1.service.SPChiTietService;
 import duan1_nhom1.service.SanPhamService;
+import duan1_nhom1.service.VoucherService;
 import duan1_nhom1.utils.MsgBox;
 import java.awt.Color;
 import java.math.BigDecimal;
@@ -60,6 +62,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
     ChiTietGioHangService ctghService = new ChiTietGioHangService();
     ChiTietHoaDonService cthdService = new ChiTietHoaDonService();
     GioHangService ghService = new GioHangService();
+    VoucherService voucherService = new VoucherService();
     int _index = -1;
 
     public TrangChuJPanel() {
@@ -68,6 +71,16 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         showDateHoaDon();
         loadBanHangGH();
         loadBanHangSp(sPChiTietService.getAll());
+        fillcomboxvoucher();
+    }
+
+    void fillcomboxvoucher() {
+        comboxvoucher.removeAllItems();
+        comboxvoucher.addItem(" ");
+        List<VoucherDto> list = voucherService.getAll();
+        for (VoucherDto voucherDto : list) {
+            comboxvoucher.addItem(voucherDto.getMa());
+        }
     }
 
     public void showDateHoaDon() {
@@ -266,7 +279,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         txtTongTien = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        comboxvoucher = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         jlbTongTienSauGiam = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -381,7 +394,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
 
         jLabel8.setText("Voucher:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboxvoucher.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel9.setText("Tổng tiền sau giảm:");
 
@@ -424,85 +437,70 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         tienTraLaiLayout.setHorizontalGroup(
             tienTraLaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tienTraLaiLayout.createSequentialGroup()
-                .addGap(60, 60, 60)
+                .addContainerGap()
                 .addGroup(tienTraLaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(tienTraLaiLayout.createSequentialGroup()
                         .addGroup(tienTraLaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(tienTraLaiLayout.createSequentialGroup()
-                                .addGroup(tienTraLaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(tienTraLaiLayout.createSequentialGroup()
-                                        .addComponent(jLabel19)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jlbTienThua))
-                                    .addComponent(jLabel15)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(tienTraLaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtTienKhachDua)
-                                    .addComponent(txtTenKhach)
-                                    .addGroup(tienTraLaiLayout.createSequentialGroup()
-                                        .addGroup(tienTraLaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtTienThua, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(tienTraLaiLayout.createSequentialGroup()
-                                                .addComponent(jRadioButton1)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jRadioButton2)))
-                                        .addGap(0, 0, Short.MAX_VALUE))))
+                                .addComponent(jLabel19)
+                                .addGap(18, 18, 18)
+                                .addComponent(jlbTienThua))
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(tienTraLaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTienThua, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(tienTraLaiLayout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(63, 63, 63)
-                                .addComponent(jlbTongTienSauGiam, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
+                                .addComponent(jRadioButton1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jRadioButton2))
+                            .addComponent(txtTienKhachDua, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnThanhToan)
+                            .addComponent(txtTenKhach, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(tienTraLaiLayout.createSequentialGroup()
                         .addComponent(jLabel9)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tienTraLaiLayout.createSequentialGroup()
-                        .addGroup(tienTraLaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(tienTraLaiLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(tienTraLaiLayout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtMahdTT, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tienTraLaiLayout.createSequentialGroup()
+                        .addGap(69, 69, 69)
+                        .addComponent(jlbTongTienSauGiam, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(tienTraLaiLayout.createSequentialGroup()
+                        .addGroup(tienTraLaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel8))
+                        .addGap(18, 18, 18)
+                        .addGroup(tienTraLaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(comboxvoucher, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMahdTT, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(tienTraLaiLayout.createSequentialGroup()
                         .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(28, 28, 28)
                         .addComponent(txtSdt, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tienTraLaiLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnThanhToan)
-                .addGap(94, 94, 94))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         tienTraLaiLayout.setVerticalGroup(
             tienTraLaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tienTraLaiLayout.createSequentialGroup()
-                .addGap(60, 60, 60)
+                .addGap(39, 39, 39)
                 .addGroup(tienTraLaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtMahdTT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(tienTraLaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jlbTongTienSauGiam)
-                .addGap(4, 4, 4)
-                .addComponent(jLabel9)
-                .addGap(27, 27, 27)
+                    .addComponent(jLabel8)
+                    .addComponent(comboxvoucher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(tienTraLaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlbTongTienSauGiam)
+                    .addComponent(jLabel9))
+                .addGap(26, 26, 26)
                 .addGroup(tienTraLaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(txtSdt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton11))
-                .addGap(18, 18, 18)
+                .addGap(42, 42, 42)
                 .addGroup(tienTraLaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(txtTenKhach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -524,7 +522,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel19)
                     .addComponent(jlbTienThua)
                     .addComponent(txtTienThua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
+                .addGap(35, 35, 35)
                 .addComponent(btnThanhToan)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -585,7 +583,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                                     .addComponent(jButton5)
                                     .addComponent(btnDeleteAll))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tienTraLai, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(tienTraLai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 634, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
@@ -594,7 +592,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                             .addComponent(jButton9)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jButton10))))
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -763,6 +761,9 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Xoá thành công");
                 this.loadBanHangGH();
                 this.loadBanHangSp(sPChiTietService.getAll());
+                this.txtTongTien.setText("");
+                this.txtTienKhachDua.setText("");
+                this.txtTienThua.setText("");
             }
 
             case JOptionPane.NO_OPTION -> {
@@ -843,7 +844,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
             } else {
 
                 if (MsgBox.confirm(this, "Bạn chắc chắn muốn thanh toán hóa đơn này chứ?")) {
-                    if (tienkh == tongTien || tienkh > tongTien) {
+                    if (tienkh < tongTien || tienkh == tongTien) {
                         MsgBox.alert(this, "Số tiền khách đưa không đủ để thanh toán");
                         txtTienKhachDua.setBackground(Color.red);
                         return;
@@ -887,6 +888,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                         this.txtMahdTT.setText("");
                         this.txtTongTien.setText("");
                         this.txtTienKhachDua.setText("");
+                        this.txtTienThua.setText("");
                         this.txtSdt.setText("");
                         this.loadBanHangGH();
                         this.loadBanHangSp(sPChiTietService.getAll());
@@ -903,17 +905,16 @@ public class TrangChuJPanel extends javax.swing.JPanel {
 
     private void tbl_banhanghdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_banhanghdMouseClicked
         // TODO add your handling code here:
-        int index =-1;
+        int index = -1;
         index = this.tbl_banhanghd.getSelectedRow();
         if (index == -1) {
             return;
         }
 
-
         String mahd = this.tbl_banhanghd.getValueAt(index, 1).toString();
         this.txtMahdTT.setText(mahd);
         this.txtTongTien.setText(calculateTotalPrice().toString());
-        
+
 //        String idhd = this.hds.findByMa(this.tbl_banhanghd.getValueAt(index, 1).toString()).getId();
 //        List<ChiTietHoaDonDto> listCTHD = this.cthdService.getAllByIdHd(idhd);
 //        GioHangHoaDonRepository repo = new GioHangHoaDonRepository();
@@ -987,10 +988,10 @@ public class TrangChuJPanel extends javax.swing.JPanel {
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
-                int option = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn huỷ không?", "Confirmation", JOptionPane.YES_NO_OPTION);
+        int option = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn huỷ không?", "Confirmation", JOptionPane.YES_NO_OPTION);
         switch (option) {
             case JOptionPane.YES_OPTION -> {
-                        this.txtMahdTT.setText("");
+                this.txtMahdTT.setText("");
 
                 for (ChiTietGioHangDto items : cTgioHangList) {
                     ctspView.setSoLuong(ctspView.getSoLuong() + items.getSoLuong());
@@ -998,9 +999,9 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                 }
                 this.cTgioHangList.clear();
                 JOptionPane.showMessageDialog(this, "huỷ thành công");
-        this.loadBanHangGH();
-        this.loadBanHangSp(this.CTSP.getAll());
-        this.showDateHoaDon();
+                this.loadBanHangGH();
+                this.loadBanHangSp(this.CTSP.getAll());
+                this.showDateHoaDon();
             }
 
             case JOptionPane.NO_OPTION -> {
@@ -1011,8 +1012,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
             }
         }
 
-        
-        
+
     }//GEN-LAST:event_jButton10ActionPerformed
 
 
@@ -1021,13 +1021,13 @@ public class TrangChuJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnThanhToan;
     private javax.swing.JButton btnThemVaoGH;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> comboxvoucher;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
