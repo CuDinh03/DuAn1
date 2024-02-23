@@ -4,6 +4,7 @@
  */
 package duan1_nhom1.repository;
 
+import duan1_nhom1.model.ChiTietGioHang;
 import duan1_nhom1.model.ChiTietSanPham;
 import duan1_nhom1.model.MauSac;
 import duan1_nhom1.utils.JdbcHelper;
@@ -60,7 +61,7 @@ public class SPChiTietRepository {
                 ChiTietSanPham chiTietSanPham = new ChiTietSanPham(idString, ma, idSPString, idSizeString, idHangString, idMsString, idClString, idDmString, giaNhap, giaBan, soLuong, ngayTao, ngaySua, ngayNhap, trangThai);
                 listSanPham.add(chiTietSanPham);
             }
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             System.out.println("Lỗi kết nối");
             ex.printStackTrace();
         }
@@ -163,7 +164,7 @@ public class SPChiTietRepository {
         return false;
     }
 
-    public ChiTietSanPham findByMa(String madto) {
+    public ChiTietSanPham findByMa(String madto) { 
         String query = "SELECT c.id, c.ma, s.id as id_sp, c.id_hang,c.id_cl,c.id_ms,c.id_size,c.id_dm,c.gia_nhap,c.gia_ban,c.so_luong,c.ngay_nhap,c.ngay_tao,c.ngay_sua, c.trang_thai from san_pham_chi_tiet c JOIN san_pham s ON c.id_sp = s.id WHERE s.ma = ? ";
         try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
             preparedStatement.setString(1, madto);
@@ -284,7 +285,7 @@ public class SPChiTietRepository {
     }
 
     public void changeQuantity(ChiTietSanPham ctsp) {
-        String query = "Update san_pham_chi_tiet set so_luong = ? where id = ? ";
+        String query = "Update san_pham_chi_tiet set so_luong = ? where id = ?  ";
         try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
             preparedStatement.setInt(1, ctsp.getSoLuong());
             preparedStatement.setString(2, ctsp.getId());
@@ -293,5 +294,55 @@ public class SPChiTietRepository {
         } catch (SQLException ex) {
             Logger.getLogger(SPChiTietRepository.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    public static void main(String[] args) {
+        SPChiTietRepository sp=new SPChiTietRepository();
+        List<ChiTietSanPham>list=new ArrayList<>();
+        list=sp.getAll();
+         for (ChiTietSanPham chiTietSanPham : list) {
+             System.out.println(chiTietSanPham.toString());
+        }
+    }
+
+    public List<ChiTietSanPham> getAllChiTietGioHangByIdsp(String id) {
+        List<ChiTietSanPham> chiTietSanPhams = new ArrayList<>();
+        System.out.println(id);
+        String query = "SELECT * from san_pham_chi_tiet WHERE id_sp = ? ";
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setString(1, id);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                String idString = resultSet.getString("id");
+
+                String ma = resultSet.getString("ma");
+                String idSPString = resultSet.getString("id_sp");
+
+                String idHangString = resultSet.getString("id_hang");
+                String idClString = resultSet.getString("id_cl");
+
+                String idMsString = resultSet.getString("id_ms");
+
+                String idSizeString = resultSet.getString("id_size");
+
+                String idDmString = resultSet.getString("id_dm");
+
+                BigDecimal giaNhap = resultSet.getBigDecimal("gia_nhap");
+                BigDecimal giaBan = resultSet.getBigDecimal("gia_ban");
+                Integer soLuong = resultSet.getInt("so_luong");
+                System.out.println(soLuong);
+                Date ngayNhap = resultSet.getDate("ngay_nhap");
+                Date ngayTao = resultSet.getDate("ngay_tao");
+                Date ngaySua = resultSet.getDate("ngay_sua");
+                Boolean trangThai = resultSet.getBoolean("trang_thai");
+                
+                ChiTietSanPham chiTietSanPham = new ChiTietSanPham(idString,ma,idSPString,idHangString,idClString,idMsString,idSizeString,idDmString,giaNhap,giaBan,soLuong,ngayNhap,ngayTao,ngaySua,trangThai);
+                chiTietSanPhams.add(chiTietSanPham);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return chiTietSanPhams;
     }
 }

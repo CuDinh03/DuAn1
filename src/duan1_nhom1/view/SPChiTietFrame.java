@@ -24,6 +24,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -48,7 +49,7 @@ public class SPChiTietFrame extends javax.swing.JFrame {
     /**
      * Creates new form SPChiTietFrame
      */
-    public SPChiTietFrame() {
+    public SPChiTietFrame(ChiTietSanPhamDto sp) {
 
         initComponents();
         loadHang();
@@ -58,6 +59,9 @@ public class SPChiTietFrame extends javax.swing.JFrame {
         loadSanPham();
         loadChatLieu();
         addTable(sPChiTietService.getAll());
+        loadTable(sp);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
     }
 
@@ -82,8 +86,39 @@ public class SPChiTietFrame extends javax.swing.JFrame {
         defaultTableModel = (DefaultTableModel) tbl_sanpham.getModel();
         defaultTableModel.setRowCount(0);
         int count = 1;
-       
+
         for (ChiTietSanPhamDto chiTietSanPham : list) {
+            defaultTableModel.addRow(new Object[]{
+                count++,
+                chiTietSanPham.getMa(),
+                this.sanPhamService.getTenById(chiTietSanPham.getIdSanPham().toString()),
+                this.hangService.getTenById(chiTietSanPham.getIdThuongHieu().toString()),
+                this.chatLieuService.getTenById(chiTietSanPham.getIdChatLieu().toString()),
+                this.mauSacService.getTenById(chiTietSanPham.getIdMauSac().toString()),
+                this.kichCoService.getTenById(chiTietSanPham.getIdKichThuoc().toString()),
+                this.danhMucService.getTenById(chiTietSanPham.getIdDanhMuc().toString()),
+                chiTietSanPham.getGiaNhap(),
+                chiTietSanPham.getGiaBan(),
+                chiTietSanPham.getSoLuong(),
+                chiTietSanPham.getNgayNhap(),
+                chiTietSanPham.getNgaySua(),
+                chiTietSanPham.getNgayTao(),
+                chiTietSanPham.getTrangThai()
+            });
+        }
+    }
+
+    public void loadTable(ChiTietSanPhamDto sp) {
+
+        int count = 1;
+
+        if (sp == null) {
+            return;
+        }
+
+        defaultTableModel = (DefaultTableModel) tbl_sanpham.getModel();
+        defaultTableModel.setRowCount(0);
+        for (ChiTietSanPhamDto chiTietSanPham : sPChiTietService.getAllByIdSp(sp.getId())) {
             defaultTableModel.addRow(new Object[]{
                 count++,
                 chiTietSanPham.getMa(),
@@ -151,7 +186,6 @@ public class SPChiTietFrame extends javax.swing.JFrame {
             model.addElement(hangService.getTenById(str));
         }
     }
-
 
     private void updateSP() {
         if (Uhelper.checkNull(txt_giaban, "Không để trống giá bán")) {
@@ -328,16 +362,6 @@ public class SPChiTietFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel20 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -391,73 +415,6 @@ public class SPChiTietFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
-        jLabel1.setText("MT");
-
-        jButton1.setText("Sản phẩm");
-
-        jButton2.setText("Bán hàng");
-
-        jButton3.setText("Bảo hành");
-
-        jButton4.setText("Voucher");
-
-        jButton5.setText("Nhân viên");
-
-        jButton6.setText("Khách hàng");
-
-        jButton7.setText("Báo cáo");
-
-        jLabel7.setText("-");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))))
-                .addGap(50, 50, 50))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(jLabel1)
-                .addGap(84, 84, 84)
-                .addComponent(jButton1)
-                .addGap(32, 32, 32)
-                .addComponent(jButton2)
-                .addGap(32, 32, 32)
-                .addComponent(jButton3)
-                .addGap(32, 32, 32)
-                .addComponent(jButton4)
-                .addGap(32, 32, 32)
-                .addComponent(jButton5)
-                .addGap(32, 32, 32)
-                .addComponent(jButton6)
-                .addGap(32, 32, 32)
-                .addComponent(jButton7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel7)
-                .addGap(43, 43, 43))
-        );
-
         jPanel2.setBackground(new java.awt.Color(203, 233, 162));
 
         jPanel3.setBackground(new java.awt.Color(203, 233, 162));
@@ -502,7 +459,7 @@ public class SPChiTietFrame extends javax.swing.JFrame {
                 .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_search)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 264, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 500, Short.MAX_VALUE)
                 .addComponent(Back)
                 .addGap(20, 20, 20))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
@@ -694,7 +651,7 @@ public class SPChiTietFrame extends javax.swing.JFrame {
                     .addComponent(btn_them5)
                     .addComponent(btn_them6))
                 .addGap(76, 76, 76)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addGap(18, 18, 18)
@@ -715,7 +672,7 @@ public class SPChiTietFrame extends javax.swing.JFrame {
                             .addComponent(date_ngaynhap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(date_ngaysua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(date_ngaytao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 347, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_them)
                     .addComponent(btn_sua)
@@ -829,14 +786,10 @@ public class SPChiTietFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1))
+            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jTabbedPane1)
         );
 
@@ -938,69 +891,31 @@ public class SPChiTietFrame extends javax.swing.JFrame {
     private void btn_them1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_them1ActionPerformed
         // TODO add your handling code here:
         new SanPhamFrame().setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_btn_them1ActionPerformed
 
     private void btn_them2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_them2ActionPerformed
-        // TODO add your handling code here:
-        new HangJPanel().setVisible(true);
-        this.dispose();
+        new ChatLieuJFrame().setVisible(true);
     }//GEN-LAST:event_btn_them2ActionPerformed
 
     private void btn_them3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_them3ActionPerformed
         // TODO add your handling code here:
-        
+        new DanhMucJFrame().setVisible(true);
     }//GEN-LAST:event_btn_them3ActionPerformed
 
     private void btn_them4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_them4ActionPerformed
         // TODO add your handling code here:
-        new DanhMucJPanel().setVisible(true);
-        this.dispose();
+        new HangJFrame().setVisible(true);
     }//GEN-LAST:event_btn_them4ActionPerformed
 
     private void btn_them5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_them5ActionPerformed
-        // TODO add your handling code here:
+
         new MauSacFrame().setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_btn_them5ActionPerformed
 
     private void btn_them6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_them6ActionPerformed
         // TODO add your handling code here:
         new KichThuocFrame().setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_btn_them6ActionPerformed
-
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SPChiTietFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SPChiTietFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SPChiTietFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SPChiTietFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SPChiTietFrame().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton Back;
@@ -1025,14 +940,6 @@ public class SPChiTietFrame extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser date_ngaynhap;
     private com.toedter.calendar.JDateChooser date_ngaysua;
     private com.toedter.calendar.JDateChooser date_ngaytao;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -1047,10 +954,8 @@ public class SPChiTietFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;

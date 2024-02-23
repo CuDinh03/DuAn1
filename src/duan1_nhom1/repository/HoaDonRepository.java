@@ -101,7 +101,7 @@ public class HoaDonRepository {
 
     public List<HoaDon> getAllHoaDon() {
         List<HoaDon> hoaDons = new ArrayList<>();
-        String query = "SELECT * FROM hoa_don";
+        String query = "SELECT * FROM hoa_don order by ngay_mua desc ";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query); ResultSet resultSet = preparedStatement.executeQuery()) {
 
             while (resultSet.next()) {
@@ -122,44 +122,6 @@ public class HoaDonRepository {
             e.printStackTrace();
         }
         return hoaDons;
-    }
-
-    public List<HoaDon> timKhachTheoHD(String maKhach) {
-        String sql = """
-        DECLARE @maKhach NVARCHAR(255)
-         SET @maKhach =?
-        select Hoa_Don.ma,Hoa_Don.ngay_mua,Hoa_Don.tong_tien,Hoa_Don.ngay_tao,Hoa_Don.trang_thai
-         from Hoa_Don join Khach_Hang on Hoa_Don.id_kh= Khach_Hang.id
-        WHERE (Khach_Hang.ma LIKE '%' + @maKhach + '%' OR @maKhach IS NULL);
-        """;
-
-        try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
-            // Set parameters
-            ps.setString(1, maKhach);
-            // Execute query
-            try (ResultSet rs = ps.executeQuery()) {
-                List<HoaDon> hoadonList = new ArrayList<>();
-                while (rs.next()) {
-                    HoaDon hoaDon = new HoaDon();
-                    hoaDon.setId(rs.getString("id"));
-                    hoaDon.setIdKhachHang(rs.getString("id_kh"));
-                    hoaDon.setMa(rs.getString("ma"));
-                    hoaDon.setIdNv(rs.getString("id_nv"));
-                    hoaDon.setNgayMua(rs.getDate("ngay_mua"));
-                    hoaDon.setTongTien(rs.getDouble("tong_tien"));
-                    hoaDon.setNgayTao(rs.getDate("ngay_tao"));
-                    hoaDon.setNgaySua(rs.getDate("ngay_sua"));
-                    hoaDon.setTrangThai(rs.getBoolean("trang_thai"));
-                    hoadonList.add(hoaDon);
-                }
-                return hoadonList;
-            }
-
-        } catch (Exception e) {
-            // Handle the exception more gracefully, log it or throw a custom exception
-            e.printStackTrace();
-        }
-        return null;
     }
 
     public List<HoaDon> getAllHoaDonStatus() {
@@ -202,7 +164,6 @@ public class HoaDonRepository {
                     Boolean trang_thai = resultSet.getBoolean("trang_thai");
                     Date ngay_tao = resultSet.getDate("ngay_tao");
                     Date ngay_sua = resultSet.getDate("ngay_sua");
-
                     return new HoaDon(id, id_kh, id_Nv, ma, ngay_mua, tong_tien, trang_thai, ngay_tao, ngay_sua);
                 }
             }

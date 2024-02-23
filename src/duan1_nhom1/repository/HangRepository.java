@@ -91,4 +91,86 @@ public class HangRepository {
         }
         return listId;
     }
+
+   public void addNew(Hang hang) {
+        if (hang == null) {
+            return;
+        }
+
+        String sql = "INSERT INTO hang(ma,ten,mo_ta,ngay_tao,ngay_sua,trang_thai) VALUES(?,?,?,?,?,?)";
+
+        try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, hang.getMa());
+            ps.setString(2, hang.getTen());
+            ps.setString(3, hang.getMoTa());
+            ps.setDate(4, new java.sql.Date(hang.getNgayTao().getTime()));
+            ps.setDate(5, new java.sql.Date(hang.getNgaySua().getTime()));
+            ps.setBoolean(6, hang.getTrangThai());
+
+            int chek = ps.executeUpdate();
+
+            if (chek > 0) {
+                System.out.println("San pham Đã thêm thành công ");
+            } else {
+                System.out.println("Thêm thất bại ");
+            }
+        } catch (Exception e) {
+            System.out.println("An error occurred: " + e.getMessage());
+        }
+    }
+    public void update(Hang hang, String id) {
+        List<Hang> listHang = new ArrayList();
+        String sql = """
+                UPDATE [dbo].[hang]
+                SET [ma] = ?,
+                    [ten] = ?,
+                    [mo_ta] = ?,
+                    [ngay_tao] = ?,
+                    [ngay_sua] = ?,
+                    [trang_thai] = ?
+                WHERE id = ?;
+                """;
+
+        try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+
+            // Set parameters
+            ps.setObject(1, hang.getMa());
+            ps.setObject(2, hang.getTen());
+            ps.setObject(3, hang.getMoTa());
+            ps.setObject(4, hang.getNgayTao());
+            ps.setObject(5, hang.getNgaySua());
+            ps.setObject(6, hang.getTrangThai());
+            ps.setObject(7, hang.getId());
+            ps.setObject(7, id);
+            // Execute the update
+            int chek = ps.executeUpdate();
+
+            // Check the result
+            if (chek > 0) {
+                System.out.println("update thành công ");
+            } else {
+                System.out.println("update thất bại  ");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Error updating danh muc.", e);
+        }
+    }
+
+    public void delete(String id) {
+        List<Hang> listHang = new ArrayList();
+        String sql = "DELETE FROM hang WHERE id = ?";
+
+        try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setObject(1, id);
+            int chek = ps.executeUpdate();
+
+            if (chek > 0) {
+                System.out.println("Xóa thành công ");
+            } else {
+                System.out.println("Xóa thất bại ");
+            }
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+    }
 }

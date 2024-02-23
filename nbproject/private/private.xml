@@ -3,12 +3,36 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/repository/ChiTietHoaDonRepository.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/service/ChiTietHoaDonService.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/service/ChiTietGioHangService.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/service/SPChiTietService.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/SanPhamFrame.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/repository/KhachRepo.java</file>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/KhachHangJPanel.java</file>
-            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/model/ChiTietGioHang.java</file>
-            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/DuAn1_nhom1.java</file>
-            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/TrangChuJPanel.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/service/KhachService.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/ViewDanhMuc.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/SanPhamJPanel.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/repository/SanPhamRepository.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/SingleCTSPJFrame.java</file>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/SPChiTietFrame.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/repository/SPChiTietRepository.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/AdminViewJFrame.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/service/SanPhamService.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/repository/HoaDonRepository.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/ViewSanPham.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/ThemSoLuongJFrame.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/service/HoaDonService.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/MainJFrame.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/tranf/TranferData.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/TrangChuJPanel.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/ChiTietHoaDonJFrame.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/repository/GioHangHoaDonRepository.java</file>
             <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/MauSacJPanel.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/HoaDonJPanel.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/repository/ChiTietGioHangRepository.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/BanHangFrame.java</file>
+            <file>file:/Users/anhtuanle/Desktop/DA1/DuAn1/src/duan1_nhom1/view/ViewKhachHang.java</file>
         </group>
     </open-files>
 </project-private>

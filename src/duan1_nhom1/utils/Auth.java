@@ -4,6 +4,7 @@
  */
 package duan1_nhom1.utils;
 
+import duan1_nhom1.model.ChucVu;
 import duan1_nhom1.model.TaiKhoan;
 
 /**
@@ -11,14 +12,19 @@ import duan1_nhom1.model.TaiKhoan;
  * @author WEB
  */
 public class Auth {
-    public static  TaiKhoan user=null;
-  public static  void clear(){
-  Auth.user=null;
-  }
-  public static boolean isLogin(){
-  return Auth.user !=null;
-  }
-  public static  boolean isManager(){
-  return Auth.isLogin();
-  }
+
+    public static TaiKhoan user = null;
+    public static ChucVu cv = new ChucVu();
+
+    public static void clear() {
+        Auth.user = null;
+    }
+
+    public static boolean isLogin() {
+        return Auth.user != null;
+    }
+
+    public static boolean isManager() {
+        return Auth.isLogin() && cv.isTrangTai();
+    }
 }

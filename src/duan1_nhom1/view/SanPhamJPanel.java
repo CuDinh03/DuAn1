@@ -26,7 +26,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class SanPhamJPanel extends javax.swing.JPanel {
 
-      private IService iService = new SanPhamService();
+    private IService iService = new SanPhamService();
     private SPChiTietService sPChiTietService = new SPChiTietService();
     private DefaultComboBoxModel defaultComboBoxModel;
     private DefaultTableModel defaultTableModel;
@@ -38,6 +38,7 @@ public class SanPhamJPanel extends javax.swing.JPanel {
     private ChatLieuService chatLieuService = new ChatLieuService();
     int _index;
     private int index = -1;
+    private ChiTietSanPhamDto sp = new ChiTietSanPhamDto();
 
     /**
      * Creates new form ViewSanPham
@@ -291,9 +292,7 @@ public class SanPhamJPanel extends javax.swing.JPanel {
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
-        new SPChiTietFrame().setVisible(true);
-        
-
+        new SPChiTietFrame(sp).setVisible(true);
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
 

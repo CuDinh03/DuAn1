@@ -19,7 +19,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *1
+ * 1
+ *
  * @author anhtuanle
  */
 public class KichThuocFrame extends javax.swing.JFrame {
@@ -37,40 +38,39 @@ public class KichThuocFrame extends javax.swing.JFrame {
         loadTableKichThuoc();
     }
 
-        public void loadTableKichThuoc() {
+    public void loadTableKichThuoc() {
 
-         defaultTableModel = (DefaultTableModel) tbl_kichthuoc.getModel();
+        defaultTableModel = (DefaultTableModel) tbl_kichthuoc.getModel();
         defaultTableModel.setRowCount(0);
         int count = 1;
         for (KichThuoc hang : kichCoService.getAll()) {
             String status;
             if (hang.isTrangThai()) {
                 status = "Còn";
-            }else {
+            } else {
                 status = "Hết";
             }
-             Object[] rowData = {
-             
+            Object[] rowData = {
                 hang.getMa(),
                 hang.getTen(),
                 hang.getMoTa(),
                 hang.getNgaySua(),
                 hang.getNgayTao(),
-                 status
-             };   
+                status
+            };
             defaultTableModel.addRow(rowData);
 
         }
 
     }
-    
-     private void clearForm() {
+
+    private void clearForm() {
         txt_ma.setText("");
         txt_ten.setText("");
         txt_mota.setText("");
         clr_ngaysua.setDate(null);
         clr_ngaytao.setDate(null);
-        
+
     }
 
     private KichThuoc getKichCo() {
@@ -96,9 +96,9 @@ public class KichThuocFrame extends javax.swing.JFrame {
             }
             KichThuoc kt = getKichCo();
             kichCoService.add(kt);
-           
+
             JOptionPane.showMessageDialog(this, "thêm thành công");
-            
+
             loadTableKichThuoc();
             clearForm();
         } catch (Exception e) {
@@ -106,8 +106,7 @@ public class KichThuocFrame extends javax.swing.JFrame {
         }
 
     }
-    
-    
+
     public void updateKichThuoc() {
         try {
             int check = JOptionPane.showConfirmDialog(this, "bạn có muốn update không");
@@ -120,16 +119,16 @@ public class KichThuocFrame extends javax.swing.JFrame {
             kichCoService.update(kichThuoc, id);
             loadTableKichThuoc();
             JOptionPane.showMessageDialog(this, "Update thành công");
-            
+
             clearForm();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Update thất bại");
         }
 
     }
-    
-    public void deleteKichThuoc(){
-          try {
+
+    public void deleteKichThuoc() {
+        try {
             int check = JOptionPane.showConfirmDialog(this, "bạn có muốn xóa không");
             if (check != JOptionPane.YES_OPTION) {
                 return;
@@ -145,8 +144,8 @@ public class KichThuocFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "xóa thất bại ");
         }
     }
-    
-    public void clickKichThuoc(){
+
+    public void clickKichThuoc() {
         _index = tbl_kichthuoc.getSelectedRow();
         txt_ma.setText(tbl_kichthuoc.getValueAt(_index, 0).toString());
         txt_ten.setText(tbl_kichthuoc.getValueAt(_index, 1).toString());
@@ -175,10 +174,7 @@ public class KichThuocFrame extends javax.swing.JFrame {
         clr_ngaytao.setDate(ngayTao);
         clr_ngaysua.setDate(ngaySua);
 
-        
     }
-
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -406,7 +402,7 @@ public class KichThuocFrame extends javax.swing.JFrame {
 
     private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
         // TODO add your handling code here:
-      deleteKichThuoc();
+        deleteKichThuoc();
     }//GEN-LAST:event_btn_xoaActionPerformed
 
     private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed

@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  * @author anhtuanle
  */
 public class SanPhamFrame extends javax.swing.JFrame {
-    
+
     private DefaultTableModel defaultTableModel = new DefaultTableModel();
     private SanPhamService sanPhamService = new SanPhamService();
     int _index = -1;
@@ -29,41 +29,40 @@ public class SanPhamFrame extends javax.swing.JFrame {
         initComponents();
         loadTableSanPham();
     }
-    
-        public void loadTableSanPham() {
 
-         defaultTableModel = (DefaultTableModel) tbl_sanpham.getModel();
+    public void loadTableSanPham() {
+
+        defaultTableModel = (DefaultTableModel) tbl_sanpham.getModel();
         defaultTableModel.setRowCount(0);
         int count = 1;
         for (SanPhamDto sanPham : sanPhamService.getAll()) {
             String status;
             if (sanPham.getTrangThai()) {
                 status = "Còn";
-            }else {
+            } else {
                 status = "Hết";
             }
-             Object[] rowData = {
-             
+            Object[] rowData = {
                 sanPham.getMa(),
                 sanPham.getTen(),
                 sanPham.getMoTa(),
                 sanPham.getNgaySua(),
                 sanPham.getNgayTao(),
-                 status
-             };   
+                status
+            };
             defaultTableModel.addRow(rowData);
 
         }
 
     }
-    
-     private void clearFormSanPham() {
+
+    private void clearFormSanPham() {
         txt_ma.setText("");
         txt_ten.setText("");
         txt_mota.setText("");
         clr_ngaysua.setDate(null);
         clr_ngaytao.setDate(null);
-        
+
     }
 
     private SanPhamDto getSanPhamDto() {
@@ -77,7 +76,7 @@ public class SanPhamFrame extends javax.swing.JFrame {
 
         Date ngaySua = clr_ngaysua.getDate();
         sanPham.setNgaySua(ngaySua);
-//        hang.isTrangThai(true);
+        sanPham.setTrangThai(true);
         return sanPham;
     }
 
@@ -88,18 +87,16 @@ public class SanPhamFrame extends javax.swing.JFrame {
                 return;
             }
             SanPhamDto sp = getSanPhamDto();
-            sanPhamService.add(sp);           
-            
-
+            sanPhamService.add(sp);
             JOptionPane.showMessageDialog(this, "thêm thành công");
             clearFormSanPham();
+            loadTableSanPham();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "thêm thất bại");
         }
 
     }
-    
-    
+
     public void updateSanPham() {
         try {
             int check = JOptionPane.showConfirmDialog(this, "bạn có muốn update không");
@@ -112,15 +109,14 @@ public class SanPhamFrame extends javax.swing.JFrame {
             sanPhamService.update(sanPham, id);
             loadTableSanPham();
             JOptionPane.showMessageDialog(this, "Update thành công");
-            
             clearFormSanPham();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Update thất bại");
         }
 
     }
-    
-    public void deleteSanPham(){
+
+    public void deleteSanPham() {
         try {
             int check = JOptionPane.showConfirmDialog(this, "bạn có muốn xóa không");
             if (check != JOptionPane.YES_OPTION) {
@@ -128,7 +124,7 @@ public class SanPhamFrame extends javax.swing.JFrame {
             }
             int row = tbl_sanpham.getSelectedRow();
             String id = sanPhamService.getAll().get(row).getId();
-           sanPhamService.delete(id);
+            sanPhamService.delete(id);
             JOptionPane.showMessageDialog(this, "xóa thành công");
             loadTableSanPham();
             clearFormSanPham();
@@ -136,8 +132,8 @@ public class SanPhamFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "xóa thất bại ");
         }
     }
-    
-    public void clickSanPham(){
+
+    public void clickSanPham() {
         _index = tbl_sanpham.getSelectedRow();
         txt_ma.setText(tbl_sanpham.getValueAt(_index, 0).toString());
         txt_ten.setText(tbl_sanpham.getValueAt(_index, 1).toString());
@@ -166,11 +162,7 @@ public class SanPhamFrame extends javax.swing.JFrame {
         clr_ngaytao.setDate(ngayTao);
         clr_ngaysua.setDate(ngaySua);
 
-        
     }
-
-
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -236,9 +228,9 @@ public class SanPhamFrame extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tbl_sanpham);
 
-        jLabel1.setText("Mã hãng:");
+        jLabel1.setText("Mã SP");
 
-        jLabel2.setText("Tên hãng:");
+        jLabel2.setText("Tên SP");
 
         jLabel3.setText("Ngày tạo:");
 
@@ -291,12 +283,13 @@ public class SanPhamFrame extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 459, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txt_mota, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel3)
@@ -312,9 +305,9 @@ public class SanPhamFrame extends javax.swing.JFrame {
                                         .addComponent(clr_ngaytao, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txt_ma, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btn_them)
                             .addComponent(btn_clear)

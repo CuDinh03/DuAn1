@@ -121,4 +121,67 @@ public class ChatLieuRepository {
         }
         return listId;
     }
+
+     public void addNew(ChatLieu chatLieu) {
+        if (chatLieu == null) {
+            return;
+        }
+
+        String sql = "INSERT INTO chat_lieu(ma,ten,mo_ta,ngay_tao,ngay_sua,trang_thai) VALUES(?,?,?,?,?,?)";
+
+        try (Connection con = jdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, chatLieu.getMa());
+            ps.setString(2, chatLieu.getTen());
+            ps.setString(3, chatLieu.getMoTa());
+            ps.setDate(4, new java.sql.Date(chatLieu.getNgayTao().getTime()));
+            ps.setDate(5, new java.sql.Date(chatLieu.getNgaySua().getTime()));
+            ps.setBoolean(6, chatLieu.getTrangThai());
+
+            int chek = ps.executeUpdate();
+
+            if (chek > 0) {
+                System.out.println("San pham Đã thêm thành công ");
+            } else {
+                System.out.println("Thêm thất bại ");
+            }
+        } catch (Exception e) {
+            System.out.println("An error occurred: " + e.getMessage());
+        }
+    }
+
+    public void update(ChatLieu chatLieu) {
+        String sql = "UPDATE chat_lieu SET ma = ?, ten = ?, mo_ta = ?, ngay_tao = ?,ngay_sua = ?, trang_thai = ? WHERE id = ?";
+
+        try (Connection con = jdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setObject(1, chatLieu.getMa());
+            ps.setObject(2, chatLieu.getTen());
+            ps.setObject(3, chatLieu.getMoTa());
+            ps.setObject(4, chatLieu.getNgayTao());
+            ps.setObject(5, chatLieu.getNgaySua());
+            ps.setObject(6, chatLieu.getTrangThai());
+            ps.setObject(7, chatLieu.getId());
+
+            int chek = ps.executeUpdate();
+
+            if (chek > 0) {
+                System.out.println(" update thành công ");
+            } else {
+                System.out.println("Update thất bại ");
+            }
+        } catch (Exception e) {
+            System.out.println("An error occurred: " + e.getMessage());
+        }
+    }
+
+    public void delete(String id) {
+         try {
+            String query = "DELETE FROM chat_lieu WHERE id = ?";
+            try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+                preparedStatement.setString(1, id);
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
