@@ -173,12 +173,12 @@ public class VoucherRepo {
         }
     }
 
-    public float getGiamById(String id) {
-        String sql = "SELECT giam_gia FROM Voucher WHERE id = ?";
+    public float getGiamByMa(String ma) {
+        String sql = "SELECT giam_gia FROM Voucher WHERE ma = ?";
 
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, id);
+            ps.setString(1, ma);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 return rs.getFloat("giam_gia");
@@ -204,23 +204,5 @@ public class VoucherRepo {
         }
         return null;
     }
-    public void loadComboBox() {
-        String sql = "SELECT ma FROM Voucher";
-    try {
-        
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ResultSet rs = ps.executeQuery(sql);
-
-        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
-        while (rs.next()) {
-            String ma = rs.getString("ma");
-            model.addElement(ma);
-        }
-    } catch (Exception ex) {
-        ex.printStackTrace();
-    }
-}
-
-
     
 }

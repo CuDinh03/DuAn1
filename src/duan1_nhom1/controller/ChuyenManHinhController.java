@@ -8,6 +8,7 @@ import duan1_nhom1.bean.DanhMucBean;
 import duan1_nhom1.view.BaoCaoJPanel;
 import duan1_nhom1.view.HoaDonJPanel;
 import duan1_nhom1.view.KhachHangJPanel;
+import duan1_nhom1.view.SanPhamJPanel;
 //import duan1_nhom1.view.SanPhamJPanel;
 import duan1_nhom1.view.TrangChuJPanel;
 import duan1_nhom1.view.VoucherJPanel;
@@ -69,7 +70,7 @@ public class ChuyenManHinhController {
         public void mouseClicked(MouseEvent e) {
             switch (kind) {
                 case "TrangChu" -> node = new TrangChuJPanel();
-//                case "SanPham" -> node = new SanPhamJPanel();
+                case "SanPham" -> node = new SanPhamJPanel();
                 case "BaoCao" -> node = new BaoCaoJPanel();
                 case "HoaDon" -> node = new HoaDonJPanel();
                 case "KhachHang" -> node = new KhachHangJPanel();

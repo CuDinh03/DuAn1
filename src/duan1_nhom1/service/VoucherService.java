@@ -39,16 +39,7 @@ public class VoucherService implements IService<Voucher> {
     public Voucher findById(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
-    public String getMaById(String id) {
-        return voucherRepo.getMaById(id);
+    public float findGiamByMa(String ma){
+        return voucherRepo.getGiamByMa(ma);
     }
-    
-    public float getGiamById(String id) {
-        return voucherRepo.getGiamById(id);
-    }
-//    public void loadCBB(Voucher t) {
-//        this voucherRepo.loadComboBox();
-//    }
-   
 }

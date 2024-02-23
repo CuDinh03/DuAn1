@@ -6,8 +6,10 @@ import duan1_nhom1.dto.ChiTietSanPhamDto;
 import duan1_nhom1.dto.GioHangDto;
 import duan1_nhom1.dto.HoaDonDto;
 import duan1_nhom1.dto.KhachDto;
+import duan1_nhom1.dto.VoucherDto;
 import duan1_nhom1.model.ChiTietSanPham;
 import duan1_nhom1.model.GioHangHoaDon;
+import duan1_nhom1.model.Voucher;
 import duan1_nhom1.repository.GioHangHoaDonRepository;
 import duan1_nhom1.service.ChatLieuService;
 import duan1_nhom1.service.ChiTietGioHangService;
@@ -25,6 +27,8 @@ import duan1_nhom1.service.SanPhamService;
 import duan1_nhom1.service.VoucherService;
 import duan1_nhom1.utils.MsgBox;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.math.BigDecimal;
 import java.security.SecureRandom;
 import java.util.ArrayList;
@@ -33,7 +37,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.util.regex.*;
-import javax.swing.DefaultComboBoxModel;
 
 public class TrangChuJPanel extends javax.swing.JPanel {
 
@@ -71,6 +74,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         showDateHoaDon();
         loadBanHangGH();
         loadBanHangSp(sPChiTietService.getAll());
+        loadComboBox();
     }
 
     public void showDateHoaDon() {
@@ -217,14 +221,34 @@ public class TrangChuJPanel extends javax.swing.JPanel {
             this.cthdService.add(cthd);
         }
     }
-    
-    public void loadComboBox(){
-        
-        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
-        cbbVoucher.setModel(model);
+
+    public void loadComboBox() {
         cbbVoucher.removeAllItems();
+        cbbVoucher.addItem(" ");
+        List<Voucher> list = voucherService.getAll();
+        for (Voucher voucher : list) {
+            cbbVoucher.addItem(voucher.getMa());
+        }
+        cbbVoucher.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tongTienSauGiam();
+            }
+        });
     }
-    
+
+    public void tongTienSauGiam() {
+        String selected = cbbVoucher.getSelectedItem().toString();
+        voucherService.findGiamByMa(selected);
+        List<Voucher> list = voucherService.getAll();
+        Float tongTien = Float.parseFloat(calculateTotalPrice().toString()); 
+        for (Voucher voucher : list) {
+            float giam = voucher.getGiamGia();
+            Integer sauGiam = Math.round((tongTien * giam)/100);
+            jlbTongTienSauGiam.setText(sauGiam.toString());
+        }
+    }
+
     public BigDecimal calculateTotalPrice() {
         BigDecimal totalPrice = BigDecimal.ZERO;
         for (ChiTietGioHangDto item : cTgioHangList) {
@@ -663,7 +687,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1091, Short.MAX_VALUE)
+            .addGap(0, 1097, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -998,10 +1022,10 @@ public class TrangChuJPanel extends javax.swing.JPanel {
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
-                int option = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn huỷ không?", "Confirmation", JOptionPane.YES_NO_OPTION);
+        int option = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn huỷ không?", "Confirmation", JOptionPane.YES_NO_OPTION);
         switch (option) {
             case JOptionPane.YES_OPTION -> {
-                        this.txtMahdTT.setText("");
+                this.txtMahdTT.setText("");
 
                 for (ChiTietGioHangDto items : cTgioHangList) {
                     ctspView.setSoLuong(ctspView.getSoLuong() + items.getSoLuong());
@@ -1009,9 +1033,9 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                 }
                 this.cTgioHangList.clear();
                 JOptionPane.showMessageDialog(this, "huỷ thành công");
-        this.loadBanHangGH();
-        this.loadBanHangSp(this.CTSP.getAll());
-        this.showDateHoaDon();
+                this.loadBanHangGH();
+                this.loadBanHangSp(this.CTSP.getAll());
+                this.showDateHoaDon();
             }
 
             case JOptionPane.NO_OPTION -> {
@@ -1022,12 +1046,12 @@ public class TrangChuJPanel extends javax.swing.JPanel {
             }
         }
 
-        
-        
+
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void cbbVoucherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbVoucherActionPerformed
         // TODO add your handling code here:
+
     }//GEN-LAST:event_cbbVoucherActionPerformed
 
 
