@@ -3,12 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/bachh/DuAn1/src/duan1_nhom1/DuAn1_nhom1.java</file>
             <file>file:/C:/Users/bachh/DuAn1/src/duan1_nhom1/view/TrangChuJPanel.java</file>
+<<<<<<< HEAD
             <file>file:/C:/Users/bachh/DuAn1/src/duan1_nhom1/service/VoucherService.java</file>
             <file>file:/C:/Users/bachh/DuAn1/src/duan1_nhom1/view/VoucherFrame.java</file>
             <file>file:/C:/Users/bachh/DuAn1/src/duan1_nhom1/view/DangNhapJDialog.java</file>
             <file>file:/C:/Users/bachh/DuAn1/src/duan1_nhom1/repository/VoucherRepo.java</file>
+=======
+=======
+            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/repository/ChatLieuRepository.java</file>
+            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/repository/HoaDonRepository.java</file>
+>>>>>>> 97ad61b37dd29bcc19b61f778a6d10f49660e04e
+>>>>>>> master
         </group>
     </open-files>
 </project-private>
