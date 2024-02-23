@@ -763,7 +763,8 @@ public class TrangChuJPanel extends javax.swing.JPanel {
 
         }
 
-        this.txtTongTien.setText(calculateTotalPrice().toString());
+//        this.txtTongTien.setText(calculateTotalPrice().toString());
+        this.txtTongTien.setText(jlbTongTienSauGiam.getText());
         this.loadBanHangGH();
         this.loadBanHangSp(sPChiTietService.getAll());
 
