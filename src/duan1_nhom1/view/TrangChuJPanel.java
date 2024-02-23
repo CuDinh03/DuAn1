@@ -976,7 +976,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         if (index == -1) {
             return;
         }
-        cTgioHangList.clear();
+//        cTgioHangList.clear();
 //        String idhd = this.hds.findByMa(this.tbl_banhanghd.getValueAt(index, 1).toString()).getId();
 //        List<ChiTietHoaDonDto> listCTHD = this.cthdService.getAllByIdHd(idhd);
 //        GioHangHoaDonRepository repo = new GioHangHoaDonRepository();
