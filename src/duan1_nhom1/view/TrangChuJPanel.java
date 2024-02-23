@@ -223,7 +223,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
 
         for (ChiTietGioHangDto gh : cTgioHangList) {
             gh.setIdGH(idgh);
-            this.ctghService.add(gh);
+//            this.ctghService.add(gh);
             ChiTietHoaDonDto cthd = new ChiTietHoaDonDto("", idHd, gh.getIdSP(), "", gh.getSoLuong(), this.CTSP.findByIdSP(gh.getIdSP()).getGiaBan().doubleValue(), new Date(), new Date(), Boolean.TRUE);
             this.cthdService.add(cthd);
         }
@@ -346,6 +346,9 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         tbl_banhanghd.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbl_banhanghdMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                tbl_banhanghdMouseEntered(evt);
             }
         });
         jScrollPane2.setViewportView(tbl_banhanghd);
@@ -711,11 +714,14 @@ public class TrangChuJPanel extends javax.swing.JPanel {
 
                     chiTietGioHang.setSoLuong(chiTietGioHang.getSoLuong() + quantity);
                 } else {
-                    ChiTietGioHangDto item = new ChiTietGioHangDto("", "", ctspView.getIdSanPham(), quantity, new Date(), new Date(), Boolean.TRUE);
-
-                    ctspView.setSoLuong(ctspView.getSoLuong() - quantity);
-                    sPChiTietService.changeSL(ctspView);
-                    cTgioHangList.add(item);
+                        ChiTietGioHangDto item = new ChiTietGioHangDto();
+                    item.setIdGH(this.idGH);
+                    System.out.println(item.getIdGH());
+                    item.setIdSP(ctspView.getIdSanPham());
+                    item.setSoLuong(quantity);
+                    item.setNgayTao(new Date());
+                    item.setNgaySua(new Date()); 
+                    item.setTrangThai(Boolean.TRUE);
 
                 }
             } else {
@@ -796,6 +802,23 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         hd.setTrangThai(Boolean.FALSE);
         this.hds.add(hd);
         JOptionPane.showMessageDialog(null, "Tạo hoá đơn thành công");
+            GioHangDto ghd = new GioHangDto();
+        if (this.khachView != null) {
+            ghd.setIdKH(khachView.getId());
+        }
+        ghd.setMa(generateGHCode());
+        ghd.setNgaySua(new Date());
+        ghd.setNgayTao(new Date());
+        ghd.setTrangThai(Boolean.FALSE);
+        this.ghService.add(ghd);
+
+        this.idGH = ghService.findByMa(ghd.getMa()).getId();
+        System.out.println(idGH);
+
+        GioHangHoaDonRepository repo = new GioHangHoaDonRepository();
+        repo.createGioHangHoaDon(new GioHangHoaDon("", idGH, this.hds.findByMa(hd.getMa()).getId(), new Date(), new Date(), Boolean.TRUE));
+
+//        this.saveCT(idGH, this.hds.findByMa(idGH).getId());
         cTgioHangList.clear();
         this.loadBanHangGH();
         this.loadBanHangSp(sPChiTietService.getAll());
@@ -906,34 +929,34 @@ public class TrangChuJPanel extends javax.swing.JPanel {
 
     private void tbl_banhanghdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_banhanghdMouseClicked
         // TODO add your handling code here:
-        int index = -1;
-        index = this.tbl_banhanghd.getSelectedRow();
-        if (index == -1) {
-            return;
-        }
- 
-//        String idhd = this.hds.findByMa(this.tbl_banhanghd.getValueAt(index, 1).toString()).getId();
-//        List<ChiTietHoaDonDto> listCTHD = this.cthdService.getAllByIdHd(idhd);
-//        GioHangHoaDonRepository repo = new GioHangHoaDonRepository();
-//        String idgh = repo.getGioHangHoaDonById(idhd).getIdGioHang();
-//        cTgioHangList.clear();
-//        for (ChiTietGioHangDto item : this.ctghService.getAll()) {
-//            if (item.getIdGH().equals(idgh)) {
-//                cTgioHangList.add(item);
-//            }
+//        int index = -1;
+//        index = this.tbl_banhanghd.getSelectedRow();
+//        if (index == -1) {
+//            return;
 //        }
-        String mahd = this.tbl_banhanghd.getValueAt(index, 1).toString();
-        HoaDonDto hddto = hds.findByMa(mahd);
-        GioHangHoaDonRepository repo = new GioHangHoaDonRepository();
-        GioHangHoaDon ghHd = repo.getGioHangHoaDonById(hddto.getId());
-        this.idGH = ghHd.getIdGioHang();
-        System.out.println(this.idGH);
-        cTgioHangList = ctghService.getAllByIdGh(this.idGH);
-        System.out.println(cTgioHangList);
-        this.txtMahdTT.setText(mahd);
-        this.txtTongTien.setText(calculateTotalPrice().toString());
-        this.loadBanHangGH();
-        this.loadBanHangSp(sPChiTietService.getAll());
+// 
+////        String idhd = this.hds.findByMa(this.tbl_banhanghd.getValueAt(index, 1).toString()).getId();
+////        List<ChiTietHoaDonDto> listCTHD = this.cthdService.getAllByIdHd(idhd);
+////        GioHangHoaDonRepository repo = new GioHangHoaDonRepository();
+////        String idgh = repo.getGioHangHoaDonById(idhd).getIdGioHang();
+////        cTgioHangList.clear();
+////        for (ChiTietGioHangDto item : this.ctghService.getAll()) {
+////            if (item.getIdGH().equals(idgh)) {
+////                cTgioHangList.add(item);
+////            }
+////        }
+//        String mahd = this.tbl_banhanghd.getValueAt(index, 1).toString();
+//        HoaDonDto hddto = hds.findByMa(mahd);
+//        GioHangHoaDonRepository repo = new GioHangHoaDonRepository();
+//        GioHangHoaDon ghHd = repo.getGioHangHoaDonById(hddto.getId());
+//        this.idGH = ghHd.getIdGioHang();
+//        System.out.println(this.idGH);
+//        cTgioHangList = ctghService.getAllByIdGh(this.idGH);
+//        System.out.println(cTgioHangList);
+//        this.txtMahdTT.setText(mahd);
+//        this.txtTongTien.setText(calculateTotalPrice().toString());
+//        this.loadBanHangGH();
+//        this.loadBanHangSp(sPChiTietService.getAll());
         
     }//GEN-LAST:event_tbl_banhanghdMouseClicked
 
@@ -1020,6 +1043,39 @@ public class TrangChuJPanel extends javax.swing.JPanel {
 
 
     }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void tbl_banhanghdMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_banhanghdMouseEntered
+       int index = -1;
+        index = this.tbl_banhanghd.getSelectedRow();
+        if (index == -1) {
+            return;
+        }
+ 
+//        String idhd = this.hds.findByMa(this.tbl_banhanghd.getValueAt(index, 1).toString()).getId();
+//        List<ChiTietHoaDonDto> listCTHD = this.cthdService.getAllByIdHd(idhd);
+//        GioHangHoaDonRepository repo = new GioHangHoaDonRepository();
+//        String idgh = repo.getGioHangHoaDonById(idhd).getIdGioHang();
+//        cTgioHangList.clear();
+//        for (ChiTietGioHangDto item : this.ctghService.getAll()) {
+//            if (item.getIdGH().equals(idgh)) {
+//                cTgioHangList.add(item);
+//            }
+//        }
+        String mahd = this.tbl_banhanghd.getValueAt(index, 1).toString();
+        HoaDonDto hddto = hds.findByMa(mahd);
+        GioHangHoaDonRepository repo = new GioHangHoaDonRepository();
+        GioHangHoaDon ghHd = repo.getGioHangHoaDonById(hddto.getId());
+        this.idGH = ghHd.getIdGioHang();
+        System.out.println(this.idGH);
+        cTgioHangList = ctghService.getAllByIdGh(this.idGH);
+        System.out.println(cTgioHangList);
+        this.txtMahdTT.setText(mahd);
+        this.txtTongTien.setText(calculateTotalPrice().toString());
+        this.loadBanHangGH();
+        this.loadBanHangSp(sPChiTietService.getAll());
+        
+        
+    }//GEN-LAST:event_tbl_banhanghdMouseEntered
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
