@@ -88,36 +88,49 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
     
 
     public void addTable(List<ChiTietSanPhamDto> list) {
-        defaultTableModel = (DefaultTableModel) tbl_sanpham.getModel();
-        defaultTableModel.setRowCount(0);
-        int count = 1;
+    defaultTableModel = (DefaultTableModel) tbl_sanpham.getModel();
+    defaultTableModel.setRowCount(0);
+    int count = 1;
 
-        for (ChiTietSanPhamDto chiTietSanPham : list) {
-            defaultTableModel.addRow(new Object[]{
-                count++,
-                chiTietSanPham.getMa(),
-                this.sanPhamService.getTenById(chiTietSanPham.getIdSanPham().toString()),
-                this.hangService.getTenById(chiTietSanPham.getIdThuongHieu().toString()),
-                this.chatLieuService.getTenById(chiTietSanPham.getIdChatLieu().toString()),
-                this.mauSacService.getTenById(chiTietSanPham.getIdMauSac().toString()),
-                this.kichCoService.getTenById(chiTietSanPham.getIdKichThuoc().toString()),
-                this.danhMucService.getTenById(chiTietSanPham.getIdDanhMuc().toString()),
-                chiTietSanPham.getGiaNhap(),
-                chiTietSanPham.getGiaBan(),
-                chiTietSanPham.getSoLuong(),
-                chiTietSanPham.getNgayNhap(),
-                chiTietSanPham.getNgaySua(),
-                chiTietSanPham.getNgayTao(),
-                chiTietSanPham.getTrangThai()
-            });
+    for (ChiTietSanPhamDto chiTietSanPham : list) {
+        String trangThai;
+        if (chiTietSanPham.getSoLuong() > 0) {
+            trangThai = "Còn hàng";
+        } else {
+            trangThai = "Hết hàng";
         }
+        
+        defaultTableModel.addRow(new Object[]{
+            count++,
+            chiTietSanPham.getMa(),
+            this.sanPhamService.getTenById(chiTietSanPham.getIdSanPham().toString()),
+            this.hangService.getTenById(chiTietSanPham.getIdThuongHieu().toString()),
+            this.chatLieuService.getTenById(chiTietSanPham.getIdChatLieu().toString()),
+            this.mauSacService.getTenById(chiTietSanPham.getIdMauSac().toString()),
+            this.kichCoService.getTenById(chiTietSanPham.getIdKichThuoc().toString()),
+            this.danhMucService.getTenById(chiTietSanPham.getIdDanhMuc().toString()),
+            chiTietSanPham.getGiaNhap(),
+            chiTietSanPham.getGiaBan(),
+            chiTietSanPham.getSoLuong(),
+            chiTietSanPham.getNgayNhap(),
+            chiTietSanPham.getNgaySua(),
+            chiTietSanPham.getNgayTao(),
+            trangThai
+        });
     }
+}
     private void loadDataQLSP(List<ChiTietSanPham> listViewModel) {
         DefaultTableModel model = (DefaultTableModel) tbl_sanpham.getModel();
         model.setRowCount(0);
         int count = 1;
         for (int i = 0; i < listViewModel.size(); i++) {
             ChiTietSanPham chiTietSanPham = listViewModel.get(i);
+            String trangThai;
+        if (chiTietSanPham.getSoLuong() > 0) {
+            trangThai = "Còn hàng";
+        } else {
+            trangThai = "Hết hàng";
+        }
             model.addRow(new Object[]{
                 count++,
                 chiTietSanPham.getMa(),
@@ -133,7 +146,7 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
                 chiTietSanPham.getNgayNhap(),
                 chiTietSanPham.getNgaySua(),
                 chiTietSanPham.getNgayTao(),
-                chiTietSanPham.isTrangThai()
+               trangThai
 
         });
     }
