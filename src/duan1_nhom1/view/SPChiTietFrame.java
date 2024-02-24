@@ -1005,14 +1005,12 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
     }//GEN-LAST:event_btn_searchActionPerformed
 
     private void cb_findhangItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_findhangItemStateChanged
-        // TODO add your handling code here:
-         if (cb_findhang.getSelectedItem().equals("All")) {
-            loadDataQLSP(sPChiTietService.getAllSPHadDm());
-        } else {
-            String dm = (String) cb_findhang.getSelectedItem();
-            List<ChiTietSanPham> lst = sPChiTietService.findByDm(dm);
-//            loadDataSPByHang(lst);
-        }
+//        if (cb_findhang.getSelectedIndex() == 0) {
+//            addTable(sPChiTietService.getAll());
+//        }
+//        String hang = (String) cb_findhang.getSelectedItem();
+//        List<ChiTietSanPham> lst = sPChiTietService.findByDm(hang);
+//        loadDataQLSP(lst);
     }//GEN-LAST:event_cb_findhangItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
