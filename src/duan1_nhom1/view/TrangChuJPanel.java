@@ -713,6 +713,8 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                 if (chiTietGioHang != null) {
 
                     chiTietGioHang.setSoLuong(chiTietGioHang.getSoLuong() + quantity);
+                    ctspView.setSoLuong(ctspView.getSoLuong() - quantity);
+                    sPChiTietService.changeSL(ctspView);
 
                 } else {
                     ChiTietGioHangDto item = new ChiTietGioHangDto();
@@ -902,7 +904,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                         System.out.println(id);
 
                         ghd.setTrangThai(Boolean.TRUE);
-                        this.ghService.update( ghd,id);
+                        this.ghService.update(ghd, id);
                         List<ChiTietGioHangDto> listDto = chiTietGioHangService.getAllByIdGh(repo.getGioHangHoaDonById(hoaDonDto.getId()).getIdGioHang());
                         for (ChiTietGioHangDto ctgh : listDto) {
                             ctgh.setTrangThai(Boolean.TRUE);
@@ -949,15 +951,12 @@ public class TrangChuJPanel extends javax.swing.JPanel {
 //        }
         String mahd = this.tbl_banhanghd.getValueAt(index, 1).toString();
 
-
         HoaDonDto hddto = hds.findByMa(mahd);
         GioHangHoaDonRepository repo = new GioHangHoaDonRepository();
         GioHangHoaDon ghHd = repo.getGioHangHoaDonById(hddto.getId());
         this.idGH = ghHd.getIdGioHang();
-        System.out.println(this.idGH);
         cTgioHangList = ctghService.getAllByIdGh(this.idGH);
-        System.out.println(cTgioHangList);
-                this.txtMahdTT.setText(mahd);
+        this.txtMahdTT.setText(mahd);
         this.txtTongTien.setText(calculateTotalPrice().toString());
         this.loadBanHangGH();
         this.loadBanHangSp(sPChiTietService.getAll());
