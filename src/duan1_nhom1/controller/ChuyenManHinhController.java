@@ -9,7 +9,7 @@ import duan1_nhom1.view.BaoCaoJPanel;
 import duan1_nhom1.view.HoaDonJPanel;
 import duan1_nhom1.view.KhachHangJPanel;
 import duan1_nhom1.view.SanPhamJPanel;
-//import duan1_nhom1.view.TrangChuJPanel;
+import duan1_nhom1.view.TrangChuJPanel;
 import duan1_nhom1.view.VoucherJPanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -40,7 +40,7 @@ public class ChuyenManHinhController {
 
         root.removeAll();
         root.setLayout(new BorderLayout());
-//        root.add(new TrangChuJPanel());
+        root.add(new TrangChuJPanel());
         root.validate();
         root.repaint();
     }
@@ -68,7 +68,7 @@ public class ChuyenManHinhController {
         @Override
         public void mouseClicked(MouseEvent e) {
             switch (kind) {
-//                case "TrangChu" -> node = new TrangChuJPanel();
+                case "TrangChu" -> node = new TrangChuJPanel();
                 case "SanPham" -> node = new SanPhamJPanel();
                 case "BaoCao" -> node = new BaoCaoJPanel();
                 case "HoaDon" -> node = new HoaDonJPanel();
