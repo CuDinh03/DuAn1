@@ -5,7 +5,6 @@
 package duan1_nhom1;
 
 import duan1_nhom1.view.MainJFrame;
-import duan1_nhom1.view.chaoJDialog;
 
 
 /**
