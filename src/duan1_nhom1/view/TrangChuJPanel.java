@@ -22,6 +22,7 @@ import duan1_nhom1.service.KichCoService;
 import duan1_nhom1.service.MauSacService;
 import duan1_nhom1.service.SPChiTietService;
 import duan1_nhom1.service.SanPhamService;
+import duan1_nhom1.utils.Auth;
 import duan1_nhom1.utils.MsgBox;
 import java.awt.Color;
 import java.math.BigDecimal;
@@ -792,7 +793,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
 //                    System.out.println(idKhach);
 //                    if (idKhach != null) {
         HoaDonDto hd = new HoaDonDto();
-        hd.setIdNv("497bc77a-ae69-4f07-9436-72f37de7652f");
+        hd.setIdNv(Auth.user.getIdNguoiDung());
         hd.setMa(generateInvoiceCode());
         hd.setNgayMua(new Date());
         hd.setNgaySua(new Date());

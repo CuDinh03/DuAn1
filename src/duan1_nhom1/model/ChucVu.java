@@ -76,5 +76,10 @@ public class ChucVu {
         this.trangTai = trangTai;
     }
 
-     
+    @Override
+    public String toString() {
+        return this.getTenCV();
+    }
+
+    
 }

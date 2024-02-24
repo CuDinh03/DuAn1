@@ -174,6 +174,7 @@ public class TaiKhoanRepo {
                 tk.setNgayTao(rs.getDate(6));
                 tk.setNgaySua(rs.getDate(7));
                 tk.setTrangThai(rs.getBoolean(8));
+                tk.setIdNguoiDung(rs.getString(9));
             }
         } catch (Exception e) {
             System.out.println(e);
