@@ -370,7 +370,7 @@ public class MainJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jlbNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbNhanVienMouseClicked
-        new NguoiDungJPanel().setVisible(true);
+//        new NguoiDungJPanel().setVisible(true);
     }//GEN-LAST:event_jlbNhanVienMouseClicked
 
 
