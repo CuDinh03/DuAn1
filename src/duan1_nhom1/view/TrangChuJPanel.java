@@ -224,29 +224,39 @@ public class TrangChuJPanel extends javax.swing.JPanel {
 
     public void loadComboBox() {
         cbbVoucher.removeAllItems();
-        cbbVoucher.addItem(" ");
+        cbbVoucher.addItem("");
         List<Voucher> list = voucherService.getAll();
         for (Voucher voucher : list) {
             cbbVoucher.addItem(voucher.getMa());
         }
+        tongTienSauGiam();
         cbbVoucher.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 tongTienSauGiam();
+                txtTongTien.setText(tongTienSauGiam());
             }
         });
     }
 
-    public void tongTienSauGiam() {
+    public String tongTienSauGiam() {
         String selected = cbbVoucher.getSelectedItem().toString();
-        voucherService.findGiamByMa(selected);
+        Float giam = voucherService.findGiamByMa(selected);
         List<Voucher> list = voucherService.getAll();
-        Float tongTien = Float.parseFloat(calculateTotalPrice().toString()); 
+//        Float tongTien = Float.parseFloat(calculateTotalPrice().toString());
+        float tongTien = 1000;
+        Float sauGiam = tongTien;
         for (Voucher voucher : list) {
-            float giam = voucher.getGiamGia();
-            Integer sauGiam = Math.round((tongTien * giam)/100);
+            if (giam>0) {
+                sauGiam = tongTien-(tongTien * (giam/100));
+                
+            } else {
+                sauGiam=tongTien;
+            }
             jlbTongTienSauGiam.setText(sauGiam.toString());
+            
         }
+        return sauGiam.toString();
     }
 
     public BigDecimal calculateTotalPrice() {
@@ -776,8 +786,8 @@ public class TrangChuJPanel extends javax.swing.JPanel {
 
         }
 
-        this.txtTongTien.setText(calculateTotalPrice().toString());
-//        this.txtTongTien.setText(jlbTongTienSauGiam.getText());
+//        this.txtTongTien.setText(calculateTotalPrice().toString());
+        this.txtTongTien.setText(tongTienSauGiam());
         this.loadBanHangGH();
         this.loadBanHangSp(sPChiTietService.getAll());
 
@@ -998,7 +1008,8 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         cTgioHangList = ctghService.getAllByIdGh(this.idGH);
         System.out.println(cTgioHangList);
                 this.txtMahdTT.setText(mahd);
-        this.txtTongTien.setText(calculateTotalPrice().toString());
+//        this.txtTongTien.setText(calculateTotalPrice().toString());
+        this.txtTongTien.setText(tongTienSauGiam());
         this.loadBanHangGH();
         this.loadBanHangSp(sPChiTietService.getAll());
 //        this.showDateHoaDon();
@@ -1051,8 +1062,8 @@ public class TrangChuJPanel extends javax.swing.JPanel {
             }
         }
 
-        this.txtTongTien.setText(calculateTotalPrice().toString());
-//        this.txtTongTien.setText(jlbTongTienSauGiam.getText());
+//        this.txtTongTien.setText(calculateTotalPrice().toString());
+        this.txtTongTien.setText(tongTienSauGiam());
         this.loadBanHangGH();
         this.loadBanHangSp(sPChiTietService.getAll());
     }//GEN-LAST:event_jButton4ActionPerformed
