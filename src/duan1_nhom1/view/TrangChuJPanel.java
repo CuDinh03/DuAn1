@@ -35,9 +35,6 @@ import java.util.regex.*;
 
 public class TrangChuJPanel extends javax.swing.JPanel {
 
-    int row1 = -1;
-    int row2 = -1;
-    int row3 = -1;
     private HoaDonService hds = new HoaDonService();
     private List<ChiTietSanPham> listCTSP = new ArrayList<>();
     private SPChiTietService CTSP = new SPChiTietService();
@@ -60,7 +57,6 @@ public class TrangChuJPanel extends javax.swing.JPanel {
     ChiTietGioHangService ctghService = new ChiTietGioHangService();
     ChiTietHoaDonService cthdService = new ChiTietHoaDonService();
     GioHangService ghService = new GioHangService();
-    int _index = -1;
     String idGH = "";
 
     public TrangChuJPanel() {
@@ -383,8 +379,6 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         jLabel6.setText("Tổng tiền:");
 
         jLabel8.setText("Voucher:");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel9.setText("Tổng tiền sau giảm:");
 
@@ -882,6 +876,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                         this.hds.update(hoaDonDto, hoaDonDto.getId());
                         this.jlbTienThua.setText(tienThua.toString());
                         List<ChiTietHoaDonDto> listCthd = this.cthdService.getAllByIdHd(hoaDonDto.getId());
+                        System.out.println("chi tiet hoa don" + listCthd);
                         for (ChiTietHoaDonDto chiTietHoaDonDto : listCthd) {
                             chiTietHoaDonDto.setTrangThai(Boolean.TRUE);
                             this.cthdService.update2(chiTietHoaDonDto);
@@ -896,7 +891,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
 //                        ghd.setNgayTao(new Date());
 //                        ghd.setTrangThai(Boolean.FALSE);
 //                        this.ghService.add(ghd);
-//                        this.saveCT(this.ghService.findByMa(magh).getId(), hoaDonDto.getId());
+                        this.saveCT(idGH, hoaDonDto.getId());
                         GioHangHoaDonRepository repo = new GioHangHoaDonRepository();
                         repo.createGioHangHoaDon(new GioHangHoaDon("", idGH, hoaDonDto.getId(), new Date(), new Date(), Boolean.TRUE));
 
