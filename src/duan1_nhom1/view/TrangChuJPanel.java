@@ -719,7 +719,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
             HoaDonDto donDto = this.hds.findByMa(this.txtMahdTT.getText());
             if (donDto != null) {
                 ctspView = this.sPChiTietService.findByMaCt(this.tbl_banhangsp.getValueAt(index, 2).toString());
-
+                
             }
 
         } catch (Exception e) {
@@ -776,8 +776,8 @@ public class TrangChuJPanel extends javax.swing.JPanel {
 
         }
 
-//        this.txtTongTien.setText(calculateTotalPrice().toString());
-        this.txtTongTien.setText(jlbTongTienSauGiam.getText());
+        this.txtTongTien.setText(calculateTotalPrice().toString());
+//        this.txtTongTien.setText(jlbTongTienSauGiam.getText());
         this.loadBanHangGH();
         this.loadBanHangSp(sPChiTietService.getAll());
 
@@ -976,7 +976,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         if (index == -1) {
             return;
         }
-//        cTgioHangList.clear();
+        cTgioHangList.clear();
 //        String idhd = this.hds.findByMa(this.tbl_banhanghd.getValueAt(index, 1).toString()).getId();
 //        List<ChiTietHoaDonDto> listCTHD = this.cthdService.getAllByIdHd(idhd);
 //        GioHangHoaDonRepository repo = new GioHangHoaDonRepository();
@@ -1052,6 +1052,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         }
 
         this.txtTongTien.setText(calculateTotalPrice().toString());
+//        this.txtTongTien.setText(jlbTongTienSauGiam.getText());
         this.loadBanHangGH();
         this.loadBanHangSp(sPChiTietService.getAll());
     }//GEN-LAST:event_jButton4ActionPerformed
