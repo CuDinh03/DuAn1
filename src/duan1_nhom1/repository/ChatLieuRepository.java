@@ -20,7 +20,7 @@ import java.util.List;
  * @author anhtuanle
  */
 public class ChatLieuRepository {
-
+    // hoan
     private JdbcHelper jdbcHelper;
     List<ChatLieu> listChatLieu = new ArrayList();
     Connection conn = JdbcHelper.getConnection();
