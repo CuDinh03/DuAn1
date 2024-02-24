@@ -708,6 +708,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
 
             return;
         }
+
         String userInput = JOptionPane.showInputDialog(null, "Nhập số lượng sản phẩm:", "Nhập số lượng", JOptionPane.QUESTION_MESSAGE);
         if (userInput != null && !userInput.isEmpty()) {
             Integer quantity = Integer.valueOf(userInput);
@@ -716,15 +717,21 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                 if (chiTietGioHang != null) {
 
                     chiTietGioHang.setSoLuong(chiTietGioHang.getSoLuong() + quantity);
+
                 } else {
-                        ChiTietGioHangDto item = new ChiTietGioHangDto();
+                    ChiTietGioHangDto item = new ChiTietGioHangDto();
                     item.setIdGH(this.idGH);
                     System.out.println(item.getIdGH());
                     item.setIdSP(ctspView.getIdSanPham());
                     item.setSoLuong(quantity);
                     item.setNgayTao(new Date());
-                    item.setNgaySua(new Date()); 
+                    item.setNgaySua(new Date());
                     item.setTrangThai(Boolean.TRUE);
+
+                    ctspView.setSoLuong(ctspView.getSoLuong() - quantity);
+                    sPChiTietService.changeSL(ctspView);
+                    this.ctghService.add(item);
+                    cTgioHangList.add(item);
 
                 }
             } else {
@@ -738,6 +745,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         this.loadBanHangGH();
         this.loadBanHangSp(sPChiTietService.getAll());
 
+
     }//GEN-LAST:event_btnThemVaoGHActionPerformed
 
     private void tbl_banhangghMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_banhangghMouseClicked
@@ -750,6 +758,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
 
         String idSp = this.CTSP.findByMaCt(this.tbl_banhanggh.getValueAt(index, 1).toString()).getIdSanPham();
         ctghView.setIdSP(idSp);
+
 
     }//GEN-LAST:event_tbl_banhangghMouseClicked
 
@@ -771,9 +780,6 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Xoá thành công");
                 this.loadBanHangGH();
                 this.loadBanHangSp(sPChiTietService.getAll());
-                this.txtTongTien.setText("");
-                this.txtTienKhachDua.setText("");
-                this.txtTienThua.setText("");
             }
 
             case JOptionPane.NO_OPTION -> {
@@ -805,7 +811,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         hd.setTrangThai(Boolean.FALSE);
         this.hds.add(hd);
         JOptionPane.showMessageDialog(null, "Tạo hoá đơn thành công");
-            GioHangDto ghd = new GioHangDto();
+        GioHangDto ghd = new GioHangDto();
         if (this.khachView != null) {
             ghd.setIdKH(khachView.getId());
         }
@@ -839,7 +845,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
 ////            }
 //        } else {
 //            JOptionPane.showMessageDialog(null, "Bạn đã hủy .");
-//        }        // TODO add your handling code here:
+//        }       
 
     }//GEN-LAST:event_jButton9ActionPerformed
 
@@ -871,7 +877,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
             } else {
 
                 if (MsgBox.confirm(this, "Bạn chắc chắn muốn thanh toán hóa đơn này chứ?")) {
-                    if (tienkh < tongTien || tienkh == tongTien) {
+                    if (tienkh < tongTien) {
                         MsgBox.alert(this, "Số tiền khách đưa không đủ để thanh toán");
                         txtTienKhachDua.setBackground(Color.red);
                         return;
@@ -884,19 +890,19 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                             chiTietHoaDonDto.setTrangThai(Boolean.TRUE);
                             this.cthdService.update2(chiTietHoaDonDto);
                         }
-                        GioHangDto ghd = new GioHangDto();
-                        if (this.khachView != null) {
-                            ghd.setIdKH(khachView.getId());
-                        }
-                        ghd.setMa(generateGHCode());
-                        String magh = ghd.getMa();
-                        ghd.setNgaySua(new Date());
-                        ghd.setNgayTao(new Date());
-                        ghd.setTrangThai(Boolean.FALSE);
-                        this.ghService.add(ghd);
-                        this.saveCT(this.ghService.findByMa(magh).getId(), hoaDonDto.getId());
+                        GioHangDto ghd = ghService.findById(idGH);
+//                        if (this.khachView != null) {
+//                            ghd.setIdKH(khachView.getId());
+//                        }
+//                        ghd.setMa(generateGHCode());
+//                        String magh = ghd.getMa();
+//                        ghd.setNgaySua(new Date());
+//                        ghd.setNgayTao(new Date());
+//                        ghd.setTrangThai(Boolean.FALSE);
+//                        this.ghService.add(ghd);
+//                        this.saveCT(this.ghService.findByMa(magh).getId(), hoaDonDto.getId());
                         GioHangHoaDonRepository repo = new GioHangHoaDonRepository();
-                        repo.createGioHangHoaDon(new GioHangHoaDon("", this.ghService.findByMa(magh).getId(), hoaDonDto.getId(), new Date(), new Date(), Boolean.TRUE));
+                        repo.createGioHangHoaDon(new GioHangHoaDon("", idGH, hoaDonDto.getId(), new Date(), new Date(), Boolean.TRUE));
 
                         String id = repo.getGioHangHoaDonById(hoaDonDto.getId()).getIdGioHang();
                         System.out.println(id);
@@ -915,7 +921,6 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                         this.txtMahdTT.setText("");
                         this.txtTongTien.setText("");
                         this.txtTienKhachDua.setText("");
-                        this.txtTienThua.setText("");
                         this.txtSdt.setText("");
                         this.loadBanHangGH();
                         this.loadBanHangSp(sPChiTietService.getAll());
@@ -937,7 +942,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         if (index == -1) {
             return;
         }
-  cTgioHangList.clear();
+        cTgioHangList.clear();
 //        String idhd = this.hds.findByMa(this.tbl_banhanghd.getValueAt(index, 1).toString()).getId();
 //        List<ChiTietHoaDonDto> listCTHD = this.cthdService.getAllByIdHd(idhd);
 //        GioHangHoaDonRepository repo = new GioHangHoaDonRepository();
@@ -949,6 +954,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
 //            }
 //        }
         String mahd = this.tbl_banhanghd.getValueAt(index, 1).toString();
+
         HoaDonDto hddto = hds.findByMa(mahd);
         GioHangHoaDonRepository repo = new GioHangHoaDonRepository();
         GioHangHoaDon ghHd = repo.getGioHangHoaDonById(hddto.getId());
@@ -960,7 +966,8 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         this.txtTongTien.setText(calculateTotalPrice().toString());
         this.loadBanHangGH();
         this.loadBanHangSp(sPChiTietService.getAll());
-        
+//        this.showDateHoaDon();
+
     }//GEN-LAST:event_tbl_banhanghdMouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -1077,7 +1084,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
 //        this.loadBanHangGH();
 //        this.loadBanHangSp(sPChiTietService.getAll());
 //        
-        
+
     }//GEN-LAST:event_tbl_banhanghdMouseEntered
 
 
