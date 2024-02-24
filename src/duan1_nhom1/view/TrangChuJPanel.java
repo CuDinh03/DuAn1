@@ -243,8 +243,8 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         String selected = cbbVoucher.getSelectedItem().toString();
         Float giam = voucherService.findGiamByMa(selected);
         List<Voucher> list = voucherService.getAll();
-//        Float tongTien = Float.parseFloat(calculateTotalPrice().toString());
-        float tongTien = 1000;
+        Float tongTien = Float.parseFloat(calculateTotalPrice().toString());
+//        float tongTien = 1000;
         Float sauGiam = tongTien;
         for (Voucher voucher : list) {
             if (giam>0) {
