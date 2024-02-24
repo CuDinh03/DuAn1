@@ -33,8 +33,8 @@ public class ChiTietHoaDonJFrame extends javax.swing.JFrame {
      */
     public ChiTietHoaDonJFrame(HoaDonDto hd) {
         initComponents();
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            setLocationRelativeTo(null);
+            setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         loadTableCTHD(hd);
     }
 
@@ -56,7 +56,7 @@ public class ChiTietHoaDonJFrame extends javax.swing.JFrame {
         for (ChiTietHoaDonDto cthd : this.ctService.getAllByIdHd(hd.getId())) {
             HoaDonDto hdto = this.hdService.findById(hd.getId());
             SanPhamDto spdto = this.spService.findById(cthd.getIdSP());
-            String status;
+            String status;  
             if (cthd.getTrangThai()) {
                 status = "Đã thanh toán";
             } else {

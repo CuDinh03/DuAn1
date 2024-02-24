@@ -38,7 +38,7 @@ public class GioHangHoaDonRepository {
     
 public List<GioHangHoaDon> getAllGioHangHoaDon( String idhd) {
     List<GioHangHoaDon> gioHangHoaDons = new ArrayList<>();
-    String query = "SELECT * FROM gio_hang_hoa_don WHERE  id_hd = ?";
+    String query = "SELECT * FROM Gio_Hang_Hoa_Don WHERE  id_hd = ?";
     try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
         preparedStatement.setString(1, idhd);
 
@@ -60,7 +60,7 @@ public List<GioHangHoaDon> getAllGioHangHoaDon( String idhd) {
     return gioHangHoaDons;
 }
     public GioHangHoaDon getGioHangHoaDonById(String idhoadon) {
-        String query = "SELECT * FROM gio_hang_hoa_don WHERE id_hd = ?";
+        String query = "SELECT * FROM Gio_Hang_Hoa_Don WHERE id_hd = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, idhoadon);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {

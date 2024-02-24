@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -49,7 +49,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="684" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="733" max="32767" attributes="0"/>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -98,20 +98,22 @@
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="jLabel27" alignment="0" min="-2" max="-2" attributes="0"/>
                                                   <Component id="jLabel28" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jLabel30" alignment="0" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="txt_danhmuc" alignment="0" pref="136" max="32767" attributes="0"/>
-                                          <Component id="jDateChooser1" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="jDateChooser2" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="txt_ten" alignment="0" pref="136" max="32767" attributes="0"/>
+                                          <Component id="clr_ngaytao" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="clr_ngaysua" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="txt_mota" alignment="0" pref="136" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="jLabel26" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="txt_ma1" min="-2" pref="136" max="-2" attributes="0"/>
+                                      <Component id="txt_ma" min="-2" pref="136" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
@@ -140,24 +142,29 @@
                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel26" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txt_ma1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_ma" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btn_them2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel27" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txt_danhmuc" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_ten" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btn_sua2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel30" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_mota" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel28" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="btn_xoa2" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jDateChooser1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="clr_ngaytao" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jDateChooser2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="clr_ngaysua" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel29" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="btn_clear2" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -208,9 +215,9 @@
                 <Property name="text" type="java.lang.String" value="M&#xe3; danh m&#x1ee5;c:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txt_ma1">
+            <Component class="javax.swing.JTextField" name="txt_ma">
             </Component>
-            <Component class="javax.swing.JTextField" name="txt_danhmuc">
+            <Component class="javax.swing.JTextField" name="txt_ten">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel27">
               <Properties>
@@ -239,20 +246,36 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_sua2ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btn_xoa2">
               <Properties>
                 <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_xoa2ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btn_clear2">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Clear"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_clear2ActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
+            <Component class="com.toedter.calendar.JDateChooser" name="clr_ngaytao">
             </Component>
-            <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser2">
+            <Component class="com.toedter.calendar.JDateChooser" name="clr_ngaysua">
+            </Component>
+            <Component class="javax.swing.JTextField" name="txt_mota">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel30">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Mo ta:"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

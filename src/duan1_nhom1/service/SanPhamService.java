@@ -11,18 +11,18 @@ public class SanPhamService implements IService<SanPhamDto> {
     private SanPhamRepository sanPhamRepository = new SanPhamRepository();
 
     @Override
-    public void add(SanPhamDto t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void add(SanPhamDto sanPham) {
+        sanPhamRepository.addNew(TranferData.convertToEntity(sanPham));
     }
 
     @Override
-    public void update(SanPhamDto t, String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void update(SanPhamDto sanPham, String id) {
+        sanPhamRepository.update(TranferData.convertToEntity(sanPham));
     }
 
     @Override
     public void delete(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        sanPhamRepository.delete(id);
     }
 
     @Override

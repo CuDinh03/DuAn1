@@ -164,7 +164,6 @@ public class HoaDonRepository {
                     Boolean trang_thai = resultSet.getBoolean("trang_thai");
                     Date ngay_tao = resultSet.getDate("ngay_tao");
                     Date ngay_sua = resultSet.getDate("ngay_sua");
-
                     return new HoaDon(id, id_kh, id_Nv, ma, ngay_mua, tong_tien, trang_thai, ngay_tao, ngay_sua);
                 }
             }

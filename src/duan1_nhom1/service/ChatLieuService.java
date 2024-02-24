@@ -20,18 +20,18 @@ public class ChatLieuService implements IService<ChatLieuDto> {
     private ChatLieuRepository chatLieuRepository = new ChatLieuRepository();
 
     @Override
-    public void add(ChatLieuDto t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void add(ChatLieuDto chatLieu) {
+        chatLieuRepository.addNew(TranferData.convertToEntity(chatLieu));
     }
 
     @Override
-    public void update(ChatLieuDto t, String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void update(ChatLieuDto chatLieu, String id) {
+        chatLieuRepository.update(TranferData.convertToEntity(chatLieu));
     }
 
     @Override
     public void delete(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        chatLieuRepository.delete(id);
     }
 
     @Override

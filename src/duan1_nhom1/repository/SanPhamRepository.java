@@ -119,4 +119,67 @@ public class SanPhamRepository {
         }
         return null;
     }
+
+    public void addNew(SanPham sanPham) {
+        if (sanPham == null) {
+            return;
+        }
+
+        String sql = "INSERT INTO San_Pham(ma,ten,mo_ta,ngay_tao,ngay_sua,trang_thai) VALUES(?,?,?,?,?,?)";
+
+        try (Connection con = jdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, sanPham.getMa());
+            ps.setString(2, sanPham.getTen());
+            ps.setString(3, sanPham.getMoTa());
+            ps.setDate(4, new java.sql.Date(sanPham.getNgayTao().getTime()));
+            ps.setDate(5, new java.sql.Date(sanPham.getNgaySua().getTime()));
+            ps.setBoolean(6, sanPham.getTrangThai());
+
+            int chek = ps.executeUpdate();
+
+            if (chek > 0) {
+                System.out.println("San pham Đã thêm thành công ");
+            } else {
+                System.out.println("Thêm thất bại ");
+            }
+        } catch (Exception e) {
+            System.out.println("An error occurred: " + e.getMessage());
+        }
+    }
+
+    public void update(SanPham sanPham) {
+        String sql = "UPDATE san_pham SET ma = ?, ten = ?, mo_ta = ?, ngay_tao = ?,ngay_sua = ?, trang_thai = ? WHERE id = ?";
+
+        try (Connection con = jdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setObject(1, sanPham.getMa());
+            ps.setObject(2, sanPham.getTen());
+            ps.setObject(3, sanPham.getMoTa());
+            ps.setObject(4, sanPham.getNgayTao());
+            ps.setObject(5, sanPham.getNgaySua());
+            ps.setObject(6, sanPham.getTrangThai());
+            ps.setObject(7, sanPham.getId());
+
+            int chek = ps.executeUpdate();
+
+            if (chek > 0) {
+                System.out.println(" update thành công ");
+            } else {
+                System.out.println("Update thất bại ");
+            }
+        } catch (Exception e) {
+            System.out.println("An error occurred: " + e.getMessage());
+        }
+    }
+
+    public void delete(String id) {
+         try {
+            String query = "DELETE FROM san_pham WHERE id = ?";
+            try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+                preparedStatement.setString(1, id);
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -20,17 +20,17 @@ public class HangService implements IService<Hang>{
     }
     @Override
     public void add(Hang t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        hangRepository.addNew(t);
     }
 
     @Override
     public void update(Hang t, String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        hangRepository.update(t,id);
     }
 
     @Override
     public void delete(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        hangRepository.delete(id);
     }
 
     @Override
