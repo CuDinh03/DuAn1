@@ -17,11 +17,12 @@ public class TaiKhoan {
     private Date ngayTao;
     private Date ngaySua;
     private  Boolean trangThai;
+    private String idNguoiDung;
 
     public TaiKhoan() {
     }
 
-    public TaiKhoan(String id, String ma, String tenDangNhap, String matKhau, String idCV, Date ngayTao, Date ngaySua, Boolean trangThai) {
+    public TaiKhoan(String id, String ma, String tenDangNhap, String matKhau, String idCV, Date ngayTao, Date ngaySua, Boolean trangThai, String idNguoiDung) {
         this.id = id;
         this.ma = ma;
         this.tenDangNhap = tenDangNhap;
@@ -30,6 +31,7 @@ public class TaiKhoan {
         this.ngayTao = ngayTao;
         this.ngaySua = ngaySua;
         this.trangThai = trangThai;
+        this.idNguoiDung = idNguoiDung;
     }
 
    
@@ -98,5 +100,14 @@ public class TaiKhoan {
     public void setTrangThai(Boolean trangThai) {
         this.trangThai = trangThai;
     }
+
+    public String getIdNguoiDung() {
+        return idNguoiDung;
+    }
+
+    public void setIdNguoiDung(String idNguoiDung) {
+        this.idNguoiDung = idNguoiDung;
+    }
+    
     
 }

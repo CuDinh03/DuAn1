@@ -16,8 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
-import static org.apache.poi.hssf.usermodel.HeaderFooter.date;
 /**
  *
  * @author acer
@@ -32,16 +32,16 @@ public class NguoiDungJPanel extends javax.swing.JFrame {
     /** Creates new form NguoiDungJPanel */
     public NguoiDungJPanel() {
         initComponents();
-        setLocationRelativeTo(null);
+        listND = service.getAll();
         showDataNguoiDung();
         loadChucVu();
     }
     public void showDataNguoiDung() {
         tableModel = (DefaultTableModel) tblNhanVien.getModel();
         tableModel.setRowCount(0);
-        listND = service.getAll();
         for (NguoiDung nguoiDung : listND) {
             tableModel.addRow(new Object[]{
+                nguoiDung.getId(),
                 nguoiDung.getTen(),
                 nguoiDung.getDiaChi(),
                 nguoiDung.getSdt(),
@@ -70,20 +70,16 @@ public class NguoiDungJPanel extends javax.swing.JFrame {
         }
     }
 
-    public void FillData(NguoiDung nv) {
-        
+    public void FillData(NguoiDung nv)
+    {
         txtTenNhanVien.setText(nv.getTen());
         txtDiaChi.setText(nv.getDiaChi());
         txtSDT.setText(nv.getSdt());
-        cboCV.setSelectedItem(nv.getId_cv());
-        Date ngayBd =nv.getNgayBD();
-        Date ngayTao =nv.getNgayTao();
-        Date ngaySua =nv.getNgaySua();
-        jdcNgayBD.setDate(ngayBd);
-        jdcNgayTao.setDate(ngayTao);
-        jdcNgaySua.setDate(ngaySua);
+        cboCV.getModel().setSelectedItem(chucVuService.findById(nv.getId_cv()));
+        jdcNgayBD.setDate(nv.getNgayBD());
+        jdcNgayTao.setDate(nv.getNgayTao());
+        jdcNgaySua.setDate(nv.getNgaySua());
         rdDangLam.isSelected();
-
     }
 
     public void clearForm() {
@@ -97,9 +93,9 @@ public class NguoiDungJPanel extends javax.swing.JFrame {
 
     public void loadChucVu(){
         DefaultComboBoxModel model=(DefaultComboBoxModel) cboCV.getModel();
-        List<String>list=chucVuService.getAllId();
-        for (String str :list) {
-            model.addElement(chucVuService.getTenById(str));
+        List<ChucVu>list=chucVuService.getAll();
+        for (ChucVu cv :list) {
+            model.addElement(cv);
         }
     }
     public NguoiDung getDataForm() {
@@ -148,7 +144,8 @@ public class NguoiDungJPanel extends javax.swing.JFrame {
         service.update(nv, id);
         
         JOptionPane.showMessageDialog(this, "sua thanh cong");
-        
+        listND=service.getAll();
+        showDataNguoiDung();
         clearForm();
         } catch (Exception e) {
             JOptionPane.showConfirmDialog(this, "Sua that bai");
@@ -159,13 +156,10 @@ public class NguoiDungJPanel extends javax.swing.JFrame {
         nguoiDung.setTen(txtTenNhanVien.getText());
         nguoiDung.setDiaChi(txtDiaChi.getText());
         nguoiDung.setSdt(txtSDT.getText());
-        nguoiDung.setId_cv((String) cboCV.getSelectedItem());
-        Date ngayBD = (Date) jdcNgayBD.getDate();
-        Date ngayTao = (Date) jdcNgayTao.getDate();
-        Date ngaySua = (Date) jdcNgaySua.getDate();
-        nguoiDung.setNgayBD(ngayBD);
-        nguoiDung.setNgayTao(ngayTao);
-        nguoiDung.setNgaySua(ngaySua);
+        nguoiDung.setId_cv(((ChucVu) cboCV.getSelectedItem()).getId());
+        nguoiDung.setNgayBD(jdcNgayBD.getDate());
+        nguoiDung.setNgayTao(jdcNgayTao.getDate());
+        nguoiDung.setNgaySua(jdcNgaySua.getDate());
         boolean trangThai;
         if (rdDangLam.isSelected()) {
             trangThai = true;
@@ -183,10 +177,7 @@ public class NguoiDungJPanel extends javax.swing.JFrame {
                 ten = null;
             }
             listND=service.timKiem(ten);
-            showDataNguoiDung2();
-
-//            listHoaDon = hoaDonService.searhListNhanVien(khach);
-//            showDataHoaDon2();
+            showDataNguoiDung();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -372,7 +363,7 @@ public class NguoiDungJPanel extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Tên NV", "Địa chỉ ", "SDT", "Chức vụ", "Ngày BD", "Ngày tạo", "Ngày sửa", "Trạng thái"
+                "Mã NV", "Tên NV", "Địa chỉ ", "SDT", "Chức vụ", "Ngày BD", "Ngày tạo", "Ngày sửa", "Trạng thái"
             }
         ));
         tblNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -585,8 +576,8 @@ public class NguoiDungJPanel extends javax.swing.JFrame {
         String id = tblNhanVien.getValueAt(row, 0).toString();
         service.delete(id);
         JOptionPane.showMessageDialog(this, "xoa thanh cong");
-        listND = nguoiDungRepo.getAll();
-        
+        listND = service.getAll();
+        showDataNguoiDung();
         clearForm();
     }//GEN-LAST:event_jButton4ActionPerformed
 

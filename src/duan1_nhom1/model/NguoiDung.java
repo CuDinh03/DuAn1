@@ -4,7 +4,8 @@
  */
 package duan1_nhom1.model;
 
-import java.sql.Date;
+import java.util.Date;
+
 
 public class NguoiDung {
     private String id;

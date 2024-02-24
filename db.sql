@@ -26,11 +26,13 @@ CREATE TABLE tai_khoan (
     trang_thai BIT
 );
 
+alter table tai_khoan
+add id_nguoi_dung UNIQUEIDENTIFIER references Nguoi_Dung(id)
 
 
 
 CREATE TABLE san_pham
-
+(
     id UNIQUEIDENTIFIER DEFAULT NEWID() NOT NULL PRIMARY KEY,
     ma Nvarchar(10),
     ten Nvarchar(50),

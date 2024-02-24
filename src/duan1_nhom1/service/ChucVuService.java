@@ -31,12 +31,12 @@ public class ChucVuService implements IService<ChucVu>{
 
     @Override
     public List<ChucVu> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return chucVuRepository.getAll();
     }
 
     @Override
     public ChucVu findById(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return chucVuRepository.getChucVuById(id);
     }
     
     public String getTenById(String id) {
@@ -44,7 +44,7 @@ public class ChucVuService implements IService<ChucVu>{
     }
 
     public List<String> getAllTen() {
-        return chucVuRepository.getAllId();
+        return chucVuRepository.getAllTen();
     }
 
     public List<String> getAllId() {

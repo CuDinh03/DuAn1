@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class NguoiDungRepo {
 
     List<NguoiDung> list = new ArrayList<>();
     ChucVuService chucVuService=new ChucVuService();
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
     public List<NguoiDung> getAll() {
         String sql = "SELECT [id],[ten],[dia_chi],[sdt],[id_cv],[ngay_bd],[ngay_tao],[ngay_sua],[trang_thai] FROM [dbo].[Nguoi_Dung];";
         try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
@@ -59,10 +61,10 @@ public class NguoiDungRepo {
             stm.setString(1, nguoiDung.getTen());
             stm.setString(2, nguoiDung.getDiaChi());
             stm.setString(3, nguoiDung.getSdt());
-            stm.setString(4, chucVuService.getTenById(nguoiDung.getId_cv()));
-            stm.setDate(5, nguoiDung.getNgayBD());
-            stm.setDate(6,  nguoiDung.getNgayTao());
-            stm.setDate(7,  nguoiDung.getNgaySua());
+            stm.setString(4, nguoiDung.getId_cv());
+            stm.setString(5, formatter.format(nguoiDung.getNgayBD()));
+            stm.setString(6,  formatter.format(nguoiDung.getNgayTao()));
+            stm.setString(7, formatter.format(nguoiDung.getNgaySua()));
             stm.setBoolean(8, nguoiDung.isTrangThai());
 
             int chek = stm.executeUpdate();
@@ -80,7 +82,7 @@ public class NguoiDungRepo {
     public void updateNguoiDung(NguoiDung nv, String id) {
 
         String sql = "UPDATE Nguoi_dung SET ten=?,dia_chi = ?,"
-                + "sdt = ?,ngay_bd=?,ngay_tao=?,ngay_sua=?,trang_thai=? WHERE id = ?";
+                + "sdt = ?, id_cv = ?,ngay_bd=?,ngay_tao=?,ngay_sua=?,trang_thai=? WHERE id = ?";
 
         try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 
@@ -88,10 +90,12 @@ public class NguoiDungRepo {
             ps.setObject(1, nv.getTen());
             ps.setObject(2, nv.getDiaChi());
             ps.setObject(3, nv.getSdt());
-            ps.setObject(4, nv.getNgayBD());
-            ps.setObject(5, nv.getNgayTao());
-            ps.setObject(6, nv.getNgaySua());
-            ps.setObject(7, nv.isTrangThai());
+            ps.setObject(4, nv.getId_cv());
+            ps.setObject(5, nv.getNgayBD());
+            ps.setObject(6, nv.getNgayTao());
+            ps.setObject(7, nv.getNgaySua());
+            ps.setObject(8, nv.isTrangThai());
+            ps.setObject(9, id);
             // Execute the update
             int chek = ps.executeUpdate();
 

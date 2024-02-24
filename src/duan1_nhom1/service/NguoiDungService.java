@@ -50,30 +50,21 @@ public class NguoiDungService implements IService<NguoiDung> {
     }
 
     public List<NguoiDung> timKiem(String ma) {
-        String sql = """
-                   SELECT [ten]
-                             ,[dia_chi]
-                             ,[sdt]
-                             ,[id_cv]
-                             ,[ngay_bd]
-                             ,[ngay_tao]
-                             ,[ngay_sua]
-                             ,[trang_thai]
-                         FROM [dbo].[Nguoi_Dung] where ten=?;
-                     """;
+        String sql = "SELECT [id], [ten],[dia_chi],[sdt],[id_cv],[ngay_bd],[ngay_tao],[ngay_sua],[trang_thai] FROM [dbo].[Nguoi_Dung] where ten like '%' + '" + ma + "' + '%'" ;
         try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setObject(1, ma);
             ResultSet rs = ps.executeQuery();
             List<NguoiDung> list = new ArrayList<>();
             while (rs.next()) {
                 NguoiDung kh = new NguoiDung();
-                kh.setTen(rs.getString(1));
-                kh.setDiaChi(rs.getString(2));
-                kh.setSdt(rs.getString(3));
-                kh.setNgayBD(rs.getDate(4));
-                kh.setNgayTao(rs.getDate(5));
-                kh.setNgaySua(rs.getDate(6));
-             kh.setTrangThai(rs.getBoolean(4));
+                kh.setId(rs.getString(1));
+                kh.setTen(rs.getString(2));
+                kh.setDiaChi(rs.getString(3));
+                kh.setSdt(rs.getString(4));
+                kh.setId_cv(rs.getString(5));
+                kh.setNgayBD(Date.valueOf(rs.getString(6)));
+                kh.setNgayTao(Date.valueOf(rs.getString(7)));
+                kh.setNgaySua(Date.valueOf(rs.getString(8)));
+             kh.setTrangThai(rs.getBoolean(9));
                 list.add(kh);
             }
             return list;

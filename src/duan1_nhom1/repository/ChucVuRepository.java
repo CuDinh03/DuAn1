@@ -18,23 +18,24 @@ import java.util.List;
  * @author acer
  */
 public class ChucVuRepository {
+
     JdbcHelper dBConTect;
 
-         public ArrayList<ChucVu> getChucVu() {
+    public ArrayList<ChucVu> getChucVu() {
         ArrayList<ChucVu> list = new ArrayList<>();
         String sql = "select* from chuc_vu ";
-        try (Connection conn=JdbcHelper.getConnection()){
-            PreparedStatement pst =conn.prepareStatement(sql);
-            ResultSet rs=pst.executeQuery();
-            while (rs.next()) { 
-                String id=rs.getString("id");
-                String ma=rs.getString("ma");
-                String tencv =rs.getString("ten_chuc_vu");
-                
-                Date ngayTao =rs.getDate("ngay_tao");
-                Date ngaySua =rs.getDate("ngay_sua");
-                boolean trangThai=rs.getBoolean("trang_thai");
-                ChucVu nv=new ChucVu(id, ma, tencv, ngayTao, ngaySua, trangThai);
+        try (Connection conn = JdbcHelper.getConnection()) {
+            PreparedStatement pst = conn.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                String id = rs.getString("id");
+                String ma = rs.getString("ma");
+                String tencv = rs.getString("ten_chuc_vu");
+
+                Date ngayTao = rs.getDate("ngay_tao");
+                Date ngaySua = rs.getDate("ngay_sua");
+                boolean trangThai = rs.getBoolean("trang_thai");
+                ChucVu nv = new ChucVu(id, ma, tencv, ngayTao, ngaySua, trangThai);
                 list.add(nv);
             }
         } catch (Exception e) {
@@ -42,7 +43,8 @@ public class ChucVuRepository {
         }
         return list;
     }
-         public String getTenById(String id) {
+
+    public String getTenById(String id) {
         String sql = "SELECT ten_chuc_vu FROM chuc_vu WHERE id = ?";
         java.sql.Connection cn = JdbcHelper.getConnection();
         try {
@@ -58,6 +60,25 @@ public class ChucVuRepository {
         return null;
     }
 
+    public ChucVu getChucVuById(String id) {
+        java.sql.Connection cn = JdbcHelper.getConnection();
+        String sql = "SELECT * FROM chuc_vu where id = ?";
+        try {
+            PreparedStatement ps = cn.prepareStatement(sql);
+            ps.setString(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                ChucVu chucVu = new ChucVu();
+                chucVu.setId(rs.getString(1));
+                chucVu.setTenCV(rs.getString(3));
+                return chucVu;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
     public List<String> getAllId() {
         ArrayList<String> listId = new ArrayList<>();
         java.sql.Connection cn = JdbcHelper.getConnection();
@@ -88,5 +109,29 @@ public class ChucVuRepository {
             e.printStackTrace();
         }
         return listId;
+    }
+
+    public List<ChucVu> getAll() {
+        ArrayList<ChucVu> list = new ArrayList<>();
+        java.sql.Connection cn = JdbcHelper.getConnection();
+        String sql = "SELECT * FROM chuc_vu";
+        try {
+            PreparedStatement ps = cn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                ChucVu chucVu = new ChucVu();
+                chucVu.setId(rs.getString(1));
+                chucVu.setMa(rs.getString(2));
+                chucVu.setTenCV(rs.getString(3));
+                chucVu.setNgayTao(Date.valueOf(rs.getString(4)));
+                chucVu.setNgaySua(Date.valueOf(rs.getString(5)));
+                chucVu.setTrangTai(Boolean.parseBoolean(rs.getString(6)));
+                list.add(chucVu);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

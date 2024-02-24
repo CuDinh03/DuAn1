@@ -78,7 +78,7 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jLabel1)
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jpnTrangChu.setBackground(new java.awt.Color(153, 153, 153));
@@ -135,6 +135,11 @@ public class MainJFrame extends javax.swing.JFrame {
         jlbNhanVien.setForeground(new java.awt.Color(255, 255, 255));
         jlbNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/duan1_nhom1/Icon/LogoAccount.png"))); // NOI18N
         jlbNhanVien.setText("Quản lý nhân viên");
+        jlbNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlbNhanVienMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpnNhanVienLayout = new javax.swing.GroupLayout(jpnNhanVien);
         jpnNhanVien.setLayout(jpnNhanVienLayout);
@@ -143,7 +148,7 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(jpnNhanVienLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(jlbNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpnNhanVienLayout.setVerticalGroup(
             jpnNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -363,6 +368,10 @@ public class MainJFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jlbNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbNhanVienMouseClicked
+        new NguoiDungJPanel().setVisible(true);
+    }//GEN-LAST:event_jlbNhanVienMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
