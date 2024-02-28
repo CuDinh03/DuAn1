@@ -182,12 +182,12 @@ public class SPChiTietFrame extends javax.swing.JFrame {
             model.addRow(new Object[]{
                 count++,
                 chiTietSanPham.getMa(),
-                this.sanPhamService.getTenById(chiTietSanPham.getIdSanPham().toString()),
-                this.hangService.getTenById(chiTietSanPham.getIdThuongHieu().toString()),
-                this.chatLieuService.getTenById(chiTietSanPham.getIdChatLieu().toString()),
-                this.mauSacService.getTenById(chiTietSanPham.getIdMauSac().toString()),
-                this.kichCoService.getTenById(chiTietSanPham.getIdKichThuoc().toString()),
-                this.danhMucService.getTenById(chiTietSanPham.getIdDanhMuc().toString()),
+                this.sanPhamService.getTenById(chiTietSanPham.getIdSanPham()),
+                this.hangService.getTenById(chiTietSanPham.getIdThuongHieu()),
+                this.chatLieuService.getTenById(chiTietSanPham.getIdChatLieu()),
+                this.mauSacService.getTenById(chiTietSanPham.getIdMauSac()),
+                this.kichCoService.getTenById(chiTietSanPham.getIdKichThuoc()),
+                this.danhMucService.getTenById(chiTietSanPham.getIdDanhMuc()),
                 chiTietSanPham.getGiaNhap(),
                 chiTietSanPham.getGiaBan(),
                 chiTietSanPham.getSoLuong(),
@@ -615,7 +615,6 @@ public class SPChiTietFrame extends javax.swing.JFrame {
         btn_xoa = new javax.swing.JButton();
         btn_clear = new javax.swing.JButton();
         txt_masp = new javax.swing.JTextField();
-        btn_them1 = new javax.swing.JButton();
         btn_them2 = new javax.swing.JButton();
         btn_them3 = new javax.swing.JButton();
         btn_them4 = new javax.swing.JButton();
@@ -780,17 +779,6 @@ public class SPChiTietFrame extends javax.swing.JFrame {
             }
         });
 
-        btn_them1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/duan1_nhom1/Icon/edit_property_24px.png"))); // NOI18N
-        btn_them1.setBorder(null);
-        btn_them1.setBorderPainted(false);
-        btn_them1.setContentAreaFilled(false);
-        btn_them1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btn_them1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_them1ActionPerformed(evt);
-            }
-        });
-
         btn_them2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/duan1_nhom1/Icon/edit_property_24px.png"))); // NOI18N
         btn_them2.setBorder(null);
         btn_them2.setBorderPainted(false);
@@ -878,7 +866,6 @@ public class SPChiTietFrame extends javax.swing.JFrame {
                             .addComponent(cb_hang, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btn_them1)
                             .addComponent(btn_them2)
                             .addComponent(btn_them3)
                             .addComponent(btn_them4)
@@ -936,13 +923,12 @@ public class SPChiTietFrame extends javax.swing.JFrame {
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addGap(1, 1, 1)
                                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                     .addGroup(jPanel2Layout.createSequentialGroup()
-                                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                                .addComponent(jLabel3)
-                                                                .addComponent(cb_tensp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                            .addComponent(btn_them1))
+                                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                            .addComponent(jLabel3)
+                                                            .addComponent(cb_tensp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                         .addGap(14, 14, 14)
                                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                             .addComponent(jLabel4)
@@ -1131,11 +1117,6 @@ public class SPChiTietFrame extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_BackActionPerformed
 
-    private void btn_them1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_them1ActionPerformed
-        // TODO add your handling code here:
-        new SanPhamFrame().setVisible(true);
-    }//GEN-LAST:event_btn_them1ActionPerformed
-
     private void btn_them2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_them2ActionPerformed
         new ChatLieuJFrame().setVisible(true);
     }//GEN-LAST:event_btn_them2ActionPerformed
@@ -1175,9 +1156,9 @@ public class SPChiTietFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_searchActionPerformed
 
     private void cb_findhangItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_findhangItemStateChanged
-        if (cb_findhang.getSelectedIndex() == 0) {
-            addTable(sPChiTietService.getAll());
-            
+
+        if (cb_findhang.getSelectedItem().equals("All")) {
+            addTable(sPChiTietService.getAllSPHadDm());
         }
         String dm = (String) cb_findhang.getSelectedItem();
         List<ChiTietSanPhamDto> lst = sPChiTietService.findByDm(dm);
@@ -1227,7 +1208,6 @@ public class SPChiTietFrame extends javax.swing.JFrame {
     private javax.swing.JButton btn_search;
     private javax.swing.JButton btn_sua;
     private javax.swing.JButton btn_them;
-    private javax.swing.JButton btn_them1;
     private javax.swing.JButton btn_them2;
     private javax.swing.JButton btn_them3;
     private javax.swing.JButton btn_them4;

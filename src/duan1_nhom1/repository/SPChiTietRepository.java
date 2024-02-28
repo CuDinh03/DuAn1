@@ -393,14 +393,13 @@ public class SPChiTietRepository {
 
     public List<ChiTietSanPham> getAllSPHadDm() {
         List<ChiTietSanPham> list = new ArrayList<>();
-        String sql = "SELECT spct.id, spct.ma, sp.ten AS ten_san_pham, h.ten AS ten_hang, cl.ten AS ten_chat_lieu, ms.ten AS ten_mau_sac, s.ten AS ten_size, dm.ten AS ten_danh_muc, spct.gia_nhap, spct.gia_ban, spct.so_luong, spct.ngay_nhap, spct.ngay_tao, spct.ngay_sua, spct.trang_thai "
-                + "FROM san_pham_chi_tiet spct "
-                + "JOIN san_pham sp ON spct.id_sp = sp.id "
-                + "JOIN Hang h ON spct.id_hang = h.id "
-                + "JOIN chat_lieu cl ON spct.id_cl = cl.id "
-                + "JOIN mau_sac ms ON spct.id_ms = ms.id "
-                + "JOIN Size_ao s ON spct.id_size = s.id "
-                + "JOIN danh_muc_san_pham dm ON spct.id_dm = dm.id";
+        String sql = "SELECT SP.*, H.ten AS TenHang, MS.ten AS TenMauSac, CL.ten AS TenChatLieu, Size.ten AS TenKichThuoc, DM.ten AS TenDanhMuc\n"
+                + "FROM san_pham_chi_tiet SP\n"
+                + "JOIN Hang H ON SP.id_hang = H.id\n"
+                + "JOIN mau_sac MS ON SP.id_ms = MS.id\n"
+                + "JOIN chat_lieu CL ON SP.id_cl = CL.id\n"
+                + "JOIN Size_ao Size ON SP.id_size = Size.id\n"
+                + "JOIN danh_muc_san_pham DM ON SP.id_dm = DM.id;";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet resultSet = ps.executeQuery();
