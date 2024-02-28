@@ -297,6 +297,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         txtTienThua = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         btnThemVaoGH = new javax.swing.JButton();
@@ -436,6 +437,13 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText("Chuyển khoản ");
 
+        jButton1.setText("Thêm khách hàng mới ");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout tienTraLaiLayout = new javax.swing.GroupLayout(tienTraLai);
         tienTraLai.setLayout(tienTraLaiLayout);
         tienTraLaiLayout.setHorizontalGroup(
@@ -471,7 +479,8 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                             .addGroup(tienTraLaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(txtTienThua, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
                                 .addComponent(txtTienKhachDua, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtTongTien, javax.swing.GroupLayout.Alignment.LEADING))))
+                                .addComponent(txtTongTien, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(jButton1)))
                     .addGroup(tienTraLaiLayout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addGap(69, 69, 69)
@@ -510,7 +519,9 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                 .addGroup(tienTraLaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(txtTenKhach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addGap(10, 10, 10)
                 .addGroup(tienTraLaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(jRadioButton1)
@@ -854,28 +865,29 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         if (txtTienKhachDua.getText().trim().equals("")) {
             txtTienKhachDua.setText("0");
         }
-        HoaDonDto hoaDonDto = this.hds.findByMa(this.txtMahdTT.getText().trim());
-        hoaDonDto.setTrangThai(Boolean.TRUE);
-        hoaDonDto.setTongTien(calculateTotalPrice().doubleValue());
-        if (this.khachView != null) {
-            hoaDonDto.setIdKhachHang(khachView.getId());
-        }
-
-        System.out.println(hoaDonDto.getId());
-        Double tienkh = Double.valueOf(this.txtTienKhachDua.getText().trim());
-        Double tienThua = tienkh - calculateTotalPrice().doubleValue();
-        Double tongTien = Double.valueOf(this.txtTongTien.getText().trim());
-        txtTienThua.setText(tienThua.toString());
 
         try {
-            if (txtMahdTT.getText().equals("")) {
+
+            if (txtMahdTT.getText().trim().equals("")) {
                 MsgBox.alert(this, "Vui lòng chọn hóa đơn trước khi nhấn thanh toán");
                 return;
+
             } else if (tbl_banhanggh.getRowCount() == 0) {
                 MsgBox.alert(this, "Vui lòng chọn sản phẩm trước khi nhấn thanh toán");
                 return;
             } else {
+                HoaDonDto hoaDonDto = this.hds.findByMa(this.txtMahdTT.getText().trim());
+                hoaDonDto.setTrangThai(Boolean.TRUE);
+                hoaDonDto.setTongTien(calculateTotalPrice().doubleValue());
+                if (this.khachView != null) {
+                    hoaDonDto.setIdKhachHang(khachView.getId());
+                }
 
+                System.out.println(hoaDonDto.getId());
+                Double tienkh = Double.valueOf(this.txtTienKhachDua.getText().trim());
+                Double tienThua = tienkh - calculateTotalPrice().doubleValue();
+                Double tongTien = Double.valueOf(this.txtTongTien.getText().trim());
+                txtTienThua.setText(tienThua.toString());
                 if (MsgBox.confirm(this, "Bạn chắc chắn muốn thanh toán hóa đơn này chứ?")) {
                     if (tienkh < tongTien) {
                         MsgBox.alert(this, "Số tiền khách đưa không đủ để thanh toán");
@@ -922,6 +934,9 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                         this.txtTongTien.setText("");
                         this.txtTienKhachDua.setText("");
                         this.txtSdt.setText("");
+                        this.buttonGroup1.clearSelection();
+                        this.txtTenKhach.setText("");
+                        this.txtTienThua.setText("");
                         this.loadBanHangGH();
                         this.loadBanHangSp(sPChiTietService.getAll());
                         this.showDateHoaDon();
@@ -1087,6 +1102,11 @@ public class TrangChuJPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_tbl_banhanghdMouseEntered
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        java.awt.Frame parent = null;
+        new ThemKhachJDialog(parent, true).setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDeleteAll;
@@ -1094,6 +1114,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnThemVaoGH;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> comboxvoucher;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton4;
