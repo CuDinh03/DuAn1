@@ -3,11 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package duan1_nhom1.view;
+
 import duan1_nhom1.model.Hang;
 import duan1_nhom1.service.HangService;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,9 +20,11 @@ import javax.swing.table.DefaultTableModel;
  */
 public class HangJFrame extends javax.swing.JFrame {
 
-      private DefaultTableModel defaultTableModel = new DefaultTableModel();
+    private DefaultTableModel defaultTableModel = new DefaultTableModel();
     private HangService hangService = new HangService();
+    private List<Hang> listHang = new ArrayList<>();
     int _index = -1;
+
     public HangJFrame() {
         initComponents();
         loadTableHang();
@@ -30,28 +35,79 @@ public class HangJFrame extends javax.swing.JFrame {
         defaultTableModel = (DefaultTableModel) tbl_hang.getModel();
         defaultTableModel.setRowCount(0);
         int count = 1;
-        for (Hang hang : hangService.getAll() ) {
+        for (Hang hang : hangService.getAll()) {
             String status;
             if (hang.getTrangThai()) {
                 status = "Còn";
-            }else {
+            } else {
                 status = "Hết";
             }
-             Object[] rowData = {
-                 count++,
+            Object[] rowData = {
+                count++,
                 hang.getMa(),
                 hang.getTen(),
                 hang.getMoTa(),
                 hang.getNgaySua(),
                 hang.getNgayTao(),
-                
-                 status
-             };   
+                status
+            };
             defaultTableModel.addRow(rowData);
 
         }
 
     }
+    
+     
+    public void loadData2() {
+        defaultTableModel = (DefaultTableModel) tbl_hang.getModel();
+        defaultTableModel.setRowCount(0);
+        int count = 1;
+        for (Hang hang : listHang) {
+            String status;
+            if (hang.getTrangThai()) {
+                status = "Còn";
+            } else {
+                status = "Hết";
+            }
+            Object[] rowData = {
+                count++,
+                hang.getMa(),
+                hang.getTen(),
+                hang.getMoTa(),
+                hang.getNgaySua(),
+                hang.getNgayTao(),
+                status
+            };
+            defaultTableModel.addRow(rowData);
+
+        }
+    }
+    
+     public void search() {
+        
+        try {
+            String ma = txt_search.getText();
+            String ten = txt_search.getText();
+            String sdt = txt_search.getText();
+            if (ma.trim().isEmpty()) {
+                ma = null;
+            }
+            if (ten.trim().isEmpty()) {
+                ten = null;
+            }
+            if (sdt.trim().isEmpty()) {
+                sdt = null;
+            }
+            listHang = hangService.timKiem(ma, ten);
+            loadData2();
+
+//            listHoaDon = hoaDonService.searhListNhanVien(khach);
+//            showDataHoaDon2();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     private void clearForm() {
         txt_ma.setText("");
@@ -84,7 +140,7 @@ public class HangJFrame extends javax.swing.JFrame {
             }
             Hang hang = getHang();
             hangService.add(hang);
-       
+
             JOptionPane.showMessageDialog(this, "thêm thành công");
             loadTableHang();
             clearForm();
@@ -93,8 +149,7 @@ public class HangJFrame extends javax.swing.JFrame {
         }
 
     }
-    
-       
+
     public void updateHang() {
         try {
             int check = JOptionPane.showConfirmDialog(this, "bạn có muốn update không");
@@ -107,15 +162,15 @@ public class HangJFrame extends javax.swing.JFrame {
             hangService.update(hang, id);
             loadTableHang();
             JOptionPane.showMessageDialog(this, "Update thành công");
-            
+
             clearForm();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Update thất bại");
         }
 
     }
-    
-    public void click(){
+
+    public void click() {
         _index = tbl_hang.getSelectedRow();
         txt_ma.setText(tbl_hang.getValueAt(_index, 1).toString());
         txt_ten.setText(tbl_hang.getValueAt(_index, 2).toString());
@@ -144,8 +199,8 @@ public class HangJFrame extends javax.swing.JFrame {
         clr_ngaytao.setDate(ngayTao);
         clr_ngaysua.setDate(ngaySua);
     }
-    
-    public void delete(){
+
+    public void delete() {
         try {
             int check = JOptionPane.showConfirmDialog(this, "bạn có muốn xóa không");
             if (check != JOptionPane.YES_OPTION) {
@@ -154,7 +209,7 @@ public class HangJFrame extends javax.swing.JFrame {
             int row = tbl_hang.getSelectedRow();
             String id = hangService.getAll().get(row).getId();
             hangService.delete(id);
-          
+
             JOptionPane.showMessageDialog(this, "xóa thành công");
             loadTableHang();
             clearForm();
@@ -162,6 +217,7 @@ public class HangJFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "xóa thất bại ");
         }
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -185,12 +241,19 @@ public class HangJFrame extends javax.swing.JFrame {
         btn_clear = new javax.swing.JButton();
         txt_mota = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        btn_back1 = new javax.swing.JButton();
+        btn_back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel2.setBackground(new java.awt.Color(203, 233, 162));
 
         btn_search.setText("Tìm Kiếm");
+        btn_search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_searchActionPerformed(evt);
+            }
+        });
 
         tbl_hang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -259,19 +322,27 @@ public class HangJFrame extends javax.swing.JFrame {
 
         jLabel5.setText("Mô tả:");
 
+        btn_back1.setText("Back");
+        btn_back1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_back1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_search)
-                .addGap(57, 57, 57))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(btn_back1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_search)
+                        .addGap(57, 57, 57))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
                         .addContainerGap())
@@ -313,7 +384,8 @@ public class HangJFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_search)
-                    .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_back1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
@@ -349,6 +421,13 @@ public class HangJFrame extends javax.swing.JFrame {
                 .addGap(32, 32, 32))
         );
 
+        btn_back.setText("Back");
+        btn_back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_backActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -359,6 +438,11 @@ public class HangJFrame extends javax.swing.JFrame {
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(214, 214, 214)
+                    .addComponent(btn_back)
+                    .addContainerGap(214, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -368,6 +452,11 @@ public class HangJFrame extends javax.swing.JFrame {
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(259, 259, 259)
+                    .addComponent(btn_back, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(259, Short.MAX_VALUE)))
         );
 
         pack();
@@ -378,7 +467,7 @@ public class HangJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_tbl_hangMouseClicked
 
     private void tbl_hangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_hangMousePressed
-        
+
     }//GEN-LAST:event_tbl_hangMousePressed
 
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
@@ -390,13 +479,28 @@ public class HangJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_suaActionPerformed
 
     private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
-       delete();
+        delete();
     }//GEN-LAST:event_btn_xoaActionPerformed
 
     private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
 
         clearForm();
     }//GEN-LAST:event_btn_clearActionPerformed
+
+    private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btn_backActionPerformed
+
+    private void btn_back1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_back1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btn_back1ActionPerformed
+
+    private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
+        // TODO add your handling code here:
+        search();
+    }//GEN-LAST:event_btn_searchActionPerformed
 
     /**
      * @param args the command line arguments
@@ -434,6 +538,8 @@ public class HangJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_back;
+    private javax.swing.JButton btn_back1;
     private javax.swing.JButton btn_clear;
     private javax.swing.JButton btn_search;
     private javax.swing.JButton btn_sua;

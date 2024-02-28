@@ -4,6 +4,7 @@
  */
 package duan1_nhom1.repository;
 
+import duan1_nhom1.dto.ChiTietSanPhamDto;
 import duan1_nhom1.model.ChiTietGioHang;
 import duan1_nhom1.model.ChiTietSanPham;
 import duan1_nhom1.model.MauSac;
@@ -17,6 +18,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -349,7 +351,6 @@ public class SPChiTietRepository {
 
     public List<ChiTietSanPham> getAllChiTietGioHangByIdsp(String id) {
         List<ChiTietSanPham> chiTietSanPhams = new ArrayList<>();
-        System.out.println(id);
         String query = "SELECT * from san_pham_chi_tiet WHERE id_sp = ? ";
         try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
             preparedStatement.setString(1, id);
@@ -363,6 +364,7 @@ public class SPChiTietRepository {
                 String idSPString = resultSet.getString("id_sp");
 
                 String idHangString = resultSet.getString("id_hang");
+                System.out.println("id hang repo" + idHangString);
                 String idClString = resultSet.getString("id_cl");
 
                 String idMsString = resultSet.getString("id_ms");
@@ -391,75 +393,115 @@ public class SPChiTietRepository {
 
     public List<ChiTietSanPham> getAllSPHadDm() {
         List<ChiTietSanPham> list = new ArrayList<>();
-    String sql = "SELECT spct.id, spct.ma, sp.ten AS ten_san_pham, h.ten AS ten_hang, cl.ten AS ten_chat_lieu, ms.ten AS ten_mau_sac, s.ten AS ten_size, dm.ten AS ten_danh_muc, spct.gia_nhap, spct.gia_ban, spct.so_luong, spct.ngay_nhap, spct.ngay_tao, spct.ngay_sua, spct.trang_thai " +
-             "FROM san_pham_chi_tiet spct " +
-             "JOIN san_pham sp ON spct.id_sp = sp.id " +
-             "JOIN Hang h ON spct.id_hang = h.id " +
-             "JOIN chat_lieu cl ON spct.id_cl = cl.id " +
-             "JOIN mau_sac ms ON spct.id_ms = ms.id " +
-             "JOIN Size_ao s ON spct.id_size = s.id " +
-             "JOIN danh_muc_san_pham dm ON spct.id_dm = dm.id";
-    try {
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ResultSet resultSet = ps.executeQuery();
-        while (resultSet.next()) {
-            String idString = resultSet.getString("id");
-            String ma = resultSet.getString("ma");
-            String idSPString = resultSet.getString("id_sp"); 
-            String idHangString = resultSet.getString("id_hang");
-            String idClString = resultSet.getString("id_cl");
-            String idMsString = resultSet.getString("id_ms");
-            String idSizeString = resultSet.getString("id_size");
-            String idDmString = resultSet.getString("id_dm");
-            BigDecimal giaNhap = resultSet.getBigDecimal("gia_nhap");
-            BigDecimal giaBan = resultSet.getBigDecimal("gia_ban");
-            int soLuong = resultSet.getInt("so_luong");
-            Date ngayNhap = resultSet.getDate("ngay_nhap");
-            Date ngayTao = resultSet.getDate("ngay_tao");
-            Date ngaySua = resultSet.getDate("ngay_sua");
-            boolean trangThai = resultSet.getBoolean("trang_thai");
-            ChiTietSanPham chiTietSanPham = new ChiTietSanPham(idString, ma, idSPString, idHangString, idClString, idMsString, idSizeString, idDmString, giaNhap, giaBan, soLuong, ngayNhap, ngayTao, ngaySua, trangThai);
-            list.add(chiTietSanPham);
+        String sql = "SELECT spct.id, spct.ma, sp.ten AS ten_san_pham, h.ten AS ten_hang, cl.ten AS ten_chat_lieu, ms.ten AS ten_mau_sac, s.ten AS ten_size, dm.ten AS ten_danh_muc, spct.gia_nhap, spct.gia_ban, spct.so_luong, spct.ngay_nhap, spct.ngay_tao, spct.ngay_sua, spct.trang_thai "
+                + "FROM san_pham_chi_tiet spct "
+                + "JOIN san_pham sp ON spct.id_sp = sp.id "
+                + "JOIN Hang h ON spct.id_hang = h.id "
+                + "JOIN chat_lieu cl ON spct.id_cl = cl.id "
+                + "JOIN mau_sac ms ON spct.id_ms = ms.id "
+                + "JOIN Size_ao s ON spct.id_size = s.id "
+                + "JOIN danh_muc_san_pham dm ON spct.id_dm = dm.id";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet resultSet = ps.executeQuery();
+            while (resultSet.next()) {
+                String idString = resultSet.getString("id");
+                String ma = resultSet.getString("ma");
+                String idSPString = resultSet.getString("id_sp");
+                String idHangString = resultSet.getString("id_hang");
+                String idClString = resultSet.getString("id_cl");
+                String idMsString = resultSet.getString("id_ms");
+                String idSizeString = resultSet.getString("id_size");
+                String idDmString = resultSet.getString("id_dm");
+                BigDecimal giaNhap = resultSet.getBigDecimal("gia_nhap");
+                BigDecimal giaBan = resultSet.getBigDecimal("gia_ban");
+                int soLuong = resultSet.getInt("so_luong");
+                Date ngayNhap = resultSet.getDate("ngay_nhap");
+                Date ngayTao = resultSet.getDate("ngay_tao");
+                Date ngaySua = resultSet.getDate("ngay_sua");
+                boolean trangThai = resultSet.getBoolean("trang_thai");
+                ChiTietSanPham chiTietSanPham = new ChiTietSanPham(idString, ma, idSPString, idHangString, idClString, idMsString, idSizeString, idDmString, giaNhap, giaBan, soLuong, ngayNhap, ngayTao, ngaySua, trangThai);
+                list.add(chiTietSanPham);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-    return list;
+        return list;
     }
 
     public List<ChiTietSanPham> findByDm(String dm) {
         List<ChiTietSanPham> list = new ArrayList<>();
-        String sql = "SELECT spct.id, spct.ma, spct.id_hang, spct.id_ms, spct.id_cl, spct.id_size, spct.id_dm, sp.ten AS ten_san_pham, spct.gia_nhap, spct.gia_ban, spct.so_luong, spct.ngay_nhap, spct.ngay_tao, spct.trang_thai\n"
-                + "FROM san_pham_chi_tiet spct\n"
-                + "JOIN san_pham sp ON spct.id_sp = sp.id\n"
-                + "JOIN danh_muc_san_pham dm ON spct.id_dm = dm.id\n"
-                + "WHERE dm.ten = ? AND spct.trang_thai != 2";
+        String sql = "SELECT * FROM san_pham_chi_tiet \n"
+                + "JOIN danh_muc_san_pham ON san_pham_chi_tiet.id_dm = danh_muc_san_pham.id\n"
+                + "WHERE ten = ? ";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, dm);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                String id = rs.getString("id");
-                String ma = rs.getString("ma");
-                String idHang = rs.getString("id_hang");
-                String idMs = rs.getString("id_ms");
-                String idCl = rs.getString("id_cl");
-                String idSize = rs.getString("id_size");
-                String idDm = rs.getString("id_dm");
-                String tenSanPham = rs.getString("ten_san_pham");
-                BigDecimal giaNhap = rs.getBigDecimal("gia_nhap");
-                BigDecimal giaBan = rs.getBigDecimal("gia_ban");
-                int soLuong = rs.getInt("so_luong");
-                Date ngayNhap = rs.getDate("ngay_nhap");
-                Date ngayTao = rs.getDate("ngay_tao");
-                boolean trangThai = rs.getBoolean("trang_thai");
-
-                ChiTietSanPham chiTietSanPham = new ChiTietSanPham(id, ma, tenSanPham, idSize, idHang, idMs, idCl, idDm, giaNhap, giaBan, soLuong, ngayTao, ngayTao, ngayNhap, trangThai);
+            ResultSet resultSet = ps.executeQuery();
+            while (resultSet.next()) {
+                String idString = resultSet.getString("id");
+                String ma = resultSet.getString("ma");
+                String idSPString = resultSet.getString("id_sp");
+                String idHangString = resultSet.getString("id_hang");
+                String idClString = resultSet.getString("id_cl");
+                String idMsString = resultSet.getString("id_ms");
+                String idSizeString = resultSet.getString("id_size");
+                String idDmString = resultSet.getString("id_dm");
+                BigDecimal giaNhap = resultSet.getBigDecimal("gia_nhap");
+                BigDecimal giaBan = resultSet.getBigDecimal("gia_ban");
+                int soLuong = resultSet.getInt("so_luong");
+                Date ngayNhap = resultSet.getDate("ngay_nhap");
+                Date ngayTao = resultSet.getDate("ngay_tao");
+                Date ngaySua = resultSet.getDate("ngay_sua");
+                boolean trangThai = resultSet.getBoolean("trang_thai");
+                ChiTietSanPham chiTietSanPham = new ChiTietSanPham(idString, ma, idSPString, idHangString, idClString, idMsString, idSizeString, idDmString, giaNhap, giaBan, soLuong, ngayNhap, ngayTao, ngaySua, trangThai);
                 list.add(chiTietSanPham);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public List<ChiTietSanPham> getAllByIdDm(String id) {
+        List<ChiTietSanPham> chiTietSanPhams = new ArrayList<>();
+        String query = "SELECT * from san_pham_chi_tiet WHERE id_dm = ? ";
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setObject(1, id);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                String idString = resultSet.getString("id");
+
+                String ma = resultSet.getString("ma");
+                String idSPString = resultSet.getString("id_sp");
+
+                String idHangString = resultSet.getString("id_hang");
+                System.out.println("id hang repo" + idHangString);
+                String idClString = resultSet.getString("id_cl");
+
+                String idMsString = resultSet.getString("id_ms");
+
+                String idSizeString = resultSet.getString("id_size");
+
+                String idDmString = resultSet.getString("id_dm");
+
+                BigDecimal giaNhap = resultSet.getBigDecimal("gia_nhap");
+                BigDecimal giaBan = resultSet.getBigDecimal("gia_ban");
+                Integer soLuong = resultSet.getInt("so_luong");
+                System.out.println(soLuong);
+                Date ngayNhap = resultSet.getDate("ngay_nhap");
+                Date ngayTao = resultSet.getDate("ngay_tao");
+                Date ngaySua = resultSet.getDate("ngay_sua");
+                Boolean trangThai = resultSet.getBoolean("trang_thai");
+
+                ChiTietSanPham chiTietSanPham = new ChiTietSanPham(idString, ma, idSPString, idHangString, idClString, idMsString, idSizeString, idDmString, giaNhap, giaBan, soLuong, ngayNhap, ngayTao, ngaySua, trangThai);
+                chiTietSanPhams.add(chiTietSanPham);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return chiTietSanPhams;
     }
 }

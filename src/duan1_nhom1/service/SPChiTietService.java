@@ -114,9 +114,10 @@ public class SPChiTietService implements IService<ChiTietSanPhamDto> {
 
     public List<ChiTietSanPhamDto> getAllByIdSp(String id) {
         return TranferData.convertListToDtos(this.sPChiTietRepository.getAllChiTietGioHangByIdsp(id));
-
     }
-    
+    public List<ChiTietSanPham> getAllByIdDm(String id) {
+        return sPChiTietRepository.getAllByIdDm(id);
+    }
  public ChiTietSanPhamDto findByMaCtLike(String ma) {
         return TranferData.convertToDto(this.sPChiTietRepository.findByMaCtLike(ma));
     }
@@ -149,30 +150,33 @@ public class SPChiTietService implements IService<ChiTietSanPhamDto> {
         return listViewModel;
     }
  
- public List<ChiTietSanPham> findByDm(String dm) {
-        List<ChiTietSanPham> list = sPChiTietRepository.findByDm(dm);
-        List<ChiTietSanPham> listViewModel = new ArrayList<>();
+ public List<ChiTietSanPhamDto> findByDm(String dm) {
+        List<ChiTietSanPhamDto> listViewModel = new ArrayList<>();
 
-        for (ChiTietSanPham domainModel : list) {
-            ChiTietSanPham t = new ChiTietSanPham();
-            t.setMa(t.getMa());
 
-        t.setIdThuongHieu(t.getIdThuongHieu());
-        t.setIdMauSac(t.getIdMauSac());
-        t.setIdDanhMuc(t.getIdDanhMuc());
-        t.setIdChatLieu(t.getIdChatLieu());
-        t.setIdSanPham(t.getIdSanPham());
-        t.setIdKichThuoc(t.getIdKichThuoc());
-        t.setGiaNhap(t.getGiaNhap());
-        t.setGiaBan(t.getGiaBan());
-        t.setSoLuong(t.getSoLuong());
-        t.setNgayNhap(t.getNgayNhap());
-        t.setNgaySua(t.getNgaySua());
-        t.setNgayTao(t.getNgayTao());
-        t.setTrangThai(t.isTrangThai());
+        for (ChiTietSanPhamDto domainModel : TranferData.convertListToDtos(sPChiTietRepository.findByDm(dm))) {
+            
+            ChiTietSanPhamDto t = new ChiTietSanPhamDto();
+            t.setMa(domainModel.getMa());
+
+        t.setIdThuongHieu(domainModel.getIdThuongHieu());
+        t.setIdMauSac(domainModel.getIdMauSac());
+        t.setIdDanhMuc(domainModel.getIdDanhMuc());
+        t.setIdChatLieu(domainModel.getIdChatLieu());
+        t.setIdSanPham(domainModel.getIdSanPham());
+        t.setIdKichThuoc(domainModel.getIdKichThuoc());
+        t.setGiaNhap(domainModel.getGiaNhap());
+        t.setGiaBan(domainModel.getGiaBan());
+        t.setSoLuong(domainModel.getSoLuong());
+        t.setNgayNhap(domainModel.getNgayNhap());
+        t.setNgaySua(domainModel.getNgaySua());
+        t.setNgayTao(domainModel.getNgayTao());
+        t.setTrangThai(domainModel.getTrangThai());
 
             listViewModel.add(t);
         }
         return listViewModel;
     }
+ 
+
 }

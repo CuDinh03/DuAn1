@@ -5,7 +5,9 @@
 package duan1_nhom1.view;
 
 import duan1_nhom1.dto.ChiTietSanPhamDto;
+import duan1_nhom1.dto.SanPhamDto;
 import duan1_nhom1.model.ChiTietSanPham;
+import duan1_nhom1.model.Hang;
 import duan1_nhom1.service.ChatLieuService;
 import duan1_nhom1.service.DanhMucService;
 import duan1_nhom1.service.HangService;
@@ -34,7 +36,7 @@ import javax.swing.table.DefaultTableModel;
  * @author anhtuanle
  */
 public class SPChiTietFrame extends javax.swing.JFrame {
-
+    
     private IService iService = new SanPhamService();
     private SPChiTietService sPChiTietService = new SPChiTietService();
     private DefaultComboBoxModel defaultComboBoxModel;
@@ -45,8 +47,8 @@ public class SPChiTietFrame extends javax.swing.JFrame {
     private SanPhamService sanPhamService = new SanPhamService();
     private DanhMucService danhMucService = new DanhMucService();
     private ChatLieuService chatLieuService = new ChatLieuService();
-   ChiTietSanPhamDto singleItem = new ChiTietSanPhamDto();
-ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
+    ChiTietSanPhamDto singleItem = new ChiTietSanPhamDto();
+    ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
     int _index;
     private int index = -1;
 
@@ -62,11 +64,15 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
         loadSanPham();
         loadChatLieu();
         loadDanhMucSearch();
+//        loadTableCTSP(sp);
         addTable(sPChiTietService.getAll());
+//        loadDataChiTietSP(list);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 //        loadDataQLSP(sPChiTietService.getAllSPHadDm());
 
     }
-
+    
     private void clearForm() {
         txt_masp.setText("");
         cb_tensp.setSelectedIndex(0);
@@ -81,44 +87,86 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
         date_ngaynhap.setDate(null);
         date_ngaytao.setDate(null);
         date_ngaysua.setDate(null);
-
-    }
-    
-    
-    
-
-    public void addTable(List<ChiTietSanPhamDto> list) {
-    defaultTableModel = (DefaultTableModel) tbl_sanpham.getModel();
-    defaultTableModel.setRowCount(0);
-    int count = 1;
-
-    for (ChiTietSanPhamDto chiTietSanPham : list) {
-        String trangThai;
-        if (chiTietSanPham.getSoLuong() > 0) {
-            trangThai = "Còn hàng";
-        } else {
-            trangThai = "Hết hàng";
-        }
         
-        defaultTableModel.addRow(new Object[]{
-            count++,
-            chiTietSanPham.getMa(),
-            this.sanPhamService.getTenById(chiTietSanPham.getIdSanPham().toString()),
-            this.hangService.getTenById(chiTietSanPham.getIdThuongHieu().toString()),
-            this.chatLieuService.getTenById(chiTietSanPham.getIdChatLieu().toString()),
-            this.mauSacService.getTenById(chiTietSanPham.getIdMauSac().toString()),
-            this.kichCoService.getTenById(chiTietSanPham.getIdKichThuoc().toString()),
-            this.danhMucService.getTenById(chiTietSanPham.getIdDanhMuc().toString()),
-            chiTietSanPham.getGiaNhap(),
-            chiTietSanPham.getGiaBan(),
-            chiTietSanPham.getSoLuong(),
-            chiTietSanPham.getNgayNhap(),
-            chiTietSanPham.getNgaySua(),
-            chiTietSanPham.getNgayTao(),
-            trangThai
-        });
     }
-}
+
+//    private void loadTableCTSP(SanPhamDto sp) {
+//        if (sp == null) {
+//            return;
+//        }
+//        defaultTableModel = (DefaultTableModel) tbl_sanpham.getModel();
+//        defaultTableModel.setRowCount(0);
+//        int count = 1;
+//
+//        for (ChiTietSanPhamDto ctsp : this.sPChiTietService.getAllByIdSp(sp.getId())) {
+//          
+//            String trangThai;
+//            if (ctsp.getSoLuong() > 0) {
+//                trangThai = "Còn hàng";
+//            } else {
+//                trangThai = "Hết hàng";
+//            }
+//
+//            Object[] rowData = {
+//                count++,
+//                ctsp.getMa(),
+//                this.sanPhamService.getTenById(ctsp.getIdSanPham()),
+//                 this.hangService.getTenById(ctsp.getIdThuongHieu()),
+//                this.chatLieuService.getTenById(ctsp.getIdChatLieu()),
+//                this.mauSacService.getTenById(ctsp.getIdMauSac()),
+//                this.kichCoService.getTenById(ctsp.getIdKichThuoc()),
+//                this.danhMucService.getTenById(ctsp.getIdDanhMuc()),
+//                
+//                
+//                ctsp.getGiaNhap(),
+//                ctsp.getGiaBan(),
+//                ctsp.getSoLuong(),
+//                ctsp.getNgayNhap(),
+//                ctsp.getNgaySua(),
+//                ctsp.getNgayTao(),
+//                trangThai
+//            };
+//            System.out.println(ctsp.getIdThuongHieu());
+//            System.out.println( this.hangService.getTenById(ctsp.getIdThuongHieu()));
+//            System.out.println( chatLieuService.getTenById(ctsp.getIdChatLieu()));
+//            System.out.println( this.kichCoService.getTenById(ctsp.getIdKichThuoc()));
+//            defaultTableModel.addRow(rowData);
+//
+//        }
+//    }
+    public void addTable(List<ChiTietSanPhamDto> list) {
+        defaultTableModel = (DefaultTableModel) tbl_sanpham.getModel();
+        defaultTableModel.setRowCount(0);
+        int count = 1;
+        
+        for (ChiTietSanPhamDto chiTietSanPham : list) {
+            String trangThai;
+            if (chiTietSanPham.getSoLuong() > 0) {
+                trangThai = "Còn hàng";
+            } else {
+                trangThai = "Hết hàng";
+            }
+            
+            defaultTableModel.addRow(new Object[]{
+                count++,
+                chiTietSanPham.getMa(),
+                this.sanPhamService.getTenById(chiTietSanPham.getIdSanPham()),
+                this.hangService.getTenById(chiTietSanPham.getIdThuongHieu()),
+                this.chatLieuService.getTenById(chiTietSanPham.getIdChatLieu()),
+                this.mauSacService.getTenById(chiTietSanPham.getIdMauSac()),
+                this.kichCoService.getTenById(chiTietSanPham.getIdKichThuoc()),
+                this.danhMucService.getTenById(chiTietSanPham.getIdDanhMuc()),
+                chiTietSanPham.getGiaNhap(),
+                chiTietSanPham.getGiaBan(),
+                chiTietSanPham.getSoLuong(),
+                chiTietSanPham.getNgayNhap(),
+                chiTietSanPham.getNgaySua(),
+                chiTietSanPham.getNgayTao(),
+                trangThai
+            });
+        }
+    }
+    
     private void loadDataQLSP(List<ChiTietSanPham> listViewModel) {
         DefaultTableModel model = (DefaultTableModel) tbl_sanpham.getModel();
         model.setRowCount(0);
@@ -126,11 +174,11 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
         for (int i = 0; i < listViewModel.size(); i++) {
             ChiTietSanPham chiTietSanPham = listViewModel.get(i);
             String trangThai;
-        if (chiTietSanPham.getSoLuong() > 0) {
-            trangThai = "Còn hàng";
-        } else {
-            trangThai = "Hết hàng";
-        }
+            if (chiTietSanPham.getSoLuong() > 0) {
+                trangThai = "Còn hàng";
+            } else {
+                trangThai = "Hết hàng";
+            }
             model.addRow(new Object[]{
                 count++,
                 chiTietSanPham.getMa(),
@@ -146,44 +194,45 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
                 chiTietSanPham.getNgayNhap(),
                 chiTietSanPham.getNgaySua(),
                 chiTietSanPham.getNgayTao(),
-               trangThai
-
-        });
+                trangThai
+            
+            });
+        }
     }
-    }
+    
     public void loadFindByMa(ChiTietSanPhamDto list) {
         defaultTableModel = (DefaultTableModel) tbl_sanpham.getModel();
         defaultTableModel.setRowCount(0);
         int count = 1;
-
-            defaultTableModel.addRow(new Object[]{
-                count++,
-                list.getMa(),
-                this.sanPhamService.getTenById(list.getIdSanPham().toString()),
-                this.hangService.getTenById(list.getIdThuongHieu().toString()),
-                this.chatLieuService.getTenById(list.getIdChatLieu().toString()),
-                this.mauSacService.getTenById(list.getIdMauSac().toString()),
-                this.kichCoService.getTenById(list.getIdKichThuoc().toString()),
-                this.danhMucService.getTenById(list.getIdDanhMuc().toString()),
-                list.getGiaNhap(),
-                list.getGiaBan(),
-                list.getSoLuong(),
-                list.getNgayNhap(),
-                list.getNgaySua(),
-                list.getNgayTao(),
-                list.getTrangThai()
-            });
+        
+        defaultTableModel.addRow(new Object[]{
+            count++,
+            list.getMa(),
+            this.sanPhamService.getTenById(list.getIdSanPham().toString()),
+            this.hangService.getTenById(list.getIdThuongHieu().toString()),
+            this.chatLieuService.getTenById(list.getIdChatLieu().toString()),
+            this.mauSacService.getTenById(list.getIdMauSac().toString()),
+            this.kichCoService.getTenById(list.getIdKichThuoc().toString()),
+            this.danhMucService.getTenById(list.getIdDanhMuc().toString()),
+            list.getGiaNhap(),
+            list.getGiaBan(),
+            list.getSoLuong(),
+            list.getNgayNhap(),
+            list.getNgaySua(),
+            list.getNgayTao(),
+            list.getTrangThai()
+        });
         
     }
-
+    
     public void loadTable(ChiTietSanPhamDto sp) {
-
+        
         int count = 1;
-
+        
         if (sp == null) {
             return;
         }
-
+        
         defaultTableModel = (DefaultTableModel) tbl_sanpham.getModel();
         defaultTableModel.setRowCount(0);
         for (ChiTietSanPhamDto chiTietSanPham : sPChiTietService.getAllByIdSp(sp.getId())) {
@@ -206,7 +255,7 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
             });
         }
     }
-
+    
     public void loadDanhMuc() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cb_danhmuc.getModel();
         List<String> list = danhMucService.getAllId();
@@ -214,6 +263,7 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
             model.addElement(danhMucService.getTenById(str));
         }
     }
+    
     public void loadDanhMucSearch() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cb_findhang.getModel();
         List<String> list = danhMucService.getAllId();
@@ -221,6 +271,7 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
             model.addElement(danhMucService.getTenById(str));
         }
     }
+    
     public void loadChatLieu() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cb_chatlieu.getModel();
         List<String> list = chatLieuService.getAllId();
@@ -228,7 +279,7 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
             model.addElement(chatLieuService.getTenById(str));
         }
     }
-
+    
     public void loadSanPham() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cb_tensp.getModel();
         List<String> list = sanPhamService.getAllId();
@@ -236,7 +287,7 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
             model.addElement(sanPhamService.getTenById(str));
         }
     }
-
+    
     public void loadKichThuoc() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cb_kichco.getModel();
         List<String> list = kichCoService.getAllId();
@@ -244,7 +295,7 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
             model.addElement(kichCoService.getTenById(str));
         }
     }
-
+    
     public void loadMauSac() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cb_mausac.getModel();
         List<String> list = mauSacService.getAllId();
@@ -252,7 +303,7 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
             model.addElement(mauSacService.getTenById(str));
         }
     }
-
+    
     public void loadHang() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cb_hang.getModel();
         List<String> list = hangService.getAllId();
@@ -260,7 +311,7 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
             model.addElement(hangService.getTenById(str));
         }
     }
-
+    
     private void updateSP() {
         if (Uhelper.checkNull(txt_giaban, "Không để trống giá bán")) {
             return;
@@ -284,12 +335,12 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
             return;
         }
         index = tbl_sanpham.getSelectedRow();
-
+        
         if (index == -1) {
             JOptionPane.showMessageDialog(this, "Bạn vui lòng chọn sản phẩm cần sửa !");
             return;
         }
-
+        
         String id = this.sPChiTietService.getAll().get(index).getId();
         String maSP = txt_masp.getText().trim();
         String idTenSP = sanPhamService.getAllId().get(cb_tensp.getSelectedIndex());
@@ -302,12 +353,12 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
         BigDecimal giaBan = new BigDecimal(txt_giaban.getText());
 //        boolean trangThai = Boolean.parseBoolean(txt_trangthai.getText());
         Integer soLuong = Integer.parseInt(txt_soluong.getText());
-
+        
         if (giaBan.compareTo(giaNhap) != 0 && giaBan.compareTo(giaNhap) != 1) {
             JOptionPane.showMessageDialog(this, "Giá bán lớn hơn giá nhập, bạn vui lòng nhập lại giá bán !");
             return;
         }
-
+        
         Date ngayNhap = new Date();
         String timeStamp = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy").format(Calendar.getInstance().getTime());
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
@@ -316,28 +367,33 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
         } catch (ParseException ex) {
             Logger.getLogger(SPChiTietFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         Date ngayTao = new Date();
         try {
             ngayTao = sdf.parse(timeStamp);
         } catch (ParseException ex) {
             Logger.getLogger(SPChiTietFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         Date ngaySua = new Date();
         try {
             ngaySua = sdf.parse(timeStamp);
         } catch (ParseException ex) {
             Logger.getLogger(SPChiTietFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         boolean trangThai = true;
+        if (btn_conhang.isSelected()) {
+            trangThai = true;
+        } else if (btn_hethang.isSelected()) {
+            trangThai = false;
+        }
         ChiTietSanPhamDto ctsp = new ChiTietSanPhamDto(id, maSP, idTenSP, idKichCo, idThuongHieu, idMauSac, idChatLieu, idDanhMuc, giaNhap, giaBan, soLuong, ngayTao, ngaySua, ngayNhap, trangThai);
         this.sPChiTietService.update(ctsp, id);
         addTable(sPChiTietService.getAll());
-
+        
     }
-
+    
     private void deleteSP() {
         try {
             int check = JOptionPane.showConfirmDialog(this, "bạn có muốn xóa không");
@@ -347,7 +403,7 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
             int row = tbl_sanpham.getSelectedRow();
             String id = sPChiTietService.getAll().get(row).getId();
             sPChiTietService.deleteSP(id);
-
+            
             JOptionPane.showMessageDialog(this, "xóa thành công");
             addTable(sPChiTietService.getAll());
             clearForm();
@@ -355,8 +411,46 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
             JOptionPane.showMessageDialog(this, "xóa thất bại ");
         }
     }
-
-
+    
+    private boolean checkDuplicateObject2(ChiTietSanPhamDto vModelCheck, int index) {
+        
+        int count = 0;
+        List<ChiTietSanPhamDto> listViewModel = this.sPChiTietService.getAll();
+        for (int i = 0; i < listViewModel.size(); i++) {
+            if (i != index) {
+                if (listViewModel.get(i).getIdChatLieu().equals(vModelCheck.getIdChatLieu())
+                        && listViewModel.get(i).getIdDanhMuc().equals(vModelCheck.getIdDanhMuc())
+                        && listViewModel.get(i).getIdKichThuoc().equals(vModelCheck.getIdKichThuoc())
+                        && listViewModel.get(i).getIdMauSac().equals(vModelCheck.getIdMauSac())
+                        && listViewModel.get(i).getIdSanPham().equals(vModelCheck.getIdSanPham())
+                        && listViewModel.get(i).getIdThuongHieu().equals(vModelCheck.getIdThuongHieu())) {
+                    count++;
+                }
+            }
+        }
+        if (count == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    private boolean checkDuplicateMaSP2(String maSP, int index) {
+        int count = 0;
+        for (int i = 0; i < this.sPChiTietService.getAll().size(); i++) {
+            if (i != index) {
+                if (maSP.equalsIgnoreCase(this.sPChiTietService.getAll().get(i).getMa())) {
+                    count++;
+                }
+            }
+        }
+        if (count == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
     private void addSanPham() {
         if (Uhelper.checkNull(txt_giaban, "Không để trống giá bán")) {
             return;
@@ -379,7 +473,7 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
         if (Uhelper.checkNull(txt_masp, "Vui lòng nhập mã sản phẩm")) {
             return;
         }
-
+        
         String maSP = txt_masp.getText().trim();
         String idTenSP = sanPhamService.getAllId().get(cb_tensp.getSelectedIndex());
         String idThuongHieu = hangService.getAllId().get(cb_hang.getSelectedIndex());
@@ -391,12 +485,12 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
         BigDecimal giaBan = new BigDecimal(txt_giaban.getText());
 //        boolean trangThai = Boolean.parseBoolean(txt_trangthai.getText());
         int soLuong = Integer.parseInt(txt_soluong.getText());
-
+        
         if (giaBan.compareTo(giaNhap) != 0 && giaBan.compareTo(giaNhap) != 1) {
             JOptionPane.showMessageDialog(this, "Giá bán lớn hơn giá nhập, bạn vui lòng nhập lại giá bán !");
             return;
         }
-
+        
         Date ngayNhap = new Date();
         String timeStamp = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy").format(Calendar.getInstance().getTime());
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
@@ -405,38 +499,82 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
         } catch (ParseException ex) {
             Logger.getLogger(SPChiTietFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         Date ngayTao = new Date();
         try {
             ngayTao = sdf.parse(timeStamp);
         } catch (ParseException ex) {
             Logger.getLogger(SPChiTietFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         Date ngaySua = new Date();
         try {
             ngaySua = sdf.parse(timeStamp);
         } catch (ParseException ex) {
             Logger.getLogger(SPChiTietFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         boolean trangThai = true;
+        if (btn_conhang.isSelected()) {
+            trangThai = true;
+        } else if (btn_hethang.isSelected()) {
+            trangThai = false;
+        }
         ChiTietSanPhamDto ctsp = new ChiTietSanPhamDto("", maSP, idTenSP, idKichCo, idThuongHieu, idMauSac, idChatLieu, idDanhMuc, giaNhap, giaBan, soLuong, ngayTao, ngaySua, ngayNhap, trangThai);
 
-        sPChiTietService.insert(ctsp);
-        addTable(sPChiTietService.getAll());
+//        sPChiTietService.insert(ctsp);
+//        addTable(sPChiTietService.getAll());
+        int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn thêm không ?");
+        if (confirm != JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(this, "Sửa thất bại !");
+            return;
+        } else {
+            if (this.checkDuplicateObject2(ctsp, index)) {
+                if (!checkDuplicateMaSP2(maSP, index)) {
+                    JOptionPane.showMessageDialog(this, this.sPChiTietService.insert(ctsp));
+                    this.addTable(sPChiTietService.getAll());
+                } else {
+                    JOptionPane.showMessageDialog(this, "Mã sản phẩm đã tồn tại.");
+                    return;
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Sản phẩm này đã tồn tại");
+                return;
+            }
+        }
     }
- 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
+    
+    private void loadDataChiTietSP(List<ChiTietSanPham> list) {
+        DefaultTableModel model = (DefaultTableModel) tbl_sanpham.getModel();
+        model.setRowCount(0);
+        int count = 1;
+        for (ChiTietSanPham vModel : list) {
+            model.addRow(new Object[]{
+                count++,
+                vModel.getMa(),
+                this.sanPhamService.getTenById(vModel.getIdSanPham().toString()),
+                this.hangService.getTenById(vModel.getIdThuongHieu().toString()),
+                this.chatLieuService.getTenById(vModel.getIdChatLieu().toString()),
+                this.mauSacService.getTenById(vModel.getIdMauSac().toString()),
+                this.kichCoService.getTenById(vModel.getIdKichThuoc().toString()),
+                this.danhMucService.getTenById(vModel.getIdDanhMuc().toString()),
+                vModel.getGiaNhap(),
+                vModel.getGiaBan(),
+                vModel.getSoLuong(),
+                vModel.getNgayNhap(),
+                vModel.getNgaySua(),
+                vModel.getNgayTao(),
+                vModel.isTrangThai()
+            });
+        }
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jLabel20 = new javax.swing.JLabel();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -446,7 +584,6 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_sanpham = new javax.swing.JTable();
         Back = new javax.swing.JToggleButton();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -477,7 +614,6 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
         btn_sua = new javax.swing.JButton();
         btn_xoa = new javax.swing.JButton();
         btn_clear = new javax.swing.JButton();
-        txt_trangthai = new javax.swing.JTextField();
         txt_masp = new javax.swing.JTextField();
         btn_them1 = new javax.swing.JButton();
         btn_them2 = new javax.swing.JButton();
@@ -485,6 +621,8 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
         btn_them4 = new javax.swing.JButton();
         btn_them5 = new javax.swing.JButton();
         btn_them6 = new javax.swing.JButton();
+        btn_conhang = new javax.swing.JRadioButton();
+        btn_hethang = new javax.swing.JRadioButton();
 
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/duan1_nhom1/Icon/edit_property_24px.png"))); // NOI18N
 
@@ -495,9 +633,16 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
         jPanel3.setBackground(new java.awt.Color(203, 233, 162));
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        cb_findhang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All" }));
+        cb_findhang.setToolTipText("");
         cb_findhang.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cb_findhangItemStateChanged(evt);
+            }
+        });
+        cb_findhang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_findhangActionPerformed(evt);
             }
         });
 
@@ -566,8 +711,6 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
                 .addContainerGap())
         );
-
-        jLabel2.setText("Hình ảnh");
 
         jLabel3.setText("Tên sản phẩm:");
 
@@ -703,14 +846,18 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
             }
         });
 
+        buttonGroup1.add(btn_conhang);
+        btn_conhang.setText("Còn hàng");
+
+        buttonGroup1.add(btn_hethang);
+        btn_hethang.setText("Hết hàng");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addComponent(jLabel2)
-                .addGap(133, 133, 133)
+                .addGap(249, 249, 249)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
@@ -720,22 +867,27 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
                     .addComponent(jLabel8)
                     .addComponent(jLabel9))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cb_kichco, 0, 165, Short.MAX_VALUE)
-                    .addComponent(cb_mausac, 0, 165, Short.MAX_VALUE)
-                    .addComponent(cb_danhmuc, 0, 165, Short.MAX_VALUE)
-                    .addComponent(cb_chatlieu, 0, 165, Short.MAX_VALUE)
-                    .addComponent(cb_tensp, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cb_hang, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txt_trangthai, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_them1)
-                    .addComponent(btn_them2)
-                    .addComponent(btn_them3)
-                    .addComponent(btn_them4)
-                    .addComponent(btn_them5)
-                    .addComponent(btn_them6))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cb_kichco, 0, 165, Short.MAX_VALUE)
+                            .addComponent(cb_mausac, 0, 165, Short.MAX_VALUE)
+                            .addComponent(cb_danhmuc, 0, 165, Short.MAX_VALUE)
+                            .addComponent(cb_chatlieu, 0, 165, Short.MAX_VALUE)
+                            .addComponent(cb_tensp, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cb_hang, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btn_them1)
+                            .addComponent(btn_them2)
+                            .addComponent(btn_them3)
+                            .addComponent(btn_them4)
+                            .addComponent(btn_them5)
+                            .addComponent(btn_them6)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btn_conhang)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_hethang)))
                 .addGap(76, 76, 76)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -777,9 +929,6 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(166, 166, 166)
-                        .addComponent(jLabel2))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(47, 47, 47)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -820,10 +969,11 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
                                     .addComponent(jLabel8)
                                     .addComponent(cb_kichco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(btn_them6))
-                        .addGap(14, 14, 14)
+                        .addGap(15, 15, 15)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
-                            .addComponent(txt_trangthai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btn_conhang)
+                            .addComponent(btn_hethang)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -863,7 +1013,7 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
                             .addComponent(jLabel17)
                             .addComponent(date_ngaytao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn_clear))))
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Chi tiết sản phẩm", jPanel2);
@@ -910,7 +1060,7 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
 
 //        _index = tbl_sanpham.getSelectedRow();
         ChiTietSanPhamDto ctsp = this.sPChiTietService.getAll().get(index);
-
+        
         txt_masp.setText(ctsp.getMa());
         cb_tensp.setSelectedItem(sanPhamService.getTenById(ctsp.getIdSanPham()));
         cb_hang.setSelectedItem(hangService.getTenById(ctsp.getIdThuongHieu()));
@@ -921,43 +1071,50 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
         txt_gianhap.setText("" + ctsp.getGiaNhap());
         txt_giaban.setText("" + ctsp.getGiaBan());
         txt_soluong.setText("" + ctsp.getSoLuong());
-
+        
         String ngayNhapString = tbl_sanpham.getValueAt(index, 11).toString();
         Date ngayNhap = null;
-
+        
         try {
-
+            
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             ngayNhap = dateFormat.parse(ngayNhapString);
         } catch (ParseException ex) {
             ex.printStackTrace();
         }
-
+        
         String ngaySuaString = tbl_sanpham.getValueAt(index, 12).toString();
         Date ngaySua = null;
-
+        
         try {
-
+            
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             ngaySua = dateFormat.parse(ngaySuaString);
         } catch (ParseException ex) {
             ex.printStackTrace();
         }
-
+        
         String ngayTaoString = tbl_sanpham.getValueAt(index, 13).toString();
         Date ngayTao = null;
-
+        
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             ngayTao = dateFormat.parse(ngayTaoString);
         } catch (ParseException ex) {
             ex.printStackTrace();
         }
-
+        
         date_ngaynhap.setDate(ngayNhap);
         date_ngaysua.setDate(ngaySua);
         date_ngaytao.setDate(ngayTao);
         tbl_sanpham.setRowSelectionInterval(index, index);
+        
+        boolean trangthai = ctsp.getTrangThai();
+        if (trangthai == true) {
+            btn_conhang.setSelected(true);
+        } else {
+            btn_hethang.setSelected(true);
+        }
 
 //
 //        txt_trangthai.setText(tbl_sanpham.getValueAt(_index, 14).toString());
@@ -994,7 +1151,7 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
     }//GEN-LAST:event_btn_them4ActionPerformed
 
     private void btn_them5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_them5ActionPerformed
-
+        
         new MauSacFrame().setVisible(true);
     }//GEN-LAST:event_btn_them5ActionPerformed
 
@@ -1004,7 +1161,7 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
     }//GEN-LAST:event_btn_them6ActionPerformed
 
     private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
-           String im = txtTimKiem.getText();
+        String im = txtTimKiem.getText();
         ChiTietSanPhamDto sp = sPChiTietService.findByMaCtLike(im);
         if (sp != null) {
             loadFindByMa(sp);
@@ -1014,21 +1171,59 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
             addTable(sPChiTietService.getAll());
             return;
         }
-            
+
     }//GEN-LAST:event_btn_searchActionPerformed
 
     private void cb_findhangItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_findhangItemStateChanged
-//        if (cb_findhang.getSelectedIndex() == 0) {
-//            addTable(sPChiTietService.getAll());
-//        }
-//        String hang = (String) cb_findhang.getSelectedItem();
-//        List<ChiTietSanPham> lst = sPChiTietService.findByDm(hang);
-//        loadDataQLSP(lst);
+        if (cb_findhang.getSelectedIndex() == 0) {
+            addTable(sPChiTietService.getAll());
+            
+        }
+        String dm = (String) cb_findhang.getSelectedItem();
+        List<ChiTietSanPhamDto> lst = sPChiTietService.findByDm(dm);
+        addTable(lst);
+        
     }//GEN-LAST:event_cb_findhangItemStateChanged
 
+    private void cb_findhangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_findhangActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cb_findhangActionPerformed
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(KichThuocFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(KichThuocFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(KichThuocFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(KichThuocFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new SPChiTietFrame().setVisible(true);
+            }
+        });
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton Back;
     private javax.swing.JButton btn_clear;
+    private javax.swing.JRadioButton btn_conhang;
+    private javax.swing.JRadioButton btn_hethang;
     private javax.swing.JButton btn_search;
     private javax.swing.JButton btn_sua;
     private javax.swing.JButton btn_them;
@@ -1039,6 +1234,7 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
     private javax.swing.JButton btn_them5;
     private javax.swing.JButton btn_them6;
     private javax.swing.JButton btn_xoa;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cb_chatlieu;
     private javax.swing.JComboBox<String> cb_danhmuc;
     private javax.swing.JComboBox<String> cb_findhang;
@@ -1057,7 +1253,6 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1075,6 +1270,5 @@ ArrayList<ChiTietSanPhamDto> itemList = new ArrayList<>();
     private javax.swing.JTextField txt_gianhap;
     private javax.swing.JTextField txt_masp;
     private javax.swing.JTextField txt_soluong;
-    private javax.swing.JTextField txt_trangthai;
     // End of variables declaration//GEN-END:variables
 }

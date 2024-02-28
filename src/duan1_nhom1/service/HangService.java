@@ -5,7 +5,13 @@
 package duan1_nhom1.service;
 
 import duan1_nhom1.model.Hang;
+import duan1_nhom1.model.KichThuoc;
 import duan1_nhom1.repository.HangRepository;
+import duan1_nhom1.utils.JdbcHelper;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 /**1
@@ -39,8 +45,8 @@ public class HangService implements IService<Hang>{
     }
 
     @Override
-    public Hang findById(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Hang findById(String hangId) {
+        return hangRepository.findById(hangId);
     }
     
     public String getTenById(String id) {
@@ -54,6 +60,46 @@ public class HangService implements IService<Hang>{
     
     public List<String> getAllId() {
         return hangRepository.getAllId();
+    }
+    
+     
+    public List<Hang> timKiem(String ma, String ten) {
+        String sql = """
+                 SELECT [ma]
+                        ,[ten]
+                        ,[mo_ta]
+                        ,[ngay_tao]
+                        ,[ngay_sua]
+                        ,[trang_thai]
+                   FROM [dbo].[hang]
+                   WHERE [ma] = ? OR [ten] = ?;
+                 """;
+
+        try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setObject(1, ma);
+            ps.setObject(2, ten);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                List<Hang> list = new ArrayList<>();
+                while (rs.next()) {
+                    Hang hang = new Hang();
+                    hang.setMa(rs.getString(1));
+                    hang.setTen(rs.getString(2));
+                    hang.setMoTa(rs.getString(3));
+                    hang.setNgayTao(rs.getDate(4));
+                    hang.setNgaySua(rs.getDate(5));
+                    hang.setTrangThai(rs.getBoolean(6));
+                    list.add(hang);
+                }
+                return list;
+            }
+
+        } catch (Exception e) {
+            // Log the exception using a logging framework like log4j or slf4j
+            e.printStackTrace();
+        }
+        return null;
     }
     
 }

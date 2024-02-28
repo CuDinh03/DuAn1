@@ -173,4 +173,28 @@ public class HangRepository {
             e.printStackTrace(System.out);
         }
     }
+
+    public Hang findById(String hangId) {
+        
+        String query = "SELECT * FROM hang WHERE id = ?";
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setString(1, hangId);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                String id = rs.getString("id");
+                String ma = rs.getString("ma");
+                String ten = rs.getString("ten");
+                String moTa = rs.getString("mo_ta");
+                Date ngayTao = rs.getDate("ngay_tao");
+                Date ngaySua = rs.getDate("ngay_tao");
+                Boolean trangThai = rs.getBoolean("trang_thai");
+
+                return new Hang(id, ma, ten, moTa, ngayTao, ngaySua, trangThai);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

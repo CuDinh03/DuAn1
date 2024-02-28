@@ -8,7 +8,9 @@ import duan1_nhom1.model.DanhMuc;
 import duan1_nhom1.service.DanhMucService;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,6 +22,7 @@ public class DanhMucJFrame extends javax.swing.JFrame {
 
     private DefaultTableModel defaultTableModel = new DefaultTableModel();
     private DanhMucService danhMucService = new DanhMucService();
+    private List<DanhMuc> listDM = new ArrayList<>();
     int _index = -1;
 
     public DanhMucJFrame() {
@@ -55,6 +58,59 @@ public class DanhMucJFrame extends javax.swing.JFrame {
         }
 
     }
+    
+    
+     
+    public void loadData2() {
+        defaultTableModel = (DefaultTableModel) tbl_danhmuc.getModel();
+        defaultTableModel.setRowCount(0);
+        int count = 1;
+        for (DanhMuc dm : listDM) {
+            String status;
+            if (dm.getTrangThai()) {
+                status = "Còn";
+            } else {
+                status = "Hết";
+            }
+            Object[] rowData = {
+                count++,
+                dm.getMa(),
+                dm.getTen(),
+                dm.getMoTa(),
+                dm.getNgaySua(),
+                dm.getNgayTao(),
+                status
+            };
+            defaultTableModel.addRow(rowData);
+
+        }
+    }
+    
+     public void search() {
+        
+        try {
+            String ma = txt_search.getText();
+            String ten = txt_search.getText();
+            String sdt = txt_search.getText();
+            if (ma.trim().isEmpty()) {
+                ma = null;
+            }
+            if (ten.trim().isEmpty()) {
+                ten = null;
+            }
+            if (sdt.trim().isEmpty()) {
+                sdt = null;
+            }
+            listDM = danhMucService.timKiem(ma, ten);
+            loadData2();
+
+//            listHoaDon = hoaDonService.searhListNhanVien(khach);
+//            showDataHoaDon2();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     private void clearForm() {
         txt_ma.setText("");
@@ -110,7 +166,6 @@ public class DanhMucJFrame extends javax.swing.JFrame {
             danhMucService.update(dm, id);
             loadTableDM();
             JOptionPane.showMessageDialog(this, "Update thành công");
-            
             clearForm();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Update thất bại");
@@ -188,12 +243,18 @@ public class DanhMucJFrame extends javax.swing.JFrame {
         btn_clear = new javax.swing.JButton();
         txt_mota = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        btn_back1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel2.setBackground(new java.awt.Color(203, 233, 162));
 
         btn_search.setText("Tìm Kiếm");
+        btn_search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_searchActionPerformed(evt);
+            }
+        });
 
         tbl_danhmuc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -262,19 +323,27 @@ public class DanhMucJFrame extends javax.swing.JFrame {
 
         jLabel5.setText("Mô tả:");
 
+        btn_back1.setText("Back");
+        btn_back1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_back1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_search)
-                .addGap(57, 57, 57))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(btn_back1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_search)
+                        .addGap(57, 57, 57))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
                         .addContainerGap())
@@ -316,7 +385,8 @@ public class DanhMucJFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_search)
-                    .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_back1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
@@ -401,6 +471,16 @@ public class DanhMucJFrame extends javax.swing.JFrame {
         clearForm();
     }//GEN-LAST:event_btn_clearActionPerformed
 
+    private void btn_back1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_back1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btn_back1ActionPerformed
+
+    private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
+        // TODO add your handling code here:
+        search();
+    }//GEN-LAST:event_btn_searchActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -437,6 +517,7 @@ public class DanhMucJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_back1;
     private javax.swing.JButton btn_clear;
     private javax.swing.JButton btn_search;
     private javax.swing.JButton btn_sua;

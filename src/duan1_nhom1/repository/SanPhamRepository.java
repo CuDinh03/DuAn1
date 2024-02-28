@@ -182,4 +182,20 @@ public class SanPhamRepository {
             e.printStackTrace();
         }
     }
+
+    public String getMaById(String ma) {
+        String sql = "SELECT id FROM san_pham WHERE ma = ?";
+
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, ma);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getString("ten");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

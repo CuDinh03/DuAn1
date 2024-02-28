@@ -412,6 +412,7 @@ public class TranferData {
             dtoList.add(convertToDto(entity));
         }
         return dtoList;
+        
     }
 
     public static ChiTietHoaDonDto convertToDto(ChiTietHoaDon model) {
