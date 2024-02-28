@@ -13,6 +13,7 @@ import duan1_nhom1.service.ChiTietHoaDonService;
 import duan1_nhom1.service.HoaDonService;
 import duan1_nhom1.service.KhachService;
 import duan1_nhom1.service.SanPhamService;
+import java.time.format.DateTimeFormatter;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -70,6 +71,10 @@ public class HoaDonJPanel extends javax.swing.JPanel {
                tenK = k.getTenKhachHang();
 
             }
+            
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                        String formattedDateTime = hd.getNgayMua().format(formatter);
+
 
             Object[] rowData = {
                 ++count,
@@ -79,7 +84,8 @@ public class HoaDonJPanel extends javax.swing.JPanel {
                 hd.getIdNv(),
                 hd.getMa(),
                 hd.getTongTien(),
-                hd.getNgayMua(),
+
+               formattedDateTime ,
                 hd.getNgayTao(),
                 hd.getNgaySua(),
                 status

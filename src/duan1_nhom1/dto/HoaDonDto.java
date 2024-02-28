@@ -4,7 +4,8 @@
  */
 package duan1_nhom1.dto;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+
 
 /**
  *
@@ -16,16 +17,16 @@ public class HoaDonDto {
     private String idKhachHang;
     private String idNv;
     private String ma;
-    private Date ngayMua;
+    private LocalDateTime ngayMua;
     private Double tongTien;
     private Boolean trangThai;
-    private Date ngayTao;
-    private Date ngaySua;
+    private LocalDateTime ngayTao;
+    private LocalDateTime ngaySua;
 
     public HoaDonDto() {
     }
 
-    public HoaDonDto(String id, String idKhachHang, String idNv, String ma, Date ngayMua, Double tongTien, Boolean trangThai, Date ngayTao, Date ngaySua) {
+    public HoaDonDto(String id, String idKhachHang, String idNv, String ma, LocalDateTime ngayMua, Double tongTien, Boolean trangThai, LocalDateTime ngayTao, LocalDateTime ngaySua) {
         this.id = id;
         this.idKhachHang = idKhachHang;
         this.idNv = idNv;
@@ -69,11 +70,11 @@ public class HoaDonDto {
         this.ma = ma;
     }
 
-    public Date getNgayMua() {
+    public LocalDateTime getNgayMua() {
         return ngayMua;
     }
 
-    public void setNgayMua(Date ngayMua) {
+    public void setNgayMua(LocalDateTime ngayMua) {
         this.ngayMua = ngayMua;
     }
 
@@ -93,19 +94,19 @@ public class HoaDonDto {
         this.trangThai = trangThai;
     }
 
-    public Date getNgayTao() {
+    public LocalDateTime getNgayTao() {
         return ngayTao;
     }
 
-    public void setNgayTao(Date ngayTao) {
+    public void setNgayTao(LocalDateTime ngayTao) {
         this.ngayTao = ngayTao;
     }
 
-    public Date getNgaySua() {
+    public LocalDateTime getNgaySua() {
         return ngaySua;
     }
 
-    public void setNgaySua(Date ngaySua) {
+    public void setNgaySua(LocalDateTime ngaySua) {
         this.ngaySua = ngaySua;
     }
 

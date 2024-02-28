@@ -12,8 +12,8 @@ package duan1_nhom1.repository;
 import duan1_nhom1.model.HoaDon;
 import duan1_nhom1.utils.JdbcHelper;
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class HoaDonRepository {
@@ -28,11 +28,11 @@ public class HoaDonRepository {
                 preparedStatement.setObject(1, hoaDon.getIdKhachHang());
                 preparedStatement.setObject(2, hoaDon.getIdNv());
                 preparedStatement.setString(3, hoaDon.getMa());
-                preparedStatement.setDate(4, new java.sql.Date(hoaDon.getNgayMua().getTime()));
+                preparedStatement.setTimestamp(4, java.sql.Timestamp.valueOf(hoaDon.getNgayMua()));
                 preparedStatement.setDouble(5, hoaDon.getTongTien());
                 preparedStatement.setBoolean(6, hoaDon.getTrangThai());
-                preparedStatement.setDate(7, new java.sql.Date(hoaDon.getNgayTao().getTime()));
-                preparedStatement.setDate(8, new java.sql.Date(hoaDon.getNgaySua().getTime()));
+                preparedStatement.setTimestamp(7, java.sql.Timestamp.valueOf(hoaDon.getNgayTao()));
+                preparedStatement.setTimestamp(8, java.sql.Timestamp.valueOf(hoaDon.getNgaySua()));
 
                 preparedStatement.executeUpdate();
             }
@@ -51,11 +51,18 @@ public class HoaDonRepository {
                     String id_kh = resultSet.getString("id_kh");
                     String id_Nv = resultSet.getString("id_Nv");
                     String ma = resultSet.getString("ma");
-                    Date ngay_mua = resultSet.getDate("ngay_mua");
+                    Timestamp ngay_muaTimestamp = resultSet.getTimestamp("ngay_mua");
+                    LocalDateTime ngay_mua = ngay_muaTimestamp.toLocalDateTime();
+
                     Double tong_tien = resultSet.getDouble("tong_tien");
                     Boolean trang_thai = resultSet.getBoolean("trang_thai");
-                    Date ngay_tao = resultSet.getDate("ngay_tao");
-                    Date ngay_sua = resultSet.getDate("ngay_sua");
+                    Timestamp ngay_taoTimestamp = resultSet.getTimestamp("ngay_tao");
+
+                    LocalDateTime ngay_tao = ngay_taoTimestamp.toLocalDateTime();
+
+                    Timestamp ngay_suaTimestamp = resultSet.getTimestamp("ngay_sua");
+
+                    LocalDateTime ngay_sua = ngay_suaTimestamp.toLocalDateTime();
 
                     return new HoaDon(id, id_kh, id_Nv, ma, ngay_mua, tong_tien, trang_thai, ngay_tao, ngay_sua);
                 }
@@ -74,10 +81,10 @@ public class HoaDonRepository {
                 preparedStatement.setObject(1, hoaDon.getIdKhachHang());
                 preparedStatement.setObject(2, hoaDon.getIdNv());
                 preparedStatement.setString(3, hoaDon.getMa());
-                preparedStatement.setDate(4, new java.sql.Date(hoaDon.getNgayMua().getTime()));
+                preparedStatement.setTimestamp(4, java.sql.Timestamp.valueOf(hoaDon.getNgayMua()));
                 preparedStatement.setDouble(5, hoaDon.getTongTien());
                 preparedStatement.setBoolean(6, hoaDon.getTrangThai());
-                preparedStatement.setDate(7, new java.sql.Date(hoaDon.getNgaySua().getTime()));
+                preparedStatement.setTimestamp(7, java.sql.Timestamp.valueOf(hoaDon.getNgaySua()));
                 preparedStatement.setObject(8, hoaDon.getId());
 
                 preparedStatement.executeUpdate();
@@ -109,11 +116,18 @@ public class HoaDonRepository {
                 String id_kh = resultSet.getString("id_kh");
                 String id_Nv = resultSet.getString("id_Nv");
                 String ma = resultSet.getString("ma");
-                Date ngay_mua = resultSet.getDate("ngay_mua");
+                Timestamp ngay_muaTimestamp = resultSet.getTimestamp("ngay_mua");
+                LocalDateTime ngay_mua = ngay_muaTimestamp.toLocalDateTime();
+
                 Double tong_tien = resultSet.getDouble("tong_tien");
                 Boolean trang_thai = resultSet.getBoolean("trang_thai");
-                Date ngay_tao = resultSet.getDate("ngay_tao");
-                Date ngay_sua = resultSet.getDate("ngay_sua");
+                Timestamp ngay_taoTimestamp = resultSet.getTimestamp("ngay_tao");
+
+                LocalDateTime ngay_tao = ngay_taoTimestamp.toLocalDateTime();
+
+                Timestamp ngay_suaTimestamp = resultSet.getTimestamp("ngay_sua");
+
+                LocalDateTime ngay_sua = ngay_suaTimestamp.toLocalDateTime();
 
                 HoaDon hoaDon = new HoaDon(id, id_kh, id_Nv, ma, ngay_mua, tong_tien, trang_thai, ngay_tao, ngay_sua);
                 hoaDons.add(hoaDon);
@@ -134,11 +148,18 @@ public class HoaDonRepository {
                 String id_kh = resultSet.getString("id_kh");
                 String id_Nv = resultSet.getString("id_Nv");
                 String ma = resultSet.getString("ma");
-                Date ngay_mua = resultSet.getDate("ngay_mua");
+                Timestamp ngay_muaTimestamp = resultSet.getTimestamp("ngay_mua");
+                LocalDateTime ngay_mua = ngay_muaTimestamp.toLocalDateTime();
+
                 Double tong_tien = resultSet.getDouble("tong_tien");
                 Boolean trang_thai = resultSet.getBoolean("trang_thai");
-                Date ngay_tao = resultSet.getDate("ngay_tao");
-                Date ngay_sua = resultSet.getDate("ngay_sua");
+                Timestamp ngay_taoTimestamp = resultSet.getTimestamp("ngay_tao");
+
+                LocalDateTime ngay_tao = ngay_taoTimestamp.toLocalDateTime();
+
+                Timestamp ngay_suaTimestamp = resultSet.getTimestamp("ngay_sua");
+
+                LocalDateTime ngay_sua = ngay_suaTimestamp.toLocalDateTime();
 
                 HoaDon hoaDon = new HoaDon(id, id_kh, id_Nv, ma, ngay_mua, tong_tien, trang_thai, ngay_tao, ngay_sua);
                 hoaDons.add(hoaDon);
@@ -159,11 +180,19 @@ public class HoaDonRepository {
                     String id_kh = resultSet.getString("id_kh");
                     String id_Nv = resultSet.getString("id_Nv");
                     String ma = resultSet.getString("ma");
-                    Date ngay_mua = resultSet.getDate("ngay_mua");
+                    Timestamp ngay_muaTimestamp = resultSet.getTimestamp("ngay_mua");
+                    LocalDateTime ngay_mua = ngay_muaTimestamp.toLocalDateTime();
+
                     Double tong_tien = resultSet.getDouble("tong_tien");
                     Boolean trang_thai = resultSet.getBoolean("trang_thai");
-                    Date ngay_tao = resultSet.getDate("ngay_tao");
-                    Date ngay_sua = resultSet.getDate("ngay_sua");
+                    Timestamp ngay_taoTimestamp = resultSet.getTimestamp("ngay_tao");
+
+                    LocalDateTime ngay_tao = ngay_taoTimestamp.toLocalDateTime();
+
+                    Timestamp ngay_suaTimestamp = resultSet.getTimestamp("ngay_sua");
+
+                    LocalDateTime ngay_sua = ngay_suaTimestamp.toLocalDateTime();
+
                     return new HoaDon(id, id_kh, id_Nv, ma, ngay_mua, tong_tien, trang_thai, ngay_tao, ngay_sua);
                 }
             }

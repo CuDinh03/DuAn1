@@ -12,6 +12,8 @@ import duan1_nhom1.utils.JdbcHelper;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,10 +75,25 @@ public class HoaDonService implements IService<HoaDonDto> {
                 hd.setIdKhachHang(rs.getString(2));
                 hd.setMa(rs.getString(3));
                 hd.setIdNv(rs.getString(4));
-                hd.setNgayMua(rs.getDate(5));
+                Timestamp timestamp = rs.getTimestamp(5);
+                LocalDateTime localDateTime = null;
+                if (timestamp != null) {
+                    localDateTime = timestamp.toLocalDateTime();
+                }
+                hd.setNgayMua(localDateTime);
                 hd.setTongTien(rs.getDouble(6));
-                hd.setNgayTao(rs.getDate(7));
-                hd.setNgaySua(rs.getDate(8));
+                timestamp = rs.getTimestamp(7);
+                localDateTime = null;
+                if (timestamp != null) {
+                    localDateTime = timestamp.toLocalDateTime();
+                }
+                hd.setNgayTao(localDateTime);
+                timestamp = rs.getTimestamp(8);
+                localDateTime = null;
+                if (timestamp != null) {
+                    localDateTime = timestamp.toLocalDateTime();
+                }
+                hd.setNgaySua(localDateTime);
                 hd.setTrangThai(rs.getBoolean(9));
                 hoadon.add(hd);
             }
@@ -87,8 +104,9 @@ public class HoaDonService implements IService<HoaDonDto> {
         }
         return null;
     }
-public List<HoaDon> timKhachTheoHD(String maKhach) {
-       String sql = """
+
+    public List<HoaDon> timKhachTheoHD(String maKhach) {
+        String sql = """
         DECLARE @maKhach NVARCHAR(255)
          SET @maKhach =?
         select Hoa_Don.ma,Hoa_Don.ngay_mua,Hoa_Don.tong_tien,Hoa_Don.ngay_tao,Hoa_Don.trang_thai
@@ -99,17 +117,32 @@ public List<HoaDon> timKhachTheoHD(String maKhach) {
         try (Connection con = JdbcHelper.getConnection(); PreparedStatement stm = con.prepareStatement(sql)) {
             stm.setString(1, maKhach);
             ResultSet rs = stm.executeQuery();
-           List<HoaDon> hoadon = new ArrayList<>();
+            List<HoaDon> hoadon = new ArrayList<>();
             while (rs.next()) {
                 HoaDon hd = new HoaDon();
                 hd.setId(rs.getString(1));
                 hd.setIdKhachHang(rs.getString(2));
                 hd.setMa(rs.getString(3));
                 hd.setIdNv(rs.getString(4));
-                hd.setNgayMua(rs.getDate(5));
+                Timestamp timestamp = rs.getTimestamp(5);
+                LocalDateTime localDateTime = null;
+                if (timestamp != null) {
+                    localDateTime = timestamp.toLocalDateTime();
+                }
+                hd.setNgayMua(localDateTime);
                 hd.setTongTien(rs.getDouble(6));
-                hd.setNgayTao(rs.getDate(7));
-                hd.setNgaySua(rs.getDate(8));
+                timestamp = rs.getTimestamp(7);
+                localDateTime = null;
+                if (timestamp != null) {
+                    localDateTime = timestamp.toLocalDateTime();
+                }
+                hd.setNgayTao(localDateTime);
+                timestamp = rs.getTimestamp(8);
+                localDateTime = null;
+                if (timestamp != null) {
+                    localDateTime = timestamp.toLocalDateTime();
+                }
+                hd.setNgaySua(localDateTime);
                 hd.setTrangThai(rs.getBoolean(9));
                 hoadon.add(hd);
             }
