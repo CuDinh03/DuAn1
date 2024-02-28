@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -33,6 +34,8 @@ public class ViewDanhMuc extends javax.swing.JFrame {
     public ViewDanhMuc() {
         initComponents();
         loadTableDanhMuc();
+                    setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
     }
     
     private void loadTableDanhMuc() {

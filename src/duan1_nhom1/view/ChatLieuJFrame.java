@@ -11,6 +11,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -26,6 +27,8 @@ public class ChatLieuJFrame extends javax.swing.JFrame {
     public ChatLieuJFrame() {
         initComponents();
         loadTableCL();
+                    setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
     }
 
     public void loadTableCL() {

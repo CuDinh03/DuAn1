@@ -19,6 +19,9 @@ public class SanPhamService implements IService<SanPhamDto> {
     public void update(SanPhamDto sanPham, String id) {
         sanPhamRepository.update(TranferData.convertToEntity(sanPham));
     }
+        public void update2(SanPhamDto sanPham, String id) {
+        sanPhamRepository.update2(TranferData.convertToEntity(sanPham),id);
+    }
 
     @Override
     public void delete(String id) {

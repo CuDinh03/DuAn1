@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -23,6 +24,8 @@ public class HangJFrame extends javax.swing.JFrame {
     public HangJFrame() {
         initComponents();
         loadTableHang();
+                    setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
     }
 
     public void loadTableHang() {

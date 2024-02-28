@@ -3,12 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/utils/Uhelper.java</file>
-            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/view/HoaDonJPanel.java</file>
-            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/view/KhachHangJPanel.java</file>
-            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/view/TrangChuJPanel.java</file>
-            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/repository/ChiTietHoaDonRepository.java</file>
-            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/service/ChiTietHoaDonService.java</file>
+            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/service/SanPhamService.java</file>
+            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/view/SanPhamFrame.java</file>
+            <file>file:/Users/maccuacu/Desktop/DuAn1/DuAn1_nhom1/src/duan1_nhom1/repository/SanPhamRepository.java</file>
         </group>
     </open-files>
 </project-private>

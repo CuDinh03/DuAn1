@@ -14,6 +14,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -34,6 +35,8 @@ public class VoucherFrame extends javax.swing.JFrame {
         model = (DefaultTableModel) tblVoucher.getModel();
         vouchers = service.getAll();
         showDataVoucher();
+                    setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
     }
     private void showDataVoucher(){
         model.setRowCount(0);

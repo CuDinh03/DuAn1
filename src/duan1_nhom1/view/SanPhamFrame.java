@@ -10,6 +10,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -28,9 +29,12 @@ public class SanPhamFrame extends javax.swing.JFrame {
     public SanPhamFrame() {
         initComponents();
         loadTableSanPham();
+                    setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
     }
 
     public void loadTableSanPham() {
+        
 
         defaultTableModel = (DefaultTableModel) tbl_sanpham.getModel();
         defaultTableModel.setRowCount(0);
@@ -106,7 +110,7 @@ public class SanPhamFrame extends javax.swing.JFrame {
             SanPhamDto sanPham = getSanPhamDto();
             int row = tbl_sanpham.getSelectedRow();
             String id = sanPhamService.getAll().get(row).getId();
-            sanPhamService.update(sanPham, id);
+            sanPhamService.update2(sanPham, id);
             loadTableSanPham();
             JOptionPane.showMessageDialog(this, "Update thành công");
             clearFormSanPham();

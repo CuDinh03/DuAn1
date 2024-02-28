@@ -21,12 +21,13 @@ import java.util.List;
 public class SanPhamRepository {
 
     private JdbcHelper jdbcHelper;
-    List<SanPham> listSanPham = new ArrayList();
+//    List<SanPham> listSanPham = new ArrayList();
     Connection conn = JdbcHelper.getConnection();
 
     public List<SanPham> getAll() {
 
         String sql = "SELECT id,ma,ten,mo_ta,ngay_tao,ngay_sua,trang_thai FROM san_pham";
+    List<SanPham> listSanPham = new ArrayList();
 
         try {
             PreparedStatement pr = conn.prepareStatement(sql);
@@ -170,16 +171,45 @@ public class SanPhamRepository {
             System.out.println("An error occurred: " + e.getMessage());
         }
     }
+        public void update2(SanPham sanPham, String id) {
+        String sql = "UPDATE san_pham SET ma = ?, ten = ?, mo_ta = ?, ngay_tao = ?,ngay_sua = ?, trang_thai = ? WHERE id = ?";
 
-    public void delete(String id) {
-         try {
-            String query = "DELETE FROM san_pham WHERE id = ?";
-            try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-                preparedStatement.setString(1, id);
-                preparedStatement.executeUpdate();
+        try (Connection con = jdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setObject(1, sanPham.getMa());
+            ps.setObject(2, sanPham.getTen());
+            ps.setObject(3, sanPham.getMoTa());
+            ps.setObject(4, sanPham.getNgayTao());
+            ps.setObject(5, sanPham.getNgaySua());
+            ps.setObject(6, sanPham.getTrangThai());
+            ps.setObject(7, id);
+
+            int chek = ps.executeUpdate();
+
+            if (chek > 0) {
+                System.out.println(" update thành công ");
+            } else {
+                System.out.println("Update thất bại ");
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("An error occurred: " + e.getMessage());
         }
     }
+
+public void delete(String id) {
+    try {
+        String query = "DELETE FROM dbo.san_pham_chi_tiet\n" +
+                       "WHERE id_sp = ? AND id_sp IN (SELECT id FROM dbo.san_pham);\n" +
+                       "\n" +
+                       "DELETE FROM dbo.san_pham\n" +
+                       "WHERE id = ?";
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setString(1, id);
+            preparedStatement.setString(2, id);
+            preparedStatement.executeUpdate();
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
+
 }

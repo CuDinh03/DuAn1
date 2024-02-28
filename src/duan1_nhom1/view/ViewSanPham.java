@@ -17,6 +17,7 @@ import duan1_nhom1.service.SanPhamService;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -44,6 +45,8 @@ public class ViewSanPham extends javax.swing.JFrame {
     public ViewSanPham() {
         initComponents();
         loadViewSanPham(sPChiTietService.getAll());
+                    setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
     }
 
     public void loadViewSanPham(List<ChiTietSanPhamDto> list) {

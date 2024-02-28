@@ -793,7 +793,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
 //                    System.out.println(idKhach);
 //                    if (idKhach != null) {
         HoaDonDto hd = new HoaDonDto();
-        hd.setIdNv(Auth.user.getIdNguoiDung());
+//        hd.setIdNv(Auth.user.getIdNguoiDung());
         hd.setMa(generateInvoiceCode());
         hd.setNgayMua(new Date());
         hd.setNgaySua(new Date());

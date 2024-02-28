@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -34,6 +35,8 @@ public class ViewKhachHang extends javax.swing.JFrame {
         fillcomboxKhach();
         showDataKhach();
         showDataHoaDon();
+                    setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
 
     }
     void fillcomboxKhach() {
