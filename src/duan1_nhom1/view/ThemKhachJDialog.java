@@ -42,7 +42,7 @@ public class ThemKhachJDialog extends javax.swing.JDialog {
         return khach;
     }
 
-     private void clearFormKhach() {
+    private void clearFormKhach() {
         txtMa.setText("");
         txtTen.setText("");
         txtSdt.setText("");
@@ -55,6 +55,19 @@ public class ThemKhachJDialog extends javax.swing.JDialog {
             if (check != JOptionPane.YES_OPTION) {
                 return;
             }
+            if (txtMa.getText().trim().equals("")) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập mã khách hàng");
+                return ;
+            }
+            if (txtTen.getText().trim().equals("")) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập mã khách hàng");
+                return ;
+            }
+            if (txtSdt.getText().trim().equals("")) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập mã khách hàng");
+                return ;
+            }
+            
             Khach nv = getDataKhach();
             khachService.add(nv);
             listKH = khachService.getAll();
