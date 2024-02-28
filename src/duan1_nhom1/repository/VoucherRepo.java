@@ -4,10 +4,9 @@
  */
 package duan1_nhom1.repository;
 
-import duan1_nhom1.model.DanhMuc;
-import duan1_nhom1.model.HoaDon;
 import duan1_nhom1.model.Voucher;
 import duan1_nhom1.utils.JdbcHelper;
+import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -15,17 +14,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
  * @author bachh
  */
 public class VoucherRepo {
-    List<Voucher> listVouchers = new ArrayList();
+
     Connection conn = JdbcHelper.getConnection();
+//    List<Voucher> listVouchers = new ArrayList();
 
     public List<Voucher> getAll() {
-
+        List<Voucher> listVouchers = new ArrayList();
         String sql = """
                      SELECT [id]
                            ,[ma]
@@ -48,7 +49,7 @@ public class VoucherRepo {
                 String ma = rs.getString("ma");
                 String ten = rs.getString("ten");
                 Float giamGia = rs.getFloat("giam_gia");
-                Date ngayDau= rs.getDate("ngay_bat_dau");
+                Date ngayDau = rs.getDate("ngay_bat_dau");
                 Date ngayCuoi = rs.getDate("ngay_het_han");
                 int soLuong = rs.getInt("so_luong");
                 Date ngayTao = rs.getDate("ngay_tao");
@@ -57,15 +58,18 @@ public class VoucherRepo {
                 Voucher vc = new Voucher(id, ma, ten, giamGia, ngayDau, ngayCuoi, soLuong, ngayTao, ngaySua, trangThai);
                 listVouchers.add(vc);
             }
+            return listVouchers;
         } catch (SQLException ex) {
             System.out.println("Lỗi kết nối");
             ex.printStackTrace();
         }
-        return listVouchers;
+        return null;
     }
-    public void createVoucher(Voucher voucher) {
-        try {
-            String query = """
+
+    public List<Voucher> createVoucher(Voucher voucher) {
+//        try {
+        List<Voucher> listVouchers = new ArrayList();
+        String query = """
                            INSERT INTO [dbo].[Voucher]
                                       ([ma]
                                       ,[ten]
@@ -87,22 +91,118 @@ public class VoucherRepo {
                                       ,?
                                       ,?)
                            """;
-            try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
 //                preparedStatement.setObject(1, voucher.getId());
-                preparedStatement.setString(1, voucher.getMa());
-                preparedStatement.setString(2, voucher.getTen());
-                preparedStatement.setFloat(3, voucher.getGiamGia());
-                preparedStatement.setDate(4, new java.sql.Date(voucher.getNgayDau().getTime()));
-                preparedStatement.setDate(5, new java.sql.Date(voucher.getNgayCuoi().getTime()));
-                preparedStatement.setInt(6, voucher.getSoLuong());
-                preparedStatement.setDate(7, new java.sql.Date(voucher.getNgayTao().getTime()));
-                preparedStatement.setDate(8, new java.sql.Date(voucher.getNgaySua().getTime()));
-                preparedStatement.setBoolean(9, voucher.getTrangThai());
+            preparedStatement.setString(1, voucher.getMa());
+            preparedStatement.setString(2, voucher.getTen());
+            preparedStatement.setFloat(3, voucher.getGiamGia());
+            preparedStatement.setDate(4, new java.sql.Date(voucher.getNgayDau().getTime()));
+            preparedStatement.setDate(5, new java.sql.Date(voucher.getNgayCuoi().getTime()));
+            preparedStatement.setInt(6, voucher.getSoLuong());
+            preparedStatement.setDate(7, new java.sql.Date(voucher.getNgayTao().getTime()));
+            preparedStatement.setDate(8, new java.sql.Date(voucher.getNgaySua().getTime()));
+            preparedStatement.setBoolean(9, voucher.getTrangThai());
 
-                preparedStatement.executeUpdate();
-            }
+            preparedStatement.executeUpdate();
+            return listVouchers;
+//            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return null;
     }
+
+    public void updateVoucher(Voucher voucher, String id) {
+
+        String query = """
+                           UPDATE [dbo].[Voucher]
+                              SET [id] = ?
+                                 ,[ma] = ?
+                                 ,[ten] = ?
+                                 ,[giam_gia] = ?
+                                 ,[ngay_bat_dau] = ?
+                                 ,[ngay_het_han] = ?
+                                 ,[so_luong] = ?
+                                 ,[ngay_tao] = ?
+                                 ,[ngay_sua] = ?
+                                 ,[trang_thai] = ?
+                            WHERE = ?;
+                           """;
+
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setString(1, voucher.getMa());
+            preparedStatement.setString(2, voucher.getTen());
+            preparedStatement.setFloat(3, voucher.getGiamGia());
+            preparedStatement.setDate(4, new java.sql.Date(voucher.getNgayDau().getTime()));
+            preparedStatement.setDate(5, new java.sql.Date(voucher.getNgayCuoi().getTime()));
+            preparedStatement.setInt(6, voucher.getSoLuong());
+            preparedStatement.setDate(7, new java.sql.Date(voucher.getNgayTao().getTime()));
+            preparedStatement.setDate(8, new java.sql.Date(voucher.getNgaySua().getTime()));
+            preparedStatement.setBoolean(9, voucher.getTrangThai());
+            // Execute the update
+            preparedStatement.executeUpdate();
+
+            int chek = preparedStatement.executeUpdate();
+
+            // Check the result
+            if (chek > 0) {
+                System.out.println("update   thành công ");
+            } else {
+                System.out.println("update thất bại  ");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Error updating", e);
+        }
+    }
+
+    public void delete(String id) {
+        String sql = "DELETE FROM Voucher WHERE id = ?";
+
+        try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setObject(1, id);
+            int chek = ps.executeUpdate();
+
+            if (chek > 0) {
+                System.out.println("Xóa thành công ");
+            } else {
+                System.out.println("Xóa thất bại ");
+            }
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+    }
+
+    public float getGiamByMa(String ma) {
+        String sql = "SELECT giam_gia FROM Voucher WHERE ma = ?";
+
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, ma);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getFloat("giam_gia");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public String getMaById(String id) {
+        String sql = "SELECT ma FROM Voucher WHERE id = ?";
+
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getString("ma");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
 }

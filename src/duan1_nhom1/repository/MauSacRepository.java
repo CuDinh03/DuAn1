@@ -5,8 +5,7 @@
 package duan1_nhom1.repository;
 
 
-import duan1_nhom1.model.DanhMuc;
-import duan1_nhom1.model.KichThuoc;
+
 import duan1_nhom1.model.MauSac;
 import duan1_nhom1.utils.JdbcHelper;
 import java.util.ArrayList;
@@ -14,7 +13,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.util.Date; 
-import java.util.UUID;
 import java.sql.SQLException;
 import java.util.List;
 

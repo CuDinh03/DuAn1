@@ -20,7 +20,6 @@ import java.util.UUID;
  */
 public class ThanhToanRepo {
 
-    private List<ThanhToan> litsThanhToan = new ArrayList<>();
 
     public void addThanhToan(ThanhToan thanhToan) {
         String sql = """

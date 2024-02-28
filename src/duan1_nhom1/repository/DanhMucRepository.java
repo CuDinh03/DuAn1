@@ -1,13 +1,18 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package duan1_nhom1.repository;
+
 import duan1_nhom1.model.DanhMuc;
+import duan1_nhom1.service.DanhMucService;
 import duan1_nhom1.utils.JdbcHelper;
 import java.util.ArrayList;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Connection;
-import java .sql.Date;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -17,9 +22,10 @@ import java.util.List;
 public class DanhMucRepository {
 
     Connection conn = JdbcHelper.getConnection();
+//    List<DanhMuc> listDanhMuc = new ArrayList<>();
 
     public List<DanhMuc> getAll() {
-            List<DanhMuc> listDanhMuc = new ArrayList<>();
+        List<DanhMuc> listDanhMuc = new ArrayList<>();
         String sql = """
                      SELECT [id]
                            ,[ma]
@@ -44,12 +50,14 @@ public class DanhMucRepository {
                 Boolean trangThai = rs.getBoolean("trang_thai");
                 DanhMuc danhMuc = new DanhMuc(id, ma, ten, moTa, ngayTao, ngaySua, trangThai);
                 listDanhMuc.add(danhMuc);
+
             }
+            return listDanhMuc;
         } catch (SQLException ex) {
             System.out.println("Lỗi kết nối");
             ex.printStackTrace();
         }
-        return listDanhMuc;
+        return null;
     }
 
     public String getTenById(String id) {
@@ -77,11 +85,12 @@ public class DanhMucRepository {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 listId.add(rs.getString("id"));
+                return listId;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return listId;
+        return null;
     }
 
     public List<String> getAllTen() {
@@ -93,12 +102,14 @@ public class DanhMucRepository {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 listId.add(rs.getString("ten"));
+                return listId;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return listId;
+        return null;
     }
+
     public void addDanhMuc(DanhMuc danhMuc) {
  
         if (danhMuc == null) {
@@ -111,6 +122,8 @@ public class DanhMucRepository {
             ps.setString(1, danhMuc.getMa());
             ps.setString(2, danhMuc.getTen());
             ps.setString(3, danhMuc.getMoTa());
+            ps.setDate(4, new java.sql.Date(danhMuc.getNgayTao().getTime()));
+            ps.setDate(5, new java.sql.Date(danhMuc.getNgaySua().getTime()));
             ps.setDate(4, new java.sql.Date(danhMuc.getNgayTao().getTime()));
             ps.setDate(5, new java.sql.Date(danhMuc.getNgaySua().getTime()));
             ps.setBoolean(6, danhMuc.getTrangThai());
@@ -127,11 +140,12 @@ public class DanhMucRepository {
         }
     
     }
+
     public void update(DanhMuc danhMuc, String id) {
-        List<DanhMuc> listDanhMuc = new ArrayList();
         String sql = """
                 UPDATE [dbo].[danh_muc_san_pham]
-                SET [ma] = ?,
+                SET 
+                    [ma] = ?,
                     [ten] = ?,
                     [mo_ta] = ?,
                     [ngay_tao] = ?,
@@ -139,19 +153,17 @@ public class DanhMucRepository {
                     [trang_thai] = ?
                 WHERE id = ?;
                 """;
-
         try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
-
             // Set parameters
+            ps.setObject(7, danhMuc.getId());
             ps.setObject(1, danhMuc.getMa());
             ps.setObject(2, danhMuc.getTen());
             ps.setObject(3, danhMuc.getMoTa());
             ps.setObject(4, danhMuc.getNgayTao());
             ps.setObject(5, danhMuc.getNgaySua());
             ps.setObject(6, danhMuc.getTrangThai());
-            ps.setObject(7, danhMuc.getId());
-            ps.setObject(7, id);
-            // Execute the update
+            ps.setObject(8, id);
+//             Execute the update
             int chek = ps.executeUpdate();
 
             // Check the result
@@ -166,7 +178,6 @@ public class DanhMucRepository {
     }
 
     public void delete(String id) {
-        List<DanhMuc> listDanhMuc = new ArrayList();
         String sql = "DELETE FROM danh_muc_san_pham WHERE id = ?";
 
         try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {

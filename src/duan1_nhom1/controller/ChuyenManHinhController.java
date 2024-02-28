@@ -11,6 +11,7 @@ import duan1_nhom1.view.KhachHangJPanel;
 import duan1_nhom1.view.NguoiDungJPanel;
 import duan1_nhom1.view.NguoiDungView;
 import duan1_nhom1.view.SanPhamJPanel;
+//import duan1_nhom1.view.SanPhamJPanel;
 import duan1_nhom1.view.TrangChuJPanel;
 import duan1_nhom1.view.VoucherJPanel;
 import java.awt.BorderLayout;

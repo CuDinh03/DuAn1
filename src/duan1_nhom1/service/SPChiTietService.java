@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package duan1_nhom1.service;
 
 import duan1_nhom1.dto.ChiTietSanPhamDto;
@@ -10,13 +7,8 @@ import duan1_nhom1.repository.SPChiTietRepository;
 import duan1_nhom1.tranf.TranferData;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
-/**
- * 1
- *
- * @author anhtuanle
- */
+
 public class SPChiTietService implements IService<ChiTietSanPhamDto> {
 
     private SPChiTietRepository sPChiTietRepository = new SPChiTietRepository();

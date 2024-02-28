@@ -19,7 +19,6 @@ import java.util.List;
  */
 public class TaiKhoanRepo {
 
-    private List<TaiKhoan> listTK = new ArrayList<>();
 
     public void addKhachHang(TaiKhoan taiKhoan) {
 //        if (taiKhoan == null) {

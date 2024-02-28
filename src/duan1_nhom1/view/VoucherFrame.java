@@ -4,13 +4,8 @@
  */
 package duan1_nhom1.view;
 
-import duan1_nhom1.dto.VoucherDto;
-import duan1_nhom1.model.DanhMuc;
-import duan1_nhom1.model.Khach;
 import duan1_nhom1.model.Voucher;
-import duan1_nhom1.service.DanhMucService;
 import duan1_nhom1.service.VoucherService;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -27,21 +22,28 @@ public class VoucherFrame extends javax.swing.JFrame {
      * Creates new form VoucherFrame
      */
     private DefaultTableModel model = new DefaultTableModel();
-    private List<VoucherDto> vouchers = new ArrayList<>();
+    private List<Voucher> vouchers = new ArrayList<>();
     private VoucherService service = new VoucherService();
-    
+
     public VoucherFrame() {
         initComponents();
-        model = (DefaultTableModel) tblVoucher.getModel();
-        vouchers = service.getAll();
         showDataVoucher();
                     setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
     }
-    private void showDataVoucher(){
+
+    private void showDataVoucher() {
+        model = (DefaultTableModel) tblVoucher.getModel();
         model.setRowCount(0);
-        for (VoucherDto vc : vouchers) {
-            model.addRow(new Object[]{
+        int count = 1;
+        for (Voucher vc : service.getAll()) {
+            String status;
+            if (vc.getTrangThai()) {
+                status = "Còn";
+            } else {
+                status = "Hết";
+            }
+            Object[] rowData = {
                 vc.getId(),
                 vc.getMa(),
                 vc.getTen(),
@@ -51,12 +53,15 @@ public class VoucherFrame extends javax.swing.JFrame {
                 vc.getSoLuong(),
                 vc.getNgayTao(),
                 vc.getNgaySua(),
-                vc.getTrangThai()?"hoạt động":"ngừng hoạt động"
-            });
+                status
+            };
+            model.addRow(rowData);
+
         }
     }
-    private VoucherDto getDataVoucher() {
-        VoucherDto voucher = new VoucherDto();
+
+    private Voucher getDataVoucher() {
+        Voucher voucher = new Voucher();
         voucher.setMa(txtMa.getText());
         voucher.setTen(txtTen.getText());
         voucher.setGiamGia(Float.parseFloat(txtGiam.getText()));
@@ -68,6 +73,7 @@ public class VoucherFrame extends javax.swing.JFrame {
         voucher.setTrangThai(rioHoatDong.isSelected());
         return voucher;
     }
+
     private void clearFormVoucher() {
         txtMa.setText("");
         txtTen.setText("");
@@ -79,20 +85,41 @@ public class VoucherFrame extends javax.swing.JFrame {
         dcSua.setDate(null);
         TrangThaiGroup.clearSelection();
     }
+
     public void addVoucher() {
         try {
             int check = JOptionPane.showConfirmDialog(this, "bạn có muốn thêm không");
             if (check != JOptionPane.YES_OPTION) {
                 return;
             }
-            VoucherDto vc = getDataVoucher();
+            Voucher vc = getDataVoucher();
             service.add(vc);
             vouchers = service.getAll();
-            showDataVoucher();
+
             JOptionPane.showMessageDialog(this, "Thêm thành công");
             clearFormVoucher();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Thêm thất bại");
+        }
+
+    }
+
+    public void updateVoucher() {
+        try {
+            int check = JOptionPane.showConfirmDialog(this, "bạn có muốn update không");
+            if (check != JOptionPane.YES_OPTION) {
+                return;
+            }
+            Voucher vc = getDataVoucher();
+            int row = tblVoucher.getSelectedRow();
+            String id = vouchers.get(row).getId();
+            service.update(vc, id);
+            showDataVoucher();
+            JOptionPane.showMessageDialog(this, "Update thành công");
+            clearFormVoucher();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Update thất bại");
+            throw new RuntimeException(e);
         }
 
     }
@@ -148,8 +175,18 @@ public class VoucherFrame extends javax.swing.JFrame {
         });
 
         btnXoa.setText("Xóa");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
 
         btnSua.setText("Sửa");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
 
         btnThem.setText("Thêm");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
@@ -338,7 +375,7 @@ public class VoucherFrame extends javax.swing.JFrame {
                                 .addComponent(jLabel7)
                                 .addComponent(rioHoatDong)
                                 .addComponent(rioNgungHoatDong)))
-                        .addGap(18, 18, 18)
+                        .addGap(22, 22, 22)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(txtGiam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -379,7 +416,7 @@ public class VoucherFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 601, Short.MAX_VALUE)
+            .addGap(0, 602, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -402,7 +439,33 @@ public class VoucherFrame extends javax.swing.JFrame {
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
         addVoucher();
+        showDataVoucher();
     }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        // TODO add your handling code here:
+        updateVoucher();
+        showDataVoucher();
+    }//GEN-LAST:event_btnSuaActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        // TODO add your handling code here:
+        try {
+            int check = JOptionPane.showConfirmDialog(this, "bạn có muốn xóa không");
+            if (check != JOptionPane.YES_OPTION) {
+                return;
+            }
+            int row = tblVoucher.getSelectedRow();
+            String id = service.getAll().get(row).getId();
+            service.delete(id);
+            service.getAll().clear();
+            JOptionPane.showMessageDialog(this, "xóa thành công");
+            showDataVoucher();
+            clearFormVoucher();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "xóa thất bại ");
+        }
+    }//GEN-LAST:event_btnXoaActionPerformed
 
     /**
      * @param args the command line arguments

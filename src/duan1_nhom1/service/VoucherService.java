@@ -4,43 +4,42 @@
  */
 package duan1_nhom1.service;
 
-import duan1_nhom1.dto.VoucherDto;
 import duan1_nhom1.model.Voucher;
 import duan1_nhom1.repository.VoucherRepo;
-import duan1_nhom1.tranf.TranferData;
 import java.util.List;
 
 /**
  *
  * @author bachh
  */
-public class VoucherService implements IService<VoucherDto> {
+public class VoucherService implements IService<Voucher> {
     VoucherRepo voucherRepo = new VoucherRepo();
 
     @Override
-    public void add(VoucherDto t) {
-        this.voucherRepo.createVoucher(TranferData.convertToEntity(t));
+    public void add(Voucher t) {
+        this.voucherRepo.createVoucher(t);
     }
 
     @Override
-    public void update(VoucherDto t, String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void update(Voucher t, String id) {
+        this.voucherRepo.updateVoucher(t, id);
     }
 
     @Override
     public void delete(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        voucherRepo.delete(id);
     }
 
     @Override
-    public List<VoucherDto> getAll() {
-        return TranferData.convertListVoucherToDto(this.voucherRepo.getAll());
+    public List<Voucher> getAll() {
+        return voucherRepo.getAll();
     }
 
     @Override
-    public VoucherDto findById(String id) {
+    public Voucher findById(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
-    
+    public float findGiamByMa(String ma){
+        return voucherRepo.getGiamByMa(ma);
+    }
 }
