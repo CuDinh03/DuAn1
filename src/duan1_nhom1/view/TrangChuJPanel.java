@@ -38,6 +38,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.util.regex.*;
+import javax.swing.DefaultComboBoxModel;
 
 public class TrangChuJPanel extends javax.swing.JPanel {
 
@@ -72,7 +73,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         showDateHoaDon();
         loadBanHangGH();
         loadBanHangSp(sPChiTietService.getAll());
-        loadComboBox();
+        loadDanhMucSearch();
     }
 
     public void showDateHoaDon() {
@@ -266,7 +267,13 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         }
         return totalPrice;
     }
-
+public void loadDanhMucSearch() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cb_findhang.getModel();
+        List<String> list = danhMucService.getAllId();
+        for (String str : list) {
+            model.addElement(danhMucService.getTenById(str));
+        }
+    }
     public void searchKhach() {
         try {
             String sdt = txtSdt.getText().trim();
@@ -328,6 +335,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         jButton5 = new javax.swing.JButton();
         btnThemVaoGH = new javax.swing.JButton();
         btnDeleteAll = new javax.swing.JButton();
+        cb_findhang = new javax.swing.JComboBox<>();
 
         jPanel2.setBackground(new java.awt.Color(203, 233, 162));
 
@@ -400,6 +408,12 @@ public class TrangChuJPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane3.setViewportView(tbl_banhanggh);
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
         jButton8.setText("Tìm kiếm");
 
@@ -604,6 +618,19 @@ public class TrangChuJPanel extends javax.swing.JPanel {
             }
         });
 
+        cb_findhang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All" }));
+        cb_findhang.setToolTipText("");
+        cb_findhang.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cb_findhangItemStateChanged(evt);
+            }
+        });
+        cb_findhang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_findhangActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -618,12 +645,14 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
-                                .addGap(131, 131, 131)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cb_findhang, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(61, 61, 61)
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(68, 68, 68)
+                                .addGap(18, 18, 18)
                                 .addComponent(jButton8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnThemVaoGH))
+                                .addComponent(btnThemVaoGH, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(34, 34, 34)
@@ -672,7 +701,8 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel4)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton8)
-                            .addComponent(btnThemVaoGH))
+                            .addComponent(btnThemVaoGH)
+                            .addComponent(cb_findhang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -1099,14 +1129,24 @@ public class TrangChuJPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jButton10ActionPerformed
 
-    private void cbbVoucherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbVoucherActionPerformed
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
-    }//GEN-LAST:event_cbbVoucherActionPerformed
+    private void cb_findhangItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_findhangItemStateChanged
+        if (cb_findhang.getSelectedIndex() == 0) {
+            loadBanHangSp(sPChiTietService.getAll());
 
-    private void tbl_banhanghdMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_banhanghdMouseEntered
+        }
+        String dm = (String) cb_findhang.getSelectedItem();
+        List<ChiTietSanPhamDto> lst = sPChiTietService.findByDm(dm);
+        loadBanHangSp(lst);
+
+    }//GEN-LAST:event_cb_findhangItemStateChanged
+
+    private void cb_findhangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_findhangActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tbl_banhanghdMouseEntered
+    }//GEN-LAST:event_cb_findhangActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1114,6 +1154,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnThanhToan;
     private javax.swing.JButton btnThemVaoGH;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> cb_findhang;
     private javax.swing.JComboBox<String> cbbVoucher;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;

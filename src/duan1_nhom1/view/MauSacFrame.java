@@ -27,6 +27,7 @@ public class MauSacFrame extends javax.swing.JFrame {
 
     private MauSacService mauSacService = new MauSacService();
     private DefaultTableModel defaultTableModel = new DefaultTableModel();
+    private List<MauSac> listMS = new ArrayList<>();
   
     int _index;
 
@@ -64,6 +65,54 @@ public class MauSacFrame extends javax.swing.JFrame {
 
         }
 
+    }
+    
+    public void loadData2() {
+        defaultTableModel = (DefaultTableModel) tbl_mausac.getModel();
+        defaultTableModel.setRowCount(0);
+        for (MauSac mauSac : listMS) {
+            String status;
+            if (mauSac.isTrangThai()) {
+                status = "Còn";
+            } else {
+                status = "Hết";
+            }
+            Object[] rowData = {
+                mauSac.getMa(),
+                mauSac.getTen(),
+                mauSac.getMoTa(),
+                mauSac.getNgaySua(),
+                mauSac.getNgayTao(),
+                status
+            };
+            defaultTableModel.addRow(rowData);
+
+        }
+    }
+    
+     public void search() {
+        
+        try {
+            String ma = txt_search.getText();
+            String ten = txt_search.getText();
+            String sdt = txt_search.getText();
+            if (ma.trim().isEmpty()) {
+                ma = null;
+            }
+            if (ten.trim().isEmpty()) {
+                ten = null;
+            }
+            if (sdt.trim().isEmpty()) {
+                sdt = null;
+            }
+            listMS = mauSacService.timKiem(ma, ten);
+            loadData2();
+
+//            listHoaDon = hoaDonService.searhListNhanVien(khach);
+//            showDataHoaDon2();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void clearForm() {
@@ -160,12 +209,18 @@ public class MauSacFrame extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txt_trangthai = new javax.swing.JTextField();
+        btn_back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel2.setBackground(new java.awt.Color(203, 233, 162));
 
         btn_search.setText("Tìm Kiếm");
+        btn_search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_searchActionPerformed(evt);
+            }
+        });
 
         tbl_mausac.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -236,19 +291,27 @@ public class MauSacFrame extends javax.swing.JFrame {
 
         jLabel6.setText("Trạng thái:");
 
+        btn_back.setText("Back");
+        btn_back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_backActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_search)
-                .addGap(57, 57, 57))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(btn_back)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_search)
+                        .addGap(57, 57, 57))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane1)
                         .addContainerGap())
@@ -290,7 +353,7 @@ public class MauSacFrame extends javax.swing.JFrame {
                                 .addComponent(jLabel6)
                                 .addGap(18, 18, 18)
                                 .addComponent(txt_trangthai, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                .addContainerGap(21, Short.MAX_VALUE))))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,7 +361,8 @@ public class MauSacFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_search)
-                    .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_back, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
@@ -342,7 +406,7 @@ public class MauSacFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -427,6 +491,16 @@ public class MauSacFrame extends javax.swing.JFrame {
         updateMauSac();
     }//GEN-LAST:event_btn_suaActionPerformed
 
+    private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btn_backActionPerformed
+
+    private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
+        // TODO add your handling code here:
+        search();
+    }//GEN-LAST:event_btn_searchActionPerformed
+
     /**
      * @param args the command line arguments   
      */
@@ -463,6 +537,7 @@ public class MauSacFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_back;
     private javax.swing.JButton btn_clear;
     private javax.swing.JButton btn_search;
     private javax.swing.JButton btn_sua;
