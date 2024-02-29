@@ -8,6 +8,7 @@ import duan1_nhom1.bean.HoaDonBean;
 import duan1_nhom1.utils.JdbcHelper;
 import java.util.List;
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 
@@ -26,7 +27,10 @@ public class ThongKeRepository {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 HoaDonBean hoaDonBean = new HoaDonBean();
-                hoaDonBean.setNgayBan(((java.sql.Date) rs.getObject("ngay_mua")).toLocalDate());
+                                 Timestamp ngay_muaTimestamp = rs.getTimestamp("ngay_mua");
+                    LocalDateTime ngay_mua = ngay_muaTimestamp.toLocalDateTime();
+
+                hoaDonBean.setNgayBan(ngay_mua);
                 hoaDonBean.setSoLuongDaBan(rs.getInt("so_luong"));
                 list.add(hoaDonBean);
             }

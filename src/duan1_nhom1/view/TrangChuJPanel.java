@@ -439,7 +439,6 @@ public void loadDanhMucSearch() {
 
         jLabel8.setText("Voucher:");
 
-        cbbVoucher.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbbVoucher.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbbVoucherActionPerformed(evt);
@@ -1147,6 +1146,10 @@ public void loadDanhMucSearch() {
     private void cb_findhangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_findhangActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cb_findhangActionPerformed
+
+    private void cbbVoucherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbVoucherActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbbVoucherActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

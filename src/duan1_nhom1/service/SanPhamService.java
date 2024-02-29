@@ -56,10 +56,10 @@ public class SanPhamService implements IService<SanPhamDto> {
         return sanPhamRepository.getAllId();
     }
 
-    public String getMaById(String ma) {
-        return sanPhamRepository.getMaById(ma);
-    }
-    
+//    public String getMaById(String ma) {
+//        return sanPhamRepository.getMaById(ma);
+//    }
+//    
     public List<SanPham> timKiem(String ma, String ten) {
         String sql = """
                  SELECT [ma]

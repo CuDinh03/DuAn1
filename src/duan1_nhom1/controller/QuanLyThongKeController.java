@@ -5,17 +5,13 @@
 package duan1_nhom1.controller;
 
 import duan1_nhom1.bean.HoaDonBean;
-import duan1_nhom1.dto.NgayThangDto;
 import duan1_nhom1.service.ThongKeImp;
 import java.awt.CardLayout;
 import java.awt.Dimension;
-import java.time.LocalDate;
 import java.time.Month;
 import static java.time.Month.JANUARY;
 import java.time.Year;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,9 +22,7 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.data.gantt.Task;
-import org.jfree.data.gantt.TaskSeries;
-import org.jfree.data.gantt.TaskSeriesCollection;
+
 
 /**
  *

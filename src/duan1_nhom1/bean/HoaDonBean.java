@@ -4,7 +4,7 @@
  */
 package duan1_nhom1.bean;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  *
@@ -13,12 +13,12 @@ import java.time.LocalDate;
 public class HoaDonBean {
     
     private Integer soLuongDaBan;
-    private LocalDate ngayBan;
+    private LocalDateTime ngayBan;
 
     public HoaDonBean() {
     }
 
-    public HoaDonBean(Integer soLuongDaBan, LocalDate ngayBan) {
+    public HoaDonBean(Integer soLuongDaBan, LocalDateTime ngayBan) {
         this.soLuongDaBan = soLuongDaBan;
         this.ngayBan = ngayBan;
     }
@@ -31,11 +31,11 @@ public class HoaDonBean {
         this.soLuongDaBan = soLuongDaBan;
     }
 
-    public LocalDate getNgayBan() {
+    public LocalDateTime getNgayBan() {
         return ngayBan;
     }
 
-    public void setNgayBan(LocalDate ngayBan) {
+    public void setNgayBan(LocalDateTime ngayBan) {
         this.ngayBan = ngayBan;
     }
 
