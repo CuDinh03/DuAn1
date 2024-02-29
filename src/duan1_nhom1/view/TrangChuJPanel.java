@@ -6,7 +6,6 @@ import duan1_nhom1.dto.ChiTietSanPhamDto;
 import duan1_nhom1.dto.GioHangDto;
 import duan1_nhom1.dto.HoaDonDto;
 import duan1_nhom1.dto.KhachDto;
-import duan1_nhom1.dto.VoucherDto;
 import duan1_nhom1.model.ChiTietSanPham;
 import duan1_nhom1.model.GioHangHoaDon;
 import duan1_nhom1.model.Voucher;
@@ -75,14 +74,15 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         loadBanHangGH();
         loadBanHangSp(sPChiTietService.getAll());
         fillcomboxvoucher();
+        loadDanhMucSearch();
     }
 
     void fillcomboxvoucher() {
         comboxvoucher.removeAllItems();
         comboxvoucher.addItem(" ");
-        List<VoucherDto> list = voucherService.getAll();
-        for (VoucherDto voucherDto : list) {
-            comboxvoucher.addItem(voucherDto.getMa());
+        List<Voucher> list = voucherService.getAll();
+        for (Voucher voucher : list) {
+            comboxvoucher.addItem(voucher.getMa());
         }
     }
 
@@ -231,14 +231,14 @@ public class TrangChuJPanel extends javax.swing.JPanel {
     }
 
     public void loadComboBox() {
-        cbbVoucher.removeAllItems();
-        cbbVoucher.addItem("");
+        comboxvoucher.removeAllItems();
+        comboxvoucher.addItem("");
         List<Voucher> list = voucherService.getAll();
         for (Voucher voucher : list) {
-            cbbVoucher.addItem(voucher.getMa());
+            comboxvoucher.addItem(voucher.getMa());
         }
         tongTienSauGiam();
-        cbbVoucher.addActionListener(new ActionListener() {
+        comboxvoucher.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 tongTienSauGiam();
@@ -248,7 +248,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
     }
 
     public String tongTienSauGiam() {
-        String selected = cbbVoucher.getSelectedItem().toString();
+        String selected = comboxvoucher.getSelectedItem().toString();
         Float giam = voucherService.findGiamByMa(selected);
         List<Voucher> list = voucherService.getAll();
         Float tongTien = Float.parseFloat(calculateTotalPrice().toString());
@@ -812,14 +812,6 @@ public void loadDanhMucSearch() {
                     sPChiTietService.changeSL(ctspView);
 
                 } else {
-                    ChiTietGioHangDto item = new ChiTietGioHangDto();
-                    item.setIdGH(this.idGH);
-                    System.out.println(item.getIdGH());
-                    item.setIdSP(ctspView.getIdSanPham());
-                    item.setSoLuong(quantity);
-                    item.setNgayTao(new Date());
-                    item.setNgaySua(new Date());
-                    item.setTrangThai(Boolean.TRUE);
                     ChiTietGioHangDto item = new ChiTietGioHangDto();
                     item.setIdGH(this.idGH);
                     System.out.println(item.getIdGH());
