@@ -243,13 +243,28 @@ public class TrangChuJPanel extends javax.swing.JPanel {
     public void searchKhach() {
         try {
             String sdt = txtSdt.getText().trim();
+            String reg = "^(\\+84|0)\\d{9,9}$";
+
+            // Kiem tra dinh dang
+            boolean kt = sdt.matches(reg);
+
+            if (kt == false) {
+                MsgBox.alert(this, "Không đúng định dạng số điện thoại  ");
+                return;
+            }
             KhachDto khachDto = this.khachS.findBySdt(sdt);
             if (khachDto != null) {
                 khachView = khachDto;
                 this.txtTenKhach.setText(khachView.getTenKhachHang());
+                MsgBox.alert(this, "Là khách hàng cũ ");
+                return;
             }
+
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            MsgBox.alert(this, "Là khách hàng mới ");
+            java.awt.Frame parent = null;
+            new ThemKhachJDialog(parent, true).setVisible(true);
+            return;
         }
     }
 

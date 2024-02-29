@@ -8,6 +8,7 @@ import duan1_nhom1.model.HoaDon;
 import duan1_nhom1.model.Khach;
 import duan1_nhom1.repository.HoaDonRepository;
 import duan1_nhom1.service.KhachService;
+import duan1_nhom1.utils.MsgBox;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +54,7 @@ public class ThemKhachJDialog extends javax.swing.JDialog {
         try {
             int check = JOptionPane.showConfirmDialog(this, "bạn có muốn thêm không");
             if (check != JOptionPane.YES_OPTION) {
+                 this.setVisible(false);
                 return;
             }
             if (txtMa.getText().trim().equals("")) {
@@ -67,15 +69,24 @@ public class ThemKhachJDialog extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "Vui lòng nhập mã khách hàng");
                 return ;
             }
+            String sdt = txtSdt.getText().trim();
+            String reg = "^(\\+84|0)\\d{9,10}$";
+            boolean kt = sdt.matches(reg);
+
+            if (kt == false) {
+                MsgBox.alert(this, "Không đúng định dạng số điện thoại  ");
+                return;
+            }
             
             Khach nv = getDataKhach();
             khachService.add(nv);
             listKH = khachService.getAll();
             JOptionPane.showMessageDialog(this, "Thêm thành công");
+            this.setVisible(false);
             clearFormKhach();
         } catch (Exception e) {
-//            JOptionPane.showMessageDialog(this, "Thêm thất bại");
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(this, "Thêm thất bại");
+            
         }
 
     }
