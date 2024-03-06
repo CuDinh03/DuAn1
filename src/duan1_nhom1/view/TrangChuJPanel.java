@@ -244,10 +244,8 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         try {
             String sdt = txtSdt.getText().trim();
             String reg = "^(\\+84|0)\\d{9,9}$";
-
             // Kiem tra dinh dang
             boolean kt = sdt.matches(reg);
-
             if (kt == false) {
                 MsgBox.alert(this, "Không đúng định dạng số điện thoại  ");
                 return;
@@ -259,7 +257,6 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                 MsgBox.alert(this, "Là khách hàng cũ ");
                 return;
             }
-
         } catch (Exception e) {
             MsgBox.alert(this, "Là khách hàng mới ");
             java.awt.Frame parent = null;
@@ -312,7 +309,6 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         txtTienThua = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         btnThemVaoGH = new javax.swing.JButton();
@@ -452,13 +448,6 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText("Chuyển khoản ");
 
-        jButton1.setText("Thêm khách hàng mới ");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout tienTraLaiLayout = new javax.swing.GroupLayout(tienTraLai);
         tienTraLai.setLayout(tienTraLaiLayout);
         tienTraLaiLayout.setHorizontalGroup(
@@ -494,8 +483,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                             .addGroup(tienTraLaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(txtTienThua, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
                                 .addComponent(txtTienKhachDua, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtTongTien, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addComponent(jButton1)))
+                                .addComponent(txtTongTien, javax.swing.GroupLayout.Alignment.LEADING))))
                     .addGroup(tienTraLaiLayout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addGap(69, 69, 69)
@@ -534,9 +522,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
                 .addGroup(tienTraLaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(txtTenKhach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addGap(10, 10, 10)
+                .addGap(45, 45, 45)
                 .addGroup(tienTraLaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(jRadioButton1)
@@ -1117,11 +1103,6 @@ public class TrangChuJPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_tbl_banhanghdMouseEntered
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        java.awt.Frame parent = null;
-        new ThemKhachJDialog(parent, true).setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDeleteAll;
@@ -1129,7 +1110,6 @@ public class TrangChuJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnThemVaoGH;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> comboxvoucher;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton4;

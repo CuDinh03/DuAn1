@@ -70,14 +70,13 @@ public class ThemKhachJDialog extends javax.swing.JDialog {
                 return ;
             }
             String sdt = txtSdt.getText().trim();
-            String reg = "^(\\+84|0)\\d{9,10}$";
+            String reg = "^(\\+84|0)\\d{9,9}$";
             boolean kt = sdt.matches(reg);
 
             if (kt == false) {
                 MsgBox.alert(this, "Không đúng định dạng số điện thoại  ");
                 return;
             }
-            
             Khach nv = getDataKhach();
             khachService.add(nv);
             listKH = khachService.getAll();
